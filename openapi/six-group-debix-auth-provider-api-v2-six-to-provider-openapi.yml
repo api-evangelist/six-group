@@ -1,0 +1,306 @@
+openapi: 3.0.3
+info:
+  title: 'debiX Auth Provider API: SIX-to-Provider'
+  description: API used by SIX / debiX and implemented by the Authentication Provider
+  version: 2.1.5
+tags:
+  - name: Health check
+  - name: 3DS Authentication
+paths:
+  /healthcheck:
+    get:
+      tags:
+        - Health check
+      summary: Health check using GET method.
+      description: Returns a status message of the system.
+      operationId: healthcheckForGet
+      parameters:
+        - $ref: '#/components/parameters/RequestIdHeader'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+    post:
+      tags:
+        - Health check
+      summary: Health check using POST method.
+      description: Returns the request body. This operation will not modify the system.
+      operationId: healthCheckForPost
+      parameters:
+        - $ref: '#/components/parameters/RequestIdHeader'
+      requestBody:
+        description: Any message which is expected in the response.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HealthCheckRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+  /authentication:
+    post:
+      tags:
+        - 3DS Authentication
+      summary: Initiates the authentication of a 3DS transaction
+      description: Accepts and processes a 3DS authentication request.
+      operationId: authenticationRequest
+      parameters:
+        - $ref: '#/components/parameters/CorrelationIdHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequest'
+        required: true
+      responses:
+        '204':
+          description: Authentication received
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+  /authentication/{threeDsTransactionId}/cancel:
+    post:
+      tags:
+        - 3DS Authentication
+      summary: Cancels the authentication of a 3DS transaction
+      description: Cancels an ongoing 3DS authentication identified by the transaction ID.
+      operationId: authenticationRequestCancel
+      parameters:
+        - $ref: '#/components/parameters/CorrelationIdHeader'
+        - $ref: '#/components/parameters/ThreeDsTransactionId'
+      responses:
+        '204':
+          description: Authentication cancellation received
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+components:
+  parameters:
+    CorrelationIdHeader:
+      in: header
+      name: x-correlation-id
+      description: >-
+        A unique identifier for an authentication request and authentication
+        callback
+      schema:
+        type: string
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair
+      schema:
+        type: string
+    ThreeDsTransactionId:
+      in: path
+      name: threeDsTransactionId
+      required: true
+      example: a5b86c4e-0caa-11e8-ba89-0ed5f89f718b
+      description: The 3DS transaction id.
+      schema:
+        type: string
+  schemas:
+    AuthenticationRequest:
+      type: object
+      required:
+        - threeDsTransactionId
+        - authId
+        - transactionDetail
+      properties:
+        threeDsTransactionId:
+          type: string
+          example: a5b86c4e-0caa-11e8-ba89-0ed5f89f718b
+          description: The 3DS transaction id.
+        authId:
+          type: string
+          minLength: 1
+          maxLength: 36
+          example: ea3ze38kfj3g6ktv6wn14aaylvmdv3qn
+          description: Identifier for the device used for 3DS
+        transactionDetail:
+          $ref: '#/components/schemas/TransactionDetail'
+        threeDSRequestorAppURL:
+          type: string
+          example: https://requestor.url.com?id=24dfc3e8-0dfa-45d7-95c1-4d213a8da9d9
+          description: >-
+            threeDSRequestorAppURL as defined in the 3DS 2.2 specification. Used
+            to link back to the merchant app from an OOB app.
+    TransactionDetail:
+      type: object
+      required:
+        - maskedCardNumber
+        - merchantName
+      properties:
+        maskedCardNumber:
+          type: string
+          description: The masked primary account number.
+          example: '**** **** **** 1234'
+        purchaseDate:
+          type: string
+          format: date-time
+          description: Date and time of the transaction.
+          example: '2017-07-21T17:32:28Z'
+        merchantName:
+          type: string
+          description: The name of the merchant.
+          example: ACME Corporation
+        purchaseAmount:
+          type: string
+          description: The transaction amount.
+          example: '120012'
+        purchaseAmountExponent:
+          type: number
+          description: The transaction amount exponent.
+          minimum: 0
+          maximum: 9
+          example: 2
+        purchaseCurrency:
+          type: string
+          description: The ISO-4217 three-letter alphabetic currency code.
+          example: CHF
+    HealthCheckRequest:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: Expected response message from the health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: Any string
+    HealthCheckResponse:
+      type: object
+      required:
+        - message
+        - requestDateTime
+        - receivedHeaders
+        - apiVersion
+      properties:
+        message:
+          description: Response message from the health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: The healthcheck GET request was successfully received and processed.
+        requestDateTime:
+          description: Date and time of the request.
+          type: string
+          format: date-time
+          example: '2021-10-03T16:03:09.101+02:00'
+        receivedHeaders:
+          description: The headers received by the api backend.
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedHeader'
+        apiVersion:
+          description: Version of this API.
+          type: string
+          example: 2.0.0
+    ReceivedHeader:
+      type: object
+      properties:
+        headerName:
+          description: Name of the received header.
+          type: string
+          example: x-correlation-id
+        headerValue:
+          description: Value of the received header.
+          type: string
+          example: 9bcd4351-4b7b-4017-9b63-9613414c6ff1
+    ApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+        - applicationError
+        - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          example: OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          example: 5001
+        description:
+          description: >-
+            A human-readable explanation specific to this occurrence of the
+            problem.
+          type: string
+          example: The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the error log on the server.
+          type: string
+          example: 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    ErrorDetail:
+      type: object
+      required:
+        - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          example: 42
+        description:
+          description: The message describing the error.
+          type: string
+          example: >-
+            The answer to the great question of Life, the Universe and
+            Everything.

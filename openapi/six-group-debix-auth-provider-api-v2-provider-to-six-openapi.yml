@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: 'debiX Auth Provider API: Provider-to-SIX'
+  version: 2.1.9
+  description: >-
+    Callback API used by the Authentication Provider and implemented by SIX /
+    debiX
+servers:
+  - url: https://api.six-group.com/api/debix-auth/provider-auth/v2
+    description: PROD - Internet
+  - url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
+    description: TEST - Internet
+  - url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
+    description: PROD - SSFN
+  - url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
+    description: TEST - SSFN
+  - url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
+    description: PROD - P2P
+  - url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
+    description: TEST - P2P
+tags:
+  - name: Health check
+  - name: Authentication callback
+paths:
+  /healthcheck:
+    get:
+      tags:
+        - Health check
+      summary: Health check using GET method.
+      description: Returns a status message of the system.
+      operationId: healthcheckForGet
+      parameters:
+        - $ref: '#/components/parameters/RequestIdHeader'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+    post:
+      tags:
+        - Health check
+      summary: Health check using POST method.
+      description: Returns the request body. This operation will not modify the system.
+      operationId: healthCheckForPost
+      parameters:
+        - $ref: '#/components/parameters/RequestIdHeader'
+      requestBody:
+        description: Any message which is expected in the response.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HealthCheckRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+  /callback:
+    post:
+      tags:
+        - Authentication callback
+      summary: Processes the result of the authentication request.
+      description: >-
+        The operation processes the result of the authentication request and
+        notifies the ACS.
+      operationId: authenticationRequestCallback
+      parameters:
+        - $ref: '#/components/parameters/CorrelationIdHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequestCallbackRequest'
+        required: true
+      responses:
+        '204':
+          description: Callback received
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+components:
+  parameters:
+    CorrelationIdHeader:
+      in: header
+      name: x-correlation-id
+      description: >-
+        A unique identifier for an authentication request and authentication
+        callback
+      schema:
+        type: string
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
+  schemas:
+    AuthenticationRequestCallbackRequest:
+      type: object
+      required:
+        - threeDsTransactionId
+        - confirmationStatus
+      properties:
+        threeDsTransactionId:
+          type: string
+          examples:
+            - a5b86c4e-0caa-11e8-ba89-0ed5f89f718b
+          description: The 3DS transaction id.
+        confirmationStatus:
+          type: string
+          description: >-
+            Status of the authentication request. It may be either ACCEPTED or
+            DECLINED by the cardholder. If a technical error occurs preventing
+            the successful display of the Push Notification on the device, then
+            FAILED must be used. If the authentication provider sets a time
+            window for the cardholder to accept or decline the authentication
+            request and the cardholder fails to respond, then CANCELLED must be
+            used as the confirmationStatus.
+          examples:
+            - ACCEPTED
+          enum:
+            - ACCEPTED
+            - DECLINED
+            - FAILED
+            - CANCELLED
+        oobAuthenticationMethod:
+          type: string
+          description: >-
+            This indicates the type of second factor used for authentication.
+            This property is mandatory if the confirmationStatus is ACCEPTED,
+            but not required if the confirmationStatus is FAILED, DECLINED or
+            CANCELLED.
+          examples:
+            - BIOMETRICS
+          enum:
+            - BIOMETRICS
+            - OTHER
+    HealthCheckRequest:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: Expected response message from the health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          examples:
+            - Any string
+    HealthCheckResponse:
+      type: object
+      required:
+        - message
+        - requestDateTime
+        - receivedHeaders
+        - apiVersion
+      properties:
+        message:
+          description: Response message from the health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          examples:
+            - >-
+              The healthcheck GET request was successfully received and
+              processed.
+        requestDateTime:
+          description: Date and time of the request.
+          type: string
+          format: date-time
+          examples:
+            - '2021-10-03T16:03:09.101+02:00'
+        receivedHeaders:
+          description: The headers received by the api backend.
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedHeader'
+        apiVersion:
+          description: Version of this API.
+          type: string
+          examples:
+            - 1.0.0
+    ReceivedHeader:
+      type: object
+      properties:
+        headerName:
+          description: Name of the received header.
+          type: string
+          examples:
+            - x-correlation-id
+        headerValue:
+          description: Value of the received header.
+          type: string
+          examples:
+            - 9bcd4351-4b7b-4017-9b63-9613414c6ff1
+    ApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+        - applicationError
+        - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+            - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+            - 5001
+        description:
+          description: >-
+            A human-readable explanation specific to this occurrence of the
+            problem.
+          type: string
+          examples:
+            - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the error log on the server.
+          type: string
+          examples:
+            - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    ErrorDetail:
+      type: object
+      required:
+        - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+            - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+            - >-
+              The answer to the great question of Life, the Universe and
+              Everything.

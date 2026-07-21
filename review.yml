@@ -1,0 +1,135 @@
+aid: six-group
+name: SIX
+review:
+  question: Does SIX expose a public, documented API surface for its financial market data and infrastructure services?
+  answer: true
+  date: '2026-07-21'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    SIX runs a real public developer portal (developer.six-group.com, HTTP 200)
+    that fronts a two-tier API posture. The flagship financial data products -
+    SIX Web API (REST/JSON, GraphQL, WebSocket over 900+ price sources) and
+    SIX Bulk API - are publicly marketed but sales-gated: documentation, data
+    dictionary, and a Swagger test interface sit behind the SIX API Portal
+    (web.apiportal.six-group.com), access uses MTLS certificate
+    authentication, and onboarding is via a demo-access request form rather
+    than self-serve keys. No public OpenAPI spec or base URL is published for
+    Web API or Bulk API. In contrast, the Swiss payment/banking infrastructure
+    side is genuinely open: a Kong-based shared catalog
+    (apiportal.six-group.com, HTTP 200) publishes four APIs with downloadable
+    OAS3 specs (Swiss Bank Master, SIC Service Status, SIC Clearing Day
+    Calendar, Settlement Info Reporting), and two documented production
+    endpoints answered HTTP 200 without any authentication on the review
+    date. The debiX debit card platform (docs.debix.six-group.com,
+    Docusaurus/Redocusaurus) publishes four verbatim-downloadable OpenAPI
+    3.x specs with documented production hosts on api.six-group.com. bLink,
+    Switzerland's open banking platform (docs.blink.six-group.com), has full
+    public HTML API reference (AIS, PSS, OpenWealth, consent modules) with
+    OAuth consent flows and TLS certificates, plus a downloadable Postman
+    collection and example payloads, but no raw OpenAPI file download was
+    found on the docs site. Beyond HTTP, SIX documents a streaming Market
+    Data Feed, SIX Flex and Valordata Feed file delivery, Snowflake cloud
+    data delivery, and SIX Connect private cloud connectivity.
+  posture:
+    developerPortal: https://developer.six-group.com
+    selfServe: false
+    salesGated: true
+    salesGatedNote: Web API and Bulk API require demo-access request and MTLS certificates; bLink requires platform admission; debiX is for issuer banks. The four shared-catalog Swiss infrastructure APIs are open, and two production endpoints respond unauthenticated.
+    authModels:
+    - MTLS certificates (Web API, Bulk API, bLink transport)
+    - OAuth consent flows (bLink)
+    - None on probed SIC/bankmaster public endpoints
+    pricingPublic: false
+    ownership: SIX Group Ltd, Zurich - owned by ~120 national and international financial institutions; parent of SIX Swiss Exchange, BME (Spanish exchanges, acquired 2020), SIX Financial Information, SIX Interbank Clearing, and SIX SIS.
+  deliveryChannels:
+  - REST/JSON (Web API, Bulk API, debiX, shared catalog)
+  - GraphQL (Web API)
+  - WebSocket (Web API real-time streaming)
+  - Streaming Market Data Feed (sales-gated feed product)
+  - Flat files (SIX Flex, Valordata Feed)
+  - Cloud shares (Snowflake Cloud Data Delivery, SIX Connect on AWS/GCP/Azure)
+  probes:
+  - url: https://developer.six-group.com
+    status: 200
+  - url: https://apiportal.six-group.com/
+    status: 200
+  - url: https://web.apiportal.six-group.com/portal/bfi/catalog
+    status: 200
+  - url: https://docs.blink.six-group.com/api-reference/introduction
+    status: 200
+  - url: https://docs.debix.six-group.com/
+    status: 200
+  - url: https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
+    status: 200
+  - url: https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html
+    status: 200
+  - url: https://api.six-group.com/api/sic/pci_p/status/v1/servicestatus
+    status: 200
+    note: Live unauthenticated GET on documented production endpoint.
+  - url: https://api.six-group.com/api/epcd/bankmaster/v3/healthcheck
+    status: 200
+    note: Live unauthenticated GET; returned JSON healthcheck payload.
+  - url: https://api.six-group.com/api/epcd/bankmaster/v3/bankmaster_V3.csv
+    status: 200
+    note: Documented in spec; bankmaster.json range request returned 200.
+  - url: https://docs.six-group.com
+    status: 0
+    note: Does not resolve.
+  - url: https://www.six-group.com/apis
+    status: 404
+  - url: https://github.com/six-group
+    status: 200
+    note: Real org - web components, k8s operators, hackathon repos; no API specs hosted there.
+  openapiProvenance:
+  - file: openapi/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
+    source: https://docs.debix.six-group.com/redocusaurus/debix-bank-api-v2-bank-to-six.yaml
+    note: Verbatim download 2026-07-21; OpenAPI 3.1.0, debiX API v2.36.0, 49 paths.
+  - file: openapi/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+    source: https://docs.debix.six-group.com/redocusaurus/debix-bank-api-cardtoken-v2-bank-to-six.yaml
+    note: Verbatim download 2026-07-21; OpenAPI 3.1.0, cardtoken v2.36.0, 50 paths.
+  - file: openapi/six-group-debix-auth-provider-api-v2-six-to-provider-openapi.yml
+    source: https://docs.debix.six-group.com/redocusaurus/debix-auth-provider-api-v2-six-to-provider.yaml
+    note: Verbatim download 2026-07-21; OpenAPI 3.0.3, v2.1.5.
+  - file: openapi/six-group-debix-auth-provider-api-v2-provider-to-six-openapi.yml
+    source: https://docs.debix.six-group.com/redocusaurus/debix-auth-provider-api-v2-provider-to-six.yaml
+    note: Verbatim download 2026-07-21; OpenAPI 3.1.0, v2.1.9.
+  - file: openapi/six-group-swiss-bank-master-openapi.json
+    source: https://apiportal.six-group.com/api/v3/apis/swiss-bank-master-api-ch-v3/specifications/e41bfa39-0a9c-4f08-95bc-081de1a37f9f
+    note: Spec content extracted verbatim from Kong portal API JSON wrapper 2026-07-21; OpenAPI 3.x, 5 paths.
+  - file: openapi/six-group-sic-service-status-openapi.json
+    source: https://apiportal.six-group.com/api/v3/apis/sic-service-status-api-v1-ch-v1/specifications/0b356479-467d-4f2b-8689-37b87cd8508a
+    note: Spec content extracted verbatim from Kong portal API JSON wrapper 2026-07-21; 2 paths.
+  - file: openapi/six-group-sic-clearing-day-calendar-openapi.json
+    source: https://apiportal.six-group.com/api/v3/apis/sic-clearing-day-calendar-api-v1-ch-v1/specifications/0f2fee1c-ce1f-4323-8b82-cfed13b6e3f3
+    note: Spec content extracted verbatim from Kong portal API JSON wrapper 2026-07-21; 3 paths.
+  - file: openapi/six-group-settlement-info-reporting-openapi.json
+    source: https://apiportal.six-group.com/api/v3/apis/settlement-info-reporting-ch-v1/specifications/52cbfb5f-8e19-42e4-a1fa-bded916e761f
+    note: Spec content extracted verbatim from Kong portal API JSON wrapper 2026-07-21; OpenAPI 3.0.2 v1.0.7, CC BY-ND 4.0, 5 paths.
+  gaps:
+  - No public OpenAPI or base URL for the flagship SIX Web API or Bulk API; specs live behind the login-gated bfi portal.
+  - bLink publishes full HTML API reference and a Postman collection zip but no raw OpenAPI file on the public docs site.
+  - No public pricing for any financial data product; fixed-fee bulk packages mentioned without numbers.
+  - No public status page for the developer platform itself (the SIC Service Status API covers payment services, not the APIs).
+sources:
+- url: https://developer.six-group.com
+  type: Portal
+  note: Landing portal linking Web API, bLink, debiX, and shared catalog.
+- url: https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
+  type: Documentation
+  note: Web API - REST/JSON, GraphQL, WebSocket, MTLS, 900+ price sources, demo-access form.
+- url: https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html
+  type: Documentation
+  note: Bulk API - REST/JSON full/delta extracts, MTLS, fixed-fee packages.
+- url: https://www.six-group.com/en/products-services/financial-information/delivery-methods.html
+  type: Documentation
+  note: Delivery methods - Web API, Bulk API, Market Data Feed, SIX Flex, Valordata Feed, SIX iD, Snowflake, SIX Connect.
+- url: https://docs.blink.six-group.com/
+  type: Documentation
+  note: bLink open banking docs - AIS/PSS/OpenWealth modules, OAuth, downloads page.
+- url: https://docs.debix.six-group.com/
+  type: Documentation
+  note: debiX Docusaurus docs with four Redocusaurus OpenAPI specs.
+- url: https://apiportal.six-group.com/
+  type: Documentation
+  note: Kong-based shared API catalog with four public APIs and downloadable OAS3 specs.
