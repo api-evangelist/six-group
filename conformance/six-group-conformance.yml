@@ -1,0 +1,60 @@
+generated: '2026-07-22'
+method: searched
+source: SIX/bLink/debiX public docs + repo OpenAPI derivation (2026-07-22)
+standards:
+- id: oauth2
+  conforms: true
+  evidence: bLink consent management implements standard OAuth 2.0 consent flows
+    (authorization code, token issuance/revocation, App2App inter-app flows) -
+    https://docs.blink.six-group.com/api-reference/authentication/consent-management
+- id: mutual-tls
+  conforms: true
+  evidence: X.509 mutual TLS is the platform authentication for bLink, debiX, Web
+    API and Bulk API; bLink publishes accepted CA list and certificate requirements
+    (OV/EV, RSA >= 3072) - https://docs.blink.six-group.com/api-reference/authentication/tls-certificates
+- id: swiss-common-api-sfti
+  conforms: true
+  evidence: bLink Account & Payment Services APIs are released in partnership with
+    Swiss Fintech Innovations (SFTI) Common API -
+    https://docs.blink.six-group.com/docs/services/release-management-process
+- id: openwealth
+  conforms: true
+  evidence: bLink OpenWealth custody APIs are released with the OpenWealth
+    Association - https://openwealth.ch/ via
+    https://docs.blink.six-group.com/docs/services/release-management-process
+- id: rfc7807-problem-details
+  conforms: partial
+  evidence: Swiss Bank Master and SIC Clearing Day Calendar specs define an RFC
+    7807-shaped Problem schema (type/title/status/detail) but serve it as
+    application/json, not application/problem+json (openapi/_original/six-group-swiss-bank-master-openapi.json)
+- id: emv-3ds
+  conforms: true
+  evidence: debiX Auth Provider API implements the 3-D Secure out-of-band (OOB)
+    authentication flow between SIX and issuer auth providers -
+    https://docs.debix.six-group.com/debix-auth-v2/
+- id: openapi-3
+  conforms: true
+  evidence: Publicly downloadable OpenAPI 3.0/3.1 definitions for debiX (4 specs)
+    and the shared Kong catalog (4 specs), harvested verbatim into openapi/_original/
+- id: rfc8414-oauth-metadata
+  conforms: partial
+  evidence: apiportal.six-group.com publishes /.well-known/oauth-authorization-server
+    metadata for portal login only (well-known/six-group-oauth-authorization-server.json)
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: /.well-known/security.txt on www.six-group.com and
+    developer.six-group.com with Contact, Scope, Acknowledgements
+    (well-known/six-group-security.txt)
+- id: iso-20022
+  conforms: true
+  evidence: SIX Interbank Clearing operates the SIC Swiss franc RTGS payment
+    system; the Bulk API documents ISO-standard formats for reference data and the
+    bank master supplies payment master data for Swiss ISO 20022 payments -
+    https://www.six-group.com/en/products-services/banking-services.html
+- id: fapi
+  conforms: false
+  evidence: No FAPI conformance claim found in bLink or portal documentation.
+- id: psd2
+  conforms: false
+  evidence: bLink is a Swiss (non-EU) open banking scheme by platform admission,
+    not a PSD2/Berlin Group implementation; no PSD2 claim published.

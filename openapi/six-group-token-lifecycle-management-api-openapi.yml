@@ -1,0 +1,809 @@
+openapi: 3.1.0
+info:
+  title: 'debiX Auth Provider API: Provider-to-SIX 3DS Token Lifecycle Management API'
+  version: 2.1.9
+  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+servers:
+- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - Internet
+- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - Internet
+- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: PROD - SSFN
+- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: TEST - SSFN
+- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - P2P
+- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - P2P
+tags:
+- name: Token Lifecycle Management
+  description: Retrieves and manages digital cards (tokens) for cards.
+paths:
+  /digitalcards/{dpan}:
+    get:
+      tags:
+      - Token Lifecycle Management
+      summary: Returns a digital card.
+      description: 'Returns the digital card specified by the dpan in the request.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        '
+      operationId: getDigitalCard
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: dpan
+        description: Digital card number.
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dpan'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalCard'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/digitalcards:
+    post:
+      tags:
+      - Token Lifecycle Management
+      summary: Returns a list of digital cards.
+      description: 'Returns a list of digital cards for the given card using filter arguments.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4433 - UNKNOWN_WALLET_PROVIDER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getDigitalCards
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        description: Filter for the digital card search.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DigitalCardsSearchRequestFilter'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalCardSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/digitalcards/status:
+    put:
+      tags:
+      - Token Lifecycle Management
+      summary: Updates the status of digital cards of a card.
+      description: 'Updates the status of the digital cards of a funding debit card, specified by its card token. The status update is triggered only for those digital cards which can be updated.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED
+
+        * 4437 - DIGITAL_CARD_HAS_PENDING_STATUS
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: updateDigitalCardsStatus
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        description: Update request for the status of digital cards of a card.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DigitalCardsStatusUpdateRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalCardStatusUpdateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /digitalcards/{dpan}/status:
+    put:
+      tags:
+      - Token Lifecycle Management
+      summary: Updates the status of a digital card.
+      description: 'Triggers the status update of the digital card specified by the dpan in the request.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED
+
+        * 4437 - DIGITAL_CARD_HAS_PENDING_STATUS
+
+        '
+      operationId: updateDigitalCardStatus
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: dpan
+        description: Digital card number.
+        required: true
+        schema:
+          $ref: '#/components/schemas/Dpan'
+      requestBody:
+        description: Update request for the status of the digital card.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DigitalCardStatusUpdateRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /digitalcards/search:
+    post:
+      tags:
+      - Token Lifecycle Management
+      summary: Returns a list of digital cards.
+      description: 'Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/digitalcards` instead.
+
+
+        Returns a list of digital cards using filter arguments.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4433 - UNKNOWN_WALLET_PROVIDER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getDigitalCards
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Filter for the digital card search.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DigitalCardsSearchRequestFilter_2'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalCardSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /digitalcards/status:
+    put:
+      tags:
+      - Token Lifecycle Management
+      summary: Updates the status of digital cards of a card.
+      description: 'Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/digitalcards/status` instead.
+
+
+        Updates the status of the digital cards of a funding debit card, specified by its shortCardId. The status update is triggered only for those digital cards which can be updated.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED
+
+        * 4437 - DIGITAL_CARD_HAS_PENDING_STATUS
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: updateDigitalCardsStatus
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Update request for the status of digital cards of a card.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DigitalCardsStatusUpdateRequest_2'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalCardStatusUpdateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    TokenRequestor:
+      description: Information about the token requestor.
+      type: object
+      properties:
+        id:
+          description: The id of the token requestor.
+          type: string
+          maxLength: 11
+          examples:
+          - '1111111111'
+        name:
+          description: The name of the token requestor.
+          type: string
+          maxLength: 64
+          examples:
+          - Zalando
+    BankClearingNumber:
+      description: Unique number used to identify each bank agency or branch in the bank directory.
+      type: integer
+      format: int32
+      minimum: 100
+      maximum: 99999
+      examples:
+      - 50000
+    DigitalCardStatusUpdateResponse:
+      description: Contains two lists of digital cards; one contains those for which the update was triggered, the other contains those for which the update is not possible due to business rules. Both lists are sorted in ascending order by the Dpan.
+      type: object
+      properties:
+        commissionedDigitalCards:
+          description: Lists of digital cards for which the update was triggered.
+          type: array
+          items:
+            $ref: '#/components/schemas/Dpan'
+        rejectedDigitalCards:
+          description: Lists of digital cards for which the update is not possible due to business rules.
+          type: array
+          items:
+            $ref: '#/components/schemas/RejectedDigitalCard'
+    YearMonth:
+      type: object
+      required:
+      - month
+      - year
+      properties:
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
+    Scheme:
+      description: Scheme of the card.
+      type: string
+      enum:
+      - MASTERCARD
+      - VISA
+    DigitalCard:
+      description: Contains data of a digital card.
+      type: object
+      required:
+      - digitalCardId
+      - dpan
+      - cardToken
+      - scheme
+      - status
+      - digitalCardExpiry
+      - wallet
+      - productId
+      - provisioningDate
+      properties:
+        digitalCardId:
+          $ref: '#/components/schemas/DigitalCardId'
+        dpan:
+          $ref: '#/components/schemas/Dpan'
+        cardToken:
+          $ref: '#/components/schemas/CardToken'
+        scheme:
+          $ref: '#/components/schemas/Scheme'
+        status:
+          $ref: '#/components/schemas/DigitalCardStatus'
+        pendingStatus:
+          $ref: '#/components/schemas/DigitalCardPendingStatus'
+        digitalCardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        wallet:
+          $ref: '#/components/schemas/WalletProvider'
+        tokenRequestor:
+          $ref: '#/components/schemas/TokenRequestor'
+        productId:
+          description: Name of the card product.
+          type: string
+          examples:
+          - Bank Card Gold
+        provisioningDate:
+          description: Provisioning date.
+          type: string
+          format: date-time
+          examples:
+          - '2021-10-03T16:03:09.101+02:00'
+        deviceType:
+          $ref: '#/components/schemas/DeviceType'
+        deviceName:
+          description: Name of the device that the device owner may use to identify it.
+          type: string
+          examples:
+          - Peter's iPhone
+        digitalCardStatusUpdateReason:
+          $ref: '#/components/schemas/DigitalCardStatusUpdateReason'
+    DigitalCardStatusUpdateRequest:
+      description: Contains the new digital card status and the update reason.
+      type: object
+      required:
+      - status
+      - digitalCardStatusUpdateReason
+      properties:
+        status:
+          $ref: '#/components/schemas/DigitalCardStatus'
+        digitalCardStatusUpdateReason:
+          $ref: '#/components/schemas/DigitalCardStatusUpdateReason'
+    DigitalCardStatus:
+      description: The status of the digital card.
+      type: string
+      enum:
+      - ACTIVE
+      - SUSPENDED
+      - DELETED
+    DigitalCardSearchResponse:
+      description: Contains a list of digital cards corresponding to the request filter, sorted by provisioning date from newest to oldest.
+      type: object
+      properties:
+        digitalCards:
+          description: List of digital cards found.
+          type: array
+          items:
+            $ref: '#/components/schemas/DigitalCard'
+        totalRecords:
+          description: Total available records.
+          type: integer
+          format: int64
+          examples:
+          - 1021
+    CardNumber:
+      description: Card number of the card.
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 99999999
+      examples:
+      - 12345678
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    DeviceType:
+      description: "Type of the device where the digital card is stored. \n- \"HCE\"\n- \"SPAY_PHONE\"\n- \"SPAY_TABLET\"\n- \"SPAY_WATCH\"\n- \"SPAY_TV\"\n- \"IPHONE\"\n- \"IWATCH\"\n- \"APPLE_WATCH\"\n- \"IPAD\"\n- \"MAC_BOOK\"\n- \"ANDROID_PHONE\"\n- \"ANDROID_TABLET\"\n- \"ANDROID_WATCH\"\n- \"MOBILE_PHONE\"\n- \"TABLET\"\n- \"WATCH\"\n- \"MOBILE_PHONE_OR_TABLET\"\n- \"BRACELET\"\n- \"PC\"\n- \"HOUSEHOLD\"\n- \"WEARABLE\"\n- \"AUTOMOBILE\"\n- \"UNKNOWN\""
+      type: string
+      examples:
+      - IPHONE
+    DateTimeRange:
+      description: Date-time range lower and upper bounds (both inclusive).
+      type: object
+      properties:
+        from:
+          description: Date-time lower bound (inclusive).
+          type: string
+          format: date-time
+          examples:
+          - '2022-01-01T00:00:00.000+02:00'
+        to:
+          description: Date-time upper bound (inclusive).
+          type: string
+          format: date-time
+          examples:
+          - '2022-12-31T23:59:59.999+02:00'
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+    Paging:
+      description: Contains paging properties.
+      type: object
+      properties:
+        pageNumber:
+          description: Page number for paging starting with zero.
+          type: integer
+          format: int32
+          default: 0
+          examples:
+          - 0
+        pageSize:
+          description: Limitation of the page size.
+          type: integer
+          format: int32
+          minimum: 20
+          maximum: 100
+          default: 100
+          examples:
+          - 50
+    DigitalCardStatusUpdateReason:
+      description: The reason for the status update of the digital card.
+      type: string
+      enum:
+      - ISSUER_DECISION
+      - USER_DECISION
+    DigitalCardsStatusUpdateRequest:
+      description: Contains the new digital card status and the update reason.
+      type: object
+      required:
+      - status
+      - digitalCardStatusUpdateReason
+      properties:
+        status:
+          $ref: '#/components/schemas/DigitalCardStatus'
+        digitalCardStatusUpdateReason:
+          $ref: '#/components/schemas/DigitalCardStatusUpdateReason'
+    ShortCardId:
+      description: Complex object representing a card consisting of bank clearing number, card number and card type.
+      type: object
+      required:
+      - bankClearingNumber
+      - cardNumber
+      - cardType
+      properties:
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+    WalletProvider:
+      description: '- "WALLET"
+
+        - "ECOM"
+
+        - "APPLE_PAY"
+
+        - "SAMSUNG_PAY"
+
+        - "GOOGLE_PAY"
+
+        - "GARMIN_PAY"
+
+        - "FITBIT_PAY"
+
+        - "FACEBOOK"
+
+        - "VISA_CHECKOUT"
+
+        - "NETFLIX"
+
+        - "ASIA_PAY_LIMITED"
+
+        - "CYBERSOURCE"
+
+        - "CHERRI_TECH"
+
+        - "ADYEN"
+
+        - "AMAZON"
+
+        - "MENA_FZ_LLC"
+
+        - "GLOBAL_PYT_AUSTRALIA"
+
+        - "PAYSCOUT"
+
+        - "SAFECHARGE"
+
+        - "SECURECO"
+
+        - "WORLDPAY"
+
+        - "PAYPAL"
+
+        - "BAMBORA_ONLINE"
+
+        - "MYOB"
+
+        - "HUAWEI_PAY"'
+      type: string
+      examples:
+      - APPLE_PAY
+    DigitalCardsStatusUpdateRequest_2:
+      description: Contains the shortCardId, the new digital card status and the update reason.
+      type: object
+      required:
+      - shortCardId
+      - status
+      - digitalCardStatusUpdateReason
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+        status:
+          $ref: '#/components/schemas/DigitalCardStatus'
+        digitalCardStatusUpdateReason:
+          $ref: '#/components/schemas/DigitalCardStatusUpdateReason'
+    YearMonthRange:
+      description: Year-month range lower and upper bounds (both inclusive).
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/YearMonth'
+        to:
+          $ref: '#/components/schemas/YearMonth'
+    RejectedDigitalCard:
+      type: object
+      properties:
+        dpan:
+          $ref: '#/components/schemas/Dpan'
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+    DigitalCardsSearchRequestFilter:
+      description: Contains the optional filters for the digital cards search. Expiry and provisioning date lower and upper bounds are inclusive.
+      type: object
+      properties:
+        wallet:
+          $ref: '#/components/schemas/WalletProvider'
+        tokenRequestor:
+          $ref: '#/components/schemas/TokenRequestor'
+        digitalCardExpiryRange:
+          $ref: '#/components/schemas/YearMonthRange'
+        provisioningDateTimeRange:
+          $ref: '#/components/schemas/DateTimeRange'
+        status:
+          $ref: '#/components/schemas/DigitalCardStatus'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    DigitalCardPendingStatus:
+      description: The requested but pending status of the digital card.
+      type: string
+      enum:
+      - RESUMPTION_PENDING
+      - SUSPENSION_PENDING
+      - DELETION_PENDING
+    DigitalCardsSearchRequestFilter_2:
+      description: Contains the optional filters for the digital cards search. Expiry and provisioning date lower and upper bounds are inclusive.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+        wallet:
+          $ref: '#/components/schemas/WalletProvider'
+        tokenRequestor:
+          $ref: '#/components/schemas/TokenRequestor'
+        digitalCardExpiryRange:
+          $ref: '#/components/schemas/YearMonthRange'
+        provisioningDateTimeRange:
+          $ref: '#/components/schemas/DateTimeRange'
+        status:
+          $ref: '#/components/schemas/DigitalCardStatus'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Dpan:
+      description: Number of the digital card.
+      type: string
+      pattern: ^[4,5][0-9]{15}$
+      minLength: 16
+      maxLength: 16
+      examples:
+      - '4234567890123456'
+    DigitalCardId:
+      description: debiX id of the digital card.
+      type: string
+      examples:
+      - eb404f8d-656b-4e51-8872-88c42fa55536
+  parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
+    IssuerTraceIdHeader:
+      in: header
+      name: issuer-trace-id
+      description: A issuer‑provided unique trace identifier to correlate the complete flow started by this request.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 26

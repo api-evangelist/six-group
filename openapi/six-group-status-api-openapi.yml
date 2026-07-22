@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: 'debiX Auth Provider API: Provider-to-SIX 3DS status API'
+  version: 2.1.9
+  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+servers:
+- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - Internet
+- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - Internet
+- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: PROD - SSFN
+- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: TEST - SSFN
+- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - P2P
+- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - P2P
+tags:
+- name: status
+  description: '**SIC Status**
+
+    Information about about the status of various services can be found here.
+
+    '
+paths:
+  /servicestatus:
+    get:
+      tags:
+      - status
+      summary: GET Status in JSON Format
+      description: Returns the service status data of the SIC service as a JSON object.
+      operationId: getServiceStatusJson
+      responses:
+        '200':
+          description: Service status in JSON format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceStatusResponseEntry'
+    head:
+      tags:
+      - status
+      summary: HEAD Status in JSON Format
+      description: Service status data of the SIC service in JSON format (only head, no content).
+      operationId: headServiceStatusJson
+      responses:
+        '200':
+          description: Content can be downloaded with GET method.
+          content: {}
+components:
+  schemas:
+    ServiceStatusResponseEntry:
+      required:
+      - serviceIdentification
+      - status
+      - timestamp
+      type: object
+      properties:
+        serviceIdentification:
+          maxLength: 10
+          minLength: 1
+          type: string
+          description: "Values for Production Services: PCI_P \nValues for Test environments:\n- SIC IP service: XCI_E; ACI_E; XCI_P; ACI_P; VCI_E; VCI_P\n"
+          example: PCI_P
+        status:
+          maxLength: 20
+          minLength: 2
+          type: string
+          description: Status information for the service is either UP or DOWN or UNKNOWN.
+          example: UP
+        timestamp:
+          type: string
+          description: Date and time (according to ISO 8601) at which this status data was last checked.
+          format: date-time
+          example: '2024-12-21T10:52:05.1904957+01:00'
+      description: Status data for one service.

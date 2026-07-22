@@ -1,0 +1,44 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.debix.six-group.com/debix-v2/release-notes
+scheme: semantic versioning per product (debiX API, debiX Auth Provider API, debiX
+  PUSH, debiX BULK each publish their own release notes); releases without interface
+  changes are not listed. Dates are not published - versions only.
+current_version: 2.36.0 (debiX API v2)
+changelogs:
+- product: debiX API v2
+  url: https://docs.debix.six-group.com/debix-v2/release-notes
+- product: debiX Auth Provider API v2
+  url: https://docs.debix.six-group.com/debix-auth-v2/release-notes
+- product: debiX PUSH
+  url: https://docs.debix.six-group.com/debix-push/release-notes
+- product: debiX BULK
+  url: https://docs.debix.six-group.com/debix-bulk/release-notes
+entries:
+- version: 2.36.0
+  product: debiX API
+  breaking: false
+  highlights:
+  - 'Added endpoint in CardToken V2 to start PIN setup with cardId: POST /cards/start-set-pin'
+  - Reordered endpoints
+- version: 2.35.3
+  product: debiX API
+  breaking: false
+  highlights:
+  - Reorganized tags and reassigned endpoints to new tags
+  - Added support for bank cards to Card Management and Card Usage operations
+  - Added error codes 4480-4484 for bank-card constraints
+- version: 2.34.0
+  product: debiX API
+  breaking: false
+  highlights:
+  - Added error code 4469 PIN_DELIVERY_NOT_ALLOWED_FOR_VIRTUAL_CARD on PIN
+    datamailer orders (physical cards only)
+- version: 2.33.0
+  product: debiX API
+  breaking: false
+  highlights:
+  - Added SubCardType to CardEncryptionRequest and ClickToPayCardEncryptionRequest
+  - Added CardInstanceToken query endpoints (POST /cards/card-instance-token and
+    cardToken variants)
+  - Added CardToken/CardInstanceToken to card detail responses

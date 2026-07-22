@@ -1,0 +1,754 @@
+# bLink Docs
+
+> Explore our documentation hub to quickly join the bLink ecosystem
+
+- [bLink Docs](/index.md)
+
+## tools
+
+Quick access to our most important tools and resources related to bLink.
+
+- [Tools Overview](/tools.md): Quick access to our most important tools and resources related to bLink.
+
+## api-reference
+
+
+### ais
+
+- [AIS Response Examples](/api-reference/ais/examples-ais.md): This section presents JSON examples of the response from the AIS Module on bLink.
+- [accounts](/api-reference/ais/v4/service-providers/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v4/service-providers/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API. (as implemented by providers (e.g. financial institutions) and used by SIX)
+- [Returns all specified request headers and additional diagnostic information](/api-reference/ais/v4/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [iso20022](/api-reference/ais/v4/service-providers/iso-20022.md): iso20022
+- [Retrieve account balance information](/api-reference/ais/v4/service-providers/request-account-balance.md): Returns account balance information of the specified account.
+- [Retrieve information about a single specific account](/api-reference/ais/v4/service-providers/request-account-details.md): Returns the accounts details of the specified account.
+- [Retrieve list of authorized accounts](/api-reference/ais/v4/service-providers/request-account-list.md): Return the list of all accounts accessible for the logged in user.
+- [Retrieve transactions of a specific account](/api-reference/ais/v4/service-providers/request-account-transactions.md): Returns the transaction list of the specified account. Only postings with status booked will be returned.
+- [Retrieve a list of consents](/api-reference/ais/v4/service-providers/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given corporate user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieves the designated ISO20022 XML CAMT document.](/api-reference/ais/v4/service-providers/retrieve-iso-20022-account-statement.md): Retrieves the designated ISO20022 XML CAMT document.
+- [Retrieve a list of resource links to account statements (CAMT.053)](/api-reference/ais/v4/service-providers/retrieve-iso-20022-account-statement-ids.md): Get the resources links to available account statements (camt.053). The returned account statements must be conform to the XML schema and implementation guidelines defined by Swiss Payment Standards.
+- [accounts](/api-reference/ais/v4/six/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v4/six/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Returns all specified request headers and additional diagnostic information](/api-reference/ais/v4/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [iso20022](/api-reference/ais/v4/six/iso-20022.md): iso20022
+- [Retrieve account balance information](/api-reference/ais/v4/six/request-account-balance.md): Returns account balance information of the specified account.
+- [Retrieve information about a single specific account](/api-reference/ais/v4/six/request-account-details.md): Returns the accounts details of the specified account.
+- [Retrieve list of authorized accounts](/api-reference/ais/v4/six/request-account-list.md): Return the list of all accounts accessible for the logged in user.
+- [Retrieve transactions of a specific account](/api-reference/ais/v4/six/request-account-transactions.md): Returns the transaction list of the specified account. Only postings with status booked will be returned.
+- [Retrieve a list of consents](/api-reference/ais/v4/six/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given corporate user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieves the designated ISO20022 XML CAMT document.](/api-reference/ais/v4/six/retrieve-iso-20022-account-statement.md): Retrieves the designated ISO20022 XML CAMT document.
+- [Retrieve a list of resource links to account statements (CAMT.053)](/api-reference/ais/v4/six/retrieve-iso-20022-account-statement-ids.md): Get the resources links to available account statements (camt.053). The returned account statements must be conform to the XML schema and implementation guidelines defined by Swiss Payment Standards.
+- [accounts](/api-reference/ais/v4/with-caas/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v4/with-caas/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/ais/v4/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [iso20022](/api-reference/ais/v4/with-caas/iso-20022.md): iso20022
+- [Retrieve account balance information](/api-reference/ais/v4/with-caas/request-account-balance.md): Returns account balance information of the specified account.
+- [Retrieve information about a single specific account](/api-reference/ais/v4/with-caas/request-account-details.md): Returns the accounts details of the specified account.
+- [Retrieve list of authorized accounts](/api-reference/ais/v4/with-caas/request-account-list.md): Return the list of all accounts accessible for the logged in user.
+- [Retrieve transactions of a specific account](/api-reference/ais/v4/with-caas/request-account-transactions.md): Returns the transaction list of the specified account. Only postings with status booked will be returned.
+- [Retrieve a list of consents](/api-reference/ais/v4/with-caas/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given corporate user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieves the designated ISO20022 XML CAMT document.](/api-reference/ais/v4/with-caas/retrieve-iso-20022-account-statement.md): Retrieves the designated ISO20022 XML CAMT document.
+- [Retrieve a list of resource links to account statements (CAMT.053)](/api-reference/ais/v4/with-caas/retrieve-iso-20022-account-statement-ids.md): Get the resources links to available account statements (camt.053). The returned account statements must be conform to the XML schema and implementation guidelines defined by Swiss Payment Standards.
+- [accounts](/api-reference/ais/v5/service-providers/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v5/service-providers/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API. (as implemented by providers (e.g. financial institutions) and used by SIX)
+- [Returns all specified request headers and additional diagnostic information](/api-reference/ais/v5/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [iso20022](/api-reference/ais/v5/service-providers/iso-20022.md): iso20022
+- [Retrieve account balance information](/api-reference/ais/v5/service-providers/request-account-balance.md): Returns account balance information of the specified account.
+- [Retrieve information about a single specific account](/api-reference/ais/v5/service-providers/request-account-details.md): Returns the accounts details of the specified account.
+- [Retrieve list of authorized accounts](/api-reference/ais/v5/service-providers/request-account-list.md): Return the list of all accounts accessible for the logged in user.
+- [Retrieve transactions of a specific account](/api-reference/ais/v5/service-providers/request-account-transactions.md): Returns the transaction list of the specified account.
+- [Retrieve a list of resource links to account reports (camt.052)](/api-reference/ais/v5/service-providers/retrieve-iso-20022-account-report-ids.md): Get a list of resource links to available account reports (camt.052) generated since the last End-of-Day (EOD) processing.
+- [Retrieve the designated ISO20022 XML camt.052 document](/api-reference/ais/v5/service-providers/retrieve-iso-20022-account-reports.md): Retrieve the designated ISO20022 XML camt.052 document.
+- [Retrieve the designated ISO20022 XML camt.053 document](/api-reference/ais/v5/service-providers/retrieve-iso-20022-account-statement.md): Retrieve the designated ISO20022 XML camt.053 document.
+- [Retrieve a list of resource links to account statements (camt.053)](/api-reference/ais/v5/service-providers/retrieve-iso-20022-account-statement-ids.md): Get a list of resource links to available account statements (camt.053) for all accounts covered by the eBanking contract delivered.
+- [accounts](/api-reference/ais/v5/six/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v5/six/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Returns all specified request headers and additional diagnostic information](/api-reference/ais/v5/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [iso20022](/api-reference/ais/v5/six/iso-20022.md): iso20022
+- [Retrieve account balance information](/api-reference/ais/v5/six/request-account-balance.md): Returns account balance information of the specified account.
+- [Retrieve information about a single specific account](/api-reference/ais/v5/six/request-account-details.md): Returns the accounts details of the specified account.
+- [Retrieve list of authorized accounts](/api-reference/ais/v5/six/request-account-list.md): Return the list of all accounts accessible for the logged in user.
+- [Retrieve transactions of a specific account](/api-reference/ais/v5/six/request-account-transactions.md): Returns the transaction list of the specified account.
+- [Retrieve a list of resource links to account reports (camt.052)](/api-reference/ais/v5/six/retrieve-iso-20022-account-report-ids.md): Get a list of resource links to available account reports (camt.052) generated since the last End-of-Day (EOD) processing.
+- [Retrieve the designated ISO20022 XML camt.052 document](/api-reference/ais/v5/six/retrieve-iso-20022-account-reports.md): Retrieve the designated ISO20022 XML camt.052 document.
+- [Retrieve the designated ISO20022 XML camt.053 document](/api-reference/ais/v5/six/retrieve-iso-20022-account-statement.md): Retrieve the designated ISO20022 XML camt.053 document.
+- [Retrieve a list of resource links to account statements (camt.053)](/api-reference/ais/v5/six/retrieve-iso-20022-account-statement-ids.md): Get a list of resource links to available account statements (camt.053) for all accounts covered by the eBanking contract delivered.
+- [accounts](/api-reference/ais/v5/with-caas/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v5/with-caas/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/ais/v5/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [iso20022](/api-reference/ais/v5/with-caas/iso-20022.md): iso20022
+- [Retrieve account balance information](/api-reference/ais/v5/with-caas/request-account-balance.md): Returns account balance information of the specified account.
+- [Retrieve information about a single specific account](/api-reference/ais/v5/with-caas/request-account-details.md): Returns the accounts details of the specified account.
+- [Retrieve list of authorized accounts](/api-reference/ais/v5/with-caas/request-account-list.md): Return the list of all accounts accessible for the logged in user.
+- [Retrieve transactions of a specific account](/api-reference/ais/v5/with-caas/request-account-transactions.md): Returns the transaction list of the specified account.
+- [Retrieve a list of resource links to account reports (camt.052)](/api-reference/ais/v5/with-caas/retrieve-iso-20022-account-report-ids.md): Get a list of resource links to available account reports (camt.052) generated since the last End-of-Day (EOD) processing.
+- [Retrieve the designated ISO20022 XML camt.052 document](/api-reference/ais/v5/with-caas/retrieve-iso-20022-account-reports.md): Retrieve the designated ISO20022 XML camt.052 document.
+- [Retrieve the designated ISO20022 XML camt.053 document](/api-reference/ais/v5/with-caas/retrieve-iso-20022-account-statement.md): Retrieve the designated ISO20022 XML camt.053 document.
+- [Retrieve a list of resource links to account statements (camt.053)](/api-reference/ais/v5/with-caas/retrieve-iso-20022-account-statement-ids.md): Get a list of resource links to available account statements (camt.053) for all accounts covered by the eBanking contract delivered.
+- [accounts](/api-reference/ais/v6/service-providers/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v6/service-providers/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API.
+- [diagnostics](/api-reference/ais/v6/service-providers/diagnostics.md): diagnostics
+- [Get an account](/api-reference/ais/v6/service-providers/get-account.md): Get the details of a specific account.
+- [Get the balance of an account](/api-reference/ais/v6/service-providers/get-account-balance.md): Returns account balance information of the specified account.
+- [Get diagnostic information](/api-reference/ais/v6/service-providers/get-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers are returned unchanged.
+- [Get an ISO20022 XML camt.052 document](/api-reference/ais/v6/service-providers/get-iso-20022-account-report.md): Get an ISO20022 XML camt.052 document.
+- [Get an ISO20022 XML camt.053 document](/api-reference/ais/v6/service-providers/get-iso-20022-account-statement.md): Get an ISO20022 XML camt.053 document.
+- [iso20022](/api-reference/ais/v6/service-providers/iso-20022.md): iso20022
+- [Get a list of all transactions of an account](/api-reference/ais/v6/service-providers/list-account-transactions.md): Returns a paginated list of transactions for the specified account.
+- [Get a list of all accounts](/api-reference/ais/v6/service-providers/list-accounts.md): Get a list of all accounts for the authenticated context. The response contains an `accounts` array;
+- [Get a list of resource references to account reports (camt.052)](/api-reference/ais/v6/service-providers/list-iso-20022-account-report-references.md): Returns a paginated list of resource references to available account reports (camt.052) generated since the last End-of-Day (EOD) processing.
+- [Get a list of resource references to account statements (camt.053)](/api-reference/ais/v6/service-providers/list-iso-20022-account-statement-references.md): Get a list of resource references to available account statements (camt.053) for all accounts covered by the eBanking contract delivered.
+- [accounts](/api-reference/ais/v6/six/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v6/six/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API.
+- [diagnostics](/api-reference/ais/v6/six/diagnostics.md): diagnostics
+- [Get an account](/api-reference/ais/v6/six/get-account.md): Get the details of a specific account.
+- [Get the balance of an account](/api-reference/ais/v6/six/get-account-balance.md): Returns account balance information of the specified account.
+- [Get diagnostic information](/api-reference/ais/v6/six/get-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers are returned unchanged.
+- [Get an ISO20022 XML camt.052 document](/api-reference/ais/v6/six/get-iso-20022-account-report.md): Get an ISO20022 XML camt.052 document.
+- [Get an ISO20022 XML camt.053 document](/api-reference/ais/v6/six/get-iso-20022-account-statement.md): Get an ISO20022 XML camt.053 document.
+- [iso20022](/api-reference/ais/v6/six/iso-20022.md): iso20022
+- [Get a list of all transactions of an account](/api-reference/ais/v6/six/list-account-transactions.md): Returns a paginated list of transactions for the specified account.
+- [Get a list of all accounts](/api-reference/ais/v6/six/list-accounts.md): Get a list of all accounts for the authenticated context. The response contains an `accounts` array;
+- [Get a list of resource references to account reports (camt.052)](/api-reference/ais/v6/six/list-iso-20022-account-report-references.md): Returns a paginated list of resource references to available account reports (camt.052) generated since the last End-of-Day (EOD) processing.
+- [Get a list of resource references to account statements (camt.053)](/api-reference/ais/v6/six/list-iso-20022-account-statement-references.md): Get a list of resource references to available account statements (camt.053) for all accounts covered by the eBanking contract delivered.
+- [accounts](/api-reference/ais/v6/with-caas/accounts.md): accounts
+- [bLink API - account-information-service module](/api-reference/ais/v6/with-caas/blink-api-account-information-service-module.md): This is the specification of the bLink 'account-information-service' module API.
+- [diagnostics](/api-reference/ais/v6/with-caas/diagnostics.md): diagnostics
+- [Get an account](/api-reference/ais/v6/with-caas/get-account.md): Get the details of a specific account.
+- [Get the balance of an account](/api-reference/ais/v6/with-caas/get-account-balance.md): Returns account balance information of the specified account.
+- [Get diagnostic information](/api-reference/ais/v6/with-caas/get-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers are returned unchanged.
+- [Get an ISO20022 XML camt.052 document](/api-reference/ais/v6/with-caas/get-iso-20022-account-report.md): Get an ISO20022 XML camt.052 document.
+- [Get an ISO20022 XML camt.053 document](/api-reference/ais/v6/with-caas/get-iso-20022-account-statement.md): Get an ISO20022 XML camt.053 document.
+- [iso20022](/api-reference/ais/v6/with-caas/iso-20022.md): iso20022
+- [Get a list of all transactions of an account](/api-reference/ais/v6/with-caas/list-account-transactions.md): Returns a paginated list of transactions for the specified account.
+- [Get a list of all accounts](/api-reference/ais/v6/with-caas/list-accounts.md): Get a list of all accounts for the authenticated context. The response contains an `accounts` array;
+- [Get a list of resource references to account reports (camt.052)](/api-reference/ais/v6/with-caas/list-iso-20022-account-report-references.md): Returns a paginated list of resource references to available account reports (camt.052) generated since the last End-of-Day (EOD) processing.
+- [Get a list of resource references to account statements (camt.053)](/api-reference/ais/v6/with-caas/list-iso-20022-account-statement-references.md): Get a list of resource references to available account statements (camt.053) for all accounts covered by the eBanking contract delivered.
+
+### authentication
+
+- [Consent Management 3.0](/api-reference/authentication/blueprints/consent-management-3.md): Consent Management 3.0
+- [API Specification](/api-reference/authentication/blueprints/consent-management-3/api-specification.md): API specification for Consent 3.0
+- [Business & Technical Questions](/api-reference/authentication/blueprints/consent-management-3/business-and-technical-questions.md): Business & Technical Questions
+- [Grant Management](/api-reference/authentication/blueprints/consent-management-3/grant-management.md): Grant Management for Consent 3.0
+- [Implementation Guides](/api-reference/authentication/blueprints/consent-management-3/implementation-guides.md): Service User securely stores tokens
+- [Key Standards](/api-reference/authentication/blueprints/consent-management-3/key-standards.md): Service User securely stores tokens
+- [Migration from Permissions](/api-reference/authentication/blueprints/consent-management-3/migration-from-permissions.md): Service User securely stores tokens
+- [Overview & Scope](/api-reference/authentication/blueprints/consent-management-3/overview-scope.md): Service User securely stores tokens
+- [Roadmap](/api-reference/authentication/blueprints/consent-management-3/roadmap-transition.md): Service User securely stores tokens
+- [Consent 3.0 Flow](/api-reference/authentication/blueprints/consent-management-3/Technical Flows/consent-flow-3.0.md): Consent 3.0 Detailed Flow
+- [Migration Flow](/api-reference/authentication/blueprints/consent-management-3/Technical Flows/migration-flow.md): Permission to Token Flow
+- [Notification Flow](/api-reference/authentication/blueprints/consent-management-3/Technical Flows/notification-flow.md): Notification Flow for Consent 3.0
+- [Inter-App Consent Flow](/api-reference/authentication/blueprints/inter-app-flow.md): Inter-App Consent Flows are standard OAuth 2.0 consent flows. Using Inter-App URI communication enables OAuth consent flows between any combination of native apps and websites, e.g., App2App, App2Web, Web2App and Web2Web.
+- [Consent Management](/api-reference/authentication/consent-management.md): Details on TLS certificates necessary for API access.
+- [Consent Management 2.0](/api-reference/authentication/consent-management/consent-management-2.md): Service User securely stores tokens
+- [Consent Management 2.0 with Consent as a Service (CaaS)](/api-reference/authentication/consent-management/consent-management-2-with-caas.md): a standardized token store service that is provided by SIX
+- [Custom Headers](/api-reference/authentication/custom-headers.md): A list of custom headers required for all requests.
+- [TLS Certificates](/api-reference/authentication/tls-certificates.md): Details on TLS certificates necessary for API access.
+- [Token Management](/api-reference/authentication/token-management.md): Understand how to manage tokens on bLink.
+
+### base-module
+
+- [bLink API - consent flow module](/api-reference/base-module/consent/v2/service-providers/blink-api-consent-flow-module.md): This is the specification of the bLink 'consent-flow' module API.
+- [oauth](/api-reference/base-module/consent/v2/service-providers/oauth.md): oauth
+- [Revoke an OAuth token (access or refresh)](/api-reference/base-module/consent/v2/service-providers/oauth-revoke.md): - Revokes the specified OAuth token (must be done separately for access token and refresh token)
+- [Get the OAuth access and refresh token](/api-reference/base-module/consent/v2/service-providers/oauth-token.md): Returns the OAuth access and refresh token for the specified client and target.
+- [Validate the username of the resouce owner](/api-reference/base-module/consent/v2/service-providers/oauth-username.md): Returns whether or not a username could have been validated.
+- [bLink API - consent flow module](/api-reference/base-module/consent/v2/six/blink-api-consent-flow-module.md): This is the specification of the bLink 'consent-flow' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [oauth](/api-reference/base-module/consent/v2/six/oauth.md): oauth
+- [Revoke an OAuth token (access or refresh)](/api-reference/base-module/consent/v2/six/oauth-revoke.md): Revokes the specified OAuth token (must be done separately for access token and refresh token)
+- [Get the OAuth access and refresh token](/api-reference/base-module/consent/v2/six/oauth-token.md): Returns the OAuth access and refresh token for the specified client and target.
+- [Validate the username of the resouce owner](/api-reference/base-module/consent/v2/six/oauth-username.md): Returns whether or not a username could have been validated.
+- [bLink API - consent flow module](/api-reference/base-module/consent/v2/with-caas/blink-api-consent-flow-module.md): This is the specification of the bLink 'consent-flow' module API.
+- [createPermission](/api-reference/base-module/consent/v2/with-caas/create-permission.md): Create a permission
+- [deletePermission](/api-reference/base-module/consent/v2/with-caas/delete-permission.md): Revoke a permission for a given provider, user ID and permission ID
+- [permissions](/api-reference/base-module/consent/v2/with-caas/permissions.md): permissions
+- [refreshPermission](/api-reference/base-module/consent/v2/with-caas/refresh-permission.md): trigger token-refresh inside the permission for a given provider, user ID and permission ID
+- [retrievePermission](/api-reference/base-module/consent/v2/with-caas/retrieve-permission.md): Retrieve a permission for a given provider, user ID and permission ID
+- [retrievePermissions](/api-reference/base-module/consent/v2/with-caas/retrieve-permissions.md): Retrieve a list of permissions of a given provider and user ID
+- [Platform Module Overview](/api-reference/base-module/platform/platform-overview.md): Introduction
+- [bLink API - platform module](/api-reference/base-module/platform/v3/six/blink-api-platform-module.md): This is the specification of the bLink 'platform' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [directory](/api-reference/base-module/platform/v3/six/directory.md): directory
+- [Retrieve routing information for service provider connections](/api-reference/base-module/platform/v3/six/get-routing-information.md): Retrieves routing details for service provider connections, categorizing them into PermittedConnections and BlockedConnections. Both groups list the providerId of the respective Service Providers. BlockedConnections additionally includes the type of the restriction and a description.
+- [health status of the API](/api-reference/base-module/platform/v3/six/health-check-get.md): Endpoint to check the health status of the API for GET method.
+- [health status of the API](/api-reference/base-module/platform/v3/six/health-check-post.md): Endpoint to check the health status of the API for POST method.
+- [Retrieve the information for a registered client (e.g. third party provider)](/api-reference/base-module/platform/v3/six/retrieve-client-detail.md): Returns information regarding software and supported use cases of a client.
+- [Retrieve a list of all registered clients (e.g., third party providers)](/api-reference/base-module/platform/v3/six/retrieve-clients.md): Returns a list of clients with information regarding software and supported use cases.
+- [Retrieve the information for a registered provider (e.g., financial institutions)](/api-reference/base-module/platform/v3/six/retrieve-provider-detail.md): Returns information regarding software and supported use cases of a provider.
+- [Retrieve a list of all registered providers (e.g., financial institutions)](/api-reference/base-module/platform/v3/six/retrieve-providers.md): Returns a list of providers with information regarding software and supported use cases.
+- [instructed routes per communication](/api-reference/base-module/platform/v3/six/routing-instructions.md): Returns instructed routes for service user to service provider communication
+- [bLink API - platform module](/api-reference/base-module/platform/v3/with-caas/blink-api-platform-module.md): This is the specification of the bLink 'platform' module API.
+- [directory](/api-reference/base-module/platform/v3/with-caas/directory.md): directory
+- [Retrieve routing information for service provider connections](/api-reference/base-module/platform/v3/with-caas/get-routing-information.md): Retrieves routing details for service provider connections, categorizing them into PermittedConnections and BlockedConnections. Both groups list the providerId of the respective Service Providers. BlockedConnections additionally includes the type of the restriction and a description.
+- [health status of the API](/api-reference/base-module/platform/v3/with-caas/health-check-get.md): Endpoint to check the health status of the API for GET method.
+- [health status of the API](/api-reference/base-module/platform/v3/with-caas/health-check-post.md): Endpoint to check the health status of the API for POST method.
+- [Retrieve the information for a registered client (e.g. third party provider)](/api-reference/base-module/platform/v3/with-caas/retrieve-client-detail.md): Returns information regarding software and supported use cases of a client.
+- [Retrieve a list of all registered clients (e.g., third party providers)](/api-reference/base-module/platform/v3/with-caas/retrieve-clients.md): Returns a list of clients with information regarding software and supported use cases.
+- [Retrieve the information for a registered provider (e.g., financial institutions)](/api-reference/base-module/platform/v3/with-caas/retrieve-provider-detail.md): Returns information regarding software and supported use cases of a provider.
+- [Retrieve a list of all registered providers (e.g., financial institutions)](/api-reference/base-module/platform/v3/with-caas/retrieve-providers.md): Returns a list of providers with information regarding software and supported use cases.
+- [instructed routes per communication](/api-reference/base-module/platform/v3/with-caas/routing-instructions.md): Returns instructed routes for service user to service provider communication
+
+### category
+
+- [AIS](/api-reference/category/ais.md)
+- [AIS for Service Providers](/api-reference/category/ais-for-service-providers.md)
+- [v4](/api-reference/category/ais-for-service-providers/v4.md)
+- [v5](/api-reference/category/ais-for-service-providers/v5.md)
+- [v6](/api-reference/category/ais-for-service-providers/v6.md)
+- [AIS from SIX](/api-reference/category/ais-from-six.md)
+- [v4](/api-reference/category/ais-from-six/v4.md)
+- [v5](/api-reference/category/ais-from-six/v5.md)
+- [v6](/api-reference/category/ais-from-six/v6.md)
+- [AIS with CaaS from SIX](/api-reference/category/ais-with-caas-from-six.md)
+- [v4](/api-reference/category/ais-with-caas-from-six/v4.md)
+- [v5](/api-reference/category/ais-with-caas-from-six/v5.md)
+- [v6](/api-reference/category/ais-with-caas-from-six/v6.md)
+- [Base Modules](/api-reference/category/base-modules.md)
+- [Blueprints](/api-reference/category/blueprints.md)
+- [Consent](/api-reference/category/consent.md)
+- [Module for Service Providers](/api-reference/category/consent-for-service-providers.md)
+- [v2](/api-reference/category/consent-from-service-providers/v2.md)
+- [Module from SIX](/api-reference/category/consent-from-six.md)
+- [v2](/api-reference/category/consent-from-six/v2.md)
+- [Module with CaaS from SIX](/api-reference/category/consent-with-caas-from-six.md)
+- [v2](/api-reference/category/consent-with-caas-from-six/v2.md)
+- [Custody Services](/api-reference/category/custody-services.md)
+- [Module for Service Providers](/api-reference/category/custody-services-for-service-providers.md)
+- [v1](/api-reference/category/custody-services-for-service-providers/v1.md)
+- [v3](/api-reference/category/custody-services-for-service-providers/v3.md)
+- [Module from SIX](/api-reference/category/custody-services-from-six.md)
+- [v1](/api-reference/category/custody-services-from-six/v1.md)
+- [v3](/api-reference/category/custody-services-from-six/v3.md)
+- [Module with CaaS from SIX](/api-reference/category/custody-services-with-caas-from-six.md)
+- [v1](/api-reference/category/custody-services-with-caas-from-six/v1.md)
+- [v3](/api-reference/category/custody-services-with-caas-from-six/v3.md)
+- [Customer Management](/api-reference/category/customer-management.md)
+- [Module for Service Providers](/api-reference/category/customer-management-for-service-providers.md)
+- [v1](/api-reference/category/customer-management-for-service-providers/v1.md)
+- [Module from SIX](/api-reference/category/customer-management-from-six.md)
+- [v1](/api-reference/category/customer-management-from-six/v1.md)
+- [Module with CaaS from SIX](/api-reference/category/customer-management-with-caas-from-six.md)
+- [v1](/api-reference/category/customer-management-with-caas-from-six/v1.md)
+- [OpenWealth](/api-reference/category/openwealth.md)
+- [Order Placement](/api-reference/category/order-placement.md)
+- [Module for Notification Recipients](/api-reference/category/order-placement-for-notification-recipient.md)
+- [v2](/api-reference/category/order-placement-for-notification-recipient/v2.md)
+- [Module for Service Providers](/api-reference/category/order-placement-for-service-providers.md)
+- [v2](/api-reference/category/order-placement-for-service-providers/v2.md)
+- [Module from SIX](/api-reference/category/order-placement-from-six.md)
+- [v2](/api-reference/category/order-placement-from-six/v2.md)
+- [Module with CaaS from SIX](/api-reference/category/order-placement-with-caas-from-six.md)
+- [v2](/api-reference/category/order-placement-with-caas-from-six/v2.md)
+- [Platform](/api-reference/category/platform.md)
+- [Module from SIX](/api-reference/category/platform-from-six.md)
+- [v3](/api-reference/category/platform-from-six/v3.md)
+- [Module with CaaS from SIX](/api-reference/category/platform-with-caas-from-six.md)
+- [v3](/api-reference/category/platform-with-caas-from-six/v3.md)
+- [PSS](/api-reference/category/pss.md)
+- [PSS for Service Providers](/api-reference/category/pss-for-service-providers.md)
+- [v4](/api-reference/category/pss-for-service-providers/v4.md)
+- [v5](/api-reference/category/pss-for-service-providers/v5.md)
+- [v6](/api-reference/category/pss-for-service-providers/v6.md)
+- [PSS from SIX](/api-reference/category/pss-from-six.md)
+- [v4](/api-reference/category/pss-from-six/v4.md)
+- [v5](/api-reference/category/pss-from-six/v5.md)
+- [v6](/api-reference/category/pss-from-six/v6.md)
+- [PSS with CaaS from SIX](/api-reference/category/pss-with-caas-from-six.md)
+- [v4](/api-reference/category/pss-with-caas-from-six/v4.md)
+- [v5](/api-reference/category/pss-with-caas-from-six/v5.md)
+- [v6](/api-reference/category/pss-with-caas-from-six/v6.md)
+- [Security](/api-reference/category/security.md)
+- [Trading](/api-reference/category/trading.md)
+- [Module for Notification Recipients](/api-reference/category/trading-for-notification-recipient.md)
+- [v3](/api-reference/category/trading-for-notification-recipient/v3.md)
+- [Module for Service Providers](/api-reference/category/trading-for-service-providers.md)
+- [v3](/api-reference/category/trading-for-service-providers/v3.md)
+- [Module from SIX](/api-reference/category/trading-from-six.md)
+- [v3](/api-reference/category/trading-from-six/v3.md)
+- [Module with CaaS from SIX](/api-reference/category/trading-with-caas-from-six.md)
+- [v3](/api-reference/category/trading-with-caas-from-six/v3.md)
+
+### conventions
+
+Character set
+
+- [Conventions](/api-reference/conventions.md): Character set
+
+### error-codes
+
+Thanks to bLink's 1:n connectivity, its integration is highly scalable. Scaling the solution also means that there is no direct business relationship between the majority of the Service Providers and Service Users that would allow for immediate coordination and customer support in case of problems with your connectivity-enabled service. Hence, automation and a reliable overview of the integration are necessary to efficiently support the end customer throughout the use of your service in your product. Ultimately, the goal is to reduce the number of support touchpoints with the end customer and enable him to take appropriate action on a self-service basis in the event of potential service errors.
+
+- [Error Codes and Monitoring](/api-reference/error-codes.md): Thanks to bLink's 1:n connectivity, its integration is highly scalable. Scaling the solution also means that there is no direct business relationship between the majority of the Service Providers and Service Users that would allow for immediate coordination and customer support in case of problems with your connectivity-enabled service. Hence, automation and a reliable overview of the integration are necessary to efficiently support the end customer throughout the use of your service in your product. Ultimately, the goal is to reduce the number of support touchpoints with the end customer and enable him to take appropriate action on a self-service basis in the event of potential service errors.
+
+### introduction
+
+bLink has been implemented around RESTful principles. Our API uses OAuth Authentication where JSON and XML payloads are
+
+- [Introduction](/api-reference/introduction.md): bLink has been implemented around RESTful principles. Our API uses OAuth Authentication where JSON and XML payloads are
+
+### module-lifecycle
+
+Overview
+
+- [API Module Overview - bLink Platform](/api-reference/module-lifecycle.md): Overview
+
+### open-wealth
+
+- [bLink API - custody services module](/api-reference/open-wealth/custody-services/v1/service-providers/blink-api-custody-services-module.md): This is the specification of the bLink 'custody-services' module API. (as implemented by providers (e.g. financial institutions) and used by SIX)
+- [Returns all customers and respective accounts accessible for the logged in user.](/api-reference/open-wealth/custody-services/v1/service-providers/get-customer-accounts.md): This endpoint returns a highlevel list of customers and the respective accounts accessible for the logged in user. Paging is done based on the customerOverview object, i.e. if limit is set to 1, then 1 customerOverview will be returned per page.
+- [Returns a specific customers and respective accounts accessible for the logged in user.](/api-reference/open-wealth/custody-services/v1/service-providers/get-customer-accounts-by-customer-id.md): This endpoint returns a highlevel list of a customer and the respective accounts accessible for the logged in user.
+- [Returns the positions for a customer's specific account.](/api-reference/open-wealth/custody-services/v1/service-providers/get-positions-by-account-id.md): Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+- [Returns all positions for a specific customer.](/api-reference/open-wealth/custody-services/v1/service-providers/get-positions-by-customer-id.md): Returns all positions (incl. investment cash accounts) for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
+- [Returns the transactions a specific account.](/api-reference/open-wealth/custody-services/v1/service-providers/get-transactions-by-account-id.md): Returns the transactions for all positions in a specific account. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns transactions for a specific customer.](/api-reference/open-wealth/custody-services/v1/service-providers/get-transactions-by-customer-id.md): Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns the transactions for a specific position.](/api-reference/open-wealth/custody-services/v1/service-providers/get-transactions-by-position-id.md): Returns transactions for a specific position. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/custody-services/v1/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/custody-services/v1/service-providers/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [bLink API - custody services module](/api-reference/open-wealth/custody-services/v1/six/blink-api-custody-services-module.md): This is the specification of the bLink 'custody-services' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Returns all customers and respective accounts accessible for the logged in user.](/api-reference/open-wealth/custody-services/v1/six/get-customer-accounts.md): This endpoint returns a highlevel list of customers and the respective accounts accessible for the logged in user. Paging is done based on the customerOverview object, i.e. if limit is set to 1, then 1 customerOverview will be returned per page.
+- [Returns a specific customers and respective accounts accessible for the logged in user.](/api-reference/open-wealth/custody-services/v1/six/get-customer-accounts-by-customer-id.md): This endpoint returns a highlevel list of a customer and the respective accounts accessible for the logged in user.
+- [Returns the positions for a customer's specific account.](/api-reference/open-wealth/custody-services/v1/six/get-positions-by-account-id.md): Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+- [Returns all positions for a specific customer.](/api-reference/open-wealth/custody-services/v1/six/get-positions-by-customer-id.md): Returns all positions (incl. investment cash accounts) for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
+- [Returns the transactions a specific account.](/api-reference/open-wealth/custody-services/v1/six/get-transactions-by-account-id.md): Returns the transactions for all positions in a specific account. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns transactions for a specific customer.](/api-reference/open-wealth/custody-services/v1/six/get-transactions-by-customer-id.md): Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns the transactions for a specific position.](/api-reference/open-wealth/custody-services/v1/six/get-transactions-by-position-id.md): Returns transactions for a specific position. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/custody-services/v1/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/custody-services/v1/six/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [bLink API - custody services module](/api-reference/open-wealth/custody-services/v1/with-caas/blink-api-custody-services-module.md): This is the specification of the bLink 'custody-services' module API.
+- [Returns all customers and respective accounts accessible for the logged in user.](/api-reference/open-wealth/custody-services/v1/with-caas/get-customer-accounts.md): This endpoint returns a highlevel list of customers and the respective accounts accessible for the logged in user. Paging is done based on the customerOverview object, i.e. if limit is set to 1, then 1 customerOverview will be returned per page.
+- [Returns a specific customers and respective accounts accessible for the logged in user.](/api-reference/open-wealth/custody-services/v1/with-caas/get-customer-accounts-by-customer-id.md): This endpoint returns a highlevel list of a customer and the respective accounts accessible for the logged in user.
+- [Returns the positions for a customer's specific account.](/api-reference/open-wealth/custody-services/v1/with-caas/get-positions-by-account-id.md): Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+- [Returns all positions for a specific customer.](/api-reference/open-wealth/custody-services/v1/with-caas/get-positions-by-customer-id.md): Returns all positions (incl. investment cash accounts) for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
+- [Returns the transactions a specific account.](/api-reference/open-wealth/custody-services/v1/with-caas/get-transactions-by-account-id.md): Returns the transactions for all positions in a specific account. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns transactions for a specific customer.](/api-reference/open-wealth/custody-services/v1/with-caas/get-transactions-by-customer-id.md): Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns the transactions for a specific position.](/api-reference/open-wealth/custody-services/v1/with-caas/get-transactions-by-position-id.md): Returns transactions for a specific position. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/custody-services/v1/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/custody-services/v1/with-caas/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [accounts](/api-reference/open-wealth/custody-services/v3/service-providers/accounts.md): accounts
+- [bLink API - custody services module](/api-reference/open-wealth/custody-services/v3/service-providers/blink-api-custody-services-module.md): This is the specification of the bLink 'custody-services' module API.
+- [customers](/api-reference/open-wealth/custody-services/v3/service-providers/customers.md): customers
+- [Returns the positions for a specific account](/api-reference/open-wealth/custody-services/v3/service-providers/get-account-position-by-account-id.md): Returns all positions for a specific account.
+- [Returns a position by id for a specific account](/api-reference/open-wealth/custody-services/v3/service-providers/get-account-position-by-id.md): Returns a position by id for a specific account.
+- [Returns an account by id](/api-reference/open-wealth/custody-services/v3/service-providers/get-customer-account-by-id.md): Returns an account by id for a specific customer.
+- [Returns the accounts for a specific customer](/api-reference/open-wealth/custody-services/v3/service-providers/get-customer-accounts-by-customer-id.md): Returns all accounts for a specific customer accessible to the querying user.
+- [Returns the positions for a specific customer](/api-reference/open-wealth/custody-services/v3/service-providers/get-customer-position-by-customer-id.md): Returns all positions for a specific customer.
+- [Returns a position by id for a specific customer](/api-reference/open-wealth/custody-services/v3/service-providers/get-customer-position-by-id.md): Returns a position by id for a specific customer.
+- [Returns all customers (business partners) accessible for the logged in user](/api-reference/open-wealth/custody-services/v3/service-providers/get-customers.md): This endpoint returns a highlevel list of customers accessible for the
+- [Returns a specific customer by id](/api-reference/open-wealth/custody-services/v3/service-providers/get-customers-by-customer-id.md): Returns a specific customer by id accessible for the requesting user.
+- [Returns all transactions for a specific customer](/api-reference/open-wealth/custody-services/v3/service-providers/get-transaction-by-customer-id.md): Returns all transactions for a specific customer.
+- [Returns a transaction by id for a specific customer](/api-reference/open-wealth/custody-services/v3/service-providers/get-transaction-by-transaction-id.md): Returns a transaction instance by id for a specific customer.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/custody-services/v3/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [positions](/api-reference/open-wealth/custody-services/v3/service-providers/positions.md): positions
+- [transactions](/api-reference/open-wealth/custody-services/v3/service-providers/transactions.md): transactions
+- [accounts](/api-reference/open-wealth/custody-services/v3/six/accounts.md): accounts
+- [bLink API - custody services module](/api-reference/open-wealth/custody-services/v3/six/blink-api-custody-services-module.md): This is the specification of the bLink 'custody-services' module API.
+- [customers](/api-reference/open-wealth/custody-services/v3/six/customers.md): customers
+- [Returns the positions for a specific account](/api-reference/open-wealth/custody-services/v3/six/get-account-position-by-account-id.md): Returns all positions for a specific account.
+- [Returns a position by id for a specific account](/api-reference/open-wealth/custody-services/v3/six/get-account-position-by-id.md): Returns a position by id for a specific account.
+- [Returns an account by id](/api-reference/open-wealth/custody-services/v3/six/get-customer-account-by-id.md): Returns an account by id for a specific customer.
+- [Returns the accounts for a specific customer](/api-reference/open-wealth/custody-services/v3/six/get-customer-accounts-by-customer-id.md): Returns all accounts for a specific customer accessible to the querying user.
+- [Returns the positions for a specific customer](/api-reference/open-wealth/custody-services/v3/six/get-customer-position-by-customer-id.md): Returns all positions for a specific customer.
+- [Returns a position by id for a specific customer](/api-reference/open-wealth/custody-services/v3/six/get-customer-position-by-id.md): Returns a position by id for a specific customer.
+- [Returns all customers (business partners) accessible for the logged in user](/api-reference/open-wealth/custody-services/v3/six/get-customers.md): This endpoint returns a highlevel list of customers accessible for the
+- [Returns a specific customer by id](/api-reference/open-wealth/custody-services/v3/six/get-customers-by-customer-id.md): Returns a specific customer by id accessible for the requesting user.
+- [Returns all transactions for a specific customer](/api-reference/open-wealth/custody-services/v3/six/get-transaction-by-customer-id.md): Returns all transactions for a specific customer.
+- [Returns a transaction by id for a specific customer](/api-reference/open-wealth/custody-services/v3/six/get-transaction-by-transaction-id.md): Returns a transaction instance by id for a specific customer.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/custody-services/v3/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [positions](/api-reference/open-wealth/custody-services/v3/six/positions.md): positions
+- [transactions](/api-reference/open-wealth/custody-services/v3/six/transactions.md): transactions
+- [accounts](/api-reference/open-wealth/custody-services/v3/with-caas/accounts.md): accounts
+- [bLink API - custody services module](/api-reference/open-wealth/custody-services/v3/with-caas/blink-api-custody-services-module.md): This is the specification of the bLink 'custody-services' module API.
+- [customers](/api-reference/open-wealth/custody-services/v3/with-caas/customers.md): customers
+- [Returns the positions for a specific account](/api-reference/open-wealth/custody-services/v3/with-caas/get-account-position-by-account-id.md): Returns all positions for a specific account.
+- [Returns a position by id for a specific account](/api-reference/open-wealth/custody-services/v3/with-caas/get-account-position-by-id.md): Returns a position by id for a specific account.
+- [Returns an account by id](/api-reference/open-wealth/custody-services/v3/with-caas/get-customer-account-by-id.md): Returns an account by id for a specific customer.
+- [Returns the accounts for a specific customer](/api-reference/open-wealth/custody-services/v3/with-caas/get-customer-accounts-by-customer-id.md): Returns all accounts for a specific customer accessible to the querying user.
+- [Returns the positions for a specific customer](/api-reference/open-wealth/custody-services/v3/with-caas/get-customer-position-by-customer-id.md): Returns all positions for a specific customer.
+- [Returns a position by id for a specific customer](/api-reference/open-wealth/custody-services/v3/with-caas/get-customer-position-by-id.md): Returns a position by id for a specific customer.
+- [Returns all customers (business partners) accessible for the logged in user](/api-reference/open-wealth/custody-services/v3/with-caas/get-customers.md): This endpoint returns a highlevel list of customers accessible for the
+- [Returns a specific customer by id](/api-reference/open-wealth/custody-services/v3/with-caas/get-customers-by-customer-id.md): Returns a specific customer by id accessible for the requesting user.
+- [Returns all transactions for a specific customer](/api-reference/open-wealth/custody-services/v3/with-caas/get-transaction-by-customer-id.md): Returns all transactions for a specific customer.
+- [Returns a transaction by id for a specific customer](/api-reference/open-wealth/custody-services/v3/with-caas/get-transaction-by-transaction-id.md): Returns a transaction instance by id for a specific customer.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/custody-services/v3/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [positions](/api-reference/open-wealth/custody-services/v3/with-caas/positions.md): positions
+- [transactions](/api-reference/open-wealth/custody-services/v3/with-caas/transactions.md): transactions
+- [bLink API - customer management module](/api-reference/open-wealth/customer-management/v1/service-providers/blink-api-customer-management-module.md): This is the specification of the bLink 'customer-management' module API. (as implemented by providers (e.g. financial institutions) and used by SIX)
+- [Returns the address of a specific customer.](/api-reference/open-wealth/customer-management/v1/service-providers/get-address-by-customer-id.md): Returns a address record for a specific address id.
+- [Returns the contact details for a specific person.](/api-reference/open-wealth/customer-management/v1/service-providers/get-contact-details-by-person-id.md): Returns a contact detail list for a specific person id.
+- [Returns a specific customer.](/api-reference/open-wealth/customer-management/v1/service-providers/get-customer-by-customer-id.md): Returns a full client record for a specific customer id.
+- [Returns a list of customers.](/api-reference/open-wealth/customer-management/v1/service-providers/get-customers.md): Returns a list of all customers. A customer is an object which holds a contract with a (custody-)bank. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
+- [Returns the kyc to a specific customer.](/api-reference/open-wealth/customer-management/v1/service-providers/get-kyc-by-customer-id.md): Returns the know-your-client record for a specific customer.
+- [Returns a specific person object.](/api-reference/open-wealth/customer-management/v1/service-providers/get-person-by-person-id.md): Returns a person record for a specific person id.
+- [Returns a list with all person objects.](/api-reference/open-wealth/customer-management/v1/service-providers/get-persons.md): Returns all person records. Paging is done based on the person object, i.e. if limit is set to 1, then 1 person will be returned per page.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/customer-management/v1/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/customer-management/v1/service-providers/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Creates a new address object for a specific customer.](/api-reference/open-wealth/customer-management/v1/service-providers/post-address-by-customer-id.md): Creates a new address object for a specific customer.
+- [Creates new contact details for a specific person.](/api-reference/open-wealth/customer-management/v1/service-providers/post-contact-details-by-person-id.md): Creates new contact details for a specific person id.
+- [Updates an existing address object for a specific customer.](/api-reference/open-wealth/customer-management/v1/service-providers/put-address-by-customer-id.md): Updates an existing address object for a specific customer.
+- [bLink API - customer management module](/api-reference/open-wealth/customer-management/v1/six/blink-api-customer-management-module.md): This is the specification of the bLink 'customer-management' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Returns the address of a specific customer.](/api-reference/open-wealth/customer-management/v1/six/get-address-by-customer-id.md): Returns a address record for a specific address id.
+- [Returns the contact details for a specific person.](/api-reference/open-wealth/customer-management/v1/six/get-contact-details-by-person-id.md): Returns a contact detail list for a specific person id.
+- [Returns a specific customer.](/api-reference/open-wealth/customer-management/v1/six/get-customer-by-customer-id.md): Returns a full client record for a specific customer id.
+- [Returns a list of customers.](/api-reference/open-wealth/customer-management/v1/six/get-customers.md): Returns a list of all customers. A customer is an object which holds a contract with a (custody-)bank. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
+- [Returns the kyc to a specific customer.](/api-reference/open-wealth/customer-management/v1/six/get-kyc-by-customer-id.md): Returns the know-your-client record for a specific customer.
+- [Returns a specific person object.](/api-reference/open-wealth/customer-management/v1/six/get-person-by-person-id.md): Returns a person record for a specific person id.
+- [Returns a list with all person objects.](/api-reference/open-wealth/customer-management/v1/six/get-persons.md): Returns all person records. Paging is done based on the person object, i.e. if limit is set to 1, then 1 person will be returned per page.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/customer-management/v1/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/customer-management/v1/six/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Creates a new address object for a specific customer.](/api-reference/open-wealth/customer-management/v1/six/post-address-by-customer-id.md): Creates a new address object for a specific customer.
+- [Creates new contact details for a specific person.](/api-reference/open-wealth/customer-management/v1/six/post-contact-details-by-person-id.md): Creates new contact details for a specific person id.
+- [Updates an existing address object for a specific customer.](/api-reference/open-wealth/customer-management/v1/six/put-address-by-customer-id.md): Updates an existing address object for a specific customer.
+- [bLink API - customer management module](/api-reference/open-wealth/customer-management/v1/with-caas/blink-api-customer-management-module.md): This is the specification of the bLink 'customer-management' module API.
+- [Returns the address of a specific customer.](/api-reference/open-wealth/customer-management/v1/with-caas/get-address-by-customer-id.md): Returns a address record for a specific address id.
+- [Returns the contact details for a specific person.](/api-reference/open-wealth/customer-management/v1/with-caas/get-contact-details-by-person-id.md): Returns a contact detail list for a specific person id.
+- [Returns a specific customer.](/api-reference/open-wealth/customer-management/v1/with-caas/get-customer-by-customer-id.md): Returns a full client record for a specific customer id.
+- [Returns a list of customers.](/api-reference/open-wealth/customer-management/v1/with-caas/get-customers.md): Returns a list of all customers. A customer is an object which holds a contract with a (custody-)bank. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
+- [Returns the kyc to a specific customer.](/api-reference/open-wealth/customer-management/v1/with-caas/get-kyc-by-customer-id.md): Returns the know-your-client record for a specific customer.
+- [Returns a specific person object.](/api-reference/open-wealth/customer-management/v1/with-caas/get-person-by-person-id.md): Returns a person record for a specific person id.
+- [Returns a list with all person objects.](/api-reference/open-wealth/customer-management/v1/with-caas/get-persons.md): Returns all person records. Paging is done based on the person object, i.e. if limit is set to 1, then 1 person will be returned per page.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/customer-management/v1/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/customer-management/v1/with-caas/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Creates a new address object for a specific customer.](/api-reference/open-wealth/customer-management/v1/with-caas/post-address-by-customer-id.md): Creates a new address object for a specific customer.
+- [Creates new contact details for a specific person.](/api-reference/open-wealth/customer-management/v1/with-caas/post-contact-details-by-person-id.md): Creates new contact details for a specific person id.
+- [Updates an existing address object for a specific customer.](/api-reference/open-wealth/customer-management/v1/with-caas/put-address-by-customer-id.md): Updates an existing address object for a specific customer.
+- [bLink API - order placement module](/api-reference/open-wealth/order-placement/v2/notification-recipient/blink-api-order-placement-module.md): This is the specification of the bLink 'order-placement' module API. (as implemented by service users who offer a notification endpoint to providers and as used by SIX)
+- [event-notification-webhook](/api-reference/open-wealth/order-placement/v2/notification-recipient/event-notification-webhook.md): event-notification-webhook
+- [Push notification towards TPP](/api-reference/open-wealth/order-placement/v2/notification-recipient/post-event-notification.md): Push notifications for subscribed event notifications.
+- [accountaccess](/api-reference/open-wealth/order-placement/v2/service-providers/accountaccess.md): accountaccess
+- [bLink API - order placement module](/api-reference/open-wealth/order-placement/v2/service-providers/blink-api-order-placement-module.md): This is the specification of the bLink 'order-placement' module API. (as implemented by providers (e.g. financial institutions) and used by SIX)
+- [Change event subscription](/api-reference/open-wealth/order-placement/v2/service-providers/change-event-subscription-by-event-subscription-id.md): Changes event subscription.
+- [Delete event subscription](/api-reference/open-wealth/order-placement/v2/service-providers/delete-event-subscription-by-event-subscription-id.md): Deletes event subscriptions.
+- [Cancellation of a specific order](/api-reference/open-wealth/order-placement/v2/service-providers/delete-order-by-client-order-id.md): Places the cancellation request for a specific order.
+- [diagnostics](/api-reference/open-wealth/order-placement/v2/service-providers/diagnostics.md): diagnostics
+- [event-notification-subscription](/api-reference/open-wealth/order-placement/v2/service-providers/event-notification-subscription.md): event-notification-subscription
+- [Returns list of accounts the requestor has access to](/api-reference/open-wealth/order-placement/v2/service-providers/get-account-accesses.md): Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
+- [View Subscription](/api-reference/open-wealth/order-placement/v2/service-providers/get-event-subscription-by-event-subscription-id.md): Allows TPP to view the event subscription.
+- [View Subscriptions](/api-reference/open-wealth/order-placement/v2/service-providers/get-event-subscriptions.md): Allows TPP to view the event subscriptions.
+- [Returns a single security order](/api-reference/open-wealth/order-placement/v2/service-providers/get-order-by-client-order-id.md): Returns a specific security order.
+- [Returns a list of open security orders](/api-reference/open-wealth/order-placement/v2/service-providers/get-orders.md): Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/order-placement/v2/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/order-placement/v2/service-providers/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [orderplacement](/api-reference/open-wealth/order-placement/v2/service-providers/orderplacement.md): orderplacement
+- [orderstatus](/api-reference/open-wealth/order-placement/v2/service-providers/orderstatus.md): orderstatus
+- [Subscribe to Events](/api-reference/open-wealth/order-placement/v2/service-providers/post-event-subscription.md): Allows TPP to subscribe to specific events for the API.
+- [Posts a new order](/api-reference/open-wealth/order-placement/v2/service-providers/post-order.md): Posts a new order.
+- [accountaccess](/api-reference/open-wealth/order-placement/v2/six/accountaccess.md): accountaccess
+- [bLink API - order placement module](/api-reference/open-wealth/order-placement/v2/six/blink-api-order-placement-module.md): This is the specification of the bLink 'order-placement' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Change event subscription](/api-reference/open-wealth/order-placement/v2/six/change-event-subscription-by-event-subscription-id.md): Changes event subscription.
+- [Delete event subscription](/api-reference/open-wealth/order-placement/v2/six/delete-event-subscription-by-event-subscription-id.md): Deletes event subscriptions.
+- [Cancellation of a specific order](/api-reference/open-wealth/order-placement/v2/six/delete-order-by-client-order-id.md): Places the cancellation request for a specific order.
+- [diagnostics](/api-reference/open-wealth/order-placement/v2/six/diagnostics.md): diagnostics
+- [event-notification-aggregated-polling](/api-reference/open-wealth/order-placement/v2/six/event-notification-aggregated-polling.md): event-notification-aggregated-polling
+- [event-notification-subscription](/api-reference/open-wealth/order-placement/v2/six/event-notification-subscription.md): event-notification-subscription
+- [event-notification-webhook](/api-reference/open-wealth/order-placement/v2/six/event-notification-webhook.md): event-notification-webhook
+- [Returns list of accounts the requestor has access to](/api-reference/open-wealth/order-placement/v2/six/get-account-accesses.md): Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
+- [Get event notifications](/api-reference/open-wealth/order-placement/v2/six/get-event-notifications-by-event-subscription-id.md): Get aggregated event-notification list.
+- [View Subscription](/api-reference/open-wealth/order-placement/v2/six/get-event-subscription-by-event-subscription-id.md): Allows TPP to view the event subscription.
+- [View Subscriptions](/api-reference/open-wealth/order-placement/v2/six/get-event-subscriptions.md): Allows TPP to view the event subscriptions.
+- [Returns a single security order](/api-reference/open-wealth/order-placement/v2/six/get-order-by-client-order-id.md): Returns a specific security order.
+- [Returns a list of open security orders](/api-reference/open-wealth/order-placement/v2/six/get-orders.md): Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/order-placement/v2/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/order-placement/v2/six/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [orderplacement](/api-reference/open-wealth/order-placement/v2/six/orderplacement.md): orderplacement
+- [orderstatus](/api-reference/open-wealth/order-placement/v2/six/orderstatus.md): orderstatus
+- [Push notification towards TPP](/api-reference/open-wealth/order-placement/v2/six/post-event-notification.md): Push notifications for subscribed event notifications.
+- [Subscribe to Events](/api-reference/open-wealth/order-placement/v2/six/post-event-subscription.md): Allows TPP to subscribe to specific events for the API.
+- [Posts a new order](/api-reference/open-wealth/order-placement/v2/six/post-order.md): Posts a new order.
+- [Search Subscription](/api-reference/open-wealth/order-placement/v2/six/search-event-subscriptions.md): Allows TPP to search for event subscriptions.
+- [accountaccess](/api-reference/open-wealth/order-placement/v2/with-caas/accountaccess.md): accountaccess
+- [bLink API - order placement module](/api-reference/open-wealth/order-placement/v2/with-caas/blink-api-order-placement-module.md): This is the specification of the bLink 'order-placement' module API.
+- [Change event subscription](/api-reference/open-wealth/order-placement/v2/with-caas/change-event-subscription-by-event-subscription-id.md): Changes event subscription.
+- [Delete event subscription](/api-reference/open-wealth/order-placement/v2/with-caas/delete-event-subscription-by-event-subscription-id.md): Deletes event subscriptions.
+- [Cancellation of a specific order](/api-reference/open-wealth/order-placement/v2/with-caas/delete-order-by-client-order-id.md): Places the cancellation request for a specific order.
+- [diagnostics](/api-reference/open-wealth/order-placement/v2/with-caas/diagnostics.md): diagnostics
+- [event-notification-aggregated-polling](/api-reference/open-wealth/order-placement/v2/with-caas/event-notification-aggregated-polling.md): event-notification-aggregated-polling
+- [event-notification-subscription](/api-reference/open-wealth/order-placement/v2/with-caas/event-notification-subscription.md): event-notification-subscription
+- [event-notification-webhook](/api-reference/open-wealth/order-placement/v2/with-caas/event-notification-webhook.md): event-notification-webhook
+- [Returns list of accounts the requestor has access to](/api-reference/open-wealth/order-placement/v2/with-caas/get-account-accesses.md): Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
+- [Get event notifications](/api-reference/open-wealth/order-placement/v2/with-caas/get-event-notifications-by-event-subscription-id.md): Get aggregated event-notification list.
+- [View Subscription](/api-reference/open-wealth/order-placement/v2/with-caas/get-event-subscription-by-event-subscription-id.md): Allows TPP to view the event subscription.
+- [View Subscriptions](/api-reference/open-wealth/order-placement/v2/with-caas/get-event-subscriptions.md): Allows TPP to view the event subscriptions.
+- [Returns a single security order](/api-reference/open-wealth/order-placement/v2/with-caas/get-order-by-client-order-id.md): Returns a specific security order.
+- [Returns a list of open security orders](/api-reference/open-wealth/order-placement/v2/with-caas/get-orders.md): Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/order-placement/v2/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/order-placement/v2/with-caas/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [orderplacement](/api-reference/open-wealth/order-placement/v2/with-caas/orderplacement.md): orderplacement
+- [orderstatus](/api-reference/open-wealth/order-placement/v2/with-caas/orderstatus.md): orderstatus
+- [Push notification towards TPP](/api-reference/open-wealth/order-placement/v2/with-caas/post-event-notification.md): Push notifications for subscribed event notifications.
+- [Subscribe to Events](/api-reference/open-wealth/order-placement/v2/with-caas/post-event-subscription.md): Allows TPP to subscribe to specific events for the API.
+- [Posts a new order](/api-reference/open-wealth/order-placement/v2/with-caas/post-order.md): Posts a new order.
+- [Search Subscription](/api-reference/open-wealth/order-placement/v2/with-caas/search-event-subscriptions.md): Allows TPP to search for event subscriptions.
+- [bLink API - Trading module](/api-reference/open-wealth/trading/v3/notification-recipient/blink-api-trading-module.md): This is the specification of the bLink 'trading' module API.
+- [event-notification-webhook](/api-reference/open-wealth/trading/v3/notification-recipient/event-notification-webhook.md): event-notification-webhook
+- [Push notification towards service users](/api-reference/open-wealth/trading/v3/notification-recipient/post-event-notification.md): Push notifications for subscribed event notifications.
+- [account](/api-reference/open-wealth/trading/v3/service-providers/account.md): account
+- [Cancellation of a specific order](/api-reference/open-wealth/trading/v3/service-providers/action-cancel-order.md): Places the cancellation request for a specific order.
+- [bLink API - Trading module](/api-reference/open-wealth/trading/v3/service-providers/blink-api-trading-module.md): This is the specification of the bLink 'trading' module API. (as implemented by providers (e.g. financial institutions) and used by SIX)
+- [Create event subscription](/api-reference/open-wealth/trading/v3/service-providers/create-event-subscription.md): Create an event subscription.
+- [Posts a new order](/api-reference/open-wealth/trading/v3/service-providers/create-order.md): Posts a new order.
+- [Request a quote](/api-reference/open-wealth/trading/v3/service-providers/create-quote.md): Request quote for a security (i.e. stock, bond, fund etc), FX or crypto product.
+- [customer](/api-reference/open-wealth/trading/v3/service-providers/customer.md): customer
+- [Delete event subscription](/api-reference/open-wealth/trading/v3/service-providers/delete-event-subscription.md): Delete event subscription by id.
+- [diagnostics](/api-reference/open-wealth/trading/v3/service-providers/diagnostics.md): diagnostics
+- [event-notification-aggregated-polling](/api-reference/open-wealth/trading/v3/service-providers/event-notification-aggregated-polling.md): event-notification-aggregated-polling
+- [event-subscription](/api-reference/open-wealth/trading/v3/service-providers/event-subscription.md): event-subscription
+- [execution](/api-reference/open-wealth/trading/v3/service-providers/execution.md): execution
+- [Returns a specific account by id](/api-reference/open-wealth/trading/v3/service-providers/get-account.md): Returns a specific account by id accessible for the requesting user.
+- [Returns a specific customer by id](/api-reference/open-wealth/trading/v3/service-providers/get-customer.md): Returns a specific customer by id accessible for the requesting user.
+- [Get event notifications list](/api-reference/open-wealth/trading/v3/service-providers/get-event-notifications-by-event-subscription-id.md): Get aggregated event-notification list.
+- [Get event subscription](/api-reference/open-wealth/trading/v3/service-providers/get-event-subscription.md): Get event subscription by id.
+- [Returns a single order](/api-reference/open-wealth/trading/v3/service-providers/get-order.md): Returns a specific security order.
+- [Returns a single execution](/api-reference/open-wealth/trading/v3/service-providers/get-order-execution.md): Returns a specific execution by order ID and execution ID.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/trading/v3/service-providers/health-check-delete.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/trading/v3/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/trading/v3/service-providers/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/trading/v3/service-providers/health-check-put.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Returns list of accounts the requestor has access to](/api-reference/open-wealth/trading/v3/service-providers/list-accounts.md): Returns list of accounts the requestor has access to Paging is done based on
+- [Returns all customers (business partners) accessible for the logged in user](/api-reference/open-wealth/trading/v3/service-providers/list-customers.md): This endpoint returns a list of customers accessible for the
+- [Get event subscriptions](/api-reference/open-wealth/trading/v3/service-providers/list-event-subscriptions.md): Get list of event subscriptions.
+- [Returns a list of executions by order](/api-reference/open-wealth/trading/v3/service-providers/list-order-executions.md): Returns all executions by order ID
+- [Returns list of order states for a given order](/api-reference/open-wealth/trading/v3/service-providers/list-order-states.md): Returns list of order states for a given order. Paging is done based on
+- [Returns a list of open orders](/api-reference/open-wealth/trading/v3/service-providers/list-orders.md): Returns all open orders to which the user of the API has access to. Paging
+- [order](/api-reference/open-wealth/trading/v3/service-providers/order.md): order
+- [order-state](/api-reference/open-wealth/trading/v3/service-providers/order-state.md): order-state
+- [quote](/api-reference/open-wealth/trading/v3/service-providers/quote.md): quote
+- [Search Subscription](/api-reference/open-wealth/trading/v3/service-providers/search-event-subscriptions.md): Allows service users to search for event subscriptions.
+- [Update event subscription](/api-reference/open-wealth/trading/v3/service-providers/update-event-subscription.md): Update an event subscription.
+- [account](/api-reference/open-wealth/trading/v3/six/account.md): account
+- [Cancellation of a specific order](/api-reference/open-wealth/trading/v3/six/action-cancel-order.md): Places the cancellation request for a specific order.
+- [bLink API - Trading module](/api-reference/open-wealth/trading/v3/six/blink-api-trading-module.md): This is the specification of the bLink 'trading' module API. (as implemented by SIX and used by clients (e.g. service users))
+- [Create event subscription](/api-reference/open-wealth/trading/v3/six/create-event-subscription.md): Create an event subscription.
+- [Posts a new order](/api-reference/open-wealth/trading/v3/six/create-order.md): Posts a new order.
+- [Request a quote](/api-reference/open-wealth/trading/v3/six/create-quote.md): Request quote for a security (i.e. stock, bond, fund etc), FX or crypto product.
+- [customer](/api-reference/open-wealth/trading/v3/six/customer.md): customer
+- [Delete event subscription](/api-reference/open-wealth/trading/v3/six/delete-event-subscription.md): Delete event subscription by id.
+- [diagnostics](/api-reference/open-wealth/trading/v3/six/diagnostics.md): diagnostics
+- [event-notification-aggregated-polling](/api-reference/open-wealth/trading/v3/six/event-notification-aggregated-polling.md): event-notification-aggregated-polling
+- [event-notification-webhook](/api-reference/open-wealth/trading/v3/six/event-notification-webhook.md): event-notification-webhook
+- [event-subscription](/api-reference/open-wealth/trading/v3/six/event-subscription.md): event-subscription
+- [execution](/api-reference/open-wealth/trading/v3/six/execution.md): execution
+- [Returns a specific account by id](/api-reference/open-wealth/trading/v3/six/get-account.md): Returns a specific account by id accessible for the requesting user.
+- [Returns a specific customer by id](/api-reference/open-wealth/trading/v3/six/get-customer.md): Returns a specific customer by id accessible for the requesting user.
+- [Get event notifications list](/api-reference/open-wealth/trading/v3/six/get-event-notifications-by-event-subscription-id.md): Get aggregated event-notification list.
+- [Get event subscription](/api-reference/open-wealth/trading/v3/six/get-event-subscription.md): Get event subscription by id.
+- [Returns a single order](/api-reference/open-wealth/trading/v3/six/get-order.md): Returns a specific security order.
+- [Returns a single execution](/api-reference/open-wealth/trading/v3/six/get-order-execution.md): Returns a specific execution by order ID and execution ID.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/trading/v3/six/health-check-delete.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/trading/v3/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/trading/v3/six/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/trading/v3/six/health-check-put.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Returns list of accounts the requestor has access to](/api-reference/open-wealth/trading/v3/six/list-accounts.md): Returns list of accounts the requestor has access to Paging is done based on
+- [Returns all customers (business partners) accessible for the logged in user](/api-reference/open-wealth/trading/v3/six/list-customers.md): This endpoint returns a list of customers accessible for the
+- [Get event subscriptions](/api-reference/open-wealth/trading/v3/six/list-event-subscriptions.md): Get list of event subscriptions.
+- [Returns a list of executions by order](/api-reference/open-wealth/trading/v3/six/list-order-executions.md): Returns all executions by order ID
+- [Returns list of order states for a given order](/api-reference/open-wealth/trading/v3/six/list-order-states.md): Returns list of order states for a given order. Paging is done based on
+- [Returns a list of open orders](/api-reference/open-wealth/trading/v3/six/list-orders.md): Returns all open orders to which the user of the API has access to. Paging
+- [order](/api-reference/open-wealth/trading/v3/six/order.md): order
+- [order-state](/api-reference/open-wealth/trading/v3/six/order-state.md): order-state
+- [Push notification towards service users](/api-reference/open-wealth/trading/v3/six/post-event-notification.md): Push notifications for subscribed event notifications.
+- [quote](/api-reference/open-wealth/trading/v3/six/quote.md): quote
+- [Search Subscription](/api-reference/open-wealth/trading/v3/six/search-event-subscriptions.md): Allows service users to search for event subscriptions.
+- [Update event subscription](/api-reference/open-wealth/trading/v3/six/update-event-subscription.md): Update an event subscription.
+- [account](/api-reference/open-wealth/trading/v3/with-caas/account.md): account
+- [Cancellation of a specific order](/api-reference/open-wealth/trading/v3/with-caas/action-cancel-order.md): Places the cancellation request for a specific order.
+- [bLink API - Trading module](/api-reference/open-wealth/trading/v3/with-caas/blink-api-trading-module.md): This is the specification of the bLink 'trading' module API.
+- [Create event subscription](/api-reference/open-wealth/trading/v3/with-caas/create-event-subscription.md): Create an event subscription.
+- [Posts a new order](/api-reference/open-wealth/trading/v3/with-caas/create-order.md): Posts a new order.
+- [Request a quote](/api-reference/open-wealth/trading/v3/with-caas/create-quote.md): Request quote for a security (i.e. stock, bond, fund etc), FX or crypto product.
+- [customer](/api-reference/open-wealth/trading/v3/with-caas/customer.md): customer
+- [Delete event subscription](/api-reference/open-wealth/trading/v3/with-caas/delete-event-subscription.md): Delete event subscription by id.
+- [diagnostics](/api-reference/open-wealth/trading/v3/with-caas/diagnostics.md): diagnostics
+- [event-notification-aggregated-polling](/api-reference/open-wealth/trading/v3/with-caas/event-notification-aggregated-polling.md): event-notification-aggregated-polling
+- [event-notification-webhook](/api-reference/open-wealth/trading/v3/with-caas/event-notification-webhook.md): event-notification-webhook
+- [event-subscription](/api-reference/open-wealth/trading/v3/with-caas/event-subscription.md): event-subscription
+- [execution](/api-reference/open-wealth/trading/v3/with-caas/execution.md): execution
+- [Returns a specific account by id](/api-reference/open-wealth/trading/v3/with-caas/get-account.md): Returns a specific account by id accessible for the requesting user.
+- [Returns a specific customer by id](/api-reference/open-wealth/trading/v3/with-caas/get-customer.md): Returns a specific customer by id accessible for the requesting user.
+- [Get event notifications list](/api-reference/open-wealth/trading/v3/with-caas/get-event-notifications-by-event-subscription-id.md): Get aggregated event-notification list.
+- [Get event subscription](/api-reference/open-wealth/trading/v3/with-caas/get-event-subscription.md): Get event subscription by id.
+- [Returns a single order](/api-reference/open-wealth/trading/v3/with-caas/get-order.md): Returns a specific security order.
+- [Returns a single execution](/api-reference/open-wealth/trading/v3/with-caas/get-order-execution.md): Returns a specific execution by order ID and execution ID.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/trading/v3/with-caas/health-check-delete.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers and additional diagnostic information](/api-reference/open-wealth/trading/v3/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/trading/v3/with-caas/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/open-wealth/trading/v3/with-caas/health-check-put.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Returns list of accounts the requestor has access to](/api-reference/open-wealth/trading/v3/with-caas/list-accounts.md): Returns list of accounts the requestor has access to Paging is done based on
+- [Returns all customers (business partners) accessible for the logged in user](/api-reference/open-wealth/trading/v3/with-caas/list-customers.md): This endpoint returns a list of customers accessible for the
+- [Get event subscriptions](/api-reference/open-wealth/trading/v3/with-caas/list-event-subscriptions.md): Get list of event subscriptions.
+- [Returns a list of executions by order](/api-reference/open-wealth/trading/v3/with-caas/list-order-executions.md): Returns all executions by order ID
+- [Returns list of order states for a given order](/api-reference/open-wealth/trading/v3/with-caas/list-order-states.md): Returns list of order states for a given order. Paging is done based on
+- [Returns a list of open orders](/api-reference/open-wealth/trading/v3/with-caas/list-orders.md): Returns all open orders to which the user of the API has access to. Paging
+- [order](/api-reference/open-wealth/trading/v3/with-caas/order.md): order
+- [order-state](/api-reference/open-wealth/trading/v3/with-caas/order-state.md): order-state
+- [Push notification towards service users](/api-reference/open-wealth/trading/v3/with-caas/post-event-notification.md): Push notifications for subscribed event notifications.
+- [quote](/api-reference/open-wealth/trading/v3/with-caas/quote.md): quote
+- [Search Subscription](/api-reference/open-wealth/trading/v3/with-caas/search-event-subscriptions.md): Allows service users to search for event subscriptions.
+- [Update event subscription](/api-reference/open-wealth/trading/v3/with-caas/update-event-subscription.md): Update an event subscription.
+
+### pss
+
+- [PSS Response Examples](/api-reference/pss/examples-pss.md): This section presents JSON examples of response from the PSS Module on bLink.
+- [bLink API - payments-submission-service module](/api-reference/pss/v4/service-providers/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Returns all specified request headers and additional diagnostic information](/api-reference/pss/v4/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/pss/v4/service-providers/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Retrieve a list of consents](/api-reference/pss/v4/service-providers/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieve ISO20022 XML status report of a payment instruction (PAIN.002)](/api-reference/pss/v4/service-providers/retrieve-iso-20022-payment-instruction-status-report.md): Retrieve the status report for the requested XML ISO20022 payment instruction (PAIN.002).
+- [Retrieve payment submission status information](/api-reference/pss/v4/service-providers/retrieve-payment-submission-status.md): Retrieve a specific payment submission's status.
+- [Submit an ISO20022 XML payment instruction (PAIN.001)](/api-reference/pss/v4/service-providers/submit-iso-20022-payment-instruction.md): Submit an XML pain.001 payment instruction according to the ISO20022 specification.
+- [Submit payment instructions](/api-reference/pss/v4/service-providers/submit-payment-instructions.md): Create new payments submission.
+- [bLink API - payments-submission-service module](/api-reference/pss/v4/six/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Returns all specified request headers and additional diagnostic information](/api-reference/pss/v4/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/pss/v4/six/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Retrieve a list of consents](/api-reference/pss/v4/six/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieve ISO20022 XML status report of a payment instruction (PAIN.002)](/api-reference/pss/v4/six/retrieve-iso-20022-payment-instruction-status-report.md): Retrieve the status report for the requested XML ISO20022 payment instruction (PAIN.002).
+- [Retrieve payment submission status information](/api-reference/pss/v4/six/retrieve-payment-submission-status.md): Retrieve a specific payment submission's status.
+- [Submit an ISO20022 XML payment instruction (PAIN.001)](/api-reference/pss/v4/six/submit-iso-20022-payment-instruction.md): Submit an XML pain.001 payment instruction according to the ISO20022 specification.
+- [Submit payment instructions](/api-reference/pss/v4/six/submit-payment-instructions.md): Create new payments submission.
+- [bLink API - payments-submission-service module](/api-reference/pss/v4/with-caas/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Returns all specified request headers and additional diagnostic information](/api-reference/pss/v4/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/pss/v4/with-caas/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Retrieve a list of consents](/api-reference/pss/v4/with-caas/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieve ISO20022 XML status report of a payment instruction (PAIN.002)](/api-reference/pss/v4/with-caas/retrieve-iso-20022-payment-instruction-status-report.md): Retrieve the status report for the requested XML ISO20022 payment instruction (PAIN.002).
+- [Retrieve payment submission status information](/api-reference/pss/v4/with-caas/retrieve-payment-submission-status.md): Retrieve a specific payment submission's status.
+- [Submit an ISO20022 XML payment instruction (PAIN.001)](/api-reference/pss/v4/with-caas/submit-iso-20022-payment-instruction.md): Submit an XML pain.001 payment instruction according to the ISO20022 specification.
+- [Submit payment instructions](/api-reference/pss/v4/with-caas/submit-payment-instructions.md): Create new payments submission.
+- [bLink API - payments-submission-service module](/api-reference/pss/v5/service-providers/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API. (as implemented by providers (e.g. financial institutions) and used by SIX)
+- [Returns all specified request headers and additional diagnostic information](/api-reference/pss/v5/service-providers/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/pss/v5/service-providers/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Retrieve a list of consents](/api-reference/pss/v5/service-providers/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieve ISO20022 XML status report of a payment instruction (PAIN.002)](/api-reference/pss/v5/service-providers/retrieve-iso-20022-payment-instruction-status-report.md): Retrieve the status report for the requested XML ISO20022 payment instruction (PAIN.002).
+- [Retrieve payment submission status information](/api-reference/pss/v5/service-providers/retrieve-payment-submission-status.md): Retrieve a specific payment submission's status.
+- [Submit ISO20022 XML payment instruction (PAIN.001)](/api-reference/pss/v5/service-providers/submit-iso-20022-payment-instruction.md): Submit an XML pain.001 payment instruction according to the ISO20022 specification.
+- [Submit payment instructions](/api-reference/pss/v5/service-providers/submit-payment-instructions.md): Create new payments submission.
+- [bLink API - payments-submission-service module](/api-reference/pss/v5/six/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API. (as implemented by SIX and used by clients (e.g. third party providers))
+- [Returns all specified request headers and additional diagnostic information](/api-reference/pss/v5/six/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/pss/v5/six/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Retrieve a list of consents](/api-reference/pss/v5/six/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieve ISO20022 XML status report of a payment instruction (PAIN.002)](/api-reference/pss/v5/six/retrieve-iso-20022-payment-instruction-status-report.md): Retrieve the status report for the requested XML ISO20022 payment instruction (PAIN.002).
+- [Retrieve payment submission status information](/api-reference/pss/v5/six/retrieve-payment-submission-status.md): Retrieve a specific payment submission's status.
+- [Submit ISO20022 XML payment instruction (PAIN.001)](/api-reference/pss/v5/six/submit-iso-20022-payment-instruction.md): Submit an XML pain.001 payment instruction according to the ISO20022 specification.
+- [Submit payment instructions](/api-reference/pss/v5/six/submit-payment-instructions.md): Create new payments submission.
+- [bLink API - payments-submission-service module](/api-reference/pss/v5/with-caas/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API.
+- [Returns all specified request headers and additional diagnostic information](/api-reference/pss/v5/with-caas/health-check-get.md): Returns all specified request headers and additional diagnostic information
+- [Returns all specified request headers, the request body and additional diagnostic information](/api-reference/pss/v5/with-caas/health-check-post.md): Returns all specified request headers, the request body and additional diagnostic information
+- [Retrieve a list of consents](/api-reference/pss/v5/with-caas/retrieve-consents.md): The consents endpoint allows the client (e.g., a third party provider) to query the consents for a given user. The provider (e.g., a financial institution) must return the consents linked with the access token supplied with the request.
+- [Retrieve ISO20022 XML status report of a payment instruction (PAIN.002)](/api-reference/pss/v5/with-caas/retrieve-iso-20022-payment-instruction-status-report.md): Retrieve the status report for the requested XML ISO20022 payment instruction (PAIN.002).
+- [Retrieve payment submission status information](/api-reference/pss/v5/with-caas/retrieve-payment-submission-status.md): Retrieve a specific payment submission's status.
+- [Submit ISO20022 XML payment instruction (PAIN.001)](/api-reference/pss/v5/with-caas/submit-iso-20022-payment-instruction.md): Submit an XML pain.001 payment instruction according to the ISO20022 specification.
+- [Submit payment instructions](/api-reference/pss/v5/with-caas/submit-payment-instructions.md): Create new payments submission.
+- [bLink API - payments-submission-service module](/api-reference/pss/v6/service-providers/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API.
+- [consents](/api-reference/pss/v6/service-providers/consents.md): consents
+- [Create a payment request](/api-reference/pss/v6/service-providers/create-payment-request.md): Create a payment request.
+- [diagnostics](/api-reference/pss/v6/service-providers/diagnostics.md): diagnostics
+- [Get diagnostic information](/api-reference/pss/v6/service-providers/get-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers are returned unchanged.
+- [Get the ISO20022 XML status report (pain.002) for a payment instruction](/api-reference/pss/v6/service-providers/get-iso-20022-payment-instruction-status-report.md): Get the ISO20022 XML status report (pain.002) for a specific payment instruction.
+- [Get the status information of a payment request](/api-reference/pss/v6/service-providers/get-payment-request-status.md): Get the status information of a specific payment request.
+- [iso20022](/api-reference/pss/v6/service-providers/iso-20022.md): iso20022
+- [Get a list of all accounts](/api-reference/pss/v6/service-providers/list-accounts.md): Get a list of all accounts for the authenticated context. The response contains an `accounts` array;
+- [payments](/api-reference/pss/v6/service-providers/payments.md): payments
+- [Get diagnostic information](/api-reference/pss/v6/service-providers/post-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers and the request body are returned unchanged.
+- [Submit a ISO20022 XML payment instruction (pain.001)](/api-reference/pss/v6/service-providers/submit-iso-20022-payment-instruction.md): Submit a ISO20022 XML payment instruction (pain.001) according to the ISO20022 specification.
+- [bLink API - payments-submission-service module](/api-reference/pss/v6/six/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API.
+- [consents](/api-reference/pss/v6/six/consents.md): consents
+- [Create a payment request](/api-reference/pss/v6/six/create-payment-request.md): Create a payment request.
+- [diagnostics](/api-reference/pss/v6/six/diagnostics.md): diagnostics
+- [Get diagnostic information](/api-reference/pss/v6/six/get-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers are returned unchanged.
+- [Get the ISO20022 XML status report (pain.002) for a payment instruction](/api-reference/pss/v6/six/get-iso-20022-payment-instruction-status-report.md): Get the ISO20022 XML status report (pain.002) for a specific payment instruction.
+- [Get the status information of a payment request](/api-reference/pss/v6/six/get-payment-request-status.md): Get the status information of a specific payment request.
+- [iso20022](/api-reference/pss/v6/six/iso-20022.md): iso20022
+- [Get a list of all accounts](/api-reference/pss/v6/six/list-accounts.md): Get a list of all accounts for the authenticated context. The response contains an `accounts` array;
+- [payments](/api-reference/pss/v6/six/payments.md): payments
+- [Get diagnostic information](/api-reference/pss/v6/six/post-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers and the request body are returned unchanged.
+- [Submit a ISO20022 XML payment instruction (pain.001)](/api-reference/pss/v6/six/submit-iso-20022-payment-instruction.md): Submit a ISO20022 XML payment instruction (pain.001) according to the ISO20022 specification.
+- [bLink API - payments-submission-service module](/api-reference/pss/v6/with-caas/blink-api-payments-submission-service-module.md): This is the specification of the bLink 'payments-submission-service' module API.
+- [consents](/api-reference/pss/v6/with-caas/consents.md): consents
+- [Create a payment request](/api-reference/pss/v6/with-caas/create-payment-request.md): Create a payment request.
+- [diagnostics](/api-reference/pss/v6/with-caas/diagnostics.md): diagnostics
+- [Get diagnostic information](/api-reference/pss/v6/with-caas/get-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers are returned unchanged.
+- [Get the ISO20022 XML status report (pain.002) for a payment instruction](/api-reference/pss/v6/with-caas/get-iso-20022-payment-instruction-status-report.md): Get the ISO20022 XML status report (pain.002) for a specific payment instruction.
+- [Get the status information of a payment request](/api-reference/pss/v6/with-caas/get-payment-request-status.md): Get the status information of a specific payment request.
+- [iso20022](/api-reference/pss/v6/with-caas/iso-20022.md): iso20022
+- [Get a list of all accounts](/api-reference/pss/v6/with-caas/list-accounts.md): Get a list of all accounts for the authenticated context. The response contains an `accounts` array;
+- [payments](/api-reference/pss/v6/with-caas/payments.md): payments
+- [Get diagnostic information](/api-reference/pss/v6/with-caas/post-diagnostic-info.md): Checks the health of the API for a specific `targetId` and verifies that request headers and the request body are returned unchanged.
+- [Submit a ISO20022 XML payment instruction (pain.001)](/api-reference/pss/v6/with-caas/submit-iso-20022-payment-instruction.md): Submit a ISO20022 XML payment instruction (pain.001) according to the ISO20022 specification.
+
+## docs
+
+
+### architecture
+
+Guide for architectural decisions at the service-user side.
+
+- [Architecture Guidance](/docs/architecture.md): Guide for architectural decisions at the service-user side.
+- [Architectural Decisions For Service Provider](/docs/architecture/architecture-sp.md): Considerations from the perspective of the Service Provider.
+- [Architectural Decisions for Service User](/docs/architecture/architecture-su.md): Considerations from the perspective of the Service User.
+
+### best-practice
+
+Open banking ecosystems thrive on the value created through collaboration. Multiple ecosystem participants cooperate to offer their mutual end customers a higher service quality (e.g., through automation) or entirely new services all together. In this context, ecosystem participants can take on the role of Service User and Service Provider (see chapter What's bLink), e.g., they either consume or provide data-based, API-enabled services within the ecosystem. At the core, in whatever role, collaboration is beneficial to all ecosystem participants.
+
+- [Operational Best Practice](/docs/best-practice.md): Open banking ecosystems thrive on the value created through collaboration. Multiple ecosystem participants cooperate to offer their mutual end customers a higher service quality (e.g., through automation) or entirely new services all together. In this context, ecosystem participants can take on the role of Service User and Service Provider (see chapter What's bLink), e.g., they either consume or provide data-based, API-enabled services within the ecosystem. At the core, in whatever role, collaboration is beneficial to all ecosystem participants.
+
+### category
+
+- [Account and Payment Services](/docs/category/account-and-payment-services.md): Account and Payment Services description.
+- [Onboarding](/docs/category/onboarding.md): Get familiar with our onboarding process and its core elements.
+- [OpenWealth](/docs/category/openwealth.md): OpenWealth description.
+- [Operations](/docs/category/operations.md): The Operations section provides insights into the key processes and structures that ensure the efficient management of requests and the continuous evolution of the bLink platform through structured governance.
+- [Services](/docs/category/services.md): Description of bLink services.
+- [Technical Onboarding](/docs/category/technical-onboarding.md): Overview of the technical onboarding processes for the Service Provider and Service User roles.
+
+### downloads
+
+Postman Collection
+
+- [Downloads](/docs/downloads.md): Postman Collection
+
+### onboarding
+
+- [Admission Criteria](/docs/onboarding/admission-criteria.md): The admission criteria compose all business-related requirements to join the trusted bLink platform and its community on top of the technical onboarding, e.g., your API integration. They are divided into general and technical criteria. Proof that these requirements are being fulfilled by a platform applicant needs to be provided to SIX within the context of the mandatory admission test in order to get accredited access to the bLink platform.
+- [Admission Tool - User Manual](/docs/onboarding/admission-tool.md): Introduction
+- [Consent Flow & Management](/docs/onboarding/consent-management.md): How customer consent is handled with bLink.
+- [Contracts](/docs/onboarding/contract.md): bLink platform contracts and forms.
+- [Your Path to bLink](/docs/onboarding/start-with-blink.md): The following overview provides guidance on how to connect to bLink and utilize self-service resources and tools to ensure a smooth and efficient onboarding experience.
+- [Registration & Connectivity](/docs/onboarding/technical-onboarding/registration_connectivity.md): Get details on registration and connectivity process for all participants.
+- [Technical Onboarding Process for Service Provider](/docs/onboarding/technical-onboarding/service-provider.md): Understand the onboarding procedure for Service Provider.
+- [Implementation Guidelines for Service Provider in Onboarding](/docs/onboarding/technical-onboarding/service-provider/implementation-guidelines.md): Implementation Guidelines for Service Provider in Onboarding.
+- [Technical Onboarding Process for Service User](/docs/onboarding/technical-onboarding/technical-onboarding-service-user.md): Get to know the onboarding procedure for Service User.
+
+### operations
+
+- [bLink Governance & Coordination](/docs/operations/governance.md): To ensure structured decision-making and efficient platform evolution, bLink operates through three governance boards. Each participant must provide a contact person for all boards.
+- [Support](/docs/operations/support.md): Initial Contact
+- [Account Setup](/docs/operations/support/setup-account.md): How to set up your Account to access the bLink Web-Applications bLink Support Portal and bLink Admission Tool.
+- [bLink Support Portal – Support Processes](/docs/operations/support/support-processes.md): Overview on established Support Processes
+
+### services
+
+- [Account Information Services (AIS)](/docs/services/account-and-payment-services/account-information-services.md): An overview of the Account Information Services (AIS) on bLink.
+- [Payment Submission Services (PSS)](/docs/services/account-and-payment-services/payment-submission-services.md): An overview of the Payment Submission Services (PSS) on bLink.
+- [Service Provider Offering](/docs/services/account-and-payment-services/service-provider-offering.md): An overview of Service Provider Offering for Account and Payment Services
+- [Notification API](/docs/services/notification-api.md): Notification API
+- [Custody Services](/docs/services/openwealth/custody-services.md): Get to know more about Custody Services on bLink.
+- [Customer Management](/docs/services/openwealth/customer-management.md): Understand the details of Customer Management on bLink.
+- [OpenWealth](/docs/services/openwealth/openwealth-on-blink.md): An overview about OpenWealth on bLink.
+- [Trading](/docs/services/openwealth/trading.md): Get to details about Trading API on bLink.
+- [Release Management bLink](/docs/services/release-management-process.md): Release Management Process of bLink APIs.
+
+### testing-infrastructure
+
+For testing, both Service User and Service Provider can use simulators to test against their respective counterparties.
+
+- [Testing Infrastructure](/docs/testing-infrastructure.md): For testing, both Service User and Service Provider can use simulators to test against their respective counterparties.
+- [Service Provider Testing](/docs/testing-infrastructure/sp-testing.md): Service Provider Testing
+- [Automated Testing ("Readiness-Check")](/docs/testing-infrastructure/sp-testing/readiness-check.md): The Automated Testing section verifies whether a Service Provider’s implementation meets the requirements and specifications defined by bLink. It checks that the consent flow and applied use cases are correctly implemented. This is a mandatory step in the technical validation required for onboarding to production.
+- [Readiness Test Cases - Account & Payment Services](/docs/testing-infrastructure/sp-testing/readiness-check/AIS-PSS-Testcase-descriptions.md): This page lists all test cases executed by the bLink Readiness Check against a Service Provider's API implementation. Each test validates a specific aspect of the API behavior against the respective API specification.
+- [Service User Testing](/docs/testing-infrastructure/su-testing.md): Service User Testing
+- [Postman-Collection](/docs/testing-infrastructure/su-testing/postman-collection.md): Curated Collection for use by bLink-Participants
+
+### whats-blink
+
+bLink is the Swiss open banking platform developed by SIX, providing efficient and secure connections between banks and fintechs through standardized APIs. On behalf of and with the explicit permission of their mutual customers, platform participants exchange various types of financial data (e.g., payment account data or wealth data) to enable new products, services and user experiences, while fostering innovation and collaboration within the Swiss financial services industry.
+
+- [Introduction to the bLink Platform](/docs/whats-blink.md): bLink is the Swiss open banking platform developed by SIX, providing efficient and secure connections between banks and fintechs through standardized APIs. On behalf of and with the explicit permission of their mutual customers, platform participants exchange various types of financial data (e.g., payment account data or wealth data) to enable new products, services and user experiences, while fostering innovation and collaboration within the Swiss financial services industry.

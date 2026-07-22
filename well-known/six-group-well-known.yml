@@ -1,0 +1,81 @@
+generated: '2026-07-22'
+method: searched
+source: live probes of /.well-known/ on SIX hosts (2026-07-22)
+hosts:
+- host: https://www.six-group.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: six-group-security.txt
+  - path: /llms.txt
+    status: 200
+    file: ../llms/six-group-llms.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://developer.six-group.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: identical to www.six-group.com security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://apiportal.six-group.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: six-group-oauth-authorization-server.json
+    note: RFC 8414 metadata for the Kong developer-portal login (authorization_code
+      + PKCE S256), not for the product APIs themselves
+  - path: /.well-known/security.txt
+    status: 200
+    note: SPA HTML shell, not a real security.txt - not saved
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: SPA HTML shell, not a real document - not saved
+  - path: /.well-known/api-catalog
+    status: 200
+    note: SPA HTML shell, not a real RFC 9727 api-catalog - not saved
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: SPA HTML shell, not a real manifest - not saved
+- host: https://api.six-group.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://docs.blink.six-group.com
+  documents:
+  - path: /llms.txt
+    status: 200
+    file: ../llms/six-group-blink-llms.txt
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://docs.debix.six-group.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://blink.six-group.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://web.apiportal.six-group.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404

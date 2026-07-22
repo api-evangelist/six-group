@@ -1,0 +1,105 @@
+generated: '2026-07-22'
+method: derived
+format: mixed
+source: openapi/_original/*.{yml,json} 4xx/5xx responses
+note: 'Two envelope families: RFC 7807-shaped Problem objects (Swiss Bank Master, SIC Clearing
+  Day Calendar - served as application/json, not application/problem+json) and numeric-code
+  BankApiError/ApiError envelopes (debiX - applicationError name + int32 errorCode, e.g. 4469
+  PIN_DELIVERY_NOT_ALLOWED_FOR_VIRTUAL_CARD, 4480-4484 bank-card constraints, documented in
+  the debiX release notes). No public consolidated error-code registry page was found.'
+docs: https://docs.debix.six-group.com/debix-v2/release-notes
+problems:
+- status: 400
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 400
+  title: Bad request
+  schema: BankApiError
+  sources:
+  - openapi/_original/six-group-debix-auth-provider-api-v2-provider-to-six-openapi.yml
+  - openapi/_original/six-group-debix-auth-provider-api-v2-six-to-provider-openapi.yml
+  - openapi/_original/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+  - openapi/_original/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
+- status: 400
+  title: Bad request.
+  schema: BankApiError
+  sources:
+  - openapi/_original/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+  - openapi/_original/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
+- status: 401
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 403
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 404
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 404
+  title: Card not found or deleted
+  schema: BankApiError
+  sources:
+  - openapi/_original/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+  - openapi/_original/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
+- status: 404
+  title: No merchant or merchant logo found for given merchant id.
+  schema: BankApiError
+  sources:
+  - openapi/_original/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+  - openapi/_original/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
+- status: 404
+  title: Not found
+  schema: BankApiError
+  sources:
+  - openapi/_original/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+  - openapi/_original/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
+- status: 404
+  title: Not found or card is deleted
+  schema: BankApiError
+  sources:
+  - openapi/_original/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+  - openapi/_original/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
+- status: 409
+  title: Conflict
+  schema: BankApiError
+  sources:
+  - openapi/_original/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+  - openapi/_original/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
+- status: 413
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 429
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 500
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 501
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 503
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json
+- status: 504
+  title: null
+  schema: null
+  sources:
+  - openapi/_original/six-group-settlement-info-reporting-openapi.json

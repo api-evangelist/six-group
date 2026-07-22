@@ -1,0 +1,15 @@
+generated: '2026-07-22'
+method: generated
+skills:
+- file: six-group-swiss-bank-lookup.md
+  name: Look up Swiss bank master and IBAN data
+  api: openapi/six-group-bankmaster-api-openapi.yml
+  operations: [getBankmaster, getBankmasterJson, getBankmasterCsv, getIbanInformation]
+- file: six-group-sic-operational-check.md
+  name: Check Swiss interbank clearing status and clearing days
+  api: openapi/six-group-status-api-openapi.yml
+  operations: [getServiceStatusJson, getClearingDayCalendarJson, getClearingDayCalendarCsv]
+- file: six-group-debix-card-issuance.md
+  name: Order and manage a debiX debit card
+  api: openapi/six-group-card-management-api-openapi.yml
+  operations: [orderCard, getCardDetails, updateCardStatus, getCardToken, startSetPin, setPin]

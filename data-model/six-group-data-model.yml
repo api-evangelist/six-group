@@ -1,0 +1,59 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/ schemas and id-reference fields (debiX, bank master, SIC, custody specs)
+entities:
+- entity: Card
+  description: Physical or virtual debit card managed by an issuer on debiX (identified by CardToken
+    / ShortCardId).
+- entity: CardInstanceToken
+  description: Tokenized equivalent of the CardId identifying a concrete card instance.
+- entity: DigitalCard
+  description: Wallet token (DPAN) provisioned to Apple Pay/Google Pay/Samsung Pay, managed
+    via the Token Lifecycle API.
+- entity: PinDatamailer
+  description: PIN datamailer order for physical cards.
+- entity: BankApiError
+  description: debiX error envelope (applicationError + numeric errorCode + details).
+- entity: BankmasterRecord
+  description: Swiss bank master record (IID, BIC, bank name) required for electronic payments.
+- entity: Iban
+  description: IBAN information resolved against the bank master.
+- entity: ServiceStatus
+  description: Operational status of a SIX Interbank Clearing electronic payment service.
+- entity: ClearingDay
+  description: Clearing day calendar entry for SIC payment services.
+- entity: SettlementInformation
+  description: Detailed security settlement information per ISIN from the custody cockpit.
+- entity: BulkSubscription
+  description: Subscription for bulk delivery of settlement information results.
+- entity: Problem
+  description: RFC 7807-style problem details object (bank master / calendar APIs).
+relationships:
+- from: Card
+  to: DigitalCard
+  type: has_many
+  via: cardToken (POST /cards/{cardToken}/digitalcards)
+- from: Card
+  to: CardInstanceToken
+  type: has_one
+  via: POST /cards/{cardToken}/card-instance-token
+- from: Card
+  to: PinDatamailer
+  type: has_many
+  via: POST /cards/{cardToken}/pin-datamailer
+- from: DigitalCard
+  to: Card
+  type: belongs_to
+  via: dpan lookup (GET /digitalcards/{dpan})
+- from: Iban
+  to: BankmasterRecord
+  type: belongs_to
+  via: IID/bank identification in GET /iban
+- from: BulkSubscription
+  to: SettlementInformation
+  type: has_many
+  via: bulk subscription results
+- from: SettlementInformation
+  to: ClearingDay
+  type: belongs_to
+  via: settlement date within SIC clearing calendar

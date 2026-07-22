@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: 'API Evangelist enhancements for debiX Auth Provider API: Provider-to-SIX 3DS Health
+    check API'
+  version: 1.0.0
+extends: openapi/six-group-health-check-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      provider: six-group
+      aid: six-group
+      harvested: '2026-07-22'
+      documentation: https://docs.debix.six-group.com/
+      notes: Refined per-tag split of the verbatim SIX spec in openapi/_original/; auth is transport-level
+        mTLS (no securitySchemes declared by SIX).

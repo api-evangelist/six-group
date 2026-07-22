@@ -1,0 +1,41 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.blink.six-group.com/docs/services/release-management-process.md
+versioning:
+  scheme: uri-path
+  detail: Major version in the URL path (v1/v2/v3 across debiX, SIC, bankmaster,
+    custody APIs); debiX additionally follows semantic versioning for interface
+    releases (current debiX API 2.36.0 per release notes).
+  docs: https://docs.debix.six-group.com/debix-v2/release-notes
+release_management:
+  blink:
+    policy_url: https://docs.blink.six-group.com/docs/services/release-management-process
+    detail: Community-driven release cycle with SFTI (Swiss Fintech Innovations
+      Common API) and the OpenWealth Association - changes raised as GitHub issues,
+      consolidated into annual major releases targeted for November, deployed in
+      parallel mode so providers stay accessible regardless of version; readiness-
+      check completion is required before production release.
+  debix:
+    policy_url: https://docs.debix.six-group.com/getting-started
+    detail: New versions are specified with issuer review, published on the test
+      system first, patch versions applied on test, then promoted to production;
+      issuers switch client implementations at their own pace.
+deprecation:
+  policy_url: https://docs.debix.six-group.com/api/debix/v2
+  sunset_header: false
+  detail: debiX groups superseded endpoints into a dedicated "Deprecated" OpenAPI
+    tag (58 operations captured in openapi/six-group-deprecated-api-openapi.yml)
+    and publishes migration guides (CardId to CardToken migration, debiX PUSH
+    major-version-upgrade). No RFC 8594 Sunset/Deprecation header support is
+    documented.
+  migration_guides:
+  - https://docs.debix.six-group.com/debix-v2/ (Migration from CardId to CardToken)
+  - https://docs.debix.six-group.com/debix-push/major-version-upgrade
+status_page: null
+status_api:
+  note: No human status page was found; SIX instead exposes the SIC Service Status
+    API - GET /servicestatus on api.six-group.com answers HTTP 200 unauthenticated
+    with per-service UP/DOWN status.
+  url: https://apiportal.six-group.com/apis/sic-service-status-api-v1-ch-v1/docs
+sla: null
+deprecated_operations_spec: openapi/six-group-deprecated-api-openapi.yml

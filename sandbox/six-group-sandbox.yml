@@ -1,0 +1,44 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.debix.six-group.com/getting-started
+environments:
+- product: debiX
+  test_hosts:
+  - https://api-preprod.np.six-group.com
+  - https://api-preprod.np.six.ssfn.ch
+  - https://api-preprod.np.p2p.six-group.com
+  production_hosts:
+  - https://api.six-group.com
+  - https://api.six.ssfn.ch
+  - https://api.p2p.six-group.com
+  separation: Separate X.509 client certificates are required for the test and
+    production environments; SIX Client Delivery registers each certificate DN in
+    the debiX Portal per environment.
+  test_data: On the test system SIX Client Delivery provisions a set of test data
+    for funding debit cards provided by the issuer (values are issuer-specific and
+    not published).
+  verification: Issuers call the /healthcheck endpoint with all verbs to verify
+    access and client authentication across all layers.
+  docs: https://docs.debix.six-group.com/getting-started
+- product: bLink
+  environments:
+  - name: XE test environment
+    purpose: Integration testing against bLink simulators (manual and automated
+      testing features) before production.
+  - name: XP test environment
+    purpose: Runs the production version for pre-release verification.
+  tooling:
+  - name: bLink simulators
+    description: Simulator applications on the test system for Service Users and
+      Service Providers, including an integrated readiness-check that tracks
+      technical and functional implementation progress; SIX monitors readiness-check
+      usage before releases.
+  - name: Postman collection
+    description: Downloadable Postman collection (v5.0.1) plus example payloads for
+      testing consent flows and APIs against the SIX test environment; requires a
+      certificate whitelisted by SIX for mTLS.
+    url: https://docs.blink.six-group.com/docs/downloads
+  docs: https://docs.blink.six-group.com/docs/testing-infrastructure/su-testing/postman-collection
+notes: No public self-serve sandbox exists - test access to every surface requires
+  onboarding and certificate whitelisting by SIX. No published magic test values
+  (test cards/IBANs) were found in the public docs.

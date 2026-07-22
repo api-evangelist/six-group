@@ -1,0 +1,2009 @@
+openapi: 3.1.0
+info:
+  title: 'debiX Auth Provider API: Provider-to-SIX 3DS Token Provisioning API'
+  version: 2.1.9
+  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+servers:
+- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - Internet
+- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - Internet
+- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: PROD - SSFN
+- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: TEST - SSFN
+- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - P2P
+- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - P2P
+tags:
+- name: Token Provisioning
+  description: Allows provisioning wallet encryption for Mastercard push provisioning (Beta), provisioning wallet encryption via Thales SDK, provisioning C2P encryption via Thales SDK, enrollment for Mastercard Click to Pay (Beta), enrollment for Visa Click to Pay (Beta).
+paths:
+  /cards/{cardToken}/clicktopay/mastercard/provisioning:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Enrolls a card in Mastercard Click to Pay.
+      description: "Enrolls a card in Mastercard Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4507 - C2P_AMBIGUOUS_CONSUMER_IDENTITY_PHONE_NUMBER\n* 4508 - C2P_AMBIGUOUS_CONSUMER_IDENTITY_EMAIL_ADDRESS\n* 4509 - C2P_PARAMETER_VALIDATION_FAILED_AT_SCHEME\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+      operationId: setClickToPayMastercardProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClickToPayMastercardProvisioningRequest'
+        required: true
+      responses:
+        '204':
+          description: Click to Pay provisioning was successful
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/clicktopay/visa/provisioning:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Enrolls a card in Visa Click to Pay.
+      description: "Enrolls a card in Visa Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+      operationId: setClickToPayVisaProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClickToPayVisaProvisioningRequest'
+        required: true
+      responses:
+        '204':
+          description: Click to Pay provisioning was successful
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/apple-pay/provisioning-data:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Get data for push provisioning of the given card to a Apple Pay wallet.
+      description: 'Returns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into an Apple Pay wallet.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4436 - CARD_INACTIVE
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4454 - EXCLUDED_WALLET_PROVIDER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getApplePayProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplePayCardEncryptionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplePayProvisioningResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/google-pay/provisioning-data:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Get data for push provisioning of the given card to a Google Pay wallet.
+      description: 'Returns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into a Google Pay wallet.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4436 - CARD_INACTIVE
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4454 - EXCLUDED_WALLET_PROVIDER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getGooglePayProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePayCardEncryptionRequest'
+      responses:
+        '200':
+          description: Successful
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GooglePayProvisioningResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/samsung-pay/provisioning-data:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Get data for push provisioning of the given card to a Samsung Pay wallet.
+      description: 'Returns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into a Samsung Pay wallet.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4436 - CARD_INACTIVE
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4454 - EXCLUDED_WALLET_PROVIDER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getSamsungPayProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SamsungPayCardEncryptionRequest'
+      responses:
+        '200':
+          description: Successful
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SamsungPayProvisioningResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/encrypt-card-data:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Returns encrypted card data.
+      description: "Deprecated, use one of `POST /cards/{cardToken}/apple-pay/provisioning-data`, \n`POST /cards/{cardToken}/google-pay/provisioning-data`, \n`POST /cards/{cardToken}/samsung-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+      operationId: getEncryptedCardData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        description: Card data to encrypt.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardEncryptionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardEncryptionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/encrypt-card-data/click-to-pay:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Returns encrypted card data for Click to Pay.
+      description: 'Returns the encrypted card data for the provisioning of a funding debit card for Click to Pay into a wallet with Thales SDK.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4436 - CARD_INACTIVE
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4460 - ECOMMERCE_FEATURE_TOGGLE_NOT_ACTIVATED
+
+        * 4461 - INCOMPLETE_OR_MISSING_ADDRESS_DATA
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getEncryptedCardDataClickToPay
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        description: Card data to encrypt.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClickToPayCardEncryptionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickToPayCardEncryptionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/click-to-pay/status:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Checks for existing Click to Pay registrations.
+      description: 'Returns the DPAN associated with the given card and email address for Click to Pay. Will return no DPAN if no association exists.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getClickToPayStatus
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        description: Email address for which to return the registered DPAN.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClickToPayStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickToPayStatusResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Card not found or deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/{cardToken}/generate-authorization-code:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Returns an authorization code.
+      description: "Returns an authorization code for the provisioning of a funding debit card, specified by its card token, into a wallet with Thales SDK. \nThe code is valid for 20 seconds in the production environment and 60 seconds in test environment.  \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4433 - UNKNOWN_WALLET_PROVIDER\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+      operationId: getAuthorizationCode
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      requestBody:
+        description: Card identifier and wallet for the generation of the authorization code.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodeRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodeResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/clicktopay/mastercard/provisioning:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Enrolls a card in Mastercard Click to Pay.
+      description: "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/clicktopay/mastercard/provisioning` instead.\nEnrolls a card in Mastercard Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4507 - C2P_AMBIGUOUS_CONSUMER_IDENTITY_PHONE_NUMBER\n* 4508 - C2P_AMBIGUOUS_CONSUMER_IDENTITY_EMAIL_ADDRESS\n* 4509 - C2P_PARAMETER_VALIDATION_FAILED_AT_SCHEME\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+      operationId: setClickToPayMastercardProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClickToPayMastercardProvisioningRequest_2'
+        required: true
+      responses:
+        '204':
+          description: Click to Pay provisioning was successful
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/clicktopay/visa/provisioning:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Enrolls a card in Visa Click to Pay.
+      description: "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/clicktopay/visa/provisioning` instead.\nEnrolls a card in Visa Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+      operationId: setClickToPayVisaProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClickToPayVisaProvisioningRequest_2'
+        required: true
+      responses:
+        '204':
+          description: Click to Pay provisioning was successful
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/apple-pay/provisioning-data:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Get data for push provisioning of the given card to a Apple Pay wallet.
+      description: 'Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/apple-pay/provisioning-data` instead.
+
+
+        Returns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into an Apple Pay wallet.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4436 - CARD_INACTIVE
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4454 - EXCLUDED_WALLET_PROVIDER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getApplePayProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplePayCardEncryptionRequest_2'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplePayProvisioningResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/google-pay/provisioning-data:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Get data for push provisioning of the given card to a Google Pay wallet.
+      description: 'Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/google-pay/provisioning-data` instead.
+
+
+        Returns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a Google Pay wallet.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4436 - CARD_INACTIVE
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4454 - EXCLUDED_WALLET_PROVIDER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getGooglePayProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePayCardEncryptionRequest_2'
+      responses:
+        '200':
+          description: Successful
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GooglePayProvisioningResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/samsung-pay/provisioning-data:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Get data for push provisioning of the given card to a Samsung Pay wallet.
+      description: 'Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/samsung-pay/provisioning-data` instead.
+
+
+        Returns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a Samsung Pay wallet.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4436 - CARD_INACTIVE
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4454 - EXCLUDED_WALLET_PROVIDER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getSamsungPayProvisioningData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SamsungPayCardEncryptionRequest_2'
+      responses:
+        '200':
+          description: Successful
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SamsungPayProvisioningResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/encrypt-card-data:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Returns encrypted card data.
+      description: "Deprecated, use one of `POST /debix/bank/cardtoken/v2/cards/{cardToken}/apple-pay/provisioning-data`, \n`POST /debix/bank/cardtoken/v2/cards/{cardToken}/google-pay/provisioning-data`, \n`POST /debix/bank/cardtoken/v2/cards/{cardToken}/samsung-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+      operationId: getEncryptedCardData
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Card data to encrypt.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardEncryptionRequest_2'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardEncryptionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/encrypt-card-data/click-to-pay:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Returns encrypted card data for Click to Pay.
+      description: 'Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/encrypt-card-data/click-to-pay` instead.
+
+
+        Returns the encrypted card data for the provisioning of a funding debit card for Click to Pay into a wallet with Thales SDK.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4436 - CARD_INACTIVE
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4460 - ECOMMERCE_FEATURE_TOGGLE_NOT_ACTIVATED
+
+        * 4461 - INCOMPLETE_OR_MISSING_ADDRESS_DATA
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getEncryptedCardDataClickToPay
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Card data to encrypt.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClickToPayCardEncryptionRequest_2'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickToPayCardEncryptionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/click-to-pay/status:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Checks for existing Click to Pay registrations.
+      description: 'Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/click-to-pay/status` instead.
+
+
+        Returns the DPAN associated with the given arguments for Click to Pay. Will return no DPAN if no association exists.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED
+
+        * 4449 - TOKENIZATION_NOT_SUPPORTED
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: getClickToPayStatus
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Identifier of the card for which to return the registered DPAN.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClickToPayStatusRequest_2'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClickToPayStatusResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Card not found or deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /cards/generate-authorization-code:
+    post:
+      tags:
+      - Token Provisioning
+      summary: Returns an authorization code.
+      description: "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/generate-authorization-code` instead.\n\nReturns an authorization code for the provisioning of a funding debit card, specified by its cardId, into a wallet with Thales SDK.\nThe code is valid for 20 seconds in the production environment and 60 seconds in test environment.    \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4433 - UNKNOWN_WALLET_PROVIDER\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+      operationId: getAuthorizationCode
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Card identifier and wallet for the generation of the authorization code.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationCodeRequest_2'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationCodeResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found or card is deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+components:
+  schemas:
+    VisaC2PCustomerId:
+      description: Unique identifier for the customer.
+      type: string
+      format: uuid
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    CardSequenceNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
+    BankClearingNumber:
+      description: Unique number used to identify each bank agency or branch in the bank directory.
+      type: integer
+      format: int32
+      minimum: 100
+      maximum: 99999
+      examples:
+      - 50000
+    GooglePayCardEncryptionRequest_2:
+      description: Contains data for the Google Pay card encryption.
+      type: object
+      required:
+      - cardId
+      - cardholderName
+      - clientWalletAccountId
+      - clientDeviceId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        clientWalletAccountId:
+          type: string
+          description: The active wallet id of the current Google Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
+        clientDeviceId:
+          type: string
+          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
+    CardHolderName:
+      description: The cardholder name as printed on the card.
+      type: string
+      minLength: 2
+      maxLength: 26
+      examples:
+      - Peter Meier
+    CardEncryptionRequest:
+      description: Contains data for the card encryption.
+      type: object
+      required:
+      - cardTokenExtension
+      - cardholderName
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        subCardType:
+          $ref: '#/components/schemas/CardEncryptionSubCardType'
+    EmailAddress:
+      description: Email address to identify the customer.
+      type: string
+      minLength: 1
+      examples:
+      - peter.schweizer@mailbox.org
+    ApplePayCardEncryptionRequest:
+      description: Contains data for the Apple Pay card encryption.
+      type: object
+      required:
+      - cardTokenExtension
+      - cardholderName
+      - nonce
+      - nonceSignature
+      - applePublicCertificates
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        nonce:
+          type: string
+          description: Nonce, passed back in the response.
+        nonceSignature:
+          type: string
+          description: Nonce signature, passed back in the response.
+        applePublicCertificates:
+          type: array
+          description: Apple's certificates to be used in the Diffie-Hellman key exchange. Base64 encoded DER certificate chain.
+          items:
+            type: string
+            description: Base64 encoded DER certificate.
+    ClickToPayStatusRequest:
+      description: Contains the email address for which to return the DPAN.
+      type: object
+      required:
+      - emailAddress
+      properties:
+        emailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+    YearMonth:
+      type: object
+      required:
+      - month
+      - year
+      properties:
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    ClickToPayVisaProvisioningRequest_2:
+      description: Request data to provision Visa Click to Pay.
+      type: object
+      required:
+      - cardId
+      - consumer
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        consumer:
+          $ref: '#/components/schemas/ClickToPayVisaConsumer'
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
+    ClickToPayCardEncryptionResponse:
+      description: Contains the encrypted card data for the provisioning of the card with Thales SDK.
+      type: object
+      required:
+      - encryptedCardData
+      - scheme
+      - publicKeyId
+      - tokenRequestorId
+      properties:
+        encryptedCardData:
+          description: 'Encrypted card data in PKCS#7 format as specified by Thales SDK.
+
+            Once deciphered, the JSON payload contains the following fields:
+
+            - issuerCardRefId
+
+            - fpan
+
+            - exp
+
+            - cardholderName
+
+            - postalAddress
+
+            - phoneNumber
+
+            - phoneNumberCountryCode
+
+            - email
+
+            - issuerClientInformation
+
+            '
+          type: string
+        scheme:
+          $ref: '#/components/schemas/Scheme'
+        publicKeyId:
+          description: Id of the public key used to encrypt the card data
+          type: string
+          examples:
+          - tshKid
+        tokenRequestorId:
+          description: The Click to Pay token requestor id.
+          type: string
+          examples:
+          - '40010075338'
+    CardId:
+      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
+      type: object
+      required:
+      - bankClearingNumber
+      - cardNumber
+      - cardType
+      - cardSeqNumber
+      - cardExpiry
+      properties:
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+        cardSeqNumber:
+          $ref: '#/components/schemas/CardSeqNumber'
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+    Scheme:
+      description: Scheme of the card.
+      type: string
+      enum:
+      - MASTERCARD
+      - VISA
+    ApplePayCardEncryptionRequest_2:
+      description: Contains data for the Apple Pay card encryption.
+      type: object
+      required:
+      - cardId
+      - cardholderName
+      - nonce
+      - nonceSignature
+      - applePublicCertificates
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        nonce:
+          type: string
+          description: Nonce, passed back in the response.
+        nonceSignature:
+          type: string
+          description: Nonce signature, passed back in the response.
+        applePublicCertificates:
+          type: array
+          description: Apple's certificates to be used in the Diffie-Hellman key exchange. Base64 encoded DER certificate chain.
+          items:
+            type: string
+            description: Base64 encoded DER certificate.
+    ClickToPayMastercardProvisioningRequest_2:
+      description: Request data to provision Mastercard Click to Pay.
+      type: object
+      required:
+      - cardId
+      - consumer
+      - complianceSettings
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        consumer:
+          $ref: '#/components/schemas/ClickToPayMastercardConsumer'
+        complianceSettings:
+          $ref: '#/components/schemas/ClickToPayMastercardComplianceSettings'
+    ClickToPayMastercardConsumer:
+      description: Consumer details for Mastercard Click to Pay
+      type: object
+      required:
+      - emailAddress
+      - mobilePhoneNumber
+      - mobilePhoneNumberCountryCode
+      - languageCode
+      - firstName
+      - lastName
+      - street
+      - postalCode
+      - city
+      - countryCode
+      properties:
+        emailAddress:
+          description: The customer's email address.
+          type: string
+          minLength: 1
+          maxLength: 256
+          examples:
+          - peter.schweizer@mailbox.org
+        mobilePhoneNumber:
+          description: The phone number without country code.
+          type: string
+          pattern: ^[0-9]{5,12}$
+          examples:
+          - '795625655'
+        mobilePhoneNumberCountryCode:
+          description: The country code of the phone number.
+          type: string
+          pattern: ^[1-9][0-9]{0,3}$
+          examples:
+          - '41'
+        languageCode:
+          description: Consumer-provided language choice. ISO 639-1 Code.
+          minLength: 2
+          type: string
+          examples:
+          - de
+        firstName:
+          description: Consumer-provided first name.
+          type: string
+          maxLength: 30
+          examples:
+          - John
+        lastName:
+          description: Consumer-provided last name.
+          type: string
+          maxLength: 30
+          examples:
+          - Doe
+        street:
+          description: Consumer-provided street name.
+          type: string
+          maxLength: 25
+          examples:
+          - Main Street
+        streetNo:
+          description: Consumer-provided street number.
+          type: string
+          maxLength: 5
+          examples:
+          - '123'
+        postalCode:
+          description: Postal or zip code of the address.
+          type: string
+          minLength: 1
+          maxLength: 10
+          examples:
+          - '8005'
+        city:
+          description: The city of the address.
+          type: string
+          minLength: 1
+          maxLength: 32
+          examples:
+          - Zürich
+        countryCode:
+          description: ISO 3166 alpha 2 country code.
+          type: string
+          minLength: 2
+          maxLength: 2
+          examples:
+          - CH
+    ClickToPayCardEncryptionRequest_2:
+      description: Contains data for the card encryption.
+      type: object
+      required:
+      - cardId
+      - cardholderName
+      - emailAddress
+      - phoneNumber
+      - phoneNumberCountryCode
+      - address
+      - issuerClientInformation
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        emailAddress:
+          description: Email address to identify the customer.
+          type: string
+          minLength: 1
+          examples:
+          - peter.schweizer@mailbox.org
+        phoneNumber:
+          description: The phone number without country code.
+          type: string
+          pattern: ^[0-9]{5,12}$
+          examples:
+          - '795625655'
+        phoneNumberCountryCode:
+          description: The country code of the phone number.
+          type: string
+          pattern: ^[1-9][0-9]{0,3}$
+          examples:
+          - '41'
+        address:
+          $ref: '#/components/schemas/ClickToPayCardholderPostalAddress'
+        issuerClientInformation:
+          $ref: '#/components/schemas/ClickToPayIssuerClientInformation'
+        subCardType:
+          $ref: '#/components/schemas/CardEncryptionSubCardType'
+    ClickToPayVisaProvisioningRequest:
+      description: Request data to provision Visa Click to Pay.
+      type: object
+      required:
+      - cardTokenExtension
+      - consumer
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        consumer:
+          $ref: '#/components/schemas/ClickToPayVisaConsumer'
+    CardSeqNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
+    ClickToPayMastercardComplianceSettings:
+      description: Contains URIs to the latest privacy policy and terms and conditions for Mastercard Click to Pay.
+      type: object
+      required:
+      - privacyUri
+      - termsAndConditionsUri
+      properties:
+        privacyUri:
+          type: string
+          minLength: 15
+          description: Latest version of privacy policy URI.
+          examples:
+          - https://www.mastercard.com/global/click-to-pay/country-listing/privacy.html?locale=de_CH
+        termsAndConditionsUri:
+          type: string
+          minLength: 15
+          description: Latest version of terms and conditions URI.
+          examples:
+          - https://www.mastercard.com/global/click-to-pay/country-listing/terms.html?locale=de_CH
+    CardNumber:
+      description: Card number of the card.
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 99999999
+      examples:
+      - 12345678
+    GooglePayCardEncryptionRequest:
+      description: Contains data for the Google Pay card encryption.
+      type: object
+      required:
+      - cardTokenExtension
+      - cardholderName
+      - clientWalletAccountId
+      - clientDeviceId
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        clientWalletAccountId:
+          type: string
+          description: The active wallet id of the current Google Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
+        clientDeviceId:
+          type: string
+          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    ClickToPayVisaConsumer:
+      description: Consumer details for Visa Click to Pay
+      type: object
+      required:
+      - emailAddress
+      - mobilePhoneNumber
+      - mobilePhoneNumberCountryCode
+      - languageCode
+      - firstName
+      - lastName
+      - street
+      - postalCode
+      - city
+      - countryCode
+      properties:
+        customerId:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+        emailAddress:
+          description: The customer's email address.
+          type: string
+          minLength: 1
+          maxLength: 256
+          examples:
+          - peter.schweizer@mailbox.org
+        mobilePhoneNumber:
+          description: The phone number without country code.
+          type: string
+          pattern: ^[0-9]{5,12}$
+          examples:
+          - '795625655'
+        mobilePhoneNumberCountryCode:
+          description: The country code of the phone number.
+          type: string
+          pattern: ^[1-9][0-9]{0,3}$
+          examples:
+          - '41'
+        languageCode:
+          description: Consumer-provided language choice. ISO 639-1 Code.
+          minLength: 2
+          type: string
+          examples:
+          - de
+        firstName:
+          description: Consumer-provided first name.
+          type: string
+          maxLength: 30
+          examples:
+          - John
+        lastName:
+          description: Consumer-provided last name.
+          type: string
+          maxLength: 30
+          examples:
+          - Doe
+        street:
+          description: Consumer-provided street name.
+          type: string
+          maxLength: 25
+          examples:
+          - Main Street
+        streetNo:
+          description: Consumer-provided street number.
+          type: string
+          maxLength: 5
+          examples:
+          - '123'
+        postalCode:
+          description: Postal or zip code of the address.
+          type: string
+          minLength: 1
+          maxLength: 10
+          examples:
+          - '8005'
+        city:
+          description: The city of the address.
+          type: string
+          minLength: 1
+          maxLength: 32
+          examples:
+          - Zürich
+        countryCode:
+          description: ISO 3166 alpha 2 country code.
+          type: string
+          minLength: 2
+          maxLength: 2
+          examples:
+          - CH
+    AuthorizationCodeRequest:
+      description: Contains the card identifiers and wallet for the generation of the authorization code.
+      type: object
+      required:
+      - cardTokenExtension
+      - wallet
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        wallet:
+          $ref: '#/components/schemas/WalletProvider'
+    SubCardType:
+      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
+      type: string
+      minLength: 2
+      maxLength: 2
+      examples:
+      - A1
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+    ApplePayProvisioningResponse:
+      description: Data required for push provisioning with a Apple Pay wallet.
+      type: object
+      required:
+      - activationData
+      - ephemeralPublicKey
+      - encryptedData
+      properties:
+        activationData:
+          description: base64 encoded tokenization authentication value.
+          type: string
+          examples:
+          - for Mastercard see '#/components/schemas/MastercardTokenizationAuthenticationValue'
+        ephemeralPublicKey:
+          type: string
+          description: debiX's ephemeral public key used in the Diffie-Hellman key exchange.
+        encryptedData:
+          type: string
+          description: Encrypted card data, base64 encoded
+          examples:
+          - see '#/components/schemas/ApplePayCardCredentials'
+    CardEncryptionSubCardType:
+      description: Specifies the sub card type of the card, if any. Set the 'value' property to the sub card type if available; otherwise, set it to 'null'. Providing this object avoids additional requests to Worldline to retrieve the card's PAN.
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/SubCardType'
+    SamsungPayCardEncryptionRequest_2:
+      description: Contains data for the Samsung Pay card encryption.
+      type: object
+      required:
+      - cardId
+      - cardholderName
+      - clientWalletAccountId
+      - clientDeviceId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        clientWalletAccountId:
+          type: string
+          description: The active wallet id of the current Google Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
+        clientDeviceId:
+          type: string
+          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
+    CardEncryptionResponse:
+      description: Contains the encrypted card data for the provisioning of the card with Thales SDK.
+      type: object
+      required:
+      - encryptedCardData
+      - panSuffix
+      - publicKeyId
+      properties:
+        encryptedCardData:
+          description: 'Encrypted card data in PKCS#7 format as specified by Thales SDK.
+
+            Once deciphered, the JSON payload contains the following fields:
+
+            - issuerCardRefId
+
+            - fpan
+
+            - exp
+
+            - cardholderName
+
+            '
+          type: string
+          maxLength: 1500
+        primaryAccountIdentifier:
+          description: Primary account id; currently only for Apple Pay and only if the card has already been digitized on at least one Apple device.
+          type: string
+          minLength: 1
+        panSuffix:
+          description: Last four digits of the pan.
+          type: string
+          minLength: 4
+          maxLength: 4
+          examples:
+          - '0123'
+        publicKeyId:
+          description: Id of the public key used to encrypt the card data.
+          type: string
+          examples:
+          - tshKid
+    ClickToPayCardEncryptionRequest:
+      description: Contains data for the card encryption.
+      type: object
+      required:
+      - cardTokenExtension
+      - cardholderName
+      - emailAddress
+      - phoneNumber
+      - phoneNumberCountryCode
+      - address
+      - issuerClientInformation
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        emailAddress:
+          description: Email address to identify the customer.
+          type: string
+          minLength: 1
+          examples:
+          - peter.schweizer@mailbox.org
+        phoneNumber:
+          description: The phone number without country code.
+          type: string
+          pattern: ^[0-9]{5,12}$
+          examples:
+          - '795625655'
+        phoneNumberCountryCode:
+          description: The country code of the phone number.
+          type: string
+          pattern: ^[1-9][0-9]{0,3}$
+          examples:
+          - '41'
+        address:
+          $ref: '#/components/schemas/ClickToPayCardholderPostalAddress'
+        issuerClientInformation:
+          $ref: '#/components/schemas/ClickToPayIssuerClientInformation'
+        subCardType:
+          $ref: '#/components/schemas/CardEncryptionSubCardType'
+    ClickToPayStatusResponse:
+      description: The DPAN associated with the given arguments. None if none exists.
+      type: object
+      properties:
+        dpan:
+          $ref: '#/components/schemas/Dpan'
+    GooglePayProvisioningResponse:
+      description: Data required for push provisioning with a Google Pay wallet.
+      type: object
+      required:
+      - base64GooglePayOpaquePaymentCard
+      properties:
+        base64GooglePayOpaquePaymentCard:
+          description: Google Pay OpaquePaymentCard base64 encoded.
+          type: string
+          examples:
+          - for Mastercard see '#/components/schemas/MastercardGooglePayOpaquePaymentCard'
+    SamsungPayCardEncryptionRequest:
+      description: Contains data for the Samsung Pay card encryption.
+      type: object
+      required:
+      - cardTokenExtension
+      - cardholderName
+      - clientWalletAccountId
+      - clientDeviceId
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        clientWalletAccountId:
+          type: string
+          description: The active wallet id of the current Samsung Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
+        clientDeviceId:
+          type: string
+          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
+    ShortCardId:
+      description: Complex object representing a card consisting of bank clearing number, card number and card type.
+      type: object
+      required:
+      - bankClearingNumber
+      - cardNumber
+      - cardType
+      properties:
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+    ClickToPayStatusRequest_2:
+      description: Contains the short card id and email address for which to return the DPAN.
+      type: object
+      required:
+      - shortCardId
+      - emailAddress
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+        emailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+    AuthorizationCodeResponse:
+      description: Contains the authorization code for the provisioning of a card into a wallet with Thales SDK.
+      type: object
+      required:
+      - authorizationCode
+      properties:
+        authorizationCode:
+          description: A signed JSON Web Token (JWT/JWS) as specified by Thales SDK.
+          type: string
+    WalletProvider:
+      description: '- "WALLET"
+
+        - "ECOM"
+
+        - "APPLE_PAY"
+
+        - "SAMSUNG_PAY"
+
+        - "GOOGLE_PAY"
+
+        - "GARMIN_PAY"
+
+        - "FITBIT_PAY"
+
+        - "FACEBOOK"
+
+        - "VISA_CHECKOUT"
+
+        - "NETFLIX"
+
+        - "ASIA_PAY_LIMITED"
+
+        - "CYBERSOURCE"
+
+        - "CHERRI_TECH"
+
+        - "ADYEN"
+
+        - "AMAZON"
+
+        - "MENA_FZ_LLC"
+
+        - "GLOBAL_PYT_AUSTRALIA"
+
+        - "PAYSCOUT"
+
+        - "SAFECHARGE"
+
+        - "SECURECO"
+
+        - "WORLDPAY"
+
+        - "PAYPAL"
+
+        - "BAMBORA_ONLINE"
+
+        - "MYOB"
+
+        - "HUAWEI_PAY"'
+      type: string
+      examples:
+      - APPLE_PAY
+    ClickToPayIssuerClientInformation:
+      type: object
+      required:
+      - firstName
+      - lastName
+      properties:
+        issuerAccountID:
+          description: This is not the card's PAN. It is required by VISA.
+          type: string
+          maxLength: 24
+          examples:
+          - '1234567890'
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 80
+          examples:
+          - Peter
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 80
+          examples:
+          - Meier
+        locale:
+          description: "Language in which to communicate with the customer. \nThis is the ISO639-1 language code followed by \"_\" separator then ISO 3166-1 alpha-2 country code.\n"
+          type: string
+          minLength: 5
+          maxLength: 5
+          examples:
+          - de_CH
+        country:
+          description: '2-letter (alpha-2) country code as defined in ISO 3166-1.
+
+            '
+          type: string
+          minLength: 2
+          maxLength: 2
+          examples:
+          - CH
+    CardEncryptionRequest_2:
+      description: Contains data for the card encryption.
+      type: object
+      required:
+      - cardId
+      - cardholderName
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        subCardType:
+          $ref: '#/components/schemas/CardEncryptionSubCardType'
+    AuthorizationCodeRequest_2:
+      description: Contains the card identifier and wallet for the generation of the authorization code.
+      type: object
+      required:
+      - cardId
+      - wallet
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        wallet:
+          $ref: '#/components/schemas/WalletProvider'
+    Dpan:
+      description: Number of the digital card.
+      type: string
+      pattern: ^[4,5][0-9]{15}$
+      minLength: 16
+      maxLength: 16
+      examples:
+      - '4234567890123456'
+    ClickToPayCardholderPostalAddress:
+      description: Postal address of cardholder as specified by the TSH Token Push and Control specification.
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
+      type: object
+      properties:
+        line1:
+          description: First line of address containing the street and street number.
+          type: string
+          minLength: 1
+          maxLength: 64
+          examples:
+          - Hardturmstrasse 201
+        city:
+          description: The city of the address.
+          type: string
+          minLength: 1
+          maxLength: 32
+          examples:
+          - Zürich
+        postalCode:
+          description: Postal or zip code of the address.
+          type: string
+          minLength: 1
+          maxLength: 10
+          examples:
+          - '8005'
+        country:
+          description: 3-letter (alpha-3) country code as defined in ISO 3166-1.
+          type: string
+          minLength: 3
+          maxLength: 3
+          examples:
+          - CHE
+    CardTokenExtension:
+      description: Extension to card token to identify a card.
+      type: object
+      required:
+      - cardExpiry
+      - cardSequenceNumber
+      properties:
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        cardSequenceNumber:
+          $ref: '#/components/schemas/CardSequenceNumber'
+    SamsungPayProvisioningResponse:
+      description: Data required for push provisioning with a Samsung Pay wallet.
+      type: object
+      required:
+      - base64SamsungPayOpaquePaymentCard
+      properties:
+        base64SamsungPayOpaquePaymentCard:
+          description: Samsung Pay OpaquePaymentCard base64 encoded.
+          type: string
+          examples:
+          - for Mastercard see '#/components/schemas/MastercardGooglePayOpaquePaymentCard'
+    ClickToPayMastercardProvisioningRequest:
+      description: Request data to provision Mastercard Click to Pay.
+      type: object
+      required:
+      - cardTokenExtension
+      - consumer
+      - complianceSettings
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        consumer:
+          $ref: '#/components/schemas/ClickToPayMastercardConsumer'
+        complianceSettings:
+          $ref: '#/components/schemas/ClickToPayMastercardComplianceSettings'
+  parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
+    IssuerTraceIdHeader:
+      in: header
+      name: issuer-trace-id
+      description: A issuer‑provided unique trace identifier to correlate the complete flow started by this request.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 26

@@ -1,0 +1,1179 @@
+openapi: 3.1.0
+info:
+  title: 'debiX Auth Provider API: Provider-to-SIX 3DS Click to Pay Issuer Offered API'
+  version: 2.1.9
+  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+servers:
+- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - Internet
+- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - Internet
+- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: PROD - SSFN
+- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: TEST - SSFN
+- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - P2P
+- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - P2P
+tags:
+- name: Click to Pay Issuer Offered
+  description: Visa Click to Pay Issuer Offered operations to enroll and manage cards for Visa Click to Pay.
+paths:
+  /click-to-pay/visa/customers:
+    post:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Initiates a new customer enrollment for Visa Click to Pay.
+      description: 'Starts the process of enrolling a new customer and a card for Visa Click to Pay,
+
+        and provides a requestTraceId in the response to retrieve the status of the enrollment.
+
+        As part of the request processing, a digital card will be generated for the enrolled card.
+
+        The status of the customer is set to ACTIVE after a successful enrollment.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4436 - CARD_INACTIVE
+
+        * 4501 - CUSTOMER_ALREADY_ENROLLED_FOR_C2P
+
+        * 4504 - C2P_HAS_PENDING_REQUEST
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: enrollCustomerVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Request to enroll a customer and a card for Visa Click to Pay.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisaC2PEnrollCustomerRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PEnrollCustomerResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /click-to-pay/visa/customers/{customerId}:
+    get:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Provides the customer's information along with the enrolled cards.
+      description: 'Retrieves all information about the customer stored in Visa Click to Pay, including their enrolled cards.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4502 - UNKNOWN_CUSTOMER
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        '
+      operationId: getCustomerVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: customerId
+        description: Identifier of the customer.
+        required: true
+        schema:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PGetCustomerResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+    put:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Updates the customer's information in Visa Click to Pay.
+      description: 'Overwrites existing data for the specified customer,
+
+        and provides a requestTraceId in the response to retrieve the status of this action.
+
+        It is recommended to retrieve the latest customer information in Click to Pay and populate all data fields,
+
+        including the ones that do not change. Therefore, the complete customer information need to be sent again if the customer is ACTIVE.
+
+        If the status in the request is set to DISABLED, then the update will not be performed and Click to Pay will give an error.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4502 - UNKNOWN_CUSTOMER
+
+        * 4504 - C2P_HAS_PENDING_REQUEST
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        '
+      operationId: updateCustomerVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: customerId
+        description: Identifier of the customer.
+        required: true
+        schema:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+      requestBody:
+        description: Request to update the customer's information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisaC2PUpdateCustomerRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PUpdateCustomerResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+    delete:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Deletes an enrolled customer from Visa Click to Pay.
+      description: 'Deletes all data previously sent to Visa Click to Pay for the specified customer,
+
+        including all linked cards and digital cards.
+
+        Provides a requestTraceId in the response to retrieve the status of this action.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4502 - UNKNOWN_CUSTOMER
+
+        * 4504 - C2P_HAS_PENDING_REQUEST
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        '
+      operationId: deleteCustomerVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: customerId
+        description: Identifier of the customer.
+        required: true
+        schema:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PDeleteCustomerResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /click-to-pay/visa/customers/{customerId}/cards:
+    post:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Enrolls a card for a customer in Visa Click to Pay.
+      description: 'Enrolls a card for an existing customer already registered with Visa Click to Pay,
+
+        and provides a requestTraceId in the response to retrieve the status of this action.
+
+        As part of the request processing, a digital card will be generated for the enrolled card.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4436 - CARD_INACTIVE
+
+        * 4502 - UNKNOWN_CUSTOMER
+
+        * 4503 - CARD_ALREADY_ENROLLED_FOR_C2P
+
+        * 4504 - C2P_HAS_PENDING_REQUEST
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: enrollCardVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: customerId
+        description: Identifier of the customer.
+        required: true
+        schema:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+      requestBody:
+        description: Request to enroll a card for Visa Click to Pay.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisaC2PEnrollCardRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PEnrollCardResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+    put:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Updates the card information in Visa Click to Pay.
+      description: 'Updates existing data for the specified card,
+
+        and provides a requestTraceId in the response to retrieve the status of this action.
+
+        It is recommended to retrieve the latest card information in Click to Pay and populate all data fields,
+
+        including the ones that do not change. Therefore, the complete card information need to be sent again.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4502 - UNKNOWN_CUSTOMER
+
+        * 4504 - C2P_HAS_PENDING_REQUEST
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: updateCardVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: customerId
+        description: Identifier of the customer.
+        required: true
+        schema:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+      requestBody:
+        description: Request to update the card information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisaC2PUpdateCardRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PUpdateCardResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /click-to-pay/visa/customers/{customerId}/cards/{cardToken}:
+    delete:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Deletes an enrolled card from Visa Click to Pay.
+      description: 'Deletes a card (including the digital card) from Visa Click to Pay,
+
+        and provides a requestTraceId in the response to retrieve the status of this action.
+
+
+        Note: Deleting a customer''s last card does not automatically remove the customer from Visa Click to Pay.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4502 - UNKNOWN_CUSTOMER
+
+        * 4504 - C2P_HAS_PENDING_REQUEST
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: deleteCardVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: customerId
+        description: Identifier of the customer.
+        required: true
+        schema:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+      - in: path
+        name: cardToken
+        description: Card token
+        required: true
+        schema:
+          $ref: '#/components/schemas/CardToken'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PDeleteCardResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /click-to-pay/visa/status/{requestTraceId}:
+    get:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Returns the status of a previously triggered action.
+      description: 'Provides the result of the operation corresponding to the requestTraceId from the previously initiated action.
+
+        The requestTraceId is valid for 7 days from the time of receipt.
+
+        If the action fails, the errorDetails will contain the errors received from Visa Click to Pay.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4505 - UNKNOWN_C2P_REQUEST_TRACE_ID
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        '
+      operationId: getRequestStatusVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: requestTraceId
+        description: Identifier of the request trace.
+        required: true
+        schema:
+          $ref: '#/components/schemas/VisaC2PRequestTraceId'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PStatusResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /click-to-pay/visa/customers/{customerId}/cards/delete:
+    post:
+      tags:
+      - Click to Pay Issuer Offered
+      summary: Deletes an enrolled card from Visa Click to Pay.
+      description: 'Deprecated, use `DELETE /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}/cards/{cardToken}` instead.
+
+
+        Deletes a card (including the digital card) from Visa Click to Pay,
+
+        and provides a requestTraceId in the response to retrieve the status of this action.
+
+
+        Note: Deleting a customer''s last card does not automatically remove the customer from Visa Click to Pay.
+
+
+        In addition to standard application error codes, the following codes can be returned:
+
+        * 4430 - UNKNOWN_CARD
+
+        * 4502 - UNKNOWN_CUSTOMER
+
+        * 4504 - C2P_HAS_PENDING_REQUEST
+
+        * 4506 - C2P_NOT_SUPPORTED_BY_ISSUER
+
+        * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD
+
+        '
+      operationId: deleteCardVisaC2P
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      - in: path
+        name: customerId
+        description: Identifier of the customer.
+        required: true
+        schema:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+      requestBody:
+        description: Request to delete a card from Visa Click to Pay.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisaC2PDeleteCardRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisaC2PDeleteCardResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+components:
+  schemas:
+    VisaC2PCustomerLocale:
+      description: The customer's locale.
+      type: string
+      minLength: 2
+      maxLength: 5
+      examples:
+      - de_CH
+    VisaC2PCustomerId:
+      description: Unique identifier for the customer.
+      type: string
+      format: uuid
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    VisaC2PCustomerFirstName:
+      description: The customer's first name.
+      type: string
+      minLength: 1
+      maxLength: 35
+      examples:
+      - Maximilian
+    BankClearingNumber:
+      description: Unique number used to identify each bank agency or branch in the bank directory.
+      type: integer
+      format: int32
+      minimum: 100
+      maximum: 99999
+      examples:
+      - 50000
+    VisaC2PCustomerNationalIdentifier:
+      description: The customer's national identifier.
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          description: The type of identification.
+          type: string
+          enum:
+          - PASSPORT
+          - DRIVING_LICENSE
+          - NATIONAL_IDENTITY
+        value:
+          description: The number of identification.
+          type: string
+          minLength: 1
+          maxLength: 24
+          examples:
+          - A123456
+    VisaC2PRequestStatus:
+      description: The current status of a previously triggered action.
+      type: string
+      enum:
+      - IN_PROGRESS
+      - SUCCESS
+      - FAILURE
+    VisaC2PUpdateCardResponse:
+      description: The response to a card update request.
+      type: object
+      required:
+      - requestTraceId
+      properties:
+        requestTraceId:
+          $ref: '#/components/schemas/VisaC2PRequestTraceId'
+    VisaC2PCustomerStatus:
+      description: The status of the enrolled customer.
+      type: string
+      enum:
+      - ACTIVE
+      - DISABLED
+    VisaC2PStatusResponse:
+      description: The response to a request querying the status of a performed action.
+      type: object
+      required:
+      - status
+      properties:
+        status:
+          $ref: '#/components/schemas/VisaC2PRequestStatus'
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    VisaC2PDeleteCardRequest:
+      description: The request to delete an enrolled card.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+    VisaC2PEnrollCustomerResponse:
+      description: The response to a customer enrolment request.
+      type: object
+      required:
+      - requestTraceId
+      properties:
+        requestTraceId:
+          $ref: '#/components/schemas/VisaC2PRequestTraceId'
+    VisaC2PCustomerLastName:
+      description: The customer's last name.
+      type: string
+      minLength: 1
+      maxLength: 35
+      examples:
+      - Muster
+    VisaC2PEnrolledCard:
+      description: Contains all information about a card and it's enrollment information.
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaC2PCard'
+        digitalCard:
+          $ref: '#/components/schemas/VisaC2PDigitalCard'
+        panReferenceId:
+          description: Unique identifier for the card provided by Visa Click to Pay.
+          type: string
+          minLength: 1
+          maxLength: 32
+        paymentAccountReference:
+          description: Unique payment account reference for the card provided by Visa Click to Pay.
+          type: string
+          minLength: 29
+          maxLength: 50
+        customerStatus:
+          $ref: '#/components/schemas/VisaC2PCustomerStatus'
+    YearMonth:
+      type: object
+      required:
+      - month
+      - year
+      properties:
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    VisaC2PUpdateCustomerResponse:
+      description: The response to a customer update request.
+      type: object
+      required:
+      - requestTraceId
+      properties:
+        requestTraceId:
+          $ref: '#/components/schemas/VisaC2PRequestTraceId'
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
+    VisaC2PCustomerCountryCode:
+      description: The customer's country code in the ISO 3166 (alpha 3) format.
+      type: string
+      minLength: 3
+      maxLength: 3
+      examples:
+      - CHE
+    VisaC2PBillingAddress:
+      description: The card's billing address.
+      type: object
+      required:
+      - city
+      - countryCode
+      - postalCode
+      - addressLine1
+      properties:
+        city:
+          description: The city of the billing address.
+          type: string
+          minLength: 1
+          maxLength: 32
+          examples:
+          - Winterthur
+        state:
+          description: The state of the billing address in the ISO 3166-2 format.
+          type: string
+          minLength: 1
+          maxLength: 3
+          examples:
+          - ZH
+        countryCode:
+          description: The country code of the billing address in the ISO 3166-1-alpha3 format.
+          type: string
+          minLength: 3
+          maxLength: 3
+          examples:
+          - CHE
+        postalCode:
+          description: The postal or zip code of the billing address.
+          type: string
+          minLength: 1
+          maxLength: 9
+          examples:
+          - '8400'
+        addressLine1:
+          description: First line of the billing address.
+          type: string
+          minLength: 1
+          maxLength: 64
+          examples:
+          - Musterstrasse 12
+        addressLine2:
+          description: Second line of the billing address.
+          type: string
+          minLength: 1
+          maxLength: 64
+        addressLine3:
+          description: Third line of the billing address.
+          type: string
+          minLength: 1
+          maxLength: 64
+    VisaC2PDeleteCardResponse:
+      description: The response to a card deletion request.
+      type: object
+      required:
+      - requestTraceId
+      properties:
+        requestTraceId:
+          $ref: '#/components/schemas/VisaC2PRequestTraceId'
+    VisaC2PUpdateCardRequest:
+      description: The request to update an enrolled card.
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaC2PCard'
+    VisaC2PGetCustomerResponse:
+      description: The response received after getting a customer's information.
+      type: object
+      required:
+      - customer
+      - enrolledCards
+      properties:
+        customer:
+          $ref: '#/components/schemas/VisaC2PCustomer'
+        enrolledCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisaC2PEnrolledCard'
+    VisaC2PEnrollingCustomer:
+      description: Contains the information about a customer to be enrolled.
+      type: object
+      required:
+      - email
+      - locale
+      - phone
+      - lastName
+      - firstName
+      - countryCode
+      - customerId
+      properties:
+        email:
+          $ref: '#/components/schemas/VisaC2PCustomerEmail'
+        locale:
+          $ref: '#/components/schemas/VisaC2PCustomerLocale'
+        phone:
+          $ref: '#/components/schemas/VisaC2PCustomerPhone'
+        lastName:
+          $ref: '#/components/schemas/VisaC2PCustomerLastName'
+        firstName:
+          $ref: '#/components/schemas/VisaC2PCustomerFirstName'
+        middleName:
+          $ref: '#/components/schemas/VisaC2PCustomerMiddleName'
+        countryCode:
+          $ref: '#/components/schemas/VisaC2PCustomerCountryCode'
+        customerId:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+        nationalIdentifier:
+          $ref: '#/components/schemas/VisaC2PCustomerNationalIdentifier'
+    VisaC2PCard:
+      description: Contains the information about the card, which must be valid when enrolling for Click to Pay.
+      type: object
+      required:
+      - nameOnCard
+      - billingAddress
+      - cardToken
+      - expiration
+      properties:
+        nameOnCard:
+          description: The name which is printed on the card.
+          type: string
+          minLength: 1
+          maxLength: 120
+          examples:
+          - Peter Schweizer
+        billingAddress:
+          $ref: '#/components/schemas/VisaC2PBillingAddress'
+        cardToken:
+          $ref: '#/components/schemas/CardToken'
+        expiration:
+          $ref: '#/components/schemas/YearMonth'
+    VisaC2PUpdateCustomerRequest:
+      description: The latest information of the enrolled customer.
+      type: object
+      required:
+      - customer
+      properties:
+        customer:
+          $ref: '#/components/schemas/VisaC2PUpdatingCustomer'
+    CardNumber:
+      description: Card number of the card.
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 99999999
+      examples:
+      - 12345678
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    VisaC2PCustomerEmail:
+      description: The customer's email address.
+      type: string
+      minLength: 1
+      maxLength: 256
+      examples:
+      - peter.schweizer@mailbox.org
+    VisaC2PEnrollCardRequest:
+      description: The request to enroll a new card for a customer.
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaC2PCard'
+    VisaC2PUpdatingCustomer:
+      description: Contains the information about the customer update.
+      type: object
+      required:
+      - email
+      - locale
+      - phone
+      - lastName
+      - firstName
+      - countryCode
+      properties:
+        email:
+          $ref: '#/components/schemas/VisaC2PCustomerEmail'
+        locale:
+          $ref: '#/components/schemas/VisaC2PCustomerLocale'
+        phone:
+          $ref: '#/components/schemas/VisaC2PCustomerPhone'
+        lastName:
+          $ref: '#/components/schemas/VisaC2PCustomerLastName'
+        firstName:
+          $ref: '#/components/schemas/VisaC2PCustomerFirstName'
+        middleName:
+          $ref: '#/components/schemas/VisaC2PCustomerMiddleName'
+        countryCode:
+          $ref: '#/components/schemas/VisaC2PCustomerCountryCode'
+        customerStatus:
+          $ref: '#/components/schemas/VisaC2PCustomerStatus'
+        nationalIdentifier:
+          $ref: '#/components/schemas/VisaC2PCustomerNationalIdentifier'
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+    VisaC2PDeleteCustomerResponse:
+      description: The response to a customer delete request.
+      type: object
+      required:
+      - requestTraceId
+      properties:
+        requestTraceId:
+          $ref: '#/components/schemas/VisaC2PRequestTraceId'
+    VisaC2PCustomerPhone:
+      description: The customer's phone number in ITU-T E.164 format, without "+" symbol and leading zeros.
+      type: string
+      minLength: 1
+      maxLength: 15
+      examples:
+      - '41791231212'
+    VisaC2PCustomerMiddleName:
+      description: The customer's middle name.
+      type: string
+      minLength: 1
+      maxLength: 35
+      examples:
+      - Alexander
+    ShortCardId:
+      description: Complex object representing a card consisting of bank clearing number, card number and card type.
+      type: object
+      required:
+      - bankClearingNumber
+      - cardNumber
+      - cardType
+      properties:
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+    VisaC2PRequestTraceId:
+      description: Identifier of the request trace.
+      type: string
+      format: uuid
+    VisaC2PEnrollCustomerRequest:
+      description: Customer and card data to enroll to Visa Click to Pay.
+      type: object
+      required:
+      - customer
+      - card
+      properties:
+        customer:
+          $ref: '#/components/schemas/VisaC2PEnrollingCustomer'
+        card:
+          $ref: '#/components/schemas/VisaC2PCard'
+    VisaC2PEnrollCardResponse:
+      description: The response to a card enrolment request.
+      type: object
+      required:
+      - requestTraceId
+      properties:
+        requestTraceId:
+          $ref: '#/components/schemas/VisaC2PRequestTraceId'
+    VisaC2PDigitalCard:
+      description: The information about the digital card created in the enrollment.
+      type: object
+      required:
+      - tokenReferenceId
+      - tokenRequestorId
+      properties:
+        tokenReferenceId:
+          description: Identifier of the token.
+          type: string
+          minLength: 1
+          maxLength: 50
+        tokenRequestorId:
+          description: Identifier of the token requestor.
+          type: string
+          minLength: 1
+          maxLength: 11
+    VisaC2PCustomer:
+      description: Contains the information about the customer.
+      type: object
+      required:
+      - email
+      - locale
+      - phone
+      - lastName
+      - firstName
+      - countryCode
+      - customerId
+      properties:
+        email:
+          $ref: '#/components/schemas/VisaC2PCustomerEmail'
+        locale:
+          $ref: '#/components/schemas/VisaC2PCustomerLocale'
+        phone:
+          $ref: '#/components/schemas/VisaC2PCustomerPhone'
+        lastName:
+          $ref: '#/components/schemas/VisaC2PCustomerLastName'
+        firstName:
+          $ref: '#/components/schemas/VisaC2PCustomerFirstName'
+        middleName:
+          $ref: '#/components/schemas/VisaC2PCustomerMiddleName'
+        countryCode:
+          $ref: '#/components/schemas/VisaC2PCustomerCountryCode'
+        customerId:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+        customerStatus:
+          $ref: '#/components/schemas/VisaC2PCustomerStatus'
+        nationalIdentifier:
+          $ref: '#/components/schemas/VisaC2PCustomerNationalIdentifier'
+  parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
+    IssuerTraceIdHeader:
+      in: header
+      name: issuer-trace-id
+      description: A issuer‑provided unique trace identifier to correlate the complete flow started by this request.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 26

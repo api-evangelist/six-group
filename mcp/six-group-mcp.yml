@@ -1,0 +1,45 @@
+generated: '2026-07-22'
+method: derived
+status: candidate
+source: openapi/ operations of the open Swiss infrastructure APIs
+note: No official SIX MCP server was found (docs, npm, MCP registries checked 2026-07-22). Candidate
+  tool list derived from the openly documented, unauthenticated Swiss infrastructure APIs; the
+  sales-gated Web API/Bulk API and mTLS-gated debiX/bLink surfaces are excluded as they cannot
+  be served without certificate onboarding.
+server:
+  name: six-group
+  transport: http
+  url: null
+tools:
+- name: getBankmaster
+  description: Bank master data as JSON object.
+  source_operation: openapi/six-group-bankmaster-api-openapi.yml#getBankmaster
+  api: Swiss Bank Master API
+- name: getBankmasterCsv
+  description: Bank master data file in the CSV format.
+  source_operation: openapi/six-group-bankmaster-api-openapi.yml#getBankmasterCsv
+  api: Swiss Bank Master API
+- name: getBankmasterJson
+  description: Bank master data as JSON object.
+  source_operation: openapi/six-group-bankmaster-api-openapi.yml#getBankmasterJson
+  api: Swiss Bank Master API
+- name: getIbanInformation
+  description: GET IBAN information
+  source_operation: openapi/six-group-iban-api-openapi.yml#getIbanInformation
+  api: Swiss Bank Master API (IBAN)
+- name: getServiceStatusJson
+  description: GET Status in JSON Format
+  source_operation: openapi/six-group-status-api-openapi.yml#getServiceStatusJson
+  api: SIC Service Status API
+- name: getClearingDayCalendarJson
+  description: GET Calendar in JSON Format
+  source_operation: openapi/six-group-calendar-api-openapi.yml#getClearingDayCalendarJson
+  api: SIC Clearing Day Calendar API
+- name: getClearingDayCalendarCsv
+  description: GET Calendar File in CSV Format
+  source_operation: openapi/six-group-calendar-api-openapi.yml#getClearingDayCalendarCsv
+  api: SIC Clearing Day Calendar API
+- name: getDetailedSettlementInfo
+  description: Get detailed settlement information for a security.
+  source_operation: openapi/six-group-detailedsettlementinformation-api-openapi.yml#getDetailedSettlementInfo
+  api: Settlement Info Reporting API

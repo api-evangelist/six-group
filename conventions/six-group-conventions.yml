@@ -1,0 +1,49 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.blink.six-group.com/api-reference/introduction.md + repo OpenAPI derivation
+authentication:
+  style: Mutual TLS client certificates across the estate (bLink, debiX, Web API,
+    Bulk API); OAuth 2.0 consent flows layered on top for bLink; four Swiss
+    infrastructure APIs are open/unauthenticated.
+  see: authentication/six-group-authentication.yml
+idempotency:
+  supported: false
+  note: No Idempotency-Key header or idempotency contract is documented in any
+    public SIX spec or docs page (checked debiX, bLink, shared-catalog specs).
+pagination:
+  style: none-documented
+  note: The public specs are lookup/command style (bank master snapshots, status,
+    calendar, card commands) with no cursor/offset pagination parameters.
+formats:
+  request_response: JSON everywhere; bLink also returns XML payloads; Swiss Bank
+    Master and SIC Clearing Day Calendar additionally publish CSV file variants
+    (/bankmaster_V3.csv, /calendar.csv).
+versioning:
+  style: uri-path major versions (v1/v2/v3) + semantic versioning of debiX
+    interface releases; bLink ships annual November major releases in parallel mode.
+  see: lifecycle/six-group-lifecycle.yml
+error_envelope:
+  shapes:
+  - name: BankApiError / ApiError (debiX)
+    fields: [applicationError, errorCode, description, details]
+    detail: Numeric int32 errorCode (e.g. 5001, 4469-4484 documented in release
+      notes) with applicationError name and optional ErrorDetail list.
+  - name: Problem (Swiss Bank Master, SIC Clearing Day Calendar)
+    fields: [type, title, status, detail]
+    detail: RFC 7807-style problem object (type URI like
+      /problems/REQUEST_PARAMETER_VALIDATION_FAILED) served as application/json,
+      not application/problem+json.
+  - name: Error / ApiGwError (Settlement Info Reporting)
+    fields: [errors]
+    detail: Error list envelope plus API-gateway error shape.
+  see: errors/six-group-problem-types.yml
+request_tracing:
+  note: No request-id/correlation header parameters are declared in the published
+    specs.
+rate_limits:
+  note: No rate-limit headers or quotas are documented publicly; 429 responses are
+    declared in the Settlement Info Reporting spec without numeric limits.
+webhooks_events:
+  note: debiX PUSH delivers near real-time card/token/transaction events to issuers
+    over IBM MQ (not HTTP webhooks).
+  see: asyncapi/six-group-debix-push-webhooks.yml

@@ -1,0 +1,31 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.debix.six-group.com/debix-push/introduction
+spec_type: Webhooks
+note: SIX publishes no AsyncAPI document. debiX PUSH is a documented event
+  notification surface delivering structured card-related events to issuers in
+  near real-time over IBM Message Queue (MQ) - an event interface rather than HTTP
+  webhooks. Onboarding is via the issuer's SIX Account Manager.
+transport: IBM MQ
+event_catalog:
+- channel: Token Lifecycle v1
+  description: Updates to token data across the payment ecosystem, e.g. Apple Pay
+    wallet enrolment and other wallet token events.
+  docs: https://docs.debix.six-group.com/debix-push/
+- channel: Transaction v1
+  description: Transaction-related events supplied to issuers for cardholder
+    notification and backend synchronization.
+  docs: https://docs.debix.six-group.com/debix-push/
+- channel: Card Lifecycle v1
+  description: Card-related operations such as card blockings and feature toggle
+    mutations, raised by customer service centers, schemes, merchants, wallet
+    providers, or issuer platforms.
+  docs: https://docs.debix.six-group.com/debix-push/card-lifecycle
+- channel: Authorization Push
+  description: Authorization event push documented under debiX PUSH.
+  docs: https://docs.debix.six-group.com/debix-push/authorization-push
+identifiers: CardToken (equivalent of ShortCardId) and CardInstanceToken
+  (equivalent of CardId) are the tokenized card identifiers carried in events.
+related:
+  push_management_api: openapi/six-group-debix-push-management-beta-api-openapi.yml
+  release_notes: https://docs.debix.six-group.com/debix-push/release-notes

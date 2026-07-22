@@ -1,0 +1,266 @@
+openapi: 3.1.0
+info:
+  title: 'debiX Auth Provider API: Provider-to-SIX 3DS bankmaster API'
+  version: 2.1.9
+  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+servers:
+- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - Internet
+- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - Internet
+- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: PROD - SSFN
+- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: TEST - SSFN
+- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - P2P
+- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - P2P
+tags:
+- name: bankmaster
+  description: '**Bankmaster API**
+
+    All public REST endpoints of the bank master data are located here, such as the bank master data as JSON and downloadable files.
+
+    '
+paths:
+  /bankmaster:
+    get:
+      tags:
+      - bankmaster
+      summary: Bank master data as JSON object.
+      description: Bank master data as JSON object.
+      operationId: getBankmaster
+      parameters:
+      - name: prettyPrint
+        in: query
+        description: Flag indicating whether the response is pretty printed.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Bank master data as JSON object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankMasterJsonResponse'
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    head:
+      tags:
+      - bankmaster
+      summary: Bank master data as JSON object (only head, no content).
+      description: Bank master data as JSON object (only head, no content).
+      operationId: headBankmaster
+      responses:
+        '200':
+          description: Content can be downloaded with GET method.
+        default:
+          description: Unexpected error.
+  /bankmaster_V3.csv:
+    get:
+      tags:
+      - bankmaster
+      summary: Bank master data file in the CSV format.
+      description: Bank master data file in the CSV format, with header row. The CSV file contains UTF-8 encoded characters (important e.g. for umlauts and Euro sign).
+      operationId: getBankmasterCsv
+      responses:
+        '200':
+          description: Bank master data file in the CSV format.
+        default:
+          description: Unexpected error.
+          content:
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    head:
+      tags:
+      - bankmaster
+      summary: Bank master data file in the CSV format (only head, no content).
+      description: Bank master data file in the CSV format, with header row. The CSV file contains UTF-8 encoded characters (important e.g. for umlauts and Euro sign) (only head, no content).
+      operationId: headBankmasterCsv
+      responses:
+        '200':
+          description: Content can be downloaded with GET method.
+        default:
+          description: Unexpected error.
+  /bankmaster.json:
+    get:
+      tags:
+      - bankmaster
+      summary: Bank master data as JSON object.
+      description: Bank master data as a JSON object.
+      operationId: getBankmasterJson
+      parameters:
+      - name: prettyPrint
+        in: query
+        description: Flag indicating whether the response is pretty printed.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Bank master data as JSON object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankMasterJsonResponse'
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    head:
+      tags:
+      - bankmaster
+      summary: Bank master data as JSON object (only head, no content).
+      description: Bank master data as a JSON object (only head, no content).
+      operationId: headBankmasterJson
+      responses:
+        '200':
+          description: Content can be downloaded with GET method.
+        default:
+          description: Unexpected error.
+components:
+  schemas:
+    BankMasterBase:
+      required:
+      - entryType
+      - iid
+      - validOn
+      type: object
+      properties:
+        iid:
+          type: integer
+          description: Each bank / financial institution is identified by an IID (institution identification). IIDs are three to five digits long. QR-IIDs consist exclusively of numbers from 30000 to 31999.
+          example: 9703
+        validOn:
+          type: string
+          description: Date to which the information in a record applies. This date (written as per ISO8601 standard) is identical for all records.
+          format: date
+          example: '2023-01-23'
+        entryType:
+          type: string
+          description: '"New IID/QR-IID" must be used instead of "IID / QR-IID" if entryType is BankMasterConcatenated.'
+          example: BankMaster
+          enum:
+          - BankMasterConcatenated
+          - BankMaster
+      discriminator:
+        propertyName: entryType
+    BankMasterJsonResponse:
+      required:
+      - entries
+      - readTime
+      - totalSize
+      - validOn
+      type: object
+      properties:
+        totalSize:
+          type: integer
+          description: The total count of records in the entries list.
+          example: 42
+        validOn:
+          type: string
+          description: Master data is edited and published on a daily basis. Therefore the data is valid on that exact date only.
+          format: date
+          example: '2023-01-23'
+        readTime:
+          type: string
+          description: Date and time (according to ISO 8601) at which this response was created.
+          format: date-time
+          example: '2023-01-21T10:52:05.1904957+01:00'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BankMasterBase'
+    Problem:
+      required:
+      - detail
+      - status
+      - title
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'An absolute URI that identifies the problem type.
+
+            We may provide human-readable documentation for the problem type in the future, when the URI is dereferenced.
+
+            '
+          format: uri
+          example: /problems/REQUEST_PARAMETER_VALIDATION_FAILED
+          default: about:blank
+        title:
+          type: string
+          description: 'A short, human readable summary of the problem type.
+
+            '
+          example: Request parameter has missing or invalid values
+        status:
+          maximum: 600
+          exclusiveMaximum: true
+          minimum: 100
+          type: integer
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          format: int32
+          example: 400
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: The submitted request contains invalid or missing request parameters which cannot be processed.
+        instance:
+          type: string
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+          format: uri
+          example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
+        metadata:
+          $ref: '#/components/schemas/GenericObject'
+    GenericObject:
+      required:
+      - '@type'
+      - data
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: 'The field "@type" contains a URI/name identifying the type.
+
+            '
+          example: types.example.com/standard/id
+        data:
+          type: object
+          description: 'An object of type @type containing custom fields.
+
+            '
+          example: '-'
+      description: 'Structured type that contains an object and its type.
+
+        '
+      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
+
+        '

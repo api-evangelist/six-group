@@ -1,0 +1,426 @@
+openapi: 3.1.0
+info:
+  title: 'debiX Auth Provider API: Provider-to-SIX 3DS debiX PUSH Management (Beta) API'
+  version: 2.1.9
+  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+servers:
+- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - Internet
+- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - Internet
+- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: PROD - SSFN
+- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
+  description: TEST - SSFN
+- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: PROD - P2P
+- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
+  description: TEST - P2P
+tags:
+- name: debiX PUSH Management (Beta)
+  description: Allows management of debiX PUSH.
+paths:
+  /cards/sync:
+    post:
+      tags:
+      - debiX PUSH Management (Beta)
+      summary: Triggers a synchronization of cards via debiX PUSH.
+      description: "The current state of the cards matching the provided filter criteria are send via debiX PUSH to the bank. The filter may not select more than 150'000 cards. \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4525 - TOO_MANY_RESULTS\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+      operationId: synchronizeCards
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Optional filter criteria to define which cards should be synchronized.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardSynchronizationRequest'
+        required: false
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /push/events:
+    post:
+      tags:
+      - debiX PUSH Management (Beta)
+      summary: Provides information about the push events matching the given filter.
+      description: 'Retrieves events of the last 120 days for a given filter. The list is ordered by event timestamp from newest to oldest.
+
+        '
+      operationId: getPushEvents
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: Request to filter for specific push events.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushEventsSearchRequestFilter'
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PushEventsSearchResponse'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+  /push/events/resend:
+    post:
+      tags:
+      - debiX PUSH Management (Beta)
+      summary: Resends push events via debiX PUSH based on a list of event ids.
+      description: 'Resends push events via debiX PUSH based on a list of event ids.
+
+        '
+      operationId: resendPushEvents
+      parameters:
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/IssuerTraceIdHeader'
+      requestBody:
+        description: List of event ids of events that should be resent.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendPushEventsRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankApiError'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    DateRange:
+      description: Date range lower and upper bounds (both inclusive).
+      type: object
+      properties:
+        from:
+          description: Start date (inclusive).
+          type: string
+          format: date
+          examples:
+          - '2024-01-01'
+        to:
+          description: End date (inclusive).
+          type: string
+          format: date
+          examples:
+          - '2024-12-31'
+    ResendPushEventsRequest:
+      description: List of references to push events that should be resent.
+      type: object
+      required:
+      - eventIds
+      properties:
+        eventIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/PushEventId'
+    PushEventsSearchRequestFilter:
+      description: Contains the filter for the push event search. The date range lower and upper bounds are inclusive.
+      type: object
+      properties:
+        dateRange:
+          $ref: '#/components/schemas/DateRange'
+        pushEventTypes:
+          description: List of push event types.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PushEventType'
+        pushModules:
+          description: List of push modules.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PushModule'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    PushModule:
+      description: 'Module the push event is part of.
+
+        - "TOKEN_LIFECYCLE"
+
+        - "AUTHORIZATION"
+
+        - "CARD_LIFECYCLE"'
+      type: string
+    YearMonth:
+      type: object
+      required:
+      - month
+      - year
+      properties:
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
+    CardStatus:
+      description: The status of the card.
+      type: string
+      enum:
+      - ACTIVE
+      - SUSPENDED
+      - DELETED
+      - SUSPENSION_PENDING
+      - RESUMPTION_PENDING
+      - DELETE_PENDING
+    PushEventReference:
+      description: Reference identifying a push event already sent to the issuer.
+      type: object
+      required:
+      - eventId
+      properties:
+        eventId:
+          $ref: '#/components/schemas/PushEventId'
+        issuerTraceId:
+          description: Issuer trace id is only available in a push event if the issuer's triggering request had provided an issuer trace id.
+          $ref: '#/components/schemas/IssuerTraceId'
+    PushEventId:
+      description: Unique identifier for the push event.
+      type: string
+      format: uuid
+    PushEventsSearchResponse:
+      description: Contains a list of event references. The list is ordered by event timestamp from newest to oldest.
+      type: object
+      required:
+      - eventReferences
+      properties:
+        eventReferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/PushEventReference'
+        totalRecords:
+          description: Total available records.
+          type: integer
+          format: int64
+          examples:
+          - 1021
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    SubCardType:
+      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
+      type: string
+      minLength: 2
+      maxLength: 2
+      examples:
+      - A1
+    CardSynchronizationRequest:
+      description: Request containing optional filter parameters for card synchronization.
+      type: object
+      properties:
+        cardPlasticCode:
+          $ref: '#/components/schemas/CardPlasticCode'
+        expiry:
+          $ref: '#/components/schemas/YearMonth'
+        subCardType:
+          $ref: '#/components/schemas/SubCardType'
+        cardMaterial:
+          $ref: '#/components/schemas/CardMaterial'
+        cardOrderDateTimeRange:
+          $ref: '#/components/schemas/DateTimeRange'
+        status:
+          $ref: '#/components/schemas/CardStatus'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+    DateTimeRange:
+      description: Date-time range lower and upper bounds (both inclusive).
+      type: object
+      properties:
+        from:
+          description: Date-time lower bound (inclusive).
+          type: string
+          format: date-time
+          examples:
+          - '2022-01-01T00:00:00.000+02:00'
+        to:
+          description: Date-time upper bound (inclusive).
+          type: string
+          format: date-time
+          examples:
+          - '2022-12-31T23:59:59.999+02:00'
+    CardPlasticCode:
+      description: Plastic code of the card.
+      type: string
+      minLength: 2
+      maxLength: 2
+      examples:
+      - F0
+    Paging:
+      description: Contains paging properties.
+      type: object
+      properties:
+        pageNumber:
+          description: Page number for paging starting with zero.
+          type: integer
+          format: int32
+          default: 0
+          examples:
+          - 0
+        pageSize:
+          description: Limitation of the page size.
+          type: integer
+          format: int32
+          minimum: 20
+          maximum: 100
+          default: 100
+          examples:
+          - 50
+    CardMaterial:
+      description: Distinguishes physical from virtual cards. VIRTUAL not allowed for bank cards.
+      type: string
+      enum:
+      - PHYSICAL
+      - VIRTUAL
+    IssuerTraceId:
+      description: A issuer‑provided unique trace identifier to correlate the complete flow.
+      type: string
+      minLength: 1
+      maxLength: 26
+    PushEventType:
+      description: 'Type of the push event.
+
+        - "CARD_BLOCKED"
+
+        - "CARD_UNBLOCKED"
+
+        - "CARD_DELETED"
+
+        - "TOKEN_UPDATED"
+
+        - "TOKEN_DECLINED"
+
+        - "AUTHORIZATION_FULFILLED"
+
+        - "AUTHORIZATION_REJECTED"
+
+        - "CARD_ORDERED"
+
+        - "CARD_UPDATED"
+
+        - "CARD_ORDER_REVERSED"
+
+        - "PIN_ORDERED"
+
+        - "PIN_VIEWED"
+
+        - "ISSUE_OCCURED"
+
+        - "CARD_SYNC"'
+      type: string
+  parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
+    IssuerTraceIdHeader:
+      in: header
+      name: issuer-trace-id
+      description: A issuer‑provided unique trace identifier to correlate the complete flow started by this request.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 26

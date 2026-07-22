@@ -1,0 +1,25 @@
+generated: '2026-07-22'
+method: searched
+source: https://github.com/six-group/six-webcomponents
+families:
+- family: SIX Web Components (ui-library)
+  description: Ready-to-use web components implementing the SIX corporate styleguide,
+    published by the six-group GitHub org and maintained as the shared front-end
+    component layer for SIX products.
+  repo: https://github.com/six-group/six-webcomponents
+  loader_libraries:
+  - name: "@six-group/ui-library"
+    registry: npm
+    url: https://www.npmjs.com/package/@six-group/ui-library
+  - name: "@six-group/ui-library-angular"
+    registry: npm
+    url: https://www.npmjs.com/package/@six-group/ui-library-angular
+  - name: "@six-group/ui-library-react"
+    registry: npm
+    url: https://www.npmjs.com/package/@six-group/ui-library-react
+  - name: "@six-group/ui-library-vue"
+    registry: npm
+    url: https://www.npmjs.com/package/@six-group/ui-library-vue
+  notes: Design-system web components (framework wrappers for Angular/React/Vue),
+    not hosted payment/embedded API surfaces. No embeddable API UI components
+    (hosted checkout, drop-in elements) are published for the SIX API products.

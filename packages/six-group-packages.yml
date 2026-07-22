@@ -1,0 +1,42 @@
+generated: '2026-07-22'
+method: searched
+source: npm registry search + github.com/six-group (2026-07-22)
+note: SIX publishes no first-party API client SDKs on public registries - API access
+  to Web API / Bulk API / bLink / debiX is via mTLS-certificated HTTP with no
+  official client libraries. The packages below are the first-party UI web-component
+  libraries from the six-group GitHub org (design-system components, not API clients),
+  so no SDKs rating pointer is emitted.
+packages:
+- language: javascript
+  registry: npm
+  name: "@six-group/ui-library"
+  url: https://www.npmjs.com/package/@six-group/ui-library
+  install: npm install @six-group/ui-library
+  official: true
+  kind: ui-components
+  description: Web components in alignment with the SIX corporate styleguide
+  source: https://github.com/six-group/six-webcomponents
+- language: javascript
+  registry: npm
+  name: "@six-group/ui-library-angular"
+  url: https://www.npmjs.com/package/@six-group/ui-library-angular
+  install: npm install @six-group/ui-library-angular
+  official: true
+  kind: ui-components
+  description: Angular wrapper components for @six-group/ui-library
+- language: javascript
+  registry: npm
+  name: "@six-group/ui-library-react"
+  url: https://www.npmjs.com/package/@six-group/ui-library-react
+  install: npm install @six-group/ui-library-react
+  official: true
+  kind: ui-components
+  description: React wrapper components for @six-group/ui-library
+- language: javascript
+  registry: npm
+  name: "@six-group/ui-library-vue"
+  url: https://www.npmjs.com/package/@six-group/ui-library-vue
+  install: npm install @six-group/ui-library-vue
+  official: true
+  kind: ui-components
+  description: Vue wrapper components for @six-group/ui-library
