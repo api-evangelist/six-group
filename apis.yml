@@ -39,7 +39,7 @@ tags:
 - Switzerland
 created: '2026-07-21'
 modified: '2026-07-22'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: six-group:six-web-api
   name: SIX Web API
