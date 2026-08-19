@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS DetailedSettlementInformation API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DetailedSettlementInformation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get detailed settlement information for a security.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/detailed-settlement-information/securities/:isin",
+            "headers": [
+              {
+                "name": "X-Correlation-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "isin",
+                "value": "CH0038863350",
+                "type": "path",
+                "description": "Identifier of the security."
+              }
+            ]
+          },
+          "docs": "Get detailed settlement information for a security identified by its ISIN."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

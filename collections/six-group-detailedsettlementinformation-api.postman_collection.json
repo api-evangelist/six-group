@@ -1,0 +1,767 @@
+{
+  "item": [
+    {
+      "id": "2853daf6-bc94-4286-bf0f-9cfed8bd879b",
+      "name": "DetailedSettlementInformation",
+      "description": {
+        "content": "Query for detailed settlement information about a security",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a069d8d1-e664-49ae-98a9-f1f64f1dddb8",
+          "name": "Get detailed settlement information for a security.",
+          "request": {
+            "name": "Get detailed settlement information for a security.",
+            "description": {
+              "content": "Get detailed settlement information for a security identified by its ISIN.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "detailed-settlement-information",
+                "securities",
+                ":isin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "isin",
+                  "description": "(Required) Identifier of the security."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Correlation identifier for the request",
+                "key": "X-Correlation-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c03935f2-bc00-4a2e-98ab-e9f492ce662f",
+              "name": "Detailed settlement information for a security.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"95b1b467-bd69-4436-8181-96c16408c230\",\n    \"type\": \"DetailedSettlementInfo\",\n    \"attributes\": {\n      \"isin\": \"US0378331005\",\n      \"limitedPartnership\": false,\n      \"lowPriceSecurity\": false,\n      \"inHouseEligibility\": true,\n      \"t2sEligibility\": false,\n      \"marketSegregated\": true,\n      \"sdrt\": {\n        \"eligibilityCrossBorder\": false,\n        \"eligibilityInHouse\": false,\n        \"inhouseForbidden\": false\n      },\n      \"bookingBasis\": \"UNIT\",\n      \"principalCustodian\": {\n        \"bic\": \"CITIUS33XXX\"\n      },\n      \"custodians\": [\n        {\n          \"bic\": \"MELNUS3PGSS\",\n          \"settlementEligibility\": true,\n          \"marketSegregationCode\": \"NO\",\n          \"bpId\": \"CA100045\",\n          \"name\": \"CIBC MELLON TRUST COMPANY\",\n          \"externalOrdinarioAccount\": \"SXSF1001002\",\n          \"bookingBasis\": \"UNIT\",\n          \"marketGuides\": [\n            {\n              \"marketName\": \"Canada\",\n              \"url\": \"https://sws.six-group.com/private/en/home/market-guide/overview/canada.html\"\n            }\n          ]\n        },\n        {\n          \"bic\": \"MELNUS3PGSS\",\n          \"settlementEligibility\": true,\n          \"marketSegregationCode\": \"NO\",\n          \"sdrtCountry\": [\n            \"CH\"\n          ],\n          \"bpId\": \"DE100408\",\n          \"name\": \"CLEARSTREAM BANKING AG\",\n          \"participantId\": \"7121\",\n          \"accountT2S\": \"DAKV7121000\",\n          \"externalOrdinarioAccount\": \"71210000\",\n          \"settlementEligibilityNotes\": \"ATF:PLS RE-INSTRUCT BY MEANS OF DFP/RFP\",\n          \"bookingBasis\": \"UNIT\",\n          \"marketGuides\": [\n            {\n              \"marketName\": \"Germany\",\n              \"url\": \"https://sws.six-group.com/private/en/home/market-guide/overview/germany-cbf.html\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa477cd9-c4b7-490a-aa52-5af4eb9e7361",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"path \\\"isin\\\" validation failed with error: \\\"failed to match pattern \\\"^[A-Z]{2}([A-Z0-9]){9}[0-9]$\\\" with \\\"CH003886335\\\"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a16d684-a61a-49e9-9512-b88db9511335",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No required TLS certificate was sent\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "723e9fd7-1e2f-46d3-9a70-42bd61884356",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66060f47-3785-4ab7-9765-160287ba57bf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource not found\",\n  \"errorDetail\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"detail\": \"ISIN 'US012071998' does not exist.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ce860d3-91a4-4dad-8dc1-a3c9fd365c01",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds the client ought to wait before making a follow-up request.\nSee RFC7231, §7.1.3 (https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3).\n*Note: might be higher than 'RateLimit-Reset'.*",
+                  "key": "Retry-After",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a225e720-58be-446f-bf18-f3a371a37d17",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server error\",\n  \"errorDetail\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"detail\": \"Something went wrong.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9f72d07-885b-4786-a8d9-2a517939f236",
+              "name": "Not Implemented",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not implemented\",\n  \"errorDetail\": {\n    \"title\": \"Not Implemented\",\n    \"status\": 501,\n    \"detail\": \"This API endpoint is not yet implemented.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a2014ca-c3a3-4cd9-be60-4259ae2ff657",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4752a49e-fa4b-429e-860f-a54064dd55e4",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detailed-settlement-information",
+                    "securities",
+                    ":isin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isin",
+                      "description": "(Required) Identifier of the security."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The upstream server is timing out.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "21d2fcfc-c4a2-4793-98a4-fe056201623e",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS DetailedSettlementInformation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

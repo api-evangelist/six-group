@@ -1,0 +1,715 @@
+{
+  "item": [
+    {
+      "id": "7c10b1de-ca18-4825-8bdb-7f1e5fc97d82",
+      "name": "debiX PUSH Management (Beta)",
+      "description": {
+        "content": "Allows management of debiX PUSH.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d03779e-faa8-4405-829b-9440a481ff34",
+          "name": "Triggers a synchronization of cards via debiX PUSH.",
+          "request": {
+            "name": "Triggers a synchronization of cards via debiX PUSH.",
+            "description": {
+              "content": "The current state of the cards matching the provided filter criteria are send via debiX PUSH to the bank. The filter may not select more than 150'000 cards. \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4525 - TOO_MANY_RESULTS\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                "sync"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardPlasticCode\": \"<string>\",\n  \"expiry\": {\n    \"month\": \"<string>\",\n    \"year\": \"<string>\"\n  },\n  \"subCardType\": \"<string>\",\n  \"cardMaterial\": \"<string>\",\n  \"cardOrderDateTimeRange\": {\n    \"from\": \"<dateTime>\",\n    \"to\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"cardType\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e1c4bff-045a-45d0-9afe-768e4bb544fc",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardPlasticCode\": \"F0\",\n  \"expiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"subCardType\": \"A1\",\n  \"cardMaterial\": \"VIRTUAL\",\n  \"cardOrderDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"SUSPENDED\",\n  \"cardType\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "852c4c5c-2c40-49c8-873d-ea6e36364eca",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardPlasticCode\": \"F0\",\n  \"expiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"subCardType\": \"A1\",\n  \"cardMaterial\": \"VIRTUAL\",\n  \"cardOrderDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"SUSPENDED\",\n  \"cardType\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c876ba66-f7d7-454e-bb3f-78372e852bf0",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardPlasticCode\": \"F0\",\n  \"expiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"subCardType\": \"A1\",\n  \"cardMaterial\": \"VIRTUAL\",\n  \"cardOrderDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"SUSPENDED\",\n  \"cardType\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0220328-9832-4527-bfb0-c5bc0a87f558",
+          "name": "Provides information about the push events matching the given filter.",
+          "request": {
+            "name": "Provides information about the push events matching the given filter.",
+            "description": {
+              "content": "Retrieves events of the last 120 days for a given filter. The list is ordered by event timestamp from newest to oldest.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "push",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateRange\": {\n    \"from\": \"<date>\",\n    \"to\": \"<date>\"\n  },\n  \"pushEventTypes\": [\n    \"<string>\"\n  ],\n  \"pushModules\": [\n    \"<string>\"\n  ],\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a417d8b-445c-412f-924a-210716a37eab",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "push",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"pushEventTypes\": [\n    \"string\"\n  ],\n  \"pushModules\": [\n    \"string\"\n  ],\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eventReferences\": [\n    {\n      \"eventId\": \"ae32481f-3516-4861-b379-551cda7f3464\",\n      \"issuerTraceId\": \"strin\"\n    },\n    {\n      \"eventId\": \"ebe0463a-d0dc-635c-38a3-2314dfc7d2f7\",\n      \"issuerTraceId\": \"str\"\n    }\n  ],\n  \"totalRecords\": 1021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab6bc739-3b20-408b-af2d-18abe720b770",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "push",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"pushEventTypes\": [\n    \"string\"\n  ],\n  \"pushModules\": [\n    \"string\"\n  ],\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e818e766-af8e-4c7c-a7da-60f7ba7daac8",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "push",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"pushEventTypes\": [\n    \"string\"\n  ],\n  \"pushModules\": [\n    \"string\"\n  ],\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a6ded45-eed8-4508-be81-9535957c47bb",
+          "name": "Resends push events via debiX PUSH based on a list of event ids.",
+          "request": {
+            "name": "Resends push events via debiX PUSH based on a list of event ids.",
+            "description": {
+              "content": "Resends push events via debiX PUSH based on a list of event ids.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "push",
+                "events",
+                "resend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53d55476-8740-4629-81e4-53cbe99363ac",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "push",
+                    "events",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"d3a1a332-a6c9-6282-86ca-bcb37d35f647\",\n    \"be789cba-7e86-f0af-beee-fc290ea34761\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d3773807-91f3-4ca9-ad4d-d5bd938715b4",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "push",
+                    "events",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"d3a1a332-a6c9-6282-86ca-bcb37d35f647\",\n    \"be789cba-7e86-f0af-beee-fc290ea34761\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cdc6ba0-4d83-48af-85c2-95ec2e1c3dfa",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "push",
+                    "events",
+                    "resend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventIds\": [\n    \"d3a1a332-a6c9-6282-86ca-bcb37d35f647\",\n    \"be789cba-7e86-f0af-beee-fc290ea34761\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "42a76640-7288-4d17-8f88-d82626d0ab7a",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS debiX PUSH Management (Beta) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

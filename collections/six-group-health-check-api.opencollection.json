@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Health check API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health check",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check using GET method.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/healthcheck",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a status message of the system."
+        },
+        {
+          "info": {
+            "name": "Health check using POST method.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/healthcheck",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the request body. This operation will not modify the system."
+        },
+        {
+          "info": {
+            "name": "Health check using PUT method.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/healthcheck",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the request body. This operation will not modify the system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

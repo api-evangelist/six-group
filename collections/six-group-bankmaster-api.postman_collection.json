@@ -1,0 +1,636 @@
+{
+  "item": [
+    {
+      "id": "efe964f8-8251-45a5-97e1-ccab5fe17dcc",
+      "name": "bankmaster",
+      "description": {
+        "content": "**Bankmaster API**\nAll public REST endpoints of the bank master data are located here, such as the bank master data as JSON and downloadable files.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef18b4e5-6dbd-4de4-b2ac-f9a38170e5a7",
+          "name": "Bank master data as JSON object.",
+          "request": {
+            "name": "Bank master data as JSON object.",
+            "description": {
+              "content": "Bank master data as JSON object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bankmaster"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "prettyPrint",
+                  "value": "true",
+                  "description": "Flag indicating whether the response is pretty printed."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ed401a8-1bea-431f-971f-f82fa29835e5",
+              "name": "Bank master data as JSON object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"entryType\": \"BankMaster\",\n      \"iid\": 9703,\n      \"validOn\": \"2023-01-23\"\n    },\n    {\n      \"entryType\": \"BankMaster\",\n      \"iid\": 9703,\n      \"validOn\": \"2023-01-23\"\n    }\n  ],\n  \"readTime\": \"2023-01-21T10:52:05.1904957+01:00\",\n  \"totalSize\": 42,\n  \"validOn\": \"2023-01-23\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9aebcb2a-b8a6-4f5e-8d5a-e3f3a6508ce2",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The submitted request contains invalid or missing request parameters which cannot be processed.\",\n  \"status\": 400,\n  \"title\": \"Request parameter has missing or invalid values\",\n  \"type\": \"about:blank\",\n  \"instance\": \"http://CqDmMkLIldXKYXZtbbUPFUlINjEtcH.yygeA9uCsyP9Md6vhkdgnyd,mJKzMcWdZmzxXDAUL6YaSQr4nOA29T\",\n  \"metadata\": {\n    \"@type\": \"types.example.com/standard/id\",\n    \"data\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49a2662a-3828-43b1-8810-cafe24cffbb9",
+          "name": "Bank master data as JSON object (only head, no content).",
+          "request": {
+            "name": "Bank master data as JSON object (only head, no content).",
+            "description": {
+              "content": "Bank master data as JSON object (only head, no content).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bankmaster"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8864f70a-22e6-4a08-99d7-361d95d3be99",
+              "name": "Content can be downloaded with GET method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed0044c4-cfe8-42c0-9a5b-927fac474c36",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93269165-d524-4bad-8fc0-3cfcede76885",
+          "name": "Bank master data file in the CSV format.",
+          "request": {
+            "name": "Bank master data file in the CSV format.",
+            "description": {
+              "content": "Bank master data file in the CSV format, with header row. The CSV file contains UTF-8 encoded characters (important e.g. for umlauts and Euro sign).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bankmaster_V3.csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f58abf82-76ed-4981-b3af-c34fb9051b99",
+              "name": "Bank master data file in the CSV format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster_V3.csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64e39bf6-7829-4b89-bd3f-646cbc3cdcd4",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster_V3.csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d48c928d-950e-45bb-92fa-91ae408e2a74",
+          "name": "Bank master data file in the CSV format (only head, no content).",
+          "request": {
+            "name": "Bank master data file in the CSV format (only head, no content).",
+            "description": {
+              "content": "Bank master data file in the CSV format, with header row. The CSV file contains UTF-8 encoded characters (important e.g. for umlauts and Euro sign) (only head, no content).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bankmaster_V3.csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2c9aa72-03ca-4d52-aa84-1cdc4afd24e2",
+              "name": "Content can be downloaded with GET method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster_V3.csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98896a9a-d205-48d1-b8b9-c86fb6c9880c",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster_V3.csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90754ac5-645c-43bd-a5ec-d169c144a3bd",
+          "name": "Bank master data as JSON object.",
+          "request": {
+            "name": "Bank master data as JSON object.",
+            "description": {
+              "content": "Bank master data as a JSON object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bankmaster.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "prettyPrint",
+                  "value": "true",
+                  "description": "Flag indicating whether the response is pretty printed."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71b9d98c-e1a0-48a3-9583-89eb80f2632d",
+              "name": "Bank master data as JSON object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"entryType\": \"BankMaster\",\n      \"iid\": 9703,\n      \"validOn\": \"2023-01-23\"\n    },\n    {\n      \"entryType\": \"BankMaster\",\n      \"iid\": 9703,\n      \"validOn\": \"2023-01-23\"\n    }\n  ],\n  \"readTime\": \"2023-01-21T10:52:05.1904957+01:00\",\n  \"totalSize\": 42,\n  \"validOn\": \"2023-01-23\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63774cc7-5c5f-4220-9e97-a0c92f896877",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The submitted request contains invalid or missing request parameters which cannot be processed.\",\n  \"status\": 400,\n  \"title\": \"Request parameter has missing or invalid values\",\n  \"type\": \"about:blank\",\n  \"instance\": \"http://CqDmMkLIldXKYXZtbbUPFUlINjEtcH.yygeA9uCsyP9Md6vhkdgnyd,mJKzMcWdZmzxXDAUL6YaSQr4nOA29T\",\n  \"metadata\": {\n    \"@type\": \"types.example.com/standard/id\",\n    \"data\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a190fca-7df9-4b8a-bfb3-7b4e1ac07274",
+          "name": "Bank master data as JSON object (only head, no content).",
+          "request": {
+            "name": "Bank master data as JSON object (only head, no content).",
+            "description": {
+              "content": "Bank master data as a JSON object (only head, no content).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bankmaster.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bdc1ac8-526b-48c4-98e9-fc69826c9521",
+              "name": "Content can be downloaded with GET method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f65e61b2-2cf4-455d-a796-37f19c8b5614",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bankmaster.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1d60d76f-fad0-4432-bb94-81f2d6ecb458",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS bankmaster API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

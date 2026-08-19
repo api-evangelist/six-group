@@ -1,0 +1,358 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "3DS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Registers the card for 3DS.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/3ds",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If a card with the provided card data is not yet registered for 3DS, the registration will take place.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4435 - CARD_ALREADY_REGISTERED_FOR_THREE_DS\n* 4436 - CARD_INACTIVE\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4467 - THREE_DS_PASSWORD_NOT_ALLOWED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Updates the 3DS data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/3ds",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If the request contains new information, the 3DS data will be updated for the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Deregisters the given card from 3DS and deletes the corresponding data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/3ds",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "If a card with the provided identifier is known to debiX, it will be deregistered from 3DS and the corresponding data deleted.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns the 3DS details for the given card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/3ds/details",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the details for the current 3DS registration.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4457 - CARD_NOT_REGISTERED_FOR_THREE_DS\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Orders an online One-Time-Registration-Code (OTRC).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/otrc",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "Get an online One-Time-Registration-Code (OTRC) for the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Orders an One-Time-Registration-Code (OTRC) via datamailer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/otrc-datamailer",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get a datamailer with the One-Time-Registration-Code (OTRC) for the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Registers the card for 3DS.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/3ds",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf a card with the provided card data is not yet registered for 3DS, the registration will take place.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4435 - CARD_ALREADY_REGISTERED_FOR_THREE_DS\n* 4436 - CARD_INACTIVE\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4467 - THREE_DS_PASSWORD_NOT_ALLOWED\n* 4483 - OPERA"
+        },
+        {
+          "info": {
+            "name": "Updates the 3DS data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/3ds",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf the request contains new information, the 3DS data will be updated for the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Deregisters a card from 3DS and deletes the corresponding data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/3ds/delete",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `DELETE /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf a card with the provided identifier is known to debiX, it will be deregistered from 3DS and the corresponding data deleted.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns the 3DS details for this card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/3ds/details",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/3ds/details` instead.\n\nReturns the details for the current 3DS registration.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4457 - CARD_NOT_REGISTERED_FOR_THREE_DS\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Orders an online One-Time-Registration-Code (OTRC).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/otrc",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/cards/{cardToken}/otrc` instead.\n\nGet an online One-Time-Registration-Code (OTRC) for the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Orders an One-Time-Registration-Code (OTRC) via datamailer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/otrc-datamailer",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/cards/{cardToken}/otrc-datamailer` instead.\n\nGet a datamailer with the One-Time-Registration-Code (OTRC) for the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

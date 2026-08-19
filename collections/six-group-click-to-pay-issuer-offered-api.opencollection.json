@@ -1,0 +1,297 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Click to Pay Issuer Offered API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Click to Pay Issuer Offered",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiates a new customer enrollment for Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts the process of enrolling a new customer and a card for Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of the enrollment.\nAs part of the request processing, a digital card will be generated for the enrolled card.\nThe status of the customer is set to ACTIVE after a successful enrollment.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4436 - CARD_INACTIVE\n* 4501 - CUSTOMER_ALREADY_ENROLLE"
+        },
+        {
+          "info": {
+            "name": "Provides the customer's information along with the enrolled cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ]
+          },
+          "docs": "Retrieves all information about the customer stored in Visa Click to Pay, including their enrolled cards.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4502 - UNKNOWN_CUSTOMER\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Updates the customer's information in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrites existing data for the specified customer,\nand provides a requestTraceId in the response to retrieve the status of this action.\nIt is recommended to retrieve the latest customer information in Click to Pay and populate all data fields,\nincluding the ones that do not change. Therefore, the complete customer information need to be sent again if the customer is ACTIVE.\nIf the status in the request is set to DISABLED, then the update will not be performed and Click to Pay will give an erro"
+        },
+        {
+          "info": {
+            "name": "Deletes an enrolled customer from Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ]
+          },
+          "docs": "Deletes all data previously sent to Visa Click to Pay for the specified customer,\nincluding all linked cards and digital cards.\nProvides a requestTraceId in the response to retrieve the status of this action.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Enrolls a card for a customer in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrolls a card for an existing customer already registered with Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of this action.\nAs part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4436 - CARD_INACTIVE\n* 4502 - UNKNOWN_CUSTOMER\n* 4503 - CARD_ALREADY_ENROLLED_FOR_C2P\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2"
+        },
+        {
+          "info": {
+            "name": "Updates the card information in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates existing data for the specified card,\nand provides a requestTraceId in the response to retrieve the status of this action.\nIt is recommended to retrieve the latest card information in Click to Pay and populate all data fields,\nincluding the ones that do not change. Therefore, the complete card information need to be sent again.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_RE"
+        },
+        {
+          "info": {
+            "name": "Deletes an enrolled card from Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId/cards/:cardToken",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              },
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "Deletes a card (including the digital card) from Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of this action.\n\nNote: Deleting a customer's last card does not automatically remove the customer from Visa Click to Pay.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_B"
+        },
+        {
+          "info": {
+            "name": "Returns the status of a previously triggered action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/status/:requestTraceId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestTraceId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the request trace."
+              }
+            ]
+          },
+          "docs": "Provides the result of the operation corresponding to the requestTraceId from the previously initiated action.\nThe requestTraceId is valid for 7 days from the time of receipt.\nIf the action fails, the errorDetails will contain the errors received from Visa Click to Pay.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4505 - UNKNOWN_C2P_REQUEST_TRACE_ID\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Deletes an enrolled card from Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId/cards/delete",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `DELETE /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}/cards/{cardToken}` instead.\n\nDeletes a card (including the digital card) from Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of this action.\n\nNote: Deleting a customer's last card does not automatically remove the customer from Visa Click to Pay.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4502 - UNKN"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

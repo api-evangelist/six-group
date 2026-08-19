@@ -1,0 +1,388 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Alias Directory (Beta) API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alias Directory (Beta)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates an alias in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an alias in the Alias Directory and associates the specified cards with the alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4521 - ALIAS_ALREADY_EXISTS\n* 4523 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Retrieves an alias from the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ]
+          },
+          "docs": "Retrieves information about a specific alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Updates an alias in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the information associated with the alias such as the identification, profile, or consent.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Deletes an alias in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ]
+          },
+          "docs": "Deletes a specified alias which entails a deletion of the corresponding Visa Alias Directory card registrations.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Updates the status of an alias in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status of the specified alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Retrieves all the cards corresponding to an alias.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ]
+          },
+          "docs": "Retrieves all the cards corresponding to the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Registers a card for Visa Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers the given card for Visa Alias Directory under the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4423 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Updates a card in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the given card for Visa Alias Directory under the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4423 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Retrieves a card registered in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards/:cardToken",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              },
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific card corresponding to the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Deletes a card from the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards/:cardToken",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              },
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "Deletes the given card from the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Retrieves a card registered in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards/retrieve",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards/retrieve` instead.\n\nRetrieves a specific card corresponding to the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Deletes a card from the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards/delete",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards/delete` instead.\n\nDeletes the given card from the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

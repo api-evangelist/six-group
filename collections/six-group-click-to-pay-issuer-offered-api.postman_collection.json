@@ -1,0 +1,3337 @@
+{
+  "item": [
+    {
+      "id": "15b37cfb-dd1a-491b-93d5-58eb83ca64aa",
+      "name": "Click to Pay Issuer Offered",
+      "description": {
+        "content": "Visa Click to Pay Issuer Offered operations to enroll and manage cards for Visa Click to Pay.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68963706-1042-41c1-a5b5-24f931ef2396",
+          "name": "Initiates a new customer enrollment for Visa Click to Pay.",
+          "request": {
+            "name": "Initiates a new customer enrollment for Visa Click to Pay.",
+            "description": {
+              "content": "Starts the process of enrolling a new customer and a card for Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of the enrollment.\nAs part of the request processing, a digital card will be generated for the enrolled card.\nThe status of the customer is set to ACTIVE after a successful enrollment.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4436 - CARD_INACTIVE\n* 4501 - CUSTOMER_ALREADY_ENROLLED_FOR_C2P\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"customerId\": \"<uuid>\",\n    \"middleName\": \"<string>\",\n    \"nationalIdentifier\": {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"card\": {\n    \"nameOnCard\": \"<string>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\"\n    },\n    \"cardToken\": \"<string>\",\n    \"expiration\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "86dff50d-3598-4f2b-92fe-e499b940f506",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"customerId\": \"a7d2d115-1dd1-615e-6e2d-401cf4976602\",\n    \"middleName\": \"Alexander\",\n    \"nationalIdentifier\": {\n      \"type\": \"DRIVING_LICENSE\",\n      \"value\": \"A123456\"\n    }\n  },\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestTraceId\": \"4f425794-3d9b-a946-fe97-38fb08edab01\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d09f4808-c107-4a56-95fb-ca10ddcfc323",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"customerId\": \"a7d2d115-1dd1-615e-6e2d-401cf4976602\",\n    \"middleName\": \"Alexander\",\n    \"nationalIdentifier\": {\n      \"type\": \"DRIVING_LICENSE\",\n      \"value\": \"A123456\"\n    }\n  },\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3e7259d-4e60-4912-a222-ea776b3105bc",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"customerId\": \"a7d2d115-1dd1-615e-6e2d-401cf4976602\",\n    \"middleName\": \"Alexander\",\n    \"nationalIdentifier\": {\n      \"type\": \"DRIVING_LICENSE\",\n      \"value\": \"A123456\"\n    }\n  },\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e4a5350-c867-4ff5-b22b-7b3e9104b5be",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"customerId\": \"a7d2d115-1dd1-615e-6e2d-401cf4976602\",\n    \"middleName\": \"Alexander\",\n    \"nationalIdentifier\": {\n      \"type\": \"DRIVING_LICENSE\",\n      \"value\": \"A123456\"\n    }\n  },\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e48dc60-0e95-4750-a860-690591b34462",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"customerId\": \"a7d2d115-1dd1-615e-6e2d-401cf4976602\",\n    \"middleName\": \"Alexander\",\n    \"nationalIdentifier\": {\n      \"type\": \"DRIVING_LICENSE\",\n      \"value\": \"A123456\"\n    }\n  },\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eae7a0a2-4ffe-45fb-a113-44ab49763677",
+          "name": "Provides the customer's information along with the enrolled cards.",
+          "request": {
+            "name": "Provides the customer's information along with the enrolled cards.",
+            "description": {
+              "content": "Retrieves all information about the customer stored in Visa Click to Pay, including their enrolled cards.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4502 - UNKNOWN_CUSTOMER\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of the customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b85d7d43-d32d-4045-ad5f-81f593246fed",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"customerId\": \"9116ebdc-b035-4854-0353-8f65dcb5032a\",\n    \"middleName\": \"Alexander\",\n    \"customerStatus\": \"ACTIVE\",\n    \"nationalIdentifier\": {\n      \"type\": \"DRIVING_LICENSE\",\n      \"value\": \"A123456\"\n    }\n  },\n  \"enrolledCards\": [\n    {\n      \"card\": {\n        \"nameOnCard\": \"Peter Schweizer\",\n        \"billingAddress\": {\n          \"city\": \"Winterthur\",\n          \"countryCode\": \"CHE\",\n          \"postalCode\": \"8400\",\n          \"addressLine1\": \"Musterstrasse 12\",\n          \"state\": \"ZH\",\n          \"addressLine2\": \"string\",\n          \"addressLine3\": \"string\"\n        },\n        \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n        \"expiration\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        }\n      },\n      \"digitalCard\": {\n        \"tokenReferenceId\": \"string\",\n        \"tokenRequestorId\": \"string\"\n      },\n      \"panReferenceId\": \"string\",\n      \"paymentAccountReference\": \"stringstringstringstringstring\",\n      \"customerStatus\": \"ACTIVE\"\n    },\n    {\n      \"card\": {\n        \"nameOnCard\": \"Peter Schweizer\",\n        \"billingAddress\": {\n          \"city\": \"Winterthur\",\n          \"countryCode\": \"CHE\",\n          \"postalCode\": \"8400\",\n          \"addressLine1\": \"Musterstrasse 12\",\n          \"state\": \"ZH\",\n          \"addressLine2\": \"string\",\n          \"addressLine3\": \"string\"\n        },\n        \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n        \"expiration\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        }\n      },\n      \"digitalCard\": {\n        \"tokenReferenceId\": \"string\",\n        \"tokenRequestorId\": \"strin\"\n      },\n      \"panReferenceId\": \"str\",\n      \"paymentAccountReference\": \"stringstringstringstringstring\",\n      \"customerStatus\": \"DISABLED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acc08b51-a02b-41f2-afcf-0c5dce9f2970",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eca61db6-708f-44d0-b5f7-8fc48f9755fa",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbbe00c7-3c3e-4bcc-ae0a-0b1f9a7501df",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc2fc76f-0775-4d71-b8f0-9b746d8fa0c9",
+          "name": "Updates the customer's information in Visa Click to Pay.",
+          "request": {
+            "name": "Updates the customer's information in Visa Click to Pay.",
+            "description": {
+              "content": "Overwrites existing data for the specified customer,\nand provides a requestTraceId in the response to retrieve the status of this action.\nIt is recommended to retrieve the latest customer information in Click to Pay and populate all data fields,\nincluding the ones that do not change. Therefore, the complete customer information need to be sent again if the customer is ACTIVE.\nIf the status in the request is set to DISABLED, then the update will not be performed and Click to Pay will give an error.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of the customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"customerStatus\": \"<string>\",\n    \"nationalIdentifier\": {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6e9eed4-eadf-48fe-a398-bf608340d300",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"middleName\": \"Alexander\",\n    \"customerStatus\": \"DISABLED\",\n    \"nationalIdentifier\": {\n      \"type\": \"PASSPORT\",\n      \"value\": \"A123456\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestTraceId\": \"e56e7658-b389-01cb-b3fd-3dadd354d60b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7aa963e4-ef1a-48f6-86aa-fecf3beb26ea",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"middleName\": \"Alexander\",\n    \"customerStatus\": \"DISABLED\",\n    \"nationalIdentifier\": {\n      \"type\": \"PASSPORT\",\n      \"value\": \"A123456\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8e016ae-204a-4365-bfbb-ab7c91ceaa40",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"middleName\": \"Alexander\",\n    \"customerStatus\": \"DISABLED\",\n    \"nationalIdentifier\": {\n      \"type\": \"PASSPORT\",\n      \"value\": \"A123456\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e40ffd12-863d-4673-9915-a72cd73a5f9c",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"middleName\": \"Alexander\",\n    \"customerStatus\": \"DISABLED\",\n    \"nationalIdentifier\": {\n      \"type\": \"PASSPORT\",\n      \"value\": \"A123456\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9754ae1-0120-490e-98d9-34d1482a9935",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"email\": \"peter.schweizer@mailbox.org\",\n    \"locale\": \"de_CH\",\n    \"phone\": \"41791231212\",\n    \"lastName\": \"Muster\",\n    \"firstName\": \"Maximilian\",\n    \"countryCode\": \"CHE\",\n    \"middleName\": \"Alexander\",\n    \"customerStatus\": \"DISABLED\",\n    \"nationalIdentifier\": {\n      \"type\": \"PASSPORT\",\n      \"value\": \"A123456\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0db16b15-172e-4779-87cc-972585e5ac9f",
+          "name": "Deletes an enrolled customer from Visa Click to Pay.",
+          "request": {
+            "name": "Deletes an enrolled customer from Visa Click to Pay.",
+            "description": {
+              "content": "Deletes all data previously sent to Visa Click to Pay for the specified customer,\nincluding all linked cards and digital cards.\nProvides a requestTraceId in the response to retrieve the status of this action.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of the customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c624c7d9-371f-4030-aa5d-b50364cd54a5",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestTraceId\": \"ee5f8516-7fa9-b709-ed26-0e85a918674e\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5be38c54-1ab3-4f9a-8548-f48bf0aa16e0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9aa1c174-59f5-456c-99b8-80f67448e73f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb397d96-9214-40f3-b780-04590aec249a",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16e8ade8-aa74-4dc4-acbf-f4e121628c32",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77a60279-42d5-4fe9-b17a-8df2ac9cdf5e",
+          "name": "Enrolls a card for a customer in Visa Click to Pay.",
+          "request": {
+            "name": "Enrolls a card for a customer in Visa Click to Pay.",
+            "description": {
+              "content": "Enrolls a card for an existing customer already registered with Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of this action.\nAs part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4436 - CARD_INACTIVE\n* 4502 - UNKNOWN_CUSTOMER\n* 4503 - CARD_ALREADY_ENROLLED_FOR_C2P\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "customers",
+                ":customerId",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of the customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"<string>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\"\n    },\n    \"cardToken\": \"<string>\",\n    \"expiration\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a83a13d-b3ce-45f3-a259-a4098aaa0066",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestTraceId\": \"135f4724-a915-2939-e633-54149cf2141c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae6a83e0-666e-4ae8-bb02-6913d14950cc",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bf9b959-520f-440a-8c69-5a6ff116f94b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "678bf450-d0d0-453e-a690-5ec018303c2b",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "081fa045-1fe2-426f-a83f-77b5e6fba841",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d67a9ee-82a2-4c04-967d-a3a4ee0cdb35",
+          "name": "Updates the card information in Visa Click to Pay.",
+          "request": {
+            "name": "Updates the card information in Visa Click to Pay.",
+            "description": {
+              "content": "Updates existing data for the specified card,\nand provides a requestTraceId in the response to retrieve the status of this action.\nIt is recommended to retrieve the latest card information in Click to Pay and populate all data fields,\nincluding the ones that do not change. Therefore, the complete card information need to be sent again.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "customers",
+                ":customerId",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of the customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"<string>\",\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"state\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\"\n    },\n    \"cardToken\": \"<string>\",\n    \"expiration\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a583b6c-5a73-40b3-868a-d3319bb26dfc",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestTraceId\": \"86ef4db5-53c1-4f6d-2eb6-c2617d321ee1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8603c015-26c4-4e69-ba57-0d47f88cfee5",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5394051d-dde2-4c9a-8c68-8a8c0f74321c",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1a4d86a-0a49-4b54-bdd1-db415d751b09",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efb3721c-fd70-4855-8fbd-da8a6fe6e246",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"billingAddress\": {\n      \"city\": \"Winterthur\",\n      \"countryCode\": \"CHE\",\n      \"postalCode\": \"8400\",\n      \"addressLine1\": \"Musterstrasse 12\",\n      \"state\": \"ZH\",\n      \"addressLine2\": \"string\",\n      \"addressLine3\": \"string\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"expiration\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "361b2afb-ce3c-480f-9144-2f7310bb06fc",
+          "name": "Deletes an enrolled card from Visa Click to Pay.",
+          "request": {
+            "name": "Deletes an enrolled card from Visa Click to Pay.",
+            "description": {
+              "content": "Deletes a card (including the digital card) from Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of this action.\n\nNote: Deleting a customer's last card does not automatically remove the customer from Visa Click to Pay.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "customers",
+                ":customerId",
+                "cards",
+                ":cardToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of the customer."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f55363e3-3c6f-44ee-9862-9fcca7fcb495",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestTraceId\": \"0f895073-3677-cfe0-8e73-b85b66fb43c1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1672686-4f5d-4127-9128-6aba7233e13d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f1d1efa-bdb5-42cc-b89b-001beaacc250",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "475aa41c-a870-4884-9644-4204372f6c74",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e88e8e45-4d24-4638-8a92-868819ec3df7",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7deeffc-f40d-4f1d-9ecc-7b5211a6834a",
+          "name": "Returns the status of a previously triggered action.",
+          "request": {
+            "name": "Returns the status of a previously triggered action.",
+            "description": {
+              "content": "Provides the result of the operation corresponding to the requestTraceId from the previously initiated action.\nThe requestTraceId is valid for 7 days from the time of receipt.\nIf the action fails, the errorDetails will contain the errors received from Visa Click to Pay.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4505 - UNKNOWN_C2P_REQUEST_TRACE_ID\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "status",
+                ":requestTraceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "requestTraceId",
+                  "description": "(Required) Identifier of the request trace."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f35551c6-8e2c-42dd-9a59-15cefe1c73dd",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "status",
+                    ":requestTraceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "requestTraceId",
+                      "description": "(Required) Identifier of the request trace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"FAILURE\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c18981c-d79c-4761-9365-a3bb86975970",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "status",
+                    ":requestTraceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "requestTraceId",
+                      "description": "(Required) Identifier of the request trace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "726a97b9-cd73-41a1-a6f4-c7ec689e7168",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "status",
+                    ":requestTraceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "requestTraceId",
+                      "description": "(Required) Identifier of the request trace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae015f74-1338-4e9c-baf8-d3a76a34459a",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "status",
+                    ":requestTraceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "requestTraceId",
+                      "description": "(Required) Identifier of the request trace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9db60366-85de-4b14-856b-c293e002451c",
+          "name": "Deletes an enrolled card from Visa Click to Pay.",
+          "request": {
+            "name": "Deletes an enrolled card from Visa Click to Pay.",
+            "description": {
+              "content": "Deprecated, use `DELETE /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}/cards/{cardToken}` instead.\n\nDeletes a card (including the digital card) from Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of this action.\n\nNote: Deleting a customer's last card does not automatically remove the customer from Visa Click to Pay.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "click-to-pay",
+                "visa",
+                "customers",
+                ":customerId",
+                "cards",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of the customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b66aa82b-6aba-4829-a34c-c32bed7b28a5",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestTraceId\": \"0f895073-3677-cfe0-8e73-b85b66fb43c1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1efb6036-6805-4fa3-9104-a9e1e4a11a92",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fba46206-d2ca-4338-be2c-c6d8c7e1291f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1d67fe6-e399-447e-bca5-cf03b3cb706a",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8acb8a64-3739-4d0e-a6ed-278d47c29900",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "click-to-pay",
+                    "visa",
+                    "customers",
+                    ":customerId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of the customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1f31a503-7d3e-4fc9-9214-79327fc9c688",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Click to Pay Issuer Offered API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

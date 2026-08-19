@@ -1,0 +1,1578 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Deprecated API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deprecated",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns encrypted card data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/encrypt-card-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use one of `POST /cards/{cardToken}/apple-pay/provisioning-data`, \n`POST /cards/{cardToken}/google-pay/provisioning-data`, \n`POST /cards/{cardToken}/samsung-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436"
+        },
+        {
+          "info": {
+            "name": "Orders a new card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards` instead.\n\nOrders a new virtual or physical card optionally with a reference to an existing parent card.\n\nIn case the feature toggle values are not specified in the request, either directly, or by referencing a parentCard with the takeoverFeatureToggles set to true, the \nfeature toggles will receive the following default values:\n| Feature Flag                 | Default Value            |\n|------------------------------|------------------------"
+        },
+        {
+          "info": {
+            "name": "Modifies the data of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}` instead.\n\nAllows the modification of certain data fields belonging to a card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4436 - CARD_INACTIVE\n* 4447 - NO_CARD_DETAILS_AVAILABLE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Triggers a synchronization of cards via debiX PUSH.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/sync",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/sync` instead.\n\nThe current state of the cards matching the provided filter criteria are send via debiX PUSH to the bank. The filter may not select more than 150'000 cards.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4525 - TOO_MANY_RESULTS\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Reverses a card order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/reverse-order",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/reverse-order` instead.\n\nReverses a previously ordered card.\nThe reversal is only possible while the card order of a physical card is still in a cancellable state: for card renewals before 7:55 am on the same day as the card order request and for new card orders before 18:25 on the same day as the card order request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4470 "
+        },
+        {
+          "info": {
+            "name": "Modifies the status of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/status` instead.\n\nModifies the status of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4438 - CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4439 - CARD_HAS_PENDING_STATUS\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns the card's details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/details",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}` instead.\n\nReturns the status and the details of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4447 - NO_CARD_DETAILS_AVAILABLE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Enrolls a card in Mastercard Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/clicktopay/mastercard/provisioning",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/clicktopay/mastercard/provisioning` instead.\nEnrolls a card in Mastercard Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4507 - C2P_AMBIGUOUS_CONSUMER_IDENTITY_PHONE_NUMBER\n* 4508 - C2P_AMBIGUOUS_CON"
+        },
+        {
+          "info": {
+            "name": "Enrolls a card in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/clicktopay/visa/provisioning",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/clicktopay/visa/provisioning` instead.\nEnrolls a card in Visa Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Apple Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/apple-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/apple-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into an Apple Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_N"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Google Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/google-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/google-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a Google Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Samsung Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/samsung-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/samsung-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a Samsung Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATIO"
+        },
+        {
+          "info": {
+            "name": "Returns encrypted card data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/encrypt-card-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use one of `POST /debix/bank/cardtoken/v2/cards/{cardToken}/apple-pay/provisioning-data`, \n`POST /debix/bank/cardtoken/v2/cards/{cardToken}/google-pay/provisioning-data`, \n`POST /debix/bank/cardtoken/v2/cards/{cardToken}/samsung-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 443"
+        },
+        {
+          "info": {
+            "name": "Returns encrypted card data for Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/encrypt-card-data/click-to-pay",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/encrypt-card-data/click-to-pay` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card for Click to Pay into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4460 - ECOMMERCE_FEATURE_TOGGLE_NOT_ACTIVATED\n* 4461 "
+        },
+        {
+          "info": {
+            "name": "Checks for existing Click to Pay registrations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/click-to-pay/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/click-to-pay/status` instead.\n\nReturns the DPAN associated with the given arguments for Click to Pay. Will return no DPAN if no association exists.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns an authorization code.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/generate-authorization-code",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/generate-authorization-code` instead.\n\nReturns an authorization code for the provisioning of a funding debit card, specified by its cardId, into a wallet with Thales SDK.\nThe code is valid for 20 seconds in the production environment and 60 seconds in test environment.    \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4433 "
+        },
+        {
+          "info": {
+            "name": "Registers the card for 3DS.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/3ds",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf a card with the provided card data is not yet registered for 3DS, the registration will take place.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4435 - CARD_ALREADY_REGISTERED_FOR_THREE_DS\n* 4436 - CARD_INACTIVE\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4467 - THREE_DS_PASSWORD_NOT_ALLOWED\n* 4483 - OPERA"
+        },
+        {
+          "info": {
+            "name": "Updates the 3DS data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/3ds",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf the request contains new information, the 3DS data will be updated for the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Deregisters a card from 3DS and deletes the corresponding data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/3ds/delete",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `DELETE /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf a card with the provided identifier is known to debiX, it will be deregistered from 3DS and the corresponding data deleted.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns the 3DS details for this card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/3ds/details",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/3ds/details` instead.\n\nReturns the details for the current 3DS registration.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4457 - CARD_NOT_REGISTERED_FOR_THREE_DS\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Orders an online One-Time-Registration-Code (OTRC).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/otrc",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/cards/{cardToken}/otrc` instead.\n\nGet an online One-Time-Registration-Code (OTRC) for the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Orders an One-Time-Registration-Code (OTRC) via datamailer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/otrc-datamailer",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/cards/{cardToken}/otrc-datamailer` instead.\n\nGet a datamailer with the One-Time-Registration-Code (OTRC) for the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Gets card credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/credentials",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/credentials instead`.\n\nGet credentials (PAN, CVV) of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 4451 - INVALID_JWS_SIGNATURE\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Gets the PIN for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/pin` instead.\n\nGet PIN of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 4451 - INVALID_JWS_SIGNATURE\n* 4458 - RETRIEVE_PIN_NOT_ALLOWED_FOR_DELETED_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Starts a PIN set operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/start-set-pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/start-set-pin` instead.\n\nFirst call to be able to set the PIN for the specified card. debiX returns an ephemeral public key to encrypt the PIN on the issuer's side for the '/set-pin' call.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4440 - SET_PIN_NOT_ALLOWED_FOR_BLOCKED_OR_DELETED_CARD\n* 4442 - PIN_PREVIOUSLY_PASSED_TO_NEWER_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 445"
+        },
+        {
+          "info": {
+            "name": "Sets the PIN for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/set-pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/set-pin` instead.\n\nSets the PIN for the specified card. The PIN is encrypted with the shared key derived from debiX's ephemeral public key from the '/start-set-pin' request \nand the issuer's ephemeral private key corresponding to the issuer's ephemeral public key in this request (clientEphPubKey).  \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4440 - SET_PIN_NOT_ALLO"
+        },
+        {
+          "info": {
+            "name": "Orders a PIN datamailer for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/pin-datamailer",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/pin-datamailer` instead.\n\nPIN datamailer orders are only possible for physical cards.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4469 - PIN_DELIVERY_NOT_ALLOWED_FOR_VIRTUAL_CARD\n* 4472 - MULTIPLE_PIN_DATAMAILER_ORDERS_PER_DAY\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Resets the PIN try counter for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/reset-pin-try-counter",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/reset-pin-try-counter` instead.\nRequests the reset of PIN try counter for the given card. After the reset at the card processor, the cardholder has three PIN attempts again.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4474 - RESET_PIN_TRY_COUNTER_NOT_ALLOWED_FOR_BLOCKED_OR_DELETED_CARD\n* 4475 - RESET_PIN_TRY_COUNTER_DAILY_LIMIT_EXCEEDED\n* 4484 - BANK_CARDS_NOT_SUPPO"
+        },
+        {
+          "info": {
+            "name": "Returns the card token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/card-token",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/card-token` instead.\n\nReturns the unique card token of the specified card.\n\nIn addition to standard application error codes, following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns the card instance token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/card-instance-token",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/card-instance-token` or `POST /debix/bank/cardToken/v2/cards/{cardToken}/card-instance-token` instead.\n\nReturns the unique card instance token of the specified card.\n\nIn addition to standard application error codes, following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of authorizations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/authorizations/search",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/authorizations` instead.\n\nReturns a list of authorizations using filter arguments; only the authorizations of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of authorizations for a digital card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/:dpan/authorizations",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dpan",
+                "value": "",
+                "type": "path",
+                "description": "Digital card number."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/digitalcards/{dpan}/authorizations` instead.\n\nReturns a list of authorizations for a digital card, specified by the dpan, using filter arguments; only the authorizations of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns a digital card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/:dpan",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dpan",
+                "value": "",
+                "type": "path",
+                "description": "Digital card number."
+              }
+            ]
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/digitalcards/{dpan}` instead.\n\nReturns the digital card specified by the dpan in the request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of digital cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/search",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/digitalcards` instead.\n\nReturns a list of digital cards using filter arguments.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4433 - UNKNOWN_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Updates the status of digital cards of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/digitalcards/status` instead.\n\nUpdates the status of the digital cards of a funding debit card, specified by its shortCardId. The status update is triggered only for those digital cards which can be updated.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4437 - DIGITAL_CARD_HAS_PENDING_STATUS\n* 4483 - OPERATION_NOT_ALLOWED"
+        },
+        {
+          "info": {
+            "name": "Updates the status of a digital card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/:dpan/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dpan",
+                "value": "",
+                "type": "path",
+                "description": "Digital card number."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/digitalcards/{dpan}/status` instead.\n\nTriggers the status update of the digital card specified by the dpan in the request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4437 - DIGITAL_CARD_HAS_PENDING_STATUS\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of presentments.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/presentments/search",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/presentments` instead.\n\nReturns a list of presentments using filter arguments; only the presentments of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Gets merchant logo of given merchant id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/merchants/:merchantId/logo",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "If-None-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier corresponding to a merchant in debiX."
+              }
+            ]
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/merchants/{merchantId}/logo` instead.\n\nRetrieves the merchant logo for a given merchant id, including\nits version. The logo is only returned, if the version given\nin the ImageVersionHeader parameter does not correspond to the version in debiX.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4455 - UNKNOWN_MERCHANT\n"
+        },
+        {
+          "info": {
+            "name": "Provides information about the push events matching the given filter.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/push/events",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/push/events` instead.\n\nRetrieves events of the last 120 days for a given filter. The list is ordered by event timestamp from newest to oldest.\n"
+        },
+        {
+          "info": {
+            "name": "Resends push events via debiX PUSH based on a list of event ids.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/push/events/resend",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/push/events/resend` instead.\n\nResends push events via debiX PUSH based on a list of event ids.\n"
+        },
+        {
+          "info": {
+            "name": "Initiates a new customer enrollment for Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/click-to-pay/visa/customers` instead.\n\nStarts the process of enrolling a new customer and a card for Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of the enrollment.\nAs part of the request processing, a digital card will be generated for the enrolled card.\nThe status of the customer is set to ACTIVE after a successful enrollment.\n\nIn addition to standard application error codes, the following codes can be re"
+        },
+        {
+          "info": {
+            "name": "Provides the customer's information along with the enrolled cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ]
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}` instead.\n\nRetrieves all information about the customer stored in Visa Click to Pay, including their enrolled cards.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4502 - UNKNOWN_CUSTOMER\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Updates the customer's information in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}` instead.\n\nOverwrites existing data for the specified customer,\nand provides a requestTraceId in the response to retrieve the status of this action.\nIt is recommended to retrieve the latest customer information in Click to Pay and populate all data fields,\nincluding the ones that do not change. Therefore, the complete customer information need to be sent again if the customer is ACTIVE.\nIf the status in the re"
+        },
+        {
+          "info": {
+            "name": "Deletes an enrolled customer from Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ]
+          },
+          "docs": "Deprecated, use `DELETE /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}` instead.\n\nDeletes all data previously sent to Visa Click to Pay for the specified customer,\nincluding all linked cards and digital cards.\nProvides a requestTraceId in the response to retrieve the status of this action.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4502 - UNKNOWN_CUSTOMER\n* 4504 - C2P_HAS_PENDING_REQUEST\n* 4506 - C2P_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Enrolls a card for a customer in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}/cards` instead.\n\nEnrolls a card for an existing customer already registered with Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of this action.\nAs part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4436 - CARD_INACTIVE\n* 45"
+        },
+        {
+          "info": {
+            "name": "Updates the card information in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}/cards` instead.\n\nUpdates existing data for the specified card,\nand provides a requestTraceId in the response to retrieve the status of this action.\nIt is recommended to retrieve the latest card information in Click to Pay and populate all data fields,\nincluding the ones that do not change. Therefore, the complete card information need to be sent again.\n\nIn addition to standard application error codes, the foll"
+        },
+        {
+          "info": {
+            "name": "Deletes an enrolled card from Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/customers/:customerId/cards/delete",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the customer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `DELETE /debix/bank/cardtoken/v2/click-to-pay/visa/customers/{customerId}/cards/{cardToken}` instead.\n\nDeletes a card (including the digital card) from Visa Click to Pay,\nand provides a requestTraceId in the response to retrieve the status of this action.\n\nNote: Deleting a customer's last card does not automatically remove the customer from Visa Click to Pay.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4502 - UNKN"
+        },
+        {
+          "info": {
+            "name": "Returns the status of a previously triggered action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/click-to-pay/visa/status/:requestTraceId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestTraceId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the request trace."
+              }
+            ]
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/click-to-pay/visa/status/{requestTraceId}` instead.\n\nProvides the result of the operation corresponding to the requestTraceId from the previously initiated action.\nThe requestTraceId is valid for 7 days from the time of receipt.\nIf the action fails, the errorDetails will contain the errors received from Visa Click to Pay.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4505 - UNKNOWN_C2P_REQUEST_TRACE_ID\n* 450"
+        },
+        {
+          "info": {
+            "name": "Creates an alias in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases` instead.\n\nCreates an alias in the Alias Directory and associates the specified cards with the alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4521 - ALIAS_ALREADY_EXISTS\n* 4523 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Retrieves an alias from the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ]
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}` instead.\n\nRetrieves information about a specific alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Updates an alias in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}` instead.\n\nUpdates the information associated with the alias such as the identification, profile, or consent.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Deletes an alias in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ]
+          },
+          "docs": "Deprecated, use `DELETE /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}` instead.\n\nDeletes a specified alias which entails a deletion of the corresponding Visa Alias Directory card registrations.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Updates the status of an alias in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/status` instead.\n\nUpdates the status of the specified alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Retrieves all the cards corresponding to an alias.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ]
+          },
+          "docs": "Deprecated, use `GET /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards` instead.\n\nRetrieves all the cards corresponding to the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Registers a card for Visa Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards` instead.\n\nRegisters the given card for Visa Alias Directory under the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4423 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Updates a card in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards` instead.\n\nUpdates the given card for Visa AD under the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4423 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Retrieves a card registered in the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards/retrieve",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards/retrieve` instead.\n\nRetrieves a specific card corresponding to the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        },
+        {
+          "info": {
+            "name": "Deletes a card from the Alias Directory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/visa-alias-directory/aliases/:aliasId/cards/delete",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "aliasId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the alias"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards/delete` instead.\n\nDeletes the given card from the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

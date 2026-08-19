@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Token Lifecycle Management API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token Lifecycle Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns a digital card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/:dpan",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dpan",
+                "value": "",
+                "type": "path",
+                "description": "Digital card number."
+              }
+            ]
+          },
+          "docs": "Returns the digital card specified by the dpan in the request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of digital cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/digitalcards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of digital cards for the given card using filter arguments.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4433 - UNKNOWN_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Updates the status of digital cards of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/digitalcards/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the status of the digital cards of a funding debit card, specified by its card token. The status update is triggered only for those digital cards which can be updated.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4437 - DIGITAL_CARD_HAS_PENDING_STATUS\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Updates the status of a digital card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/:dpan/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dpan",
+                "value": "",
+                "type": "path",
+                "description": "Digital card number."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers the status update of the digital card specified by the dpan in the request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4437 - DIGITAL_CARD_HAS_PENDING_STATUS\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of digital cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/search",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/digitalcards` instead.\n\nReturns a list of digital cards using filter arguments.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4433 - UNKNOWN_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Updates the status of digital cards of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/digitalcards/status` instead.\n\nUpdates the status of the digital cards of a funding debit card, specified by its shortCardId. The status update is triggered only for those digital cards which can be updated.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4437 - DIGITAL_CARD_HAS_PENDING_STATUS\n* 4483 - OPERATION_NOT_ALLOWED"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

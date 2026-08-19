@@ -1,0 +1,1873 @@
+{
+  "item": [
+    {
+      "id": "f9aa5dd2-bd1e-4acb-af50-5ae8d8665d7a",
+      "name": "Token Lifecycle Management",
+      "description": {
+        "content": "Retrieves and manages digital cards (tokens) for cards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb575e62-886a-441e-acb2-082a1f363f88",
+          "name": "Returns a digital card.",
+          "request": {
+            "name": "Returns a digital card.",
+            "description": {
+              "content": "Returns the digital card specified by the dpan in the request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "digitalcards",
+                ":dpan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dpan",
+                  "description": "(Required) Digital card number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75b69f1e-d43c-484d-80f2-10a1b747868b",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"digitalCardId\": \"eb404f8d-656b-4e51-8872-88c42fa55536\",\n  \"dpan\": \"4234567890123456\",\n  \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n  \"scheme\": \"MASTERCARD\",\n  \"status\": \"DELETED\",\n  \"digitalCardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"wallet\": \"APPLE_PAY\",\n  \"productId\": \"Bank Card Gold\",\n  \"provisioningDate\": \"2021-10-03T16:03:09.101+02:00\",\n  \"pendingStatus\": \"RESUMPTION_PENDING\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"deviceType\": \"IPHONE\",\n  \"deviceName\": \"Peter's iPhone\",\n  \"digitalCardStatusUpdateReason\": \"ISSUER_DECISION\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49ed9785-867e-4685-afc0-ab678e484387",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3be6dd31-0cc9-4ffa-abb9-cb7a2af6d7ae",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "606cb5a1-f0a6-474e-80c3-b7c662910e1c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd0b5da6-fb5e-4126-af1d-976991c05762",
+          "name": "Returns a list of digital cards.",
+          "request": {
+            "name": "Returns a list of digital cards.",
+            "description": {
+              "content": "Returns a list of digital cards for the given card using filter arguments.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4433 - UNKNOWN_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "digitalcards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"wallet\": \"<string>\",\n  \"tokenRequestor\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    },\n    \"to\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"<dateTime>\",\n    \"to\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3c93d5a0-b8cf-4641-af8a-dfee82dedfd9",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "digitalcards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet\": \"APPLE_PAY\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"to\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"SUSPENDED\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"digitalCards\": [\n    {\n      \"digitalCardId\": \"eb404f8d-656b-4e51-8872-88c42fa55536\",\n      \"dpan\": \"4234567890123456\",\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"scheme\": \"MASTERCARD\",\n      \"status\": \"DELETED\",\n      \"digitalCardExpiry\": {\n        \"month\": \"01\",\n        \"year\": \"21\"\n      },\n      \"wallet\": \"APPLE_PAY\",\n      \"productId\": \"Bank Card Gold\",\n      \"provisioningDate\": \"2021-10-03T16:03:09.101+02:00\",\n      \"pendingStatus\": \"DELETION_PENDING\",\n      \"tokenRequestor\": {\n        \"id\": \"1111111111\",\n        \"name\": \"Zalando\"\n      },\n      \"deviceType\": \"IPHONE\",\n      \"deviceName\": \"Peter's iPhone\",\n      \"digitalCardStatusUpdateReason\": \"ISSUER_DECISION\"\n    },\n    {\n      \"digitalCardId\": \"eb404f8d-656b-4e51-8872-88c42fa55536\",\n      \"dpan\": \"4234567890123456\",\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"scheme\": \"MASTERCARD\",\n      \"status\": \"SUSPENDED\",\n      \"digitalCardExpiry\": {\n        \"month\": \"01\",\n        \"year\": \"21\"\n      },\n      \"wallet\": \"APPLE_PAY\",\n      \"productId\": \"Bank Card Gold\",\n      \"provisioningDate\": \"2021-10-03T16:03:09.101+02:00\",\n      \"pendingStatus\": \"DELETION_PENDING\",\n      \"tokenRequestor\": {\n        \"id\": \"1111111111\",\n        \"name\": \"Zalando\"\n      },\n      \"deviceType\": \"IPHONE\",\n      \"deviceName\": \"Peter's iPhone\",\n      \"digitalCardStatusUpdateReason\": \"ISSUER_DECISION\"\n    }\n  ],\n  \"totalRecords\": 1021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "795dacb2-c5fd-405b-ac74-552d909fda01",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "digitalcards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet\": \"APPLE_PAY\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"to\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"SUSPENDED\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fc10697-6590-4841-a8ba-fa8925643f5c",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "digitalcards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet\": \"APPLE_PAY\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"to\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"SUSPENDED\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b020b2e-73f6-40b2-ba38-b6bbf175ed85",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "digitalcards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"wallet\": \"APPLE_PAY\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"to\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"SUSPENDED\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86ae374f-ec5c-4b1e-9b6c-8e181dfd9ded",
+          "name": "Updates the status of digital cards of a card.",
+          "request": {
+            "name": "Updates the status of digital cards of a card.",
+            "description": {
+              "content": "Updates the status of the digital cards of a funding debit card, specified by its card token. The status update is triggered only for those digital cards which can be updated.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4437 - DIGITAL_CARD_HAS_PENDING_STATUS\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "digitalcards",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"digitalCardStatusUpdateReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "383932dd-f338-4971-83df-7e27017dab64",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "digitalcards",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"SUSPENDED\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"commissionedDigitalCards\": [\n    \"4234567890123456\",\n    \"4234567890123456\"\n  ],\n  \"rejectedDigitalCards\": [\n    {\n      \"dpan\": \"4234567890123456\",\n      \"error\": {\n        \"errorCode\": 42,\n        \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n      }\n    },\n    {\n      \"dpan\": \"4234567890123456\",\n      \"error\": {\n        \"errorCode\": 42,\n        \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee3e8bfc-cf3c-4e93-8fde-d6b8fb8a4174",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "digitalcards",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"SUSPENDED\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7be949ac-b296-45e5-a784-0a2128f6efe3",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "digitalcards",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"SUSPENDED\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "514b7a54-9a7b-4240-b3e9-a5f71e7685aa",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "digitalcards",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"SUSPENDED\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71f61b59-60bd-4d38-812b-92f6b165dce4",
+          "name": "Updates the status of a digital card.",
+          "request": {
+            "name": "Updates the status of a digital card.",
+            "description": {
+              "content": "Triggers the status update of the digital card specified by the dpan in the request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4437 - DIGITAL_CARD_HAS_PENDING_STATUS\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "digitalcards",
+                ":dpan",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dpan",
+                  "description": "(Required) Digital card number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"digitalCardStatusUpdateReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fc2f1ae-15eb-4d3e-849a-8eada44f04f9",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"SUSPENDED\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "190c43e9-60cc-47a3-894b-cec77fb645e9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"SUSPENDED\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ba6a5c8-ea91-4077-a563-c802b9765d27",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"SUSPENDED\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2373a7b0-2aac-4d86-a979-15e417815a7c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"SUSPENDED\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ba986ae-b989-45a7-b491-02a45da4635b",
+          "name": "Returns a list of digital cards.",
+          "request": {
+            "name": "Returns a list of digital cards.",
+            "description": {
+              "content": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/digitalcards` instead.\n\nReturns a list of digital cards using filter arguments.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4433 - UNKNOWN_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "digitalcards",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  },\n  \"wallet\": \"<string>\",\n  \"tokenRequestor\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    },\n    \"to\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"<dateTime>\",\n    \"to\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d77a44e9-e912-4118-bfae-4e7b7238b8b1",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  },\n  \"wallet\": \"APPLE_PAY\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"to\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"ACTIVE\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"digitalCards\": [\n    {\n      \"digitalCardId\": \"eb404f8d-656b-4e51-8872-88c42fa55536\",\n      \"dpan\": \"4234567890123456\",\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"scheme\": \"MASTERCARD\",\n      \"status\": \"DELETED\",\n      \"digitalCardExpiry\": {\n        \"month\": \"01\",\n        \"year\": \"21\"\n      },\n      \"wallet\": \"APPLE_PAY\",\n      \"productId\": \"Bank Card Gold\",\n      \"provisioningDate\": \"2021-10-03T16:03:09.101+02:00\",\n      \"pendingStatus\": \"DELETION_PENDING\",\n      \"tokenRequestor\": {\n        \"id\": \"1111111111\",\n        \"name\": \"Zalando\"\n      },\n      \"deviceType\": \"IPHONE\",\n      \"deviceName\": \"Peter's iPhone\",\n      \"digitalCardStatusUpdateReason\": \"ISSUER_DECISION\"\n    },\n    {\n      \"digitalCardId\": \"eb404f8d-656b-4e51-8872-88c42fa55536\",\n      \"dpan\": \"4234567890123456\",\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"scheme\": \"MASTERCARD\",\n      \"status\": \"SUSPENDED\",\n      \"digitalCardExpiry\": {\n        \"month\": \"01\",\n        \"year\": \"21\"\n      },\n      \"wallet\": \"APPLE_PAY\",\n      \"productId\": \"Bank Card Gold\",\n      \"provisioningDate\": \"2021-10-03T16:03:09.101+02:00\",\n      \"pendingStatus\": \"DELETION_PENDING\",\n      \"tokenRequestor\": {\n        \"id\": \"1111111111\",\n        \"name\": \"Zalando\"\n      },\n      \"deviceType\": \"IPHONE\",\n      \"deviceName\": \"Peter's iPhone\",\n      \"digitalCardStatusUpdateReason\": \"ISSUER_DECISION\"\n    }\n  ],\n  \"totalRecords\": 1021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd95240b-c77e-4b77-9cec-3c9231eb262d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  },\n  \"wallet\": \"APPLE_PAY\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"to\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"ACTIVE\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98b56a97-bd9c-4cdf-b3b0-8c66ab99a537",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  },\n  \"wallet\": \"APPLE_PAY\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"to\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"ACTIVE\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cbfef6d-2167-46c3-af09-d85acad3b320",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  },\n  \"wallet\": \"APPLE_PAY\",\n  \"tokenRequestor\": {\n    \"id\": \"1111111111\",\n    \"name\": \"Zalando\"\n  },\n  \"digitalCardExpiryRange\": {\n    \"from\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"to\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"provisioningDateTimeRange\": {\n    \"from\": \"2022-01-01T00:00:00.000+02:00\",\n    \"to\": \"2022-12-31T23:59:59.999+02:00\"\n  },\n  \"status\": \"ACTIVE\",\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d350def9-ff07-43c9-93da-9b6bc8dff150",
+          "name": "Updates the status of digital cards of a card.",
+          "request": {
+            "name": "Updates the status of digital cards of a card.",
+            "description": {
+              "content": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/digitalcards/status` instead.\n\nUpdates the status of the digital cards of a funding debit card, specified by its shortCardId. The status update is triggered only for those digital cards which can be updated.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4431 - DIGITAL_CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4437 - DIGITAL_CARD_HAS_PENDING_STATUS\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "digitalcards",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  },\n  \"status\": \"<string>\",\n  \"digitalCardStatusUpdateReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d482c2c-ccaa-4f62-854e-d85d7d528ac7",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 4\n  },\n  \"status\": \"ACTIVE\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"commissionedDigitalCards\": [\n    \"4234567890123456\",\n    \"4234567890123456\"\n  ],\n  \"rejectedDigitalCards\": [\n    {\n      \"dpan\": \"4234567890123456\",\n      \"error\": {\n        \"errorCode\": 42,\n        \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n      }\n    },\n    {\n      \"dpan\": \"4234567890123456\",\n      \"error\": {\n        \"errorCode\": 42,\n        \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53b207d0-b38d-4cfe-ab61-1f98fa48a5d1",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 4\n  },\n  \"status\": \"ACTIVE\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1023b10-f200-4dd6-b3bc-fa1488608896",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 4\n  },\n  \"status\": \"ACTIVE\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99a937bf-1afd-4329-bc5d-b785df7ef806",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 4\n  },\n  \"status\": \"ACTIVE\",\n  \"digitalCardStatusUpdateReason\": \"USER_DECISION\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "27903f0e-1bd5-48ae-afad-0475326c4561",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Token Lifecycle Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

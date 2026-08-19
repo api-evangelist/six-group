@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS calendar API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "calendar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET Calendar in JSON Format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/calendar",
+            "params": [
+              {
+                "name": "calendarDay",
+                "value": "",
+                "type": "query",
+                "description": "Calendar day (according to ISO 8601) that should be returned by the API call. If not specified all available, future entries are returned."
+              },
+              {
+                "name": "serviceIdentification",
+                "value": "",
+                "type": "query",
+                "description": "Service identification that should be returned by the API call. If not specified all available services are returned."
+              }
+            ]
+          },
+          "docs": "Returns the clearing day calendar data as a JSON object."
+        },
+        {
+          "info": {
+            "name": "HEAD Calendar in JSON Format",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/calendar",
+            "params": [
+              {
+                "name": "calendarDay",
+                "value": "",
+                "type": "query",
+                "description": "Calendar day (according to ISO 8601) that should be returned by the API call. If not specified all available, future entries are returned."
+              },
+              {
+                "name": "serviceIdentification",
+                "value": "",
+                "type": "query",
+                "description": "Service identification that should be returned by the API call. If not specified all available services are returned."
+              }
+            ]
+          },
+          "docs": "Clearing day calendar file in JSON format (only head, no content)."
+        },
+        {
+          "info": {
+            "name": "GET Calendar File in CSV Format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/calendar.csv",
+            "params": [
+              {
+                "name": "calendarDay",
+                "value": "",
+                "type": "query",
+                "description": "Calendar day (according to ISO 8601) that should be returned by the API call. If not specified all available, future entries are returned."
+              },
+              {
+                "name": "serviceIdentification",
+                "value": "",
+                "type": "query",
+                "description": "Service identification that should be returned by the API call. If not specified all available services are returned."
+              }
+            ]
+          },
+          "docs": "Clearing day calendar file in CSV format, with header row. The file encoding corresponds to the Unicode character set UTF-8 and must be read accordingly (umlauts, etc.)."
+        },
+        {
+          "info": {
+            "name": "HEAD Calendar in CSV Format",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/calendar.csv",
+            "params": [
+              {
+                "name": "calendarDay",
+                "value": "",
+                "type": "query",
+                "description": "Calendar day (according to ISO 8601) that should be returned by the API call. If not specified all available, future entries are returned."
+              },
+              {
+                "name": "serviceIdentification",
+                "value": "",
+                "type": "query",
+                "description": "Service identification that should be returned by the API call. If not specified all available services are returned."
+              }
+            ]
+          },
+          "docs": "Clearing day calendar file in CSV format (only head, no content)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

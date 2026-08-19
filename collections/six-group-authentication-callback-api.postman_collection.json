@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "9a3b80de-b612-4a44-961b-5e5428a684a0",
+      "name": "Authentication callback",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67218bdf-3e0b-4f6c-b8f0-df125470321d",
+          "name": "Processes the result of the authentication request.",
+          "request": {
+            "name": "Processes the result of the authentication request.",
+            "description": {
+              "content": "The operation processes the result of the authentication request and notifies the ACS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "callback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for an authentication request and authentication callback",
+                "key": "x-correlation-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"threeDsTransactionId\": \"<string>\",\n  \"confirmationStatus\": \"<string>\",\n  \"oobAuthenticationMethod\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "476a26ec-afa4-42c5-a478-45eaa325534f",
+              "name": "Callback received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "callback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsTransactionId\": \"a5b86c4e-0caa-11e8-ba89-0ed5f89f718b\",\n  \"confirmationStatus\": \"ACCEPTED\",\n  \"oobAuthenticationMethod\": \"BIOMETRICS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "31704576-c08f-49d1-9b30-8220991f00ed",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "callback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsTransactionId\": \"a5b86c4e-0caa-11e8-ba89-0ed5f89f718b\",\n  \"confirmationStatus\": \"ACCEPTED\",\n  \"oobAuthenticationMethod\": \"BIOMETRICS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    },\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0c2c3f8-dcbf-4952-903e-c3427b2ef306",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "callback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsTransactionId\": \"a5b86c4e-0caa-11e8-ba89-0ed5f89f718b\",\n  \"confirmationStatus\": \"ACCEPTED\",\n  \"oobAuthenticationMethod\": \"BIOMETRICS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    },\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7aea381b-7773-4fe9-8e43-e71868b252ed",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Authentication callback API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

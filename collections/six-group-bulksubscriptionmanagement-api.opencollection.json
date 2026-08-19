@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS BulkSubscriptionManagement API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BulkSubscriptionManagement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set the subscription of a business partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bulk-subscription/securities/bulk-set",
+            "headers": [
+              {
+                "name": "X-Correlation-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the subscription (list of securities identified by their ISIN). The previous subscription is overwritten if and only if the operation is successful.\n\nIf the request body includes bad data (typically, one element in the array is an invalid ISIN), 400 is returned and the subscription is not updated."
+        },
+        {
+          "info": {
+            "name": "Add a security to the subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bulk-subscription/securities/:isin",
+            "headers": [
+              {
+                "name": "X-Correlation-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "isin",
+                "value": "CH0038863350",
+                "type": "path",
+                "description": "Identifier of the security."
+              }
+            ]
+          },
+          "docs": "Addition of a security (identified by its ISIN) to the subscription of a business partner for the bulk service.\nThis operation is idempotent."
+        },
+        {
+          "info": {
+            "name": "Delete a security from the subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bulk-subscription/securities/:isin",
+            "headers": [
+              {
+                "name": "X-Correlation-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "isin",
+                "value": "CH0038863350",
+                "type": "path",
+                "description": "Identifier of the security."
+              }
+            ]
+          },
+          "docs": "Removal of a security (identified by its ISIN) from the subscription of a business partner for the bulk service."
+        },
+        {
+          "info": {
+            "name": "Get the list of securities the business partner is subscribed to.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bulk-subscription/securities",
+            "headers": [
+              {
+                "name": "X-Correlation-Id",
+                "value": ""
+              },
+              {
+                "name": "If-None-Match",
+                "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+              }
+            ]
+          },
+          "docs": "Get the subscription list of securities for a business partner."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1930 @@
+{
+  "item": [
+    {
+      "id": "838a3db9-18ca-423c-a80b-c6e6ea50b9ae",
+      "name": "Card Usage",
+      "description": {
+        "content": "Retrieves not expired transactions of the last 120 days for cards and digital cards, and merchant logo for transactions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0ace4fed-4439-4d2f-aa7f-4502c27de0d8",
+          "name": "Returns a list of authorizations.",
+          "request": {
+            "name": "Returns a list of authorizations.",
+            "description": {
+              "content": "Returns a list of authorizations for the given card using filter arguments; only the authorizations of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "authorizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardTokenEntension\": {\n    \"cardExpiry\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    },\n    \"cardSequenceNumber\": \"<integer>\"\n  },\n  \"walletType\": \"<string>\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"<date>\",\n    \"to\": \"<date>\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e928350-4c63-493d-b2a8-f8ff4b08220c",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenEntension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"walletType\": \"A\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorizations\": [\n    {\n      \"processingType\": 7307,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"transactionClass\": 9736,\n      \"transactionType\": 101,\n      \"authorizationOrigin\": \"ATM\",\n      \"useCase\": 7442,\n      \"cardAcceptor\": {\n        \"id\": \"87040\",\n        \"merchantCategoryCode\": \"string\",\n        \"name\": \"Meier Gmbh\",\n        \"streetName\": \"string\",\n        \"postalCode\": \"string\",\n        \"city\": \"string\",\n        \"regionCode\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"id\": \"9e19df54-47cb-494b-84dc-1c126e95a05c\",\n      \"dpan\": \"4234567890123456\",\n      \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n      \"approvalCode\": \"803051\",\n      \"walletType\": \"A\",\n      \"issuerResponseCode\": 2103,\n      \"transactionState\": 6469,\n      \"authorizationExpiryDate\": \"2021-10-03\",\n      \"amount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"cardholderAmount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"merchant\": {\n        \"id\": \"496\",\n        \"logoAvailable\": true,\n        \"name\": \"Yallo\",\n        \"merchantCategory\": \"Telco\",\n        \"address\": {\n          \"street\": \"Hardturmstrasse 201\",\n          \"postalCode\": \"8004\",\n          \"city\": \"Zürich\",\n          \"countryCode\": \"CH\"\n        },\n        \"location\": {\n          \"longitude\": 8.5426102,\n          \"latitude\": 47.3717597\n        },\n        \"contact\": {\n          \"website\": \"www.myshop.ch\",\n          \"phoneNumber\": \"+41795625655\"\n        }\n      },\n      \"cardholderAuthentication\": 5524,\n      \"retrievalReference\": \"120909092386\",\n      \"acquiringInstitutionId\": 13445,\n      \"cardDataSource\": 1,\n      \"threeDsAuthenticationLevel\": 7939,\n      \"threeDsIndicator\": 1,\n      \"isoResponseCode\": \"string\"\n    },\n    {\n      \"processingType\": 3051,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"transactionClass\": 7192,\n      \"transactionType\": 101,\n      \"authorizationOrigin\": \"ATM\",\n      \"useCase\": 2574,\n      \"cardAcceptor\": {\n        \"id\": \"87040\",\n        \"merchantCategoryCode\": \"string\",\n        \"name\": \"Meier Gmbh\",\n        \"streetName\": \"string\",\n        \"postalCode\": \"string\",\n        \"city\": \"string\",\n        \"regionCode\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"id\": \"9e19df54-47cb-494b-84dc-1c126e95a05c\",\n      \"dpan\": \"4234567890123456\",\n      \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n      \"approvalCode\": \"803051\",\n      \"walletType\": \"A\",\n      \"issuerResponseCode\": 2103,\n      \"transactionState\": 2298,\n      \"authorizationExpiryDate\": \"2021-10-03\",\n      \"amount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"cardholderAmount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"merchant\": {\n        \"id\": \"496\",\n        \"logoAvailable\": true,\n        \"name\": \"Yallo\",\n        \"merchantCategory\": \"Telco\",\n        \"address\": {\n          \"street\": \"Hardturmstrasse 201\",\n          \"postalCode\": \"8004\",\n          \"city\": \"Zürich\",\n          \"countryCode\": \"CH\"\n        },\n        \"location\": {\n          \"longitude\": 8.5426102,\n          \"latitude\": 47.3717597\n        },\n        \"contact\": {\n          \"website\": \"www.myshop.ch\",\n          \"phoneNumber\": \"+41795625655\"\n        }\n      },\n      \"cardholderAuthentication\": 8996,\n      \"retrievalReference\": \"120909092386\",\n      \"acquiringInstitutionId\": 13445,\n      \"cardDataSource\": 1,\n      \"threeDsAuthenticationLevel\": 7520,\n      \"threeDsIndicator\": 1,\n      \"isoResponseCode\": \"string\"\n    }\n  ],\n  \"totalRecords\": 1021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e25689d5-d227-4f98-8c5e-348ba1344ea6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenEntension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"walletType\": \"A\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cc80207-a636-4c16-8a2d-dd3b871e314f",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenEntension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"walletType\": \"A\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d833d10d-74b8-457e-94cb-3d9b8b498511",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenEntension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"walletType\": \"A\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac97fafb-ee05-433e-b017-717ac3a299ae",
+          "name": "Returns a list of authorizations for a digital card.",
+          "request": {
+            "name": "Returns a list of authorizations for a digital card.",
+            "description": {
+              "content": "Returns a list of authorizations for a digital card, specified by the dpan, using filter arguments; only the authorizations of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "digitalcards",
+                ":dpan",
+                "authorizations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dpan",
+                  "description": "(Required) Digital card number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionDateRange\": {\n    \"from\": \"<date>\",\n    \"to\": \"<date>\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c99fe617-6ae4-4818-a12d-97914e032d6a",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan",
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorizations\": [\n    {\n      \"processingType\": 7307,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"transactionClass\": 9736,\n      \"transactionType\": 101,\n      \"authorizationOrigin\": \"ATM\",\n      \"useCase\": 7442,\n      \"cardAcceptor\": {\n        \"id\": \"87040\",\n        \"merchantCategoryCode\": \"string\",\n        \"name\": \"Meier Gmbh\",\n        \"streetName\": \"string\",\n        \"postalCode\": \"string\",\n        \"city\": \"string\",\n        \"regionCode\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"id\": \"9e19df54-47cb-494b-84dc-1c126e95a05c\",\n      \"dpan\": \"4234567890123456\",\n      \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n      \"approvalCode\": \"803051\",\n      \"walletType\": \"A\",\n      \"issuerResponseCode\": 2103,\n      \"transactionState\": 6469,\n      \"authorizationExpiryDate\": \"2021-10-03\",\n      \"amount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"cardholderAmount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"merchant\": {\n        \"id\": \"496\",\n        \"logoAvailable\": true,\n        \"name\": \"Yallo\",\n        \"merchantCategory\": \"Telco\",\n        \"address\": {\n          \"street\": \"Hardturmstrasse 201\",\n          \"postalCode\": \"8004\",\n          \"city\": \"Zürich\",\n          \"countryCode\": \"CH\"\n        },\n        \"location\": {\n          \"longitude\": 8.5426102,\n          \"latitude\": 47.3717597\n        },\n        \"contact\": {\n          \"website\": \"www.myshop.ch\",\n          \"phoneNumber\": \"+41795625655\"\n        }\n      },\n      \"cardholderAuthentication\": 5524,\n      \"retrievalReference\": \"120909092386\",\n      \"acquiringInstitutionId\": 13445,\n      \"cardDataSource\": 1,\n      \"threeDsAuthenticationLevel\": 7939,\n      \"threeDsIndicator\": 1,\n      \"isoResponseCode\": \"string\"\n    },\n    {\n      \"processingType\": 3051,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"transactionClass\": 7192,\n      \"transactionType\": 101,\n      \"authorizationOrigin\": \"ATM\",\n      \"useCase\": 2574,\n      \"cardAcceptor\": {\n        \"id\": \"87040\",\n        \"merchantCategoryCode\": \"string\",\n        \"name\": \"Meier Gmbh\",\n        \"streetName\": \"string\",\n        \"postalCode\": \"string\",\n        \"city\": \"string\",\n        \"regionCode\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"id\": \"9e19df54-47cb-494b-84dc-1c126e95a05c\",\n      \"dpan\": \"4234567890123456\",\n      \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n      \"approvalCode\": \"803051\",\n      \"walletType\": \"A\",\n      \"issuerResponseCode\": 2103,\n      \"transactionState\": 2298,\n      \"authorizationExpiryDate\": \"2021-10-03\",\n      \"amount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"cardholderAmount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"merchant\": {\n        \"id\": \"496\",\n        \"logoAvailable\": true,\n        \"name\": \"Yallo\",\n        \"merchantCategory\": \"Telco\",\n        \"address\": {\n          \"street\": \"Hardturmstrasse 201\",\n          \"postalCode\": \"8004\",\n          \"city\": \"Zürich\",\n          \"countryCode\": \"CH\"\n        },\n        \"location\": {\n          \"longitude\": 8.5426102,\n          \"latitude\": 47.3717597\n        },\n        \"contact\": {\n          \"website\": \"www.myshop.ch\",\n          \"phoneNumber\": \"+41795625655\"\n        }\n      },\n      \"cardholderAuthentication\": 8996,\n      \"retrievalReference\": \"120909092386\",\n      \"acquiringInstitutionId\": 13445,\n      \"cardDataSource\": 1,\n      \"threeDsAuthenticationLevel\": 7520,\n      \"threeDsIndicator\": 1,\n      \"isoResponseCode\": \"string\"\n    }\n  ],\n  \"totalRecords\": 1021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86a97b9c-b023-4c47-8839-3b73ac8c840c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan",
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb4c1663-2f65-44a4-8362-61fb9a9c2f5a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan",
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8eaafaaf-1bbb-422e-b99f-e8fe0d3217fd",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digitalcards",
+                    ":dpan",
+                    "authorizations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dpan",
+                      "description": "(Required) Digital card number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "793dfc38-894b-4407-ba11-3cf69037fab1",
+          "name": "Returns a list of presentments.",
+          "request": {
+            "name": "Returns a list of presentments.",
+            "description": {
+              "content": "Returns a list of presentments for the given card using filter arguments; only the presentments of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "presentments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    },\n    \"cardSequenceNumber\": \"<integer>\"\n  },\n  \"walletType\": \"<string>\",\n  \"transactionDateRange\": {\n    \"from\": \"<date>\",\n    \"to\": \"<date>\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9bdfc0e-0f6f-4c57-b8b2-7deb0228d262",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "presentments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"walletType\": \"A\",\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"presentments\": [\n    {\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"settlementData\": {\n        \"clearingDate\": \"2023-12-31\",\n        \"totalAmountClearingType\": \"CREDIT\",\n        \"transactionAmountClearingType\": \"CREDIT\",\n        \"feesProcessingType\": \"DEBIT\",\n        \"feesType\": 1,\n        \"settlementAmounts\": {\n          \"totalAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"feesAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionCashbackAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionSurchargeAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionTipAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"transactionType\": 101,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"transactionDataDetails\": {\n        \"retrievalReference\": \"120909092386\",\n        \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n        \"approvalCode\": \"803051\",\n        \"retrievalSituation\": \"str\",\n        \"transactionCapture\": \"str\",\n        \"captureMethod\": \"str\",\n        \"cardDataSource\": \"str\",\n        \"multipleClearingIndicator\": true,\n        \"settlementIndicator\": true,\n        \"paymentTransactionType\": 1,\n        \"cardAcceptor\": {\n          \"id\": \"87040\",\n          \"merchantCategoryCode\": \"string\",\n          \"name\": \"Meier Gmbh\",\n          \"streetName\": \"string\",\n          \"postalCode\": \"string\",\n          \"city\": \"string\",\n          \"regionCode\": \"string\",\n          \"countryCode\": \"string\"\n        },\n        \"merchant\": {\n          \"id\": \"496\",\n          \"logoAvailable\": true,\n          \"name\": \"Yallo\",\n          \"merchantCategory\": \"Telco\",\n          \"address\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"location\": {\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"contact\": {\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dpan\": \"4234567890123456\",\n        \"walletType\": \"A\",\n        \"threeDsIndicator\": 1\n      },\n      \"originalCurrencyData\": {\n        \"originalTransactionAmounts\": {\n          \"originalAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"cashbackAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"surchargeAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"tipAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          }\n        },\n        \"exchangeRate\": \"1.211226\",\n        \"referenceCountryCode\": 756\n      },\n      \"reversalData\": {\n        \"reversalType\": 7,\n        \"originalTransactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n        \"issuerReference\": 230776,\n        \"chargebackReasonCode\": 4555\n      },\n      \"matchFlag\": true,\n      \"authorizationReference\": \"6f4a6efe-fd8e-411a-8f23-adbf4bc4a6b6\"\n    },\n    {\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"settlementData\": {\n        \"clearingDate\": \"2023-12-31\",\n        \"totalAmountClearingType\": \"CREDIT\",\n        \"transactionAmountClearingType\": \"DEBIT\",\n        \"feesProcessingType\": \"CREDIT\",\n        \"feesType\": 1,\n        \"settlementAmounts\": {\n          \"totalAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"feesAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionCashbackAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionSurchargeAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionTipAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"transactionType\": 101,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"transactionDataDetails\": {\n        \"retrievalReference\": \"120909092386\",\n        \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n        \"approvalCode\": \"803051\",\n        \"retrievalSituation\": \"str\",\n        \"transactionCapture\": \"str\",\n        \"captureMethod\": \"str\",\n        \"cardDataSource\": \"str\",\n        \"multipleClearingIndicator\": true,\n        \"settlementIndicator\": true,\n        \"paymentTransactionType\": 1,\n        \"cardAcceptor\": {\n          \"id\": \"87040\",\n          \"merchantCategoryCode\": \"string\",\n          \"name\": \"Meier Gmbh\",\n          \"streetName\": \"string\",\n          \"postalCode\": \"string\",\n          \"city\": \"string\",\n          \"regionCode\": \"string\",\n          \"countryCode\": \"string\"\n        },\n        \"merchant\": {\n          \"id\": \"496\",\n          \"logoAvailable\": true,\n          \"name\": \"Yallo\",\n          \"merchantCategory\": \"Telco\",\n          \"address\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"location\": {\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"contact\": {\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dpan\": \"4234567890123456\",\n        \"walletType\": \"A\",\n        \"threeDsIndicator\": 1\n      },\n      \"originalCurrencyData\": {\n        \"originalTransactionAmounts\": {\n          \"originalAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"cashbackAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"surchargeAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"tipAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          }\n        },\n        \"exchangeRate\": \"1.211226\",\n        \"referenceCountryCode\": 756\n      },\n      \"reversalData\": {\n        \"reversalType\": 7,\n        \"originalTransactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n        \"issuerReference\": 230776,\n        \"chargebackReasonCode\": 4555\n      },\n      \"matchFlag\": true,\n      \"authorizationReference\": \"6f4a6efe-fd8e-411a-8f23-adbf4bc4a6b6\"\n    }\n  ],\n  \"totalRecords\": 1021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de29f7cb-1034-4b57-8628-625fa84e977d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "presentments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"walletType\": \"A\",\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58351243-fcf8-413b-bba6-152b457f137e",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "presentments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"walletType\": \"A\",\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb427b77-3150-48d2-a4dd-1f56be8163a7",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "presentments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"walletType\": \"A\",\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a355375c-0a9c-4e07-bea2-c99562c2cf10",
+          "name": "Gets merchant logo of given merchant id.",
+          "request": {
+            "name": "Gets merchant logo of given merchant id.",
+            "description": {
+              "content": "Retrieves the merchant logo for a given merchant id, including\nits version. The logo is only returned, if the version given\nin the ImageVersionHeader parameter does not correspond to the version in debiX.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4455 - UNKNOWN_MERCHANT\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchants",
+                ":merchantId",
+                "logo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "merchantId",
+                  "description": "(Required) A unique identifier corresponding to a merchant in debiX."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Version of the image currently stored in the client.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1e0653a-7ebd-4f00-a528-77929e50c9d5",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) A unique identifier corresponding to a merchant in debiX."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Version of the image currently stored in the client.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchantLogo\": {\n    \"image\": \"2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT=\",\n    \"version\": \"be5d87a6-1c76-49d7-9a7f-75fa411b7e96\",\n    \"mimeType\": \"image/svg+xml\",\n    \"width\": 1000,\n    \"height\": 600\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c51d16b-d135-4f1f-9001-56231b72be80",
+              "name": "The given merchant logo version corresponds to the version in debiX.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) A unique identifier corresponding to a merchant in debiX."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Version of the image currently stored in the client.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c60915b4-56f1-4d5a-858b-839f06e74775",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) A unique identifier corresponding to a merchant in debiX."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Version of the image currently stored in the client.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63ff35a5-c1c9-4ce9-89a4-d3e2e1daa89d",
+              "name": "No merchant or merchant logo found for given merchant id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) A unique identifier corresponding to a merchant in debiX."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Version of the image currently stored in the client.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "168d059b-cc71-44f0-a1e0-acec76f059f6",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchants",
+                    ":merchantId",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) A unique identifier corresponding to a merchant in debiX."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Version of the image currently stored in the client.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e3ff800-4a28-4036-8c71-d7123cf13608",
+          "name": "Returns a list of authorizations.",
+          "request": {
+            "name": "Returns a list of authorizations.",
+            "description": {
+              "content": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/authorizations` instead.\n\nReturns a list of authorizations using filter arguments; only the authorizations of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authorizations",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  },\n  \"cardSeqNumber\": \"<integer>\",\n  \"cardExpiry\": {\n    \"month\": \"<string>\",\n    \"year\": \"<string>\"\n  },\n  \"walletType\": \"<string>\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"<date>\",\n    \"to\": \"<date>\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "419d032d-f279-4bbd-a3e7-bdb0523bed47",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  },\n  \"cardSeqNumber\": 2,\n  \"cardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"walletType\": \"A\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorizations\": [\n    {\n      \"processingType\": 7307,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"transactionClass\": 9736,\n      \"transactionType\": 101,\n      \"authorizationOrigin\": \"ATM\",\n      \"useCase\": 7442,\n      \"cardAcceptor\": {\n        \"id\": \"87040\",\n        \"merchantCategoryCode\": \"string\",\n        \"name\": \"Meier Gmbh\",\n        \"streetName\": \"string\",\n        \"postalCode\": \"string\",\n        \"city\": \"string\",\n        \"regionCode\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"id\": \"9e19df54-47cb-494b-84dc-1c126e95a05c\",\n      \"dpan\": \"4234567890123456\",\n      \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n      \"approvalCode\": \"803051\",\n      \"walletType\": \"A\",\n      \"issuerResponseCode\": 2103,\n      \"transactionState\": 6469,\n      \"authorizationExpiryDate\": \"2021-10-03\",\n      \"amount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"cardholderAmount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"merchant\": {\n        \"id\": \"496\",\n        \"logoAvailable\": true,\n        \"name\": \"Yallo\",\n        \"merchantCategory\": \"Telco\",\n        \"address\": {\n          \"street\": \"Hardturmstrasse 201\",\n          \"postalCode\": \"8004\",\n          \"city\": \"Zürich\",\n          \"countryCode\": \"CH\"\n        },\n        \"location\": {\n          \"longitude\": 8.5426102,\n          \"latitude\": 47.3717597\n        },\n        \"contact\": {\n          \"website\": \"www.myshop.ch\",\n          \"phoneNumber\": \"+41795625655\"\n        }\n      },\n      \"cardholderAuthentication\": 5524,\n      \"retrievalReference\": \"120909092386\",\n      \"acquiringInstitutionId\": 13445,\n      \"cardDataSource\": 1,\n      \"threeDsAuthenticationLevel\": 7939,\n      \"threeDsIndicator\": 1,\n      \"isoResponseCode\": \"string\"\n    },\n    {\n      \"processingType\": 3051,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"transactionClass\": 7192,\n      \"transactionType\": 101,\n      \"authorizationOrigin\": \"ATM\",\n      \"useCase\": 2574,\n      \"cardAcceptor\": {\n        \"id\": \"87040\",\n        \"merchantCategoryCode\": \"string\",\n        \"name\": \"Meier Gmbh\",\n        \"streetName\": \"string\",\n        \"postalCode\": \"string\",\n        \"city\": \"string\",\n        \"regionCode\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"id\": \"9e19df54-47cb-494b-84dc-1c126e95a05c\",\n      \"dpan\": \"4234567890123456\",\n      \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n      \"approvalCode\": \"803051\",\n      \"walletType\": \"A\",\n      \"issuerResponseCode\": 2103,\n      \"transactionState\": 2298,\n      \"authorizationExpiryDate\": \"2021-10-03\",\n      \"amount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"cardholderAmount\": {\n        \"currency\": \"CHF\",\n        \"unscaledAmount\": 2000,\n        \"scale\": 1\n      },\n      \"merchant\": {\n        \"id\": \"496\",\n        \"logoAvailable\": true,\n        \"name\": \"Yallo\",\n        \"merchantCategory\": \"Telco\",\n        \"address\": {\n          \"street\": \"Hardturmstrasse 201\",\n          \"postalCode\": \"8004\",\n          \"city\": \"Zürich\",\n          \"countryCode\": \"CH\"\n        },\n        \"location\": {\n          \"longitude\": 8.5426102,\n          \"latitude\": 47.3717597\n        },\n        \"contact\": {\n          \"website\": \"www.myshop.ch\",\n          \"phoneNumber\": \"+41795625655\"\n        }\n      },\n      \"cardholderAuthentication\": 8996,\n      \"retrievalReference\": \"120909092386\",\n      \"acquiringInstitutionId\": 13445,\n      \"cardDataSource\": 1,\n      \"threeDsAuthenticationLevel\": 7520,\n      \"threeDsIndicator\": 1,\n      \"isoResponseCode\": \"string\"\n    }\n  ],\n  \"totalRecords\": 1021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fba3a9da-1d71-4e61-a8f6-ffbf81d86e23",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  },\n  \"cardSeqNumber\": 2,\n  \"cardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"walletType\": \"A\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4806066e-88be-4280-aa98-b16ff26e19b9",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  },\n  \"cardSeqNumber\": 2,\n  \"cardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"walletType\": \"A\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1c5de6e-3e19-4595-8716-c0572647517c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorizations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  },\n  \"cardSeqNumber\": 2,\n  \"cardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"walletType\": \"A\",\n  \"onlyDigitalCardBased\": true,\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ad14928-189a-4bd2-9e36-e90672c6e127",
+          "name": "Returns a list of presentments.",
+          "request": {
+            "name": "Returns a list of presentments.",
+            "description": {
+              "content": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/presentments` instead.\n\nReturns a list of presentments using filter arguments; only the presentments of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "presentments",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  },\n  \"cardSeqNumber\": \"<integer>\",\n  \"cardExpiry\": {\n    \"month\": \"<string>\",\n    \"year\": \"<string>\"\n  },\n  \"walletType\": \"<string>\",\n  \"transactionDateRange\": {\n    \"from\": \"<date>\",\n    \"to\": \"<date>\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 100\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1870b97b-f2ba-4289-b749-cf85e13ba879",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "presentments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  },\n  \"cardSeqNumber\": 2,\n  \"cardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"walletType\": \"A\",\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"presentments\": [\n    {\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"settlementData\": {\n        \"clearingDate\": \"2023-12-31\",\n        \"totalAmountClearingType\": \"CREDIT\",\n        \"transactionAmountClearingType\": \"CREDIT\",\n        \"feesProcessingType\": \"DEBIT\",\n        \"feesType\": 1,\n        \"settlementAmounts\": {\n          \"totalAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"feesAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionCashbackAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionSurchargeAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionTipAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"transactionType\": 101,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"transactionDataDetails\": {\n        \"retrievalReference\": \"120909092386\",\n        \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n        \"approvalCode\": \"803051\",\n        \"retrievalSituation\": \"str\",\n        \"transactionCapture\": \"str\",\n        \"captureMethod\": \"str\",\n        \"cardDataSource\": \"str\",\n        \"multipleClearingIndicator\": true,\n        \"settlementIndicator\": true,\n        \"paymentTransactionType\": 1,\n        \"cardAcceptor\": {\n          \"id\": \"87040\",\n          \"merchantCategoryCode\": \"string\",\n          \"name\": \"Meier Gmbh\",\n          \"streetName\": \"string\",\n          \"postalCode\": \"string\",\n          \"city\": \"string\",\n          \"regionCode\": \"string\",\n          \"countryCode\": \"string\"\n        },\n        \"merchant\": {\n          \"id\": \"496\",\n          \"logoAvailable\": true,\n          \"name\": \"Yallo\",\n          \"merchantCategory\": \"Telco\",\n          \"address\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"location\": {\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"contact\": {\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dpan\": \"4234567890123456\",\n        \"walletType\": \"A\",\n        \"threeDsIndicator\": 1\n      },\n      \"originalCurrencyData\": {\n        \"originalTransactionAmounts\": {\n          \"originalAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"cashbackAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"surchargeAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"tipAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          }\n        },\n        \"exchangeRate\": \"1.211226\",\n        \"referenceCountryCode\": 756\n      },\n      \"reversalData\": {\n        \"reversalType\": 7,\n        \"originalTransactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n        \"issuerReference\": 230776,\n        \"chargebackReasonCode\": 4555\n      },\n      \"matchFlag\": true,\n      \"authorizationReference\": \"6f4a6efe-fd8e-411a-8f23-adbf4bc4a6b6\"\n    },\n    {\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"settlementData\": {\n        \"clearingDate\": \"2023-12-31\",\n        \"totalAmountClearingType\": \"CREDIT\",\n        \"transactionAmountClearingType\": \"DEBIT\",\n        \"feesProcessingType\": \"CREDIT\",\n        \"feesType\": 1,\n        \"settlementAmounts\": {\n          \"totalAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"feesAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionCashbackAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionSurchargeAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"transactionTipAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scale\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"transactionType\": 101,\n      \"transactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n      \"cardTokenExtension\": {\n        \"cardExpiry\": {\n          \"month\": \"01\",\n          \"year\": \"21\"\n        },\n        \"cardSequenceNumber\": 2\n      },\n      \"transactionDataDetails\": {\n        \"retrievalReference\": \"120909092386\",\n        \"schemeTransactionId\": \"MDSJ9CC6I1134\",\n        \"approvalCode\": \"803051\",\n        \"retrievalSituation\": \"str\",\n        \"transactionCapture\": \"str\",\n        \"captureMethod\": \"str\",\n        \"cardDataSource\": \"str\",\n        \"multipleClearingIndicator\": true,\n        \"settlementIndicator\": true,\n        \"paymentTransactionType\": 1,\n        \"cardAcceptor\": {\n          \"id\": \"87040\",\n          \"merchantCategoryCode\": \"string\",\n          \"name\": \"Meier Gmbh\",\n          \"streetName\": \"string\",\n          \"postalCode\": \"string\",\n          \"city\": \"string\",\n          \"regionCode\": \"string\",\n          \"countryCode\": \"string\"\n        },\n        \"merchant\": {\n          \"id\": \"496\",\n          \"logoAvailable\": true,\n          \"name\": \"Yallo\",\n          \"merchantCategory\": \"Telco\",\n          \"address\": {\n            \"street\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postalCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"countryCode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"location\": {\n            \"longitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"latitude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"contact\": {\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"dpan\": \"4234567890123456\",\n        \"walletType\": \"A\",\n        \"threeDsIndicator\": 1\n      },\n      \"originalCurrencyData\": {\n        \"originalTransactionAmounts\": {\n          \"originalAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"cashbackAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"surchargeAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          },\n          \"tipAmount\": {\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unscaledAmount\": 2000,\n            \"scale\": 1\n          }\n        },\n        \"exchangeRate\": \"1.211226\",\n        \"referenceCountryCode\": 756\n      },\n      \"reversalData\": {\n        \"reversalType\": 7,\n        \"originalTransactionDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n        \"issuerReference\": 230776,\n        \"chargebackReasonCode\": 4555\n      },\n      \"matchFlag\": true,\n      \"authorizationReference\": \"6f4a6efe-fd8e-411a-8f23-adbf4bc4a6b6\"\n    }\n  ],\n  \"totalRecords\": 1021\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac06ff43-4db8-4e50-b143-d920186762c3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "presentments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  },\n  \"cardSeqNumber\": 2,\n  \"cardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"walletType\": \"A\",\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "253eba28-da2d-4bb5-9645-51bba6b0c143",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "presentments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  },\n  \"cardSeqNumber\": 2,\n  \"cardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"walletType\": \"A\",\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84070f0b-a2ba-4a0f-91b9-f7cd46341314",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "presentments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  },\n  \"cardSeqNumber\": 2,\n  \"cardExpiry\": {\n    \"month\": \"01\",\n    \"year\": \"21\"\n  },\n  \"walletType\": \"A\",\n  \"transactionDateRange\": {\n    \"from\": \"2024-01-01\",\n    \"to\": \"2024-12-31\"\n  },\n  \"paging\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 50\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9d93e5f6-dde0-4ad5-809d-b6e30a1279c2",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Card Usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

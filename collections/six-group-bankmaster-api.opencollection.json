@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS bankmaster API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "bankmaster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bank master data as JSON object.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bankmaster",
+            "params": [
+              {
+                "name": "prettyPrint",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether the response is pretty printed."
+              }
+            ]
+          },
+          "docs": "Bank master data as JSON object."
+        },
+        {
+          "info": {
+            "name": "Bank master data as JSON object (only head, no content).",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bankmaster"
+          },
+          "docs": "Bank master data as JSON object (only head, no content)."
+        },
+        {
+          "info": {
+            "name": "Bank master data file in the CSV format.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bankmaster_V3.csv"
+          },
+          "docs": "Bank master data file in the CSV format, with header row. The CSV file contains UTF-8 encoded characters (important e.g. for umlauts and Euro sign)."
+        },
+        {
+          "info": {
+            "name": "Bank master data file in the CSV format (only head, no content).",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bankmaster_V3.csv"
+          },
+          "docs": "Bank master data file in the CSV format, with header row. The CSV file contains UTF-8 encoded characters (important e.g. for umlauts and Euro sign) (only head, no content)."
+        },
+        {
+          "info": {
+            "name": "Bank master data as JSON object.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bankmaster.json",
+            "params": [
+              {
+                "name": "prettyPrint",
+                "value": "",
+                "type": "query",
+                "description": "Flag indicating whether the response is pretty printed."
+              }
+            ]
+          },
+          "docs": "Bank master data as a JSON object."
+        },
+        {
+          "info": {
+            "name": "Bank master data as JSON object (only head, no content).",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bankmaster.json"
+          },
+          "docs": "Bank master data as a JSON object (only head, no content)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

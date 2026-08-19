@@ -1,0 +1,154 @@
+{
+  "item": [
+    {
+      "id": "49d5c764-2a4c-4bb2-a8a7-2bd3b86fca49",
+      "name": "iban",
+      "description": {
+        "content": "**Bankmaster IBAN validation API**\nPublic REST endpoint of the bank master iban validation api.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a21a6eb2-40e6-4182-9cda-983ecdbdb54c",
+          "name": "GET IBAN information",
+          "request": {
+            "name": "GET IBAN information",
+            "description": {
+              "content": "Validates the international bank account number (IBAN) and returns detail information if available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "iban"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "iban",
+                  "value": "<string>",
+                  "description": "(Required) International bank account number (IBAN) parameter of the API call."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77825371-99fb-4352-83e7-d6962b41490a",
+              "name": "IBAN information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iban"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "iban",
+                      "value": "CHpp bbbb bkkk kkkk kkkk k"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"validationResult\": \"string\",\n  \"iid\": 9703\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c73c0224-cdaf-41b1-b655-49ea4c6ac4b4",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iban"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "iban",
+                      "value": "CHpp bbbb bkkk kkkk kkkk k"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The submitted request contains invalid or missing request parameters which cannot be processed.\",\n  \"status\": 400,\n  \"title\": \"Request parameter has missing or invalid values\",\n  \"type\": \"about:blank\",\n  \"instance\": \"http://SVTQXGFIqcT.wvvgw1FVeN1vCnOWPRgg.Xkqt86OHsAOb7xBeDkiX3nzQPHUsgGOj964bu\",\n  \"metadata\": {\n    \"@type\": \"types.example.com/standard/id\",\n    \"data\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "621b3a78-47fc-4838-8cf3-1e3df8939738",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS iban API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

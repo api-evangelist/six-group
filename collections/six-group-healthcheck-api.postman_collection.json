@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "8a1237b8-ff04-4da0-8b9c-25b2c81a600a",
+      "name": "healthcheck",
+      "description": {
+        "content": "**System Healthcheck**\nThis allows to check the basic state of the system (can it be reached, does it respond).\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "314a4901-78ba-4462-9f79-214332f7922e",
+          "name": "GET Health Check",
+          "request": {
+            "name": "GET Health Check",
+            "description": {
+              "content": "Returns a status message of the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "healthcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5677bd7f-3852-4a6e-b9a9-9ab4603f9a02",
+              "name": "Healthcheck successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "healthcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"1.0.23\",\n  \"applicationVersion\": \"4.5.0-julia\",\n  \"environmentStage\": \"X1\",\n  \"message\": \"The health check GET request was successfully received and processed.\",\n  \"receivedHeaders\": [\n    {\n      \"headerName\": \"Accept\",\n      \"headerValue\": \"application/json\"\n    },\n    {\n      \"headerName\": \"Accept\",\n      \"headerValue\": \"application/json\"\n    }\n  ],\n  \"requestDateTime\": \"2024-12-21T10:52:05.1904957+01:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "213d66c6-2cec-4f27-b4c0-0f42834c3e47",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "healthcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The submitted request contains invalid or missing request parameters which cannot be processed.\",\n  \"status\": 400,\n  \"title\": \"Request parameter has missing or invalid values\",\n  \"type\": \"about:blank\",\n  \"instance\": \"http://fNFSoXDsc.reoxDH+cOn8\",\n  \"metadata\": {\n    \"@type\": \"string\",\n    \"data\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8566914b-f170-4d44-bb47-333d7e00a64d",
+          "name": "HEAD Health Check",
+          "request": {
+            "name": "HEAD Health Check",
+            "description": {
+              "content": "Returns a status message of the system (only head, no content).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "healthcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ff34055-9fdd-4207-ad47-b1354f32092f",
+              "name": "Content can be downloaded with GET method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "healthcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e691cd62-3a8a-4f35-86db-68ce14a75074",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "healthcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "417678c7-b353-4dc4-8042-3ed5a5a908c8",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS healthcheck API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

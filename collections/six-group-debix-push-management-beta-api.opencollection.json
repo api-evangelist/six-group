@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS debiX PUSH Management (Beta) API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "debiX PUSH Management (Beta)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Triggers a synchronization of cards via debiX PUSH.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/sync",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The current state of the cards matching the provided filter criteria are send via debiX PUSH to the bank. The filter may not select more than 150'000 cards. \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4525 - TOO_MANY_RESULTS\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Provides information about the push events matching the given filter.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/push/events",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves events of the last 120 days for a given filter. The list is ordered by event timestamp from newest to oldest.\n"
+        },
+        {
+          "info": {
+            "name": "Resends push events via debiX PUSH based on a list of event ids.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/push/events/resend",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resends push events via debiX PUSH based on a list of event ids.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

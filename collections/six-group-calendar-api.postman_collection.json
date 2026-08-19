@@ -1,0 +1,534 @@
+{
+  "item": [
+    {
+      "id": "e2a5f860-4a05-4591-979d-9539031eb32e",
+      "name": "calendar",
+      "description": {
+        "content": "**Clearing Day Calendar**\nInformations about future clearing days can be found here.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3aa76387-37d3-47e5-b9a3-ad855722af06",
+          "name": "GET Calendar in JSON Format",
+          "request": {
+            "name": "GET Calendar in JSON Format",
+            "description": {
+              "content": "Returns the clearing day calendar data as a JSON object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calendar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calendarDay",
+                  "value": "<date>",
+                  "description": "Calendar day (according to ISO 8601) that should be returned by the API call. If not specified all available, future entries are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "serviceIdentification",
+                  "value": "<string>",
+                  "description": "Service identification that should be returned by the API call. If not specified all available services are returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48feb144-8429-4b6f-9328-5474924fde7c",
+              "name": "Clearing day calendar in JSON format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarDay",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "serviceIdentification",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"calendarDay\": \"2024-12-23\",\n      \"dayOfWeek\": \"Wednesday\",\n      \"services\": [\n        {\n          \"clearingDay\": \"2024-12-23\",\n          \"serviceDescription\": \"SIC-RTGS-Service: External test environment for tests with production data and the current development status of the next release\",\n          \"serviceIdentification\": \"PCR_P\",\n          \"scheduledDowntimes\": [\n            {\n              \"endDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"scheduledClearingDayChange\": {\n            \"nextClearingDay\": \"2024-12-24\",\n            \"scheduledClearingStop1\": \"2024-12-23T17:00:00+01:00\",\n            \"scheduledClearingStop2\": \"2024-12-23T18:00:00+01:00\",\n            \"scheduledClearingStop3\": \"2024-12-23T18:15:00+01:00\",\n            \"scheduledCutOff1\": \"2024-12-23T16:30:00+01:00\",\n            \"scheduledCutOff2\": \"2024-12-23T17:30:00+01:00\"\n          }\n        },\n        {\n          \"clearingDay\": \"2024-12-23\",\n          \"serviceDescription\": \"SIC-RTGS-Service: External test environment for tests with production data and the current development status of the next release\",\n          \"serviceIdentification\": \"PCR_P\",\n          \"scheduledDowntimes\": [\n            {\n              \"endDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"scheduledClearingDayChange\": {\n            \"nextClearingDay\": \"2024-12-24\",\n            \"scheduledClearingStop1\": \"2024-12-23T17:00:00+01:00\",\n            \"scheduledClearingStop2\": \"2024-12-23T18:00:00+01:00\",\n            \"scheduledClearingStop3\": \"2024-12-23T18:15:00+01:00\",\n            \"scheduledCutOff1\": \"2024-12-23T16:30:00+01:00\",\n            \"scheduledCutOff2\": \"2024-12-23T17:30:00+01:00\"\n          }\n        }\n      ]\n    },\n    {\n      \"calendarDay\": \"2024-12-23\",\n      \"dayOfWeek\": \"Wednesday\",\n      \"services\": [\n        {\n          \"clearingDay\": \"2024-12-23\",\n          \"serviceDescription\": \"SIC-RTGS-Service: External test environment for tests with production data and the current development status of the next release\",\n          \"serviceIdentification\": \"PCR_P\",\n          \"scheduledDowntimes\": [\n            {\n              \"endDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"scheduledClearingDayChange\": {\n            \"nextClearingDay\": \"2024-12-24\",\n            \"scheduledClearingStop1\": \"2024-12-23T17:00:00+01:00\",\n            \"scheduledClearingStop2\": \"2024-12-23T18:00:00+01:00\",\n            \"scheduledClearingStop3\": \"2024-12-23T18:15:00+01:00\",\n            \"scheduledCutOff1\": \"2024-12-23T16:30:00+01:00\",\n            \"scheduledCutOff2\": \"2024-12-23T17:30:00+01:00\"\n          }\n        },\n        {\n          \"clearingDay\": \"2024-12-23\",\n          \"serviceDescription\": \"SIC-RTGS-Service: External test environment for tests with production data and the current development status of the next release\",\n          \"serviceIdentification\": \"PCR_P\",\n          \"scheduledDowntimes\": [\n            {\n              \"endDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"endDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"startDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"scheduledClearingDayChange\": {\n            \"nextClearingDay\": \"2024-12-24\",\n            \"scheduledClearingStop1\": \"2024-12-23T17:00:00+01:00\",\n            \"scheduledClearingStop2\": \"2024-12-23T18:00:00+01:00\",\n            \"scheduledClearingStop3\": \"2024-12-23T18:15:00+01:00\",\n            \"scheduledCutOff1\": \"2024-12-23T16:30:00+01:00\",\n            \"scheduledCutOff2\": \"2024-12-23T17:30:00+01:00\"\n          }\n        }\n      ]\n    }\n  ],\n  \"metaData\": {\n    \"createdStamp\": \"2024-12-21T10:52:05.1904957+01:00\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb565c68-b0fe-420d-8f57-0b047a711d40",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarDay",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "serviceIdentification",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The submitted request contains invalid or missing request parameters which cannot be processed.\",\n  \"status\": 400,\n  \"title\": \"Request parameter has missing or invalid values\",\n  \"type\": \"about:blank\",\n  \"instance\": \"http://TnUEMqQizrWuhVzv.umaSmn6ymWUezP2lX-CQSdthn-xSmvm9Zupz9v\",\n  \"metadata\": {\n    \"@type\": \"string\",\n    \"data\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f69e69a9-8aca-4a58-8ab1-79e33a80342e",
+          "name": "HEAD Calendar in JSON Format",
+          "request": {
+            "name": "HEAD Calendar in JSON Format",
+            "description": {
+              "content": "Clearing day calendar file in JSON format (only head, no content).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calendar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calendarDay",
+                  "value": "<date>",
+                  "description": "Calendar day (according to ISO 8601) that should be returned by the API call. If not specified all available, future entries are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "serviceIdentification",
+                  "value": "<string>",
+                  "description": "Service identification that should be returned by the API call. If not specified all available services are returned."
+                }
+              ],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1838bd7f-b3b4-4426-84ee-f4c3d75ffa36",
+              "name": "Content can be downloaded with GET method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarDay",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "serviceIdentification",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f9a0fa9-b6a0-47c9-bf0f-e1648216f08f",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarDay",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "serviceIdentification",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8101db35-1d50-44fc-ac29-8c15b9fb5157",
+          "name": "GET Calendar File in CSV Format",
+          "request": {
+            "name": "GET Calendar File in CSV Format",
+            "description": {
+              "content": "Clearing day calendar file in CSV format, with header row. The file encoding corresponds to the Unicode character set UTF-8 and must be read accordingly (umlauts, etc.).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calendar.csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calendarDay",
+                  "value": "<date>",
+                  "description": "Calendar day (according to ISO 8601) that should be returned by the API call. If not specified all available, future entries are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "serviceIdentification",
+                  "value": "<string>",
+                  "description": "Service identification that should be returned by the API call. If not specified all available services are returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8cdab4ad-f33f-4b5e-8613-9d6aa4d7a3dd",
+              "name": "Clearing day calendar file in CSV format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar.csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarDay",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "serviceIdentification",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9cfa8a72-56f9-4c59-a53d-e720c709b08e",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar.csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarDay",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "serviceIdentification",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1cf3a029-e75e-42e7-b148-84b2cc852415",
+          "name": "HEAD Calendar in CSV Format",
+          "request": {
+            "name": "HEAD Calendar in CSV Format",
+            "description": {
+              "content": "Clearing day calendar file in CSV format (only head, no content).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calendar.csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calendarDay",
+                  "value": "<date>",
+                  "description": "Calendar day (according to ISO 8601) that should be returned by the API call. If not specified all available, future entries are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "serviceIdentification",
+                  "value": "<string>",
+                  "description": "Service identification that should be returned by the API call. If not specified all available services are returned."
+                }
+              ],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99f0fa9e-921e-41ed-882b-de65d9010378",
+              "name": "Content can be downloaded with GET method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar.csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarDay",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "serviceIdentification",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "163fe44f-d212-403b-b72f-d25e59f67ce5",
+              "name": "Unexpected error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar.csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarDay",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "serviceIdentification",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9b26f8c0-855d-41fb-9933-ac7ee4c5d29c",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS calendar API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

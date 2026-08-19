@@ -1,0 +1,3381 @@
+{
+  "item": [
+    {
+      "id": "88f5e6bc-9b5f-4bbb-8d76-15bb60690012",
+      "name": "3DS",
+      "description": {
+        "content": "3DS lifecycle, 3DS details, OTRC order.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d8bf3be0-cb80-420d-8be0-04d93970c40d",
+          "name": "Registers the card for 3DS.",
+          "request": {
+            "name": "Registers the card for 3DS.",
+            "description": {
+              "content": "If a card with the provided card data is not yet registered for 3DS, the registration will take place.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4435 - CARD_ALREADY_REGISTERED_FOR_THREE_DS\n* 4436 - CARD_INACTIVE\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4467 - THREE_DS_PASSWORD_NOT_ALLOWED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "3ds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    },\n    \"cardSequenceNumber\": \"<integer>\"\n  },\n  \"threeDsData\": {\n    \"language\": \"<string>\",\n    \"authenticationMethod\": \"<string>\",\n    \"userId\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"authId\": \"<string>\",\n    \"biometricType\": \"<string>\",\n    \"pinCode\": \"<string>\",\n    \"password\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ade8803-b4b6-4af3-b6b8-b50feb37b8b8",
+              "name": "The card was successfully registered for 3DS.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"threeDsData\": {\n    \"language\": \"IT\",\n    \"authenticationMethod\": \"DELEGATED\",\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"authId\": \"480463608\",\n    \"biometricType\": \"IOS_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56be584d-fa2d-44f4-9cf0-0881b182c7c0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"threeDsData\": {\n    \"language\": \"IT\",\n    \"authenticationMethod\": \"DELEGATED\",\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"authId\": \"480463608\",\n    \"biometricType\": \"IOS_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efec5e3b-6e4c-4934-bb29-a85be015e730",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"threeDsData\": {\n    \"language\": \"IT\",\n    \"authenticationMethod\": \"DELEGATED\",\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"authId\": \"480463608\",\n    \"biometricType\": \"IOS_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3cfb71b-7c7f-4ee2-8294-f172cfdfbf81",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  },\n  \"threeDsData\": {\n    \"language\": \"IT\",\n    \"authenticationMethod\": \"DELEGATED\",\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"authId\": \"480463608\",\n    \"biometricType\": \"IOS_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4feefb15-a2cf-4b28-b4ee-e3adf97a2b2a",
+          "name": "Updates the 3DS data.",
+          "request": {
+            "name": "Updates the 3DS data.",
+            "description": {
+              "content": "If the request contains new information, the 3DS data will be updated for the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "3ds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"threeDsData\": {\n    \"userId\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"language\": \"<string>\",\n    \"authId\": \"<string>\",\n    \"authenticationMethod\": \"<string>\",\n    \"biometricType\": \"<string>\",\n    \"pinCode\": \"<string>\",\n    \"password\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06787ca0-f2e4-4fe5-86af-5b58bc5970e5",
+              "name": "The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsData\": {\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"language\": \"FR\",\n    \"authId\": \"480463608\",\n    \"authenticationMethod\": \"SMS_ONLY\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b2d6a4b-f535-42ed-83c2-b60818387604",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsData\": {\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"language\": \"FR\",\n    \"authId\": \"480463608\",\n    \"authenticationMethod\": \"SMS_ONLY\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7d2b212-2976-44f5-9815-2326de08ba8b",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsData\": {\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"language\": \"FR\",\n    \"authId\": \"480463608\",\n    \"authenticationMethod\": \"SMS_ONLY\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4e67686-1107-401e-bb57-3b1a565f158c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsData\": {\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"language\": \"FR\",\n    \"authId\": \"480463608\",\n    \"authenticationMethod\": \"SMS_ONLY\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "690733ce-1d40-436a-ac7e-ce45990dc355",
+          "name": "Deregisters the given card from 3DS and deletes the corresponding data.",
+          "request": {
+            "name": "Deregisters the given card from 3DS and deletes the corresponding data.",
+            "description": {
+              "content": "If a card with the provided identifier is known to debiX, it will be deregistered from 3DS and the corresponding data deleted.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "3ds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b9e358c-f190-42b3-8c51-69312a99e05f",
+              "name": "The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "62c697a2-a4eb-462a-8c40-245bee672462",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7877a346-d854-4110-8533-591fe8f59c94",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68b0d5f3-4c07-4dd2-bf10-c8913f72eb24",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe5c40f6-ccbe-4129-950b-708e544e1e55",
+          "name": "Returns the 3DS details for the given card.",
+          "request": {
+            "name": "Returns the 3DS details for the given card.",
+            "description": {
+              "content": "Returns the details for the current 3DS registration.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4457 - CARD_NOT_REGISTERED_FOR_THREE_DS\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "3ds",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    },\n    \"cardSequenceNumber\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63b43e60-2401-47b0-8448-144578fc1eae",
+              "name": "The 3DS details were successfully fetched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"language\": \"FR\",\n  \"threeDsStatus\": \"ACTIVE\",\n  \"phoneNumber\": \"+41797778899\",\n  \"userId\": \"2345872\",\n  \"threeDsRegistrationDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n  \"smsFallback\": true,\n  \"authenticationMethod\": \"DELEGATED\",\n  \"otrcStatus\": \"DISABLED\",\n  \"otrcValidity\": \"2021-10-03T16:03:09.101+02:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b36ac26-b601-4193-a943-ff18dfeb3543",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f19085c-1a70-4c7d-b934-782a220759b8",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9207faa-87a8-4f3d-bcc0-3b6b1233e321",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "3ds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardTokenExtension\": {\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    },\n    \"cardSequenceNumber\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4a301f9-b494-4dbf-be07-d956f655f371",
+          "name": "Orders an online One-Time-Registration-Code (OTRC).",
+          "request": {
+            "name": "Orders an online One-Time-Registration-Code (OTRC).",
+            "description": {
+              "content": "Get an online One-Time-Registration-Code (OTRC) for the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "otrc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75b92bab-d8e2-4470-93ab-630ef7f73b85",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "otrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"otrc\": 1337,\n  \"otrcExpirationDateTime\": \"2024-10-03T16:03:09.101+02:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1315928-5dea-4e54-b014-b1339e36a96c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "otrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b434cf98-6ea4-4771-b835-7dff2f8275d9",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "otrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a500adf0-354c-4390-8dee-76ebd5b50b32",
+          "name": "Orders an One-Time-Registration-Code (OTRC) via datamailer.",
+          "request": {
+            "name": "Orders an One-Time-Registration-Code (OTRC) via datamailer.",
+            "description": {
+              "content": "Get a datamailer with the One-Time-Registration-Code (OTRC) for the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":cardToken",
+                "otrc-datamailer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delivery\": \"<string>\",\n  \"expressCode\": \"A_POST\",\n  \"deliveryInformation\": {\n    \"address\": [\n      \"<string>\"\n    ],\n    \"country\": \"<string>\",\n    \"salutationText\": \"<string>\"\n  },\n  \"mailerText\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1209c288-d16b-48ee-b2f1-d5bee0e4c60f",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "otrc-datamailer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"delivery\": \"DELIVER_TO_BANK\",\n  \"expressCode\": \"A_POST\",\n  \"deliveryInformation\": {\n    \"address\": [\n      \"Peter Schweizer\",\n      \"Bahnhofstrasse 1\",\n      \"8000 Zürich\"\n    ],\n    \"country\": \"CH\",\n    \"salutationText\": \"string\"\n  },\n  \"mailerText\": 9398\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ad768733-a2be-4330-8d5f-4735182c96fa",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "otrc-datamailer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"delivery\": \"DELIVER_TO_BANK\",\n  \"expressCode\": \"A_POST\",\n  \"deliveryInformation\": {\n    \"address\": [\n      \"Peter Schweizer\",\n      \"Bahnhofstrasse 1\",\n      \"8000 Zürich\"\n    ],\n    \"country\": \"CH\",\n    \"salutationText\": \"string\"\n  },\n  \"mailerText\": 9398\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4154043-64c3-4593-957f-2549dad96641",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":cardToken",
+                    "otrc-datamailer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"delivery\": \"DELIVER_TO_BANK\",\n  \"expressCode\": \"A_POST\",\n  \"deliveryInformation\": {\n    \"address\": [\n      \"Peter Schweizer\",\n      \"Bahnhofstrasse 1\",\n      \"8000 Zürich\"\n    ],\n    \"country\": \"CH\",\n    \"salutationText\": \"string\"\n  },\n  \"mailerText\": 9398\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "779a5c96-3ddc-410c-9831-6b5cfbcb1df5",
+          "name": "Registers the card for 3DS.",
+          "request": {
+            "name": "Registers the card for 3DS.",
+            "description": {
+              "content": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf a card with the provided card data is not yet registered for 3DS, the registration will take place.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4435 - CARD_ALREADY_REGISTERED_FOR_THREE_DS\n* 4436 - CARD_INACTIVE\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4467 - THREE_DS_PASSWORD_NOT_ALLOWED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                "3ds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\",\n    \"cardSeqNumber\": \"<integer>\",\n    \"cardExpiry\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    }\n  },\n  \"threeDsData\": {\n    \"language\": \"<string>\",\n    \"authenticationMethod\": \"<string>\",\n    \"userId\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"authId\": \"<string>\",\n    \"biometricType\": \"<string>\",\n    \"pinCode\": \"<string>\",\n    \"password\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "280407b6-c36c-4fbe-b72c-67b96ef69dd1",
+              "name": "The card was successfully registered for 3DS.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 1,\n    \"cardSeqNumber\": 2,\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"threeDsData\": {\n    \"language\": \"DE\",\n    \"authenticationMethod\": \"DELEGATED\",\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"authId\": \"480463608\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3dc8efa4-6aa1-40cd-843e-b372dc08fa7a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 1,\n    \"cardSeqNumber\": 2,\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"threeDsData\": {\n    \"language\": \"DE\",\n    \"authenticationMethod\": \"DELEGATED\",\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"authId\": \"480463608\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a76b0726-17a1-4e43-8e99-d87cc8314740",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 1,\n    \"cardSeqNumber\": 2,\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"threeDsData\": {\n    \"language\": \"DE\",\n    \"authenticationMethod\": \"DELEGATED\",\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"authId\": \"480463608\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3dbfc7fa-89ab-4fa1-b9e1-19549eb70357",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 1,\n    \"cardSeqNumber\": 2,\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  },\n  \"threeDsData\": {\n    \"language\": \"DE\",\n    \"authenticationMethod\": \"DELEGATED\",\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"authId\": \"480463608\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3022b0b-15f0-4fa6-a7f3-df9f3be263d5",
+          "name": "Updates the 3DS data.",
+          "request": {
+            "name": "Updates the 3DS data.",
+            "description": {
+              "content": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf the request contains new information, the 3DS data will be updated for the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4434 - THREE_DS_NOT_ENABLED_FOR_ISSUER\n* 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                "3ds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  },\n  \"threeDsData\": {\n    \"userId\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"language\": \"<string>\",\n    \"authId\": \"<string>\",\n    \"authenticationMethod\": \"<string>\",\n    \"biometricType\": \"<string>\",\n    \"pinCode\": \"<string>\",\n    \"password\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0885bee6-027b-4f66-bbae-d2906d8a8ba3",
+              "name": "The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 4\n  },\n  \"threeDsData\": {\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"language\": \"DE\",\n    \"authId\": \"480463608\",\n    \"authenticationMethod\": \"BIOMETRIC\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64f79f6d-3f4a-4437-be74-c18f492edeb8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 4\n  },\n  \"threeDsData\": {\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"language\": \"DE\",\n    \"authId\": \"480463608\",\n    \"authenticationMethod\": \"BIOMETRIC\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0aa6c83-7a6a-4755-820a-48c8cd3ee79b",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 4\n  },\n  \"threeDsData\": {\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"language\": \"DE\",\n    \"authId\": \"480463608\",\n    \"authenticationMethod\": \"BIOMETRIC\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d5ebf0f-cd31-4747-ad9d-d13efd43269e",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 4\n  },\n  \"threeDsData\": {\n    \"userId\": \"2345872\",\n    \"phoneNumber\": \"+41797778899\",\n    \"language\": \"DE\",\n    \"authId\": \"480463608\",\n    \"authenticationMethod\": \"BIOMETRIC\",\n    \"biometricType\": \"ANDROID_BIOMETRIC\",\n    \"pinCode\": \"12345\",\n    \"password\": \"password\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e77e5365-4992-4153-ac2a-b1f0e5d078af",
+          "name": "Deregisters a card from 3DS and deletes the corresponding data.",
+          "request": {
+            "name": "Deregisters a card from 3DS and deletes the corresponding data.",
+            "description": {
+              "content": "Deprecated, use `DELETE /debix/bank/cardtoken/v2/cards/{cardToken}/3ds` instead.\n\nIf a card with the provided identifier is known to debiX, it will be deregistered from 3DS and the corresponding data deleted.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                "3ds",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bda8189f-4058-4156-8cad-8df6e2965aea",
+              "name": "The request was successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77353746-88d8-4625-94e6-daf0282eea9f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce6f47d9-62c6-4c95-ad95-51b41c5e7b80",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "035ffe23-dbe3-47a8-8603-a1059b6ea12c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18a38729-d892-4812-9a59-c2a955f07d35",
+          "name": "Returns the 3DS details for this card.",
+          "request": {
+            "name": "Returns the 3DS details for this card.",
+            "description": {
+              "content": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/3ds/details` instead.\n\nReturns the details for the current 3DS registration.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4457 - CARD_NOT_REGISTERED_FOR_THREE_DS\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                "3ds",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\",\n    \"cardSeqNumber\": \"<integer>\",\n    \"cardExpiry\": {\n      \"month\": \"<string>\",\n      \"year\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a67b68d1-7149-4589-b49e-6c6d7a20b735",
+              "name": "The 3DS details were successfully fetched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 1,\n    \"cardSeqNumber\": 2,\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"language\": \"FR\",\n  \"threeDsStatus\": \"ACTIVE\",\n  \"phoneNumber\": \"+41797778899\",\n  \"userId\": \"2345872\",\n  \"threeDsRegistrationDateTime\": \"2021-10-03T16:03:09.101+02:00\",\n  \"smsFallback\": true,\n  \"authenticationMethod\": \"DELEGATED\",\n  \"otrcStatus\": \"DISABLED\",\n  \"otrcValidity\": \"2021-10-03T16:03:09.101+02:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17355803-835e-470e-9b8f-6e244f4f1437",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 1,\n    \"cardSeqNumber\": 2,\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c362824c-4b19-473c-9868-67f3506360fa",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 1,\n    \"cardSeqNumber\": 2,\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dec4276-531c-40d3-b080-8f630182de60",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "3ds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 1,\n    \"cardSeqNumber\": 2,\n    \"cardExpiry\": {\n      \"month\": \"01\",\n      \"year\": \"21\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c6f4958-782a-4e1a-b6a9-77c872763833",
+          "name": "Orders an online One-Time-Registration-Code (OTRC).",
+          "request": {
+            "name": "Orders an online One-Time-Registration-Code (OTRC).",
+            "description": {
+              "content": "Deprecated, use `GET /debix/bank/cardtoken/v2/cards/{cardToken}/otrc` instead.\n\nGet an online One-Time-Registration-Code (OTRC) for the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                "otrc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b37728b3-2120-4178-b26e-35c7cc890eb5",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "otrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"otrc\": 1337,\n  \"otrcExpirationDateTime\": \"2024-10-03T16:03:09.101+02:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70bb758b-9639-4e33-922e-93679eff63d2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "otrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6a80195-c823-4a30-98ae-1c1c91210dd1",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "otrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa91f605-2013-457c-976d-478b235a156a",
+          "name": "Orders an One-Time-Registration-Code (OTRC) via datamailer.",
+          "request": {
+            "name": "Orders an One-Time-Registration-Code (OTRC) via datamailer.",
+            "description": {
+              "content": "Deprecated, use `GET /debix/bank/cardtoken/v2/cards/{cardToken}/otrc-datamailer` instead.\n\nGet a datamailer with the One-Time-Registration-Code (OTRC) for the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                "otrc-datamailer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  },\n  \"delivery\": \"<string>\",\n  \"expressCode\": \"A_POST\",\n  \"deliveryInformation\": {\n    \"address\": [\n      \"<string>\"\n    ],\n    \"country\": \"<string>\",\n    \"salutationText\": \"<string>\"\n  },\n  \"mailerText\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a4c2928-4a12-45ce-94d8-20bc8ec9d221",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "otrc-datamailer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 5\n  },\n  \"delivery\": \"DELIVER_TO_BANK\",\n  \"expressCode\": \"A_POST\",\n  \"deliveryInformation\": {\n    \"address\": [\n      \"Peter Schweizer\",\n      \"Bahnhofstrasse 1\",\n      \"8000 Zürich\"\n    ],\n    \"country\": \"CH\",\n    \"salutationText\": \"string\"\n  },\n  \"mailerText\": 2259\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3262e07d-786b-48d6-b6a6-9722b7a10f91",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "otrc-datamailer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 5\n  },\n  \"delivery\": \"DELIVER_TO_BANK\",\n  \"expressCode\": \"A_POST\",\n  \"deliveryInformation\": {\n    \"address\": [\n      \"Peter Schweizer\",\n      \"Bahnhofstrasse 1\",\n      \"8000 Zürich\"\n    ],\n    \"country\": \"CH\",\n    \"salutationText\": \"string\"\n  },\n  \"mailerText\": 2259\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1785ca1d-ad94-439a-af42-d3e11de16fac",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    "otrc-datamailer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 5\n  },\n  \"delivery\": \"DELIVER_TO_BANK\",\n  \"expressCode\": \"A_POST\",\n  \"deliveryInformation\": {\n    \"address\": [\n      \"Peter Schweizer\",\n      \"Bahnhofstrasse 1\",\n      \"8000 Zürich\"\n    ],\n    \"country\": \"CH\",\n    \"salutationText\": \"string\"\n  },\n  \"mailerText\": 2259\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a7c60e88-5daa-4087-8eba-6df57a2ad99b",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

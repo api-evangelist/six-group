@@ -1,0 +1,540 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Token Provisioning API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token Provisioning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enrolls a card in Mastercard Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/clicktopay/mastercard/provisioning",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrolls a card in Mastercard Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4507 - C2P_AMBIGUOUS_CONSUMER_IDENTITY_PHONE_NUMBER\n* 4508 - C2P_AMBIGUOUS_CONSUMER_IDENTITY_EMAIL_ADDRESS\n* 4509 - C2P_PARAMETER_VALIDATION_FAILED_AT_SCHEME\n* 4483 - OPERATION_NOT_ALLOWED"
+        },
+        {
+          "info": {
+            "name": "Enrolls a card in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/clicktopay/visa/provisioning",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrolls a card in Visa Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Apple Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/apple-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into an Apple Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Google Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/google-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into a Google Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Samsung Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/samsung-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into a Samsung Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns encrypted card data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/encrypt-card-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use one of `POST /cards/{cardToken}/apple-pay/provisioning-data`, \n`POST /cards/{cardToken}/google-pay/provisioning-data`, \n`POST /cards/{cardToken}/samsung-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its card token, into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436"
+        },
+        {
+          "info": {
+            "name": "Returns encrypted card data for Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/encrypt-card-data/click-to-pay",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the encrypted card data for the provisioning of a funding debit card for Click to Pay into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4460 - ECOMMERCE_FEATURE_TOGGLE_NOT_ACTIVATED\n* 4461 - INCOMPLETE_OR_MISSING_ADDRESS_DATA\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Checks for existing Click to Pay registrations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/click-to-pay/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the DPAN associated with the given card and email address for Click to Pay. Will return no DPAN if no association exists.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns an authorization code.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/generate-authorization-code",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an authorization code for the provisioning of a funding debit card, specified by its card token, into a wallet with Thales SDK. \nThe code is valid for 20 seconds in the production environment and 60 seconds in test environment.  \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4433 - UNKNOWN_WALLET_PROVIDER\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDE"
+        },
+        {
+          "info": {
+            "name": "Enrolls a card in Mastercard Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/clicktopay/mastercard/provisioning",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/clicktopay/mastercard/provisioning` instead.\nEnrolls a card in Mastercard Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4507 - C2P_AMBIGUOUS_CONSUMER_IDENTITY_PHONE_NUMBER\n* 4508 - C2P_AMBIGUOUS_CON"
+        },
+        {
+          "info": {
+            "name": "Enrolls a card in Visa Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/clicktopay/visa/provisioning",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/clicktopay/visa/provisioning` instead.\nEnrolls a card in Visa Click to Pay. As part of the request processing, a digital card will be generated for the enrolled card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD        \n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Apple Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/apple-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/apple-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into an Apple Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_N"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Google Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/google-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/google-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a Google Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATION_"
+        },
+        {
+          "info": {
+            "name": "Get data for push provisioning of the given card to a Samsung Pay wallet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/samsung-pay/provisioning-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/samsung-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a Samsung Pay wallet.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4454 - EXCLUDED_WALLET_PROVIDER\n* 4483 - OPERATIO"
+        },
+        {
+          "info": {
+            "name": "Returns encrypted card data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/encrypt-card-data",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use one of `POST /debix/bank/cardtoken/v2/cards/{cardToken}/apple-pay/provisioning-data`, \n`POST /debix/bank/cardtoken/v2/cards/{cardToken}/google-pay/provisioning-data`, \n`POST /debix/bank/cardtoken/v2/cards/{cardToken}/samsung-pay/provisioning-data` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card, specified by its cardId, into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 443"
+        },
+        {
+          "info": {
+            "name": "Returns encrypted card data for Click to Pay.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/encrypt-card-data/click-to-pay",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/encrypt-card-data/click-to-pay` instead.\n\nReturns the encrypted card data for the provisioning of a funding debit card for Click to Pay into a wallet with Thales SDK.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4436 - CARD_INACTIVE\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4460 - ECOMMERCE_FEATURE_TOGGLE_NOT_ACTIVATED\n* 4461 "
+        },
+        {
+          "info": {
+            "name": "Checks for existing Click to Pay registrations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/click-to-pay/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/click-to-pay/status` instead.\n\nReturns the DPAN associated with the given arguments for Click to Pay. Will return no DPAN if no association exists.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4449 - TOKENIZATION_NOT_SUPPORTED\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns an authorization code.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/generate-authorization-code",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/generate-authorization-code` instead.\n\nReturns an authorization code for the provisioning of a funding debit card, specified by its cardId, into a wallet with Thales SDK.\nThe code is valid for 20 seconds in the production environment and 60 seconds in test environment.    \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4433 "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

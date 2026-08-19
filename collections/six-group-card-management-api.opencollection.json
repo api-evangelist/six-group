@@ -1,0 +1,703 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Card Management API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Orders a new card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Orders a new virtual or physical card optionally with a reference to an existing parent card.\n\nIn case the feature toggle values are not specified in the request, either directly, or by referencing a parentCard with the takeoverFeatureToggles set to true, the \nfeature toggles will receive the following default values:\n| Feature Flag                 | Default Value            |\n|------------------------------|--------------------------|\n| eCommerceAllowed             | true                     |\n"
+        },
+        {
+          "info": {
+            "name": "Modifies the data of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}` instead.\n\nAllows the modification of certain data fields belonging to a card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4436 - CARD_INACTIVE\n* 4447 - NO_CARD_DETAILS_AVAILABLE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Reverses a card order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/reverse-order",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reverses a previously ordered card.\nThe reversal is only possible while the card order of a physical card is still in a cancellable state: for card renewals before 7:55 am on the same day as the card order request and for new card orders before 18:25 on the same day as the card order request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4470 - CARD_ORDER_REVERSAL_NOT_POSSIBLE\n* 4471 - CARD_ORDER_REVERSAL_FOR_VIRTUAL_CARD_NOT_ALLOW"
+        },
+        {
+          "info": {
+            "name": "Returns the card's details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the status and the details of the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4447 - NO_CARD_DETAILS_AVAILABLE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Modifies the data of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows the modification of certain data fields belonging to a card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4436 - CARD_INACTIVE\n* 4447 - NO_CARD_DETAILS_AVAILABLE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Modifies the status of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the status of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4438 - CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4439 - CARD_HAS_PENDING_STATUS\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Gets card credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/credentials",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "Get credentials (PAN, CVV) of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 4451 - INVALID_JWS_SIGNATURE\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Gets the PIN for the given card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "Get PIN of the given card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 4451 - INVALID_JWS_SIGNATURE\n* 4458 - RETRIEVE_PIN_NOT_ALLOWED_FOR_DELETED_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Starts a PIN set operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/start-set-pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "First call to be able to set the PIN for the specified card. debiX returns an ephemeral public key to encrypt the PIN on the issuer's side for the '/set-pin' call.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4440 - SET_PIN_NOT_ALLOWED_FOR_BLOCKED_OR_DELETED_CARD\n* 4442 - PIN_PREVIOUSLY_PASSED_TO_NEWER_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 4451 - INVALID_JWS_SIGNATURE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Starts a PIN set operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/start-set-pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "First call to be able to set the PIN for the specified card. debiX returns an ephemeral public key to encrypt the PIN on the issuer's side for the '/set-pin' call.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4440 - SET_PIN_NOT_ALLOWED_FOR_BLOCKED_OR_DELETED_CARD\n* 4442 - PIN_PREVIOUSLY_PASSED_TO_NEWER_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 4451 - INVALID_JWS_SIGNATURE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Sets the PIN for the given card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/set-pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "Sets the PIN for the given card. The PIN is encrypted with the shared key derived from debiX's ephemeral public key from the '/start-set-pin' request \nand the issuer's ephemeral private key corresponding to the issuer's ephemeral public key in this request (clientEphPubKey).  \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4440 - SET_PIN_NOT_ALLOWED_FOR_BLOCKED_OR_DELETED_CARD\n* 4442 - PIN_PREVIOUSLY_PASSED_TO_NEWER_CARD\n* 4450 - NO"
+        },
+        {
+          "info": {
+            "name": "Orders a PIN datamailer for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/pin-datamailer",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PIN datamailer orders are only possible for physical cards.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4469 - PIN_DELIVERY_NOT_ALLOWED_FOR_VIRTUAL_CARD\n* 4472 - MULTIPLE_PIN_DATAMAILER_ORDERS_PER_DAY\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Resets the PIN try counter for the given card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/reset-pin-try-counter",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requests the reset of PIN try counter for the given card. After the reset at the card processor, the cardholder has three PIN attempts again.\n\n In addition to standard application error codes, the following codes can be returned:\n * 4430 - UNKNOWN_CARD\n * 4474 - RESET_PIN_TRY_COUNTER_NOT_ALLOWED_FOR_BLOCKED_OR_DELETED_CARD\n * 4475 - RESET_PIN_TRY_COUNTER_DAILY_LIMIT_EXCEEDED\n * 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns the card token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/card-token",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the unique card token of the specified card.\n\nIn addition to standard application error codes, following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns the card instance token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/card-instance-token",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the unique card instance token of the specified card.\n\nIn addition to standard application error codes, following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns the card instance token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/card-instance-token",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the unique card instance token of the specified card.\n\nIn addition to standard application error codes, following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns the card identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/short-card-id",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ]
+          },
+          "docs": "Returns the card identifier, i.e. short card id, of the given card.\n\nIn addition to standard application error codes, following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Reverses a card order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/reverse-order",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/reverse-order` instead.\n\nReverses a previously ordered card.\nThe reversal is only possible while the card order of a physical card is still in a cancellable state: for card renewals before 7:55 am on the same day as the card order request and for new card orders before 18:25 on the same day as the card order request.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4470 "
+        },
+        {
+          "info": {
+            "name": "Modifies the status of a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/status",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `PUT /debix/bank/cardtoken/v2/cards/{cardToken}/status` instead.\n\nModifies the status of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4438 - CARD_STATUS_UPDATE_NOT_ALLOWED\n* 4439 - CARD_HAS_PENDING_STATUS\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns the card's details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/details",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}` instead.\n\nReturns the status and the details of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4447 - NO_CARD_DETAILS_AVAILABLE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Gets card credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/credentials",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/credentials instead`.\n\nGet credentials (PAN, CVV) of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 4451 - INVALID_JWS_SIGNATURE\n* 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Gets the PIN for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/pin` instead.\n\nGet PIN of the specified card.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4450 - NO_CERTIFICATE_FOUND\n* 4451 - INVALID_JWS_SIGNATURE\n* 4458 - RETRIEVE_PIN_NOT_ALLOWED_FOR_DELETED_CARD\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Sets the PIN for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/set-pin",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/set-pin` instead.\n\nSets the PIN for the specified card. The PIN is encrypted with the shared key derived from debiX's ephemeral public key from the '/start-set-pin' request \nand the issuer's ephemeral private key corresponding to the issuer's ephemeral public key in this request (clientEphPubKey).  \n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4440 - SET_PIN_NOT_ALLO"
+        },
+        {
+          "info": {
+            "name": "Orders a PIN datamailer for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/pin-datamailer",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/pin-datamailer` instead.\n\nPIN datamailer orders are only possible for physical cards.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4469 - PIN_DELIVERY_NOT_ALLOWED_FOR_VIRTUAL_CARD\n* 4472 - MULTIPLE_PIN_DATAMAILER_ORDERS_PER_DAY\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Resets the PIN try counter for the specified card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/reset-pin-try-counter",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/reset-pin-try-counter` instead.\nRequests the reset of PIN try counter for the given card. After the reset at the card processor, the cardholder has three PIN attempts again.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4474 - RESET_PIN_TRY_COUNTER_NOT_ALLOWED_FOR_BLOCKED_OR_DELETED_CARD\n* 4475 - RESET_PIN_TRY_COUNTER_DAILY_LIMIT_EXCEEDED\n* 4484 - BANK_CARDS_NOT_SUPPO"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

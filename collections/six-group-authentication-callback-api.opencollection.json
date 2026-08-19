@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Authentication callback API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication callback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Processes the result of the authentication request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/callback",
+            "headers": [
+              {
+                "name": "x-correlation-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The operation processes the result of the authentication request and notifies the ACS."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS BulkSubscriptionResults API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BulkSubscriptionResults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the (basic) settlement information for all securities in the business partner's subscription as a gzipped file.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/bulk-subscription/resultsFile",
+            "headers": [
+              {
+                "name": "X-Correlation-Id",
+                "value": ""
+              },
+              {
+                "name": "If-None-Match",
+                "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+              }
+            ]
+          },
+          "docs": "Get the basic settlement information for all securities defined by the business partner in its subscription as a gzipped file.\n\nSettlement information is previous business day and the subscription list taken into account is the one available on the server before midnight."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

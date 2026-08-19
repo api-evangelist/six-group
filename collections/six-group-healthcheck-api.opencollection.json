@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS healthcheck API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "healthcheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET Health Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/healthcheck"
+          },
+          "docs": "Returns a status message of the system."
+        },
+        {
+          "info": {
+            "name": "HEAD Health Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/healthcheck"
+          },
+          "docs": "Returns a status message of the system (only head, no content)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

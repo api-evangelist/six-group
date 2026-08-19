@@ -1,0 +1,3764 @@
+{
+  "item": [
+    {
+      "id": "68df43e7-cdbb-4598-85bc-d594c9cebff7",
+      "name": "Alias Directory (Beta)",
+      "description": {
+        "content": "Visa Alias Directory related operations. Feature under development, subject to change.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83363f60-134d-4519-b707-e59ec12abf79",
+          "name": "Creates an alias in the Alias Directory.",
+          "request": {
+            "name": "Creates an alias in the Alias Directory.",
+            "description": {
+              "content": "Creates an alias in the Alias Directory and associates the specified cards with the alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4521 - ALIAS_ALREADY_EXISTS\n* 4523 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"aliasType\": \"<string>\",\n  \"aliasValue\": \"<string>\",\n  \"consent\": {\n    \"presenter\": \"<string>\",\n    \"validFromDateTime\": \"<dateTime>\",\n    \"version\": \"<string>\"\n  },\n  \"profile\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"contactInfo\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"dateOfBirth\": \"<string>\",\n    \"lastNameLocal\": \"<string>\",\n    \"preferredName\": \"<string>\",\n    \"firstNameLocal\": \"<string>\",\n    \"middleNameLocal\": \"<string>\"\n  },\n  \"cards\": [\n    {\n      \"nameOnCard\": \"<string>\",\n      \"cardType\": \"<string>\",\n      \"billingAddress\": {\n        \"country\": \"<We recommend to use the Alpha-3 format>\",\n        \"city\": \"<string>\",\n        \"state\": \"<We recommend to use the ISO 3166-2>\",\n        \"postalCode\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"buildingNumber\": \"<string>\",\n        \"minorSubdivisionCode\": \"<string>\"\n      },\n      \"cardToken\": \"<string>\",\n      \"preferredFor\": [\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cea93737-4090-4a28-997a-b2896293d21b",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliasType\": \"PHONE\",\n  \"aliasValue\": \"41791112233\",\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  },\n  \"cards\": [\n    {\n      \"nameOnCard\": \"Peter Schweizer\",\n      \"cardType\": \"Visa Platinum\",\n      \"billingAddress\": {\n        \"country\": \"CHE\",\n        \"city\": \"Zürich\",\n        \"state\": \"CH-ZH\",\n        \"postalCode\": \"8000\",\n        \"streetName\": \"Bahnhofstrasse\",\n        \"addressLine1\": \"Zurich Coffee Shop\",\n        \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n        \"buildingNumber\": \"18\",\n        \"minorSubdivisionCode\": \"ZH\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"preferredFor\": [\n        \"RECEIVE\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"aliasId\": \"e336c8c8-2945-4be3-af3e-951ec2d01219\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e0ed648-802e-4731-9268-f5eff6df6e57",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliasType\": \"PHONE\",\n  \"aliasValue\": \"41791112233\",\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  },\n  \"cards\": [\n    {\n      \"nameOnCard\": \"Peter Schweizer\",\n      \"cardType\": \"Visa Platinum\",\n      \"billingAddress\": {\n        \"country\": \"CHE\",\n        \"city\": \"Zürich\",\n        \"state\": \"CH-ZH\",\n        \"postalCode\": \"8000\",\n        \"streetName\": \"Bahnhofstrasse\",\n        \"addressLine1\": \"Zurich Coffee Shop\",\n        \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n        \"buildingNumber\": \"18\",\n        \"minorSubdivisionCode\": \"ZH\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"preferredFor\": [\n        \"RECEIVE\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72207871-ca08-4440-97d5-4c5c67903e94",
+              "name": "Not found or card is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliasType\": \"PHONE\",\n  \"aliasValue\": \"41791112233\",\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  },\n  \"cards\": [\n    {\n      \"nameOnCard\": \"Peter Schweizer\",\n      \"cardType\": \"Visa Platinum\",\n      \"billingAddress\": {\n        \"country\": \"CHE\",\n        \"city\": \"Zürich\",\n        \"state\": \"CH-ZH\",\n        \"postalCode\": \"8000\",\n        \"streetName\": \"Bahnhofstrasse\",\n        \"addressLine1\": \"Zurich Coffee Shop\",\n        \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n        \"buildingNumber\": \"18\",\n        \"minorSubdivisionCode\": \"ZH\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"preferredFor\": [\n        \"RECEIVE\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3377b2d8-ec14-4c2e-8d46-f0cfde266de2",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliasType\": \"PHONE\",\n  \"aliasValue\": \"41791112233\",\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  },\n  \"cards\": [\n    {\n      \"nameOnCard\": \"Peter Schweizer\",\n      \"cardType\": \"Visa Platinum\",\n      \"billingAddress\": {\n        \"country\": \"CHE\",\n        \"city\": \"Zürich\",\n        \"state\": \"CH-ZH\",\n        \"postalCode\": \"8000\",\n        \"streetName\": \"Bahnhofstrasse\",\n        \"addressLine1\": \"Zurich Coffee Shop\",\n        \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n        \"buildingNumber\": \"18\",\n        \"minorSubdivisionCode\": \"ZH\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"preferredFor\": [\n        \"RECEIVE\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f67e5e9-4a34-4865-a9aa-d7b6ee812c59",
+          "name": "Retrieves an alias from the Alias Directory.",
+          "request": {
+            "name": "Retrieves an alias from the Alias Directory.",
+            "description": {
+              "content": "Retrieves information about a specific alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2abf3366-3836-4579-8047-0f0c021bf932",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"aliasValue\": \"41791112233\",\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  },\n  \"aliasType\": \"PHONE\",\n  \"aliasStatus\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "949ad19e-7f73-4876-94c0-c59b60a75958",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f28794e-08d2-4c00-8ee2-13427b406bd0",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dd4e0b2-f45b-4e64-b7fe-1e8b21b13465",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dabc14f5-da65-4c83-8c28-77c60fe81029",
+          "name": "Updates an alias in the Alias Directory.",
+          "request": {
+            "name": "Updates an alias in the Alias Directory.",
+            "description": {
+              "content": "Updates the information associated with the alias such as the identification, profile, or consent.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consent\": {\n    \"presenter\": \"<string>\",\n    \"validFromDateTime\": \"<dateTime>\",\n    \"version\": \"<string>\"\n  },\n  \"profile\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"contactInfo\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"dateOfBirth\": \"<string>\",\n    \"lastNameLocal\": \"<string>\",\n    \"preferredName\": \"<string>\",\n    \"firstNameLocal\": \"<string>\",\n    \"middleNameLocal\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5db28704-2286-4bff-8fc1-b072c48ec4f3",
+              "name": "The alias information was successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "798aa7cf-721c-4ed8-85a7-1cbbfd7ff521",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34e43e19-dbdc-4e66-93b4-b2defd6fabd6",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db59eaeb-dabe-42d6-b412-d6461d738656",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consent\": {\n    \"presenter\": \"Bank A\",\n    \"validFromDateTime\": \"2021-12-01T10:00:00Z\",\n    \"version\": \"1.0\"\n  },\n  \"profile\": {\n    \"firstName\": \"Hans\",\n    \"lastName\": \"R.\",\n    \"middleName\": \"Ruedi\",\n    \"contactInfo\": [\n      {\n        \"type\": \"PHONE\",\n        \"value\": \"41791112233\"\n      }\n    ],\n    \"dateOfBirth\": \"1947-02-01\",\n    \"lastNameLocal\": \"R.\",\n    \"preferredName\": \"Hansruedi\",\n    \"firstNameLocal\": \"Hans\",\n    \"middleNameLocal\": \"Ruedi\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "318f7c44-eadc-406b-bbaf-ec5625ac599d",
+          "name": "Deletes an alias in the Alias Directory.",
+          "request": {
+            "name": "Deletes an alias in the Alias Directory.",
+            "description": {
+              "content": "Deletes a specified alias which entails a deletion of the corresponding Visa Alias Directory card registrations.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89760662-f25b-4104-bc10-466524920019",
+              "name": "The alias was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "18c3b72c-60e9-4114-8b67-f1b53ceb5f44",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6198445-d035-49d8-b831-23bdb10b216a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f8a4d2b-09d5-4434-bdb1-dad03b111412",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e89160e-50ca-47a5-9b43-6d4c24352277",
+          "name": "Updates the status of an alias in the Alias Directory.",
+          "request": {
+            "name": "Updates the status of an alias in the Alias Directory.",
+            "description": {
+              "content": "Updates the status of the specified alias.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"aliasStatus\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e3d1fec-17aa-4bd3-98fb-3ff345273df5",
+              "name": "The alias information was successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliasStatus\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aaaaa260-95bd-46ea-b358-1317c87e969c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliasStatus\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce1c74ad-8c3e-4ea4-a78a-f4c5935a1a9e",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliasStatus\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a61a7c-34ba-47cb-8450-0508877b916c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"aliasStatus\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "888e4c84-bf26-4f9c-9d07-ca72202d137c",
+          "name": "Retrieves all the cards corresponding to an alias.",
+          "request": {
+            "name": "Retrieves all the cards corresponding to an alias.",
+            "description": {
+              "content": "Retrieves all the cards corresponding to the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4520 - UNKNOWN_ALIAS\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4646c1d7-65ea-4198-a6aa-3ac69d86d0db",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cards\": [\n    {\n      \"nameOnCard\": \"Peter Schweizer\",\n      \"cardType\": \"Visa Platinum\",\n      \"billingAddress\": {\n        \"country\": \"CHE\",\n        \"city\": \"Zürich\",\n        \"state\": \"CH-ZH\",\n        \"postalCode\": \"8000\",\n        \"streetName\": \"Bahnhofstrasse\",\n        \"addressLine1\": \"Zurich Coffee Shop\",\n        \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n        \"buildingNumber\": \"18\",\n        \"minorSubdivisionCode\": \"ZH\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"preferredFor\": [\n        \"RECEIVE\"\n      ]\n    },\n    {\n      \"nameOnCard\": \"Peter Schweizer\",\n      \"cardType\": \"Visa Platinum\",\n      \"billingAddress\": {\n        \"country\": \"CHE\",\n        \"city\": \"Zürich\",\n        \"state\": \"CH-ZH\",\n        \"postalCode\": \"8000\",\n        \"streetName\": \"Bahnhofstrasse\",\n        \"addressLine1\": \"Zurich Coffee Shop\",\n        \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n        \"buildingNumber\": \"18\",\n        \"minorSubdivisionCode\": \"ZH\"\n      },\n      \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n      \"preferredFor\": [\n        \"RECEIVE\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "879c27bb-d1e1-4221-b0eb-62cd22c6c736",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "697b2405-acef-4c4f-bccd-de9aaf475fbf",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44fa9301-2f49-4193-9f15-a911ba0e3fc9",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c97d8697-7290-4126-b402-5105bfa4ee34",
+          "name": "Registers a card for Visa Alias Directory.",
+          "request": {
+            "name": "Registers a card for Visa Alias Directory.",
+            "description": {
+              "content": "Registers the given card for Visa Alias Directory under the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4423 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"<string>\",\n    \"cardType\": \"<string>\",\n    \"billingAddress\": {\n      \"country\": \"<We recommend to use the Alpha-3 format>\",\n      \"city\": \"<string>\",\n      \"state\": \"<We recommend to use the ISO 3166-2>\",\n      \"postalCode\": \"<string>\",\n      \"streetName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"buildingNumber\": \"<string>\",\n      \"minorSubdivisionCode\": \"<string>\"\n    },\n    \"cardToken\": \"<string>\",\n    \"preferredFor\": [\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "281beaca-a6f5-4c3b-ab4d-b6e3c69c6d2b",
+              "name": "The alias information was successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4fe5444e-bb69-4af8-b22d-b9699e0d2339",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d38c98ed-9c73-4f5a-9f37-e513b6299322",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "823c592e-1cb3-4fa5-8f3a-0a22aa5b7b6a",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "526f91d2-6aa8-4c41-bbd4-dd64aab67dcf",
+          "name": "Updates a card in the Alias Directory.",
+          "request": {
+            "name": "Updates a card in the Alias Directory.",
+            "description": {
+              "content": "Updates the given card for Visa Alias Directory under the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4423 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"<string>\",\n    \"cardType\": \"<string>\",\n    \"billingAddress\": {\n      \"country\": \"<We recommend to use the Alpha-3 format>\",\n      \"city\": \"<string>\",\n      \"state\": \"<We recommend to use the ISO 3166-2>\",\n      \"postalCode\": \"<string>\",\n      \"streetName\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"buildingNumber\": \"<string>\",\n      \"minorSubdivisionCode\": \"<string>\"\n    },\n    \"cardToken\": \"<string>\",\n    \"preferredFor\": [\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "015f417b-9f8e-4df9-86e5-ab90dc149f6e",
+              "name": "The alias information was successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd33f6eb-aae2-40c6-a295-7a5a8acbfcb9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "218071df-c91b-4fb8-a80e-67fab1f4c89d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92145120-f080-4728-bc7a-764c35c92e97",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fe21c42-c64d-42ba-b429-482b0670a35e",
+          "name": "Retrieves a card registered in the Alias Directory.",
+          "request": {
+            "name": "Retrieves a card registered in the Alias Directory.",
+            "description": {
+              "content": "Retrieves a specific card corresponding to the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId",
+                "cards",
+                ":cardToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49d5c2bb-c6a4-4826-a2b7-0147214e8f89",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"cardToken\": \"CTK-54716A6080B14CF19CEA3C170F85B1DD\",\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0537581-301c-452f-aa08-031879f1f21a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "402deddc-be2d-442b-ab7a-ffad908f07e6",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcb34e9a-2457-4010-ad49-d633e834467d",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31d1812c-f114-4396-96b3-885606894fd5",
+          "name": "Deletes a card from the Alias Directory.",
+          "request": {
+            "name": "Deletes a card from the Alias Directory.",
+            "description": {
+              "content": "Deletes the given card from the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId",
+                "cards",
+                ":cardToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardToken",
+                  "description": "(Required) Card token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "870c9d2e-6572-4f82-9b16-425b2ea29d89",
+              "name": "The card was successfully deleted from the alias",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c197c798-7d8d-43d8-b3ef-1265b87758f0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "616d0669-1137-478f-a2fa-463071508003",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f079cc6-aae9-4068-b1f8-27fe25323830",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    ":cardToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardToken",
+                      "description": "(Required) Card token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9c570f3-b71e-49b4-bd71-87bf8ba0ce1b",
+          "name": "Retrieves a card registered in the Alias Directory.",
+          "request": {
+            "name": "Retrieves a card registered in the Alias Directory.",
+            "description": {
+              "content": "Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards/retrieve` instead.\n\nRetrieves a specific card corresponding to the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId",
+                "cards",
+                "retrieve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af41a387-6154-4158-9879-7e86c2e14c81",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    "retrieve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"card\": {\n    \"nameOnCard\": \"Peter Schweizer\",\n    \"cardType\": \"Visa Platinum\",\n    \"billingAddress\": {\n      \"country\": \"CHE\",\n      \"city\": \"Zürich\",\n      \"state\": \"CH-ZH\",\n      \"postalCode\": \"8000\",\n      \"streetName\": \"Bahnhofstrasse\",\n      \"addressLine1\": \"Zurich Coffee Shop\",\n      \"addressLine2\": \"z. H. Hans Ruedi Rüdisüli\",\n      \"buildingNumber\": \"18\",\n      \"minorSubdivisionCode\": \"ZH\"\n    },\n    \"shortCardId\": {\n      \"bankClearingNumber\": 50000,\n      \"cardNumber\": 12345678,\n      \"cardType\": 1\n    },\n    \"preferredFor\": [\n      \"RECEIVE\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feedcea8-edc3-436e-8aaa-167fec9d7a35",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    "retrieve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b08391d-09c7-45a4-99a0-21eaadc10278",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    "retrieve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fec32165-e85c-43c0-8477-a36713c04847",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    "retrieve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 2\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bebb51b-1ffe-4667-a548-bfd6b4919aee",
+          "name": "Deletes a card from the Alias Directory.",
+          "request": {
+            "name": "Deletes a card from the Alias Directory.",
+            "description": {
+              "content": "Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards/delete` instead.\n\nDeletes the given card from the alias of the specified Alias ID.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4520 - UNKNOWN_ALIAS\n* 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY\n* 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "visa-alias-directory",
+                "aliases",
+                ":aliasId",
+                "cards",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "aliasId",
+                  "description": "(Required) Identifier of the alias"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for a request and response pair.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                "key": "issuer-trace-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": \"<integer>\",\n    \"cardNumber\": \"<integer>\",\n    \"cardType\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60ea8691-cb07-4ee5-95df-a5c4741b06ef",
+              "name": "The card was successfully deleted from the alias",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "336d8b8f-c0bc-4e65-8df7-a7fedefdc82f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1997703e-0430-44b6-ba71-490c50601327",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c760758-c22d-4a6a-a18e-34e3667e3410",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "visa-alias-directory",
+                    "aliases",
+                    ":aliasId",
+                    "cards",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "aliasId",
+                      "description": "(Required) Identifier of the alias"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for a request and response pair.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A issuer‑provided unique trace identifier to correlate the complete flow started by this request.",
+                    "key": "issuer-trace-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shortCardId\": {\n    \"bankClearingNumber\": 50000,\n    \"cardNumber\": 12345678,\n    \"cardType\": 3\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3b12ac3d-bf38-42ee-bc4f-121a8d3cdb84",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Alias Directory (Beta) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,764 @@
+{
+  "item": [
+    {
+      "id": "846054a3-afd0-455f-8ae5-ecaa9bea0711",
+      "name": "BulkSubscriptionResults",
+      "description": {
+        "content": "Obtain the (basic) settlement information for securities included in the business partner's subscription.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29fe11a0-8307-4c09-b83e-81a718fe80da",
+          "name": "Get the (basic) settlement information for all securities in the business partner's subscription as a gzipped file.",
+          "request": {
+            "name": "Get the (basic) settlement information for all securities in the business partner's subscription as a gzipped file.",
+            "description": {
+              "content": "Get the basic settlement information for all securities defined by the business partner in its subscription as a gzipped file.\n\nSettlement information is previous business day and the subscription list taken into account is the one available on the server before midnight.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulk-subscription",
+                "resultsFile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Correlation identifier for the request",
+                "key": "X-Correlation-Id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/gzip"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "686c4a68-2570-4780-bc7b-7f9ba40c224d",
+              "name": "The basic settlement information for all securities defined in the business partner's subscription.\n\nThe format of the file is given by the type 'ResponseSubscriptionBasicSettlementInfoQuery'; see 'SampleResultsFileContents' as an example.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Identifier of the current version of the resource.",
+                  "key": "ETag",
+                  "value": "\"A39AC1BFFADB215999106EC2B74AAA\""
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/gzip"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9de2dca4-6a64-4871-a303-ed9ac9ef00df",
+              "name": "Not Modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.api+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Identifier of the current version of the resource.",
+                  "key": "ETag",
+                  "value": "\"A39AC1BFFADB215999106EC2B74AAA\""
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.api+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4003df5a-7b98-4815-9cee-1d9a5c40adf1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"header \\\"X-Correlation-ID\\\" validation failed with error: \\\"failed to match pattern \\\"^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}\\\" with \\\"\\\"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e45160f0-6e01-47d2-9a35-0a436967882e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No required TLS certificate was sent\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae9647db-ae20-49f2-ac16-ea7223bbe61f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a86598a9-643d-4c1a-8af2-dce300408715",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"no Route matched with those values\",\n  \"errorDetail\": {\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"detail\": \"Bulk subscription results not available.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "904b7db1-1f92-4c67-9a69-18c8d3737b6f",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "Provides the remaining requests quota in the current time window (for the specific client).\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Remaining",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds until the quota resets.\nSee the 'RateLimit Header Fields for HTTP' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.",
+                  "key": "RateLimit-Reset",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "description": "Indicates the number of seconds the client ought to wait before making a follow-up request.\nSee RFC7231, §7.1.3 (https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3).\n*Note: might be higher than 'RateLimit-Reset'.*",
+                  "key": "Retry-After",
+                  "value": "50"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"API rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52971031-d213-43f3-9276-f468e199f1fd",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server error\",\n  \"errorDetail\": {\n    \"title\": \"Internal Server Error\",\n    \"status\": 500,\n    \"detail\": \"Something went wrong.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06d8ac5a-9cb8-4fe4-86b5-2f8064860e1d",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86a32eed-5bb9-4b8c-8ccc-03d6a4546cbc",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk-subscription",
+                    "resultsFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Correlation identifier for the request",
+                    "key": "X-Correlation-Id",
+                    "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The RFC7232 If-None-Match header field in a request requires the server to only operate on the resource if it does not match any of the provided entity-tags. If the provided entity-tag is `*`, it is required that the resource does not exist at all.",
+                    "key": "If-None-Match",
+                    "value": "7da7a728-f910-11e6-942a-68f728c1ba70"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlation identifier of the original request.",
+                  "key": "X-Correlation-Id",
+                  "value": "ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The upstream server is timing out.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fa1130cb-8a9b-4ecb-bc4c-2365c7e59536",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS BulkSubscriptionResults API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

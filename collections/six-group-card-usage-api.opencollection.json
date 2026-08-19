@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS Card Usage API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns a list of authorizations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/authorizations",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of authorizations for the given card using filter arguments; only the authorizations of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of authorizations for a digital card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/digitalcards/:dpan/authorizations",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dpan",
+                "value": "",
+                "type": "path",
+                "description": "Digital card number."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of authorizations for a digital card, specified by the dpan, using filter arguments; only the authorizations of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of presentments.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/cards/:cardToken/presentments",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardToken",
+                "value": "",
+                "type": "path",
+                "description": "Card token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of presentments for the given card using filter arguments; only the presentments of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Gets merchant logo of given merchant id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/merchants/:merchantId/logo",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "If-None-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "path",
+                "description": "A unique identifier corresponding to a merchant in debiX."
+              }
+            ]
+          },
+          "docs": "Retrieves the merchant logo for a given merchant id, including\nits version. The logo is only returned, if the version given\nin the ImageVersionHeader parameter does not correspond to the version in debiX.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4455 - UNKNOWN_MERCHANT\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of authorizations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/authorizations/search",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/authorizations` instead.\n\nReturns a list of authorizations using filter arguments; only the authorizations of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        },
+        {
+          "info": {
+            "name": "Returns a list of presentments.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/presentments/search",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "issuer-trace-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deprecated, use `POST /debix/bank/cardtoken/v2/cards/{cardToken}/presentments` instead.\n\nReturns a list of presentments using filter arguments; only the presentments of the last 120 days are available. The list is ordered by transaction date from newest to oldest.\n\nIn addition to standard application error codes, the following codes can be returned:\n* 4430 - UNKNOWN_CARD\n* 4432 - BANK_CLEARING_NUMBER_NOT_CONFIGURED\n* 4456 - UNKNOWN_WALLET_TYPE\n* 4484 - BANK_CARDS_NOT_SUPPORTED_BY_ISSUER\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

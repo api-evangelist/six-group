@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS status API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET Status in JSON Format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/servicestatus"
+          },
+          "docs": "Returns the service status data of the SIC service as a JSON object."
+        },
+        {
+          "info": {
+            "name": "HEAD Status in JSON Format",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/servicestatus"
+          },
+          "docs": "Service status data of the SIC service in JSON format (only head, no content)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS 3DS Authentication API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "3DS Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiates the authentication of a 3DS transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/authentication",
+            "headers": [
+              {
+                "name": "x-correlation-id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accepts and processes a 3DS authentication request."
+        },
+        {
+          "info": {
+            "name": "Cancels the authentication of a 3DS transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/authentication/:threeDsTransactionId/cancel",
+            "headers": [
+              {
+                "name": "x-correlation-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "threeDsTransactionId",
+                "value": "a5b86c4e-0caa-11e8-ba89-0ed5f89f718b",
+                "type": "path",
+                "description": "The 3DS transaction id."
+              }
+            ]
+          },
+          "docs": "Cancels an ongoing 3DS authentication identified by the transaction ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

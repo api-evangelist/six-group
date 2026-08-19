@@ -2,10 +2,10 @@ generated: '2026-07-22'
 method: derived
 status: candidate
 source: openapi/ operations of the open Swiss infrastructure APIs
-note: No official SIX MCP server was found (docs, npm, MCP registries checked 2026-07-22). Candidate
-  tool list derived from the openly documented, unauthenticated Swiss infrastructure APIs; the
-  sales-gated Web API/Bulk API and mTLS-gated debiX/bLink surfaces are excluded as they cannot
-  be served without certificate onboarding.
+note: No official SIX MCP server was found (docs, npm, MCP registries checked 2026-07-22). Candidate tool
+  list derived from the openly documented, unauthenticated Swiss infrastructure APIs; the sales-gated
+  Web API/Bulk API and mTLS-gated debiX/bLink surfaces are excluded as they cannot be served without certificate
+  onboarding.
 server:
   name: six-group
   transport: http
@@ -43,3 +43,9 @@ tools:
   description: Get detailed settlement information for a security.
   source_operation: openapi/six-group-detailedsettlementinformation-api-openapi.yml#getDetailedSettlementInfo
   api: Settlement Info Reporting API
+deployment:
+  mode: none
+  verified: derived
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census

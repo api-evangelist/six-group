@@ -1,0 +1,429 @@
+{
+  "item": [
+    {
+      "id": "89ed2978-ecff-4613-aecc-7dc22eb8aefe",
+      "name": "3DS Authentication",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "958fcbe2-d145-4d7b-a670-d9735112b85a",
+          "name": "Initiates the authentication of a 3DS transaction",
+          "request": {
+            "name": "Initiates the authentication of a 3DS transaction",
+            "description": {
+              "content": "Accepts and processes a 3DS authentication request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authentication"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for an authentication request and authentication callback",
+                "key": "x-correlation-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"threeDsTransactionId\": \"<string>\",\n  \"authId\": \"<string>\",\n  \"transactionDetail\": {\n    \"maskedCardNumber\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"purchaseDate\": \"<dateTime>\",\n    \"purchaseAmount\": \"<string>\",\n    \"purchaseAmountExponent\": \"<number>\",\n    \"purchaseCurrency\": \"<string>\"\n  },\n  \"threeDSRequestorAppURL\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bc73c064-7251-4e94-913b-a5d0a623853f",
+              "name": "Authentication received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsTransactionId\": \"a5b86c4e-0caa-11e8-ba89-0ed5f89f718b\",\n  \"authId\": \"ea3ze38kfj3g6ktv6wn14aaylvmdv3qn\",\n  \"transactionDetail\": {\n    \"maskedCardNumber\": \"**** **** **** 1234\",\n    \"merchantName\": \"ACME Corporation\",\n    \"purchaseDate\": \"2017-07-21T17:32:28Z\",\n    \"purchaseAmount\": \"120012\",\n    \"purchaseAmountExponent\": 2,\n    \"purchaseCurrency\": \"CHF\"\n  },\n  \"threeDSRequestorAppURL\": \"https://requestor.url.com?id=24dfc3e8-0dfa-45d7-95c1-4d213a8da9d9\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "734072d9-0359-4cce-9272-f79c1341c980",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsTransactionId\": \"a5b86c4e-0caa-11e8-ba89-0ed5f89f718b\",\n  \"authId\": \"ea3ze38kfj3g6ktv6wn14aaylvmdv3qn\",\n  \"transactionDetail\": {\n    \"maskedCardNumber\": \"**** **** **** 1234\",\n    \"merchantName\": \"ACME Corporation\",\n    \"purchaseDate\": \"2017-07-21T17:32:28Z\",\n    \"purchaseAmount\": \"120012\",\n    \"purchaseAmountExponent\": 2,\n    \"purchaseCurrency\": \"CHF\"\n  },\n  \"threeDSRequestorAppURL\": \"https://requestor.url.com?id=24dfc3e8-0dfa-45d7-95c1-4d213a8da9d9\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    },\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f1b4150-4c62-49e1-830f-7a4f5844d1ee",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"threeDsTransactionId\": \"a5b86c4e-0caa-11e8-ba89-0ed5f89f718b\",\n  \"authId\": \"ea3ze38kfj3g6ktv6wn14aaylvmdv3qn\",\n  \"transactionDetail\": {\n    \"maskedCardNumber\": \"**** **** **** 1234\",\n    \"merchantName\": \"ACME Corporation\",\n    \"purchaseDate\": \"2017-07-21T17:32:28Z\",\n    \"purchaseAmount\": \"120012\",\n    \"purchaseAmountExponent\": 2,\n    \"purchaseCurrency\": \"CHF\"\n  },\n  \"threeDSRequestorAppURL\": \"https://requestor.url.com?id=24dfc3e8-0dfa-45d7-95c1-4d213a8da9d9\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    },\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a2ad198-220e-433a-b262-aee1e2ff15ee",
+          "name": "Cancels the authentication of a 3DS transaction",
+          "request": {
+            "name": "Cancels the authentication of a 3DS transaction",
+            "description": {
+              "content": "Cancels an ongoing 3DS authentication identified by the transaction ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authentication",
+                ":threeDsTransactionId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "threeDsTransactionId",
+                  "description": "(Required) The 3DS transaction id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier for an authentication request and authentication callback",
+                "key": "x-correlation-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eeea15e1-622d-4ca1-8211-27ccf4b8c4f2",
+              "name": "Authentication cancellation received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    ":threeDsTransactionId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "threeDsTransactionId",
+                      "description": "(Required) The 3DS transaction id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a1fc17e-c4f9-4a9c-8c21-df48f89e3bd0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    ":threeDsTransactionId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "threeDsTransactionId",
+                      "description": "(Required) The 3DS transaction id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    },\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36dfa0fa-c6c9-46a8-bde6-02d4cfa9e972",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    ":threeDsTransactionId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "threeDsTransactionId",
+                      "description": "(Required) The 3DS transaction id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier for an authentication request and authentication callback",
+                    "key": "x-correlation-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applicationError\": \"OPERATION_FAILED\",\n  \"errorCode\": 5001,\n  \"description\": \"The requested operation failed.\",\n  \"errors\": [\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    },\n    {\n      \"errorCode\": 42,\n      \"description\": \"The answer to the great question of Life, the Universe and Everything.\"\n    }\n  ],\n  \"errorToken\": \"618503aa-7beb-4d3d-986e-36f1fdbd0e13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fb316200-3f95-4b0f-a267-af0d86a5dd85",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS 3DS Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}

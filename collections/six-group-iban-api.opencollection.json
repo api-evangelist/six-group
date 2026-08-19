@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS iban API",
+    "version": "2.1.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "iban",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET IBAN information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.six-group.com/api/debix-auth/provider-auth/v2/iban",
+            "params": [
+              {
+                "name": "iban",
+                "value": "",
+                "type": "query",
+                "description": "International bank account number (IBAN) parameter of the API call."
+              }
+            ]
+          },
+          "docs": "Validates the international bank account number (IBAN) and returns detail information if available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

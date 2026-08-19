@@ -1,0 +1,160 @@
+{
+  "item": [
+    {
+      "id": "d92fcca9-8496-4798-8501-879521d14cd5",
+      "name": "status",
+      "description": {
+        "content": "**SIC Status**\nInformation about about the status of various services can be found here.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12c18835-1c67-4c03-a97f-a5ab8499b0a2",
+          "name": "GET Status in JSON Format",
+          "request": {
+            "name": "GET Status in JSON Format",
+            "description": {
+              "content": "Returns the service status data of the SIC service as a JSON object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicestatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8f3efec-7208-456a-9595-5253fa81a209",
+              "name": "Service status in JSON format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicestatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"serviceIdentification\": \"PCI_P\",\n  \"status\": \"UP\",\n  \"timestamp\": \"2024-12-21T10:52:05.1904957+01:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a259815c-928a-474e-9256-cb910dc71254",
+          "name": "HEAD Status in JSON Format",
+          "request": {
+            "name": "HEAD Status in JSON Format",
+            "description": {
+              "content": "Service status data of the SIC service in JSON format (only head, no content).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicestatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "551545a9-227b-455c-973b-4baab55957c3",
+              "name": "Content can be downloaded with GET method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicestatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.six-group.com/api/debix-auth/provider-auth/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b696a1a5-9a84-4f35-a18d-78d428dd25ff",
+    "name": "debiX Auth Provider API: Provider-to-SIX 3DS status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Callback API used by the Authentication Provider and implemented by SIX / debiX",
+      "type": "text/plain"
+    }
+  }
+}
