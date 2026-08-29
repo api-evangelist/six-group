@@ -309,6 +309,9 @@ apis:
     Swiss market, publicly documented on the SIX API portal with a downloadable OpenAPI 3.0
     definition (CC BY-ND 4.0 licensed).
 common:
+- type: CapabilityMap
+  url: capabilities/six-group-capability-edges.yml
+  name: SIX Business Capability Map
 - type: VulnerabilityDisclosure
   url: security/six-group-vulnerability-disclosure.yml
 - type: DomainSecurity

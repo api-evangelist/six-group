@@ -1,0 +1,98 @@
+slug: six-group
+provider: SIX
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Card Management
+  spec_file: six-group-card-management-api-openapi.yml
+  capability_id: BC-1340.60
+  capability_id_l1: BC-1340
+  capability_name: Card Issuance Management
+  confidence: 0.9
+  evidence: POST /cards — Orders a new card; PUT /cards/{cardToken}/status — Modifies the status of a
+    card; POST /cards/{cardToken}/set-pin — Sets the PIN for the given card; schemas CardOrderData, CardMaterial,
+    BlockedCardReplacement
+  reason: Card ordering, production data, PIN issuance and datamailer dispatch, status change and replacement
+    are the card issuance and personalisation lifecycle for an issuing bank.
+- tag: Card Usage
+  spec_file: six-group-card-usage-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.85
+  evidence: POST /cards/{cardToken}/authorizations getAuthorizations 'Returns a list of authorizations.';
+    POST /cards/{cardToken}/presentments 'Returns a list of presentments.'; schemas CardAcceptor, ApprovalCode,
+    ThreeDsIndicator, ReversalData
+  reason: Operations expose card authorisation and presentment (clearing) transaction data with acquirer/merchant,
+    approval code and reversal detail — card transaction processing, not generic reporting.
+- tag: 3DS Authentication
+  spec_file: six-group-3ds-authentication-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.8
+  evidence: POST /authentication — Initiates the authentication of a 3DS transaction; schema TransactionDetail
+  reason: Operations initiate and cancel strong customer authentication for a 3DS card transaction, which
+    is part of card transaction authorisation and fraud screening at the issuer/scheme layer.
+- tag: 3DS
+  spec_file: six-group-3ds-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.75
+  evidence: POST /cards/{cardToken}/3ds — Registers the card for 3DS; GET /cards/{cardToken}/otrc — Orders
+    an online One-Time-Registration-Code (OTRC); schema AuthenticationMethod, BiometricType
+  reason: Enrolment and maintenance of issued cards in 3-D Secure with authentication methods and one-time
+    registration codes — cardholder authentication supporting card transaction authorisation. Sits within
+    card transaction processing; some chance it is better read as card issuance servicing, hence 0.75.
+- tag: DetailedSettlementInformation
+  spec_file: six-group-detailedsettlementinformation-api-openapi.yml
+  capability_id: BC-1380.30
+  capability_id_l1: BC-1380
+  capability_name: Settlement Management
+  confidence: 0.75
+  evidence: GET /detailed-settlement-information/securities/{isin} getDetailedSettlementInfo 'Get detailed
+    settlement information for a security.'; schemas DetailedSettlementInfoPerCustodian, PrincipalCustodianReference
+  reason: Provides securities settlement information per custodian ('Settlement Info Reporting'), supporting
+    securities settlement operations; custody adjacency introduces some sub-capability ambiguity.
+- tag: Token Provisioning
+  spec_file: six-group-token-provisioning-api-openapi.yml
+  capability_id: BC-1340.60
+  capability_id_l1: BC-1340
+  capability_name: Card Issuance Management
+  confidence: 0.75
+  evidence: POST /cards/{cardToken}/apple-pay/provisioning-data 'Get data for push provisioning of the
+    given card to a Apple Pay wallet.'; POST /cards/{cardToken}/clicktopay/visa/provisioning 'Enrolls
+    a card in Visa Click to Pay.'
+  reason: Issuer-side provisioning/enrolment of cards into digital wallets and Click to Pay — digital
+    card issuance and activation.
+- tag: Token Lifecycle Management
+  spec_file: six-group-token-lifecycle-management-api-openapi.yml
+  capability_id: BC-1340.60
+  capability_id_l1: BC-1340
+  capability_name: Card Issuance Management
+  confidence: 0.7
+  evidence: PUT /digitalcards/{dpan}/status updateDigitalCardStatus 'Updates the status of a digital card.';
+    schemas DigitalCard, WalletProvider, TokenRequestor
+  reason: Lifecycle and status management of digital (tokenised) cards in wallets on the issuer side —
+    card issuance/activation and deactivation rather than transaction switching.
+- tag: calendar
+  spec_file: six-group-calendar-api-openapi.yml
+  capability_id: BC-1340.30
+  capability_id_l1: BC-1340
+  capability_name: Clearing & Settlement Management
+  confidence: 0.7
+  evidence: '''The clearing day calendar contains scheduling information for the electronic payment services
+    provided by SIX Interbank Clearing Ltd.''; schema ScheduledClearingDayChange'
+  reason: Clearing-day scheduling data for the Swiss interbank clearing service directly supports domestic
+    clearing and settlement operations.
