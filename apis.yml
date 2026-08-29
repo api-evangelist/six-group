@@ -13,6 +13,18 @@ description: SIX operates the financial market infrastructure of Switzerland and
   with Swiss interbank clearing and settlement APIs. Financial data access is enterprise and
   sales-gated with MTLS certificate authentication, while several Swiss payment infrastructure
   APIs are publicly documented with downloadable OpenAPI.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
