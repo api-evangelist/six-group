@@ -61,17 +61,20 @@ apis:
   - Corporate Actions
   - Real-Time
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
+  humanURL: >-
+    https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
   properties:
-  - url: https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
+  - url: >-
+      https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
     type: Documentation
   - url: https://web.apiportal.six-group.com/portal/bfi/catalog
     type: Portal
-  description: Single API onto the SIX financial data universe - real-time, intraday, end-of-day,
-    and historical pricing across asset classes, reference data, corporate actions, tax, and
-    ESG datasets from 900+ price sources - using REST/JSON, GraphQL, and WebSocket streaming
-    with MTLS certificate authentication. Documentation, sample code, and a Swagger test interface
-    live behind the SIX API Portal; access is sales-gated with demo access by request.
+  description: >-
+    Single API onto the SIX financial data universe - real-time, intraday, end-of-day, and historical
+    pricing across asset classes, reference data, corporate actions, tax, and ESG datasets from 900+ price
+    sources - using REST/JSON, GraphQL, and WebSocket streaming with MTLS certificate authentication.
+    Documentation, sample code, and a Swagger test interface live behind the SIX API Portal; access is
+    sales-gated with demo access by request.
 - aid: six-group:six-bulk-api
   name: SIX Bulk API
   tags:
@@ -80,14 +83,17 @@ apis:
   - Corporate Actions
   - End of Day
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html
+  humanURL: >-
+    https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html
   properties:
-  - url: https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html
+  - url: >-
+      https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html
     type: Documentation
-  description: REST/JSON bulk retrieval of the entire SIX financial data catalog - corporate
-    actions, equities and fixed income reference data, and end-of-day pricing - as full extracts
-    or delta updates since a given date/time, using ISO-standard formats and MTLS certificate
-    authentication. Fixed-fee packages, sales-gated with trial access by request.
+  description: >-
+    REST/JSON bulk retrieval of the entire SIX financial data catalog - corporate actions, equities and
+    fixed income reference data, and end-of-day pricing - as full extracts or delta updates since a given
+    date/time, using ISO-standard formats and MTLS certificate authentication. Fixed-fee packages, sales-gated
+    with trial access by request.
 - aid: six-group:blink-api
   name: SIX bLink API
   tags:
@@ -110,11 +116,11 @@ apis:
     type: LLMsTxt
   - url: https://docs.blink.six-group.com/docs/downloads
     type: Postman
-  description: Switzerland's open banking platform connecting banks and third-party service
-    providers over RESTful JSON/XML APIs with OAuth consent flows - Account Information Services
-    (AIS), Payment Submission Services (PSS), OpenWealth custody services, and consent base
-    modules. Publicly documented with a downloadable Postman collection and example payloads;
-    participation requires bLink admission.
+  description: >-
+    Switzerland's open banking platform connecting banks and third-party service providers over RESTful
+    JSON/XML APIs with OAuth consent flows - Account Information Services (AIS), Payment Submission Services
+    (PSS), OpenWealth custody services, and consent base modules. Publicly documented with a downloadable
+    Postman collection and example payloads; participation requires bLink admission.
 - aid: six-group:debix-api
   name: SIX debiX API
   tags:
@@ -158,8 +164,6 @@ apis:
     type: OpenAPI
   - url: overlays/six-group-debix-push-management-beta-api-overlay.yaml
     type: Overlay
-  - url: openapi/six-group-3ds-api-openapi.yml
-    type: OpenAPI
   - url: overlays/six-group-3ds-api-overlay.yaml
     type: Overlay
   - url: openapi/six-group-deprecated-api-openapi.yml
@@ -170,8 +174,6 @@ apis:
     type: OpenAPI
   - url: overlays/six-group-health-check-api-overlay.yaml
     type: Overlay
-  - url: openapi/six-group-healthcheck-api-openapi.yml
-    type: OpenAPI
   - url: overlays/six-group-healthcheck-api-overlay.yaml
     type: Overlay
   - url: openapi/_original/six-group-debix-bank-api-v2-bank-to-six-openapi.yml
@@ -180,10 +182,11 @@ apis:
     type: OpenAPI
   - url: https://docs.debix.six-group.com/debix-v2/release-notes
     type: ChangeLog
-  description: REST API for card issuers on the debiX debit and mobile payment platform - transaction
-    processing, card token lifecycle, push notifications, and bulk operations - with publicly
-    downloadable OpenAPI 3.1 definitions for the bank-to-SIX and cardtoken surfaces and documented
-    production and preprod hosts on api.six-group.com.
+  description: >-
+    REST API for card issuers on the debiX debit and mobile payment platform - transaction processing,
+    card token lifecycle, push notifications, and bulk operations - with publicly downloadable OpenAPI
+    3.1 definitions for the bank-to-SIX and cardtoken surfaces and documented production and preprod hosts
+    on api.six-group.com.
 - aid: six-group:debix-auth-provider-api
   name: SIX debiX Auth Provider API
   tags:
@@ -208,9 +211,10 @@ apis:
     type: OpenAPI
   - url: openapi/_original/six-group-debix-auth-provider-api-v2-provider-to-six-openapi.yml
     type: OpenAPI
-  description: Bidirectional authentication API pair between SIX and auth providers supporting
-    the 3DS out-of-band (OOB) authentication flow for debiX debit cards, with publicly downloadable
-    OpenAPI definitions covering both SIX-to-provider and provider-to-SIX directions.
+  description: >-
+    Bidirectional authentication API pair between SIX and auth providers supporting the 3DS out-of-band
+    (OOB) authentication flow for debiX debit cards, with publicly downloadable OpenAPI definitions covering
+    both SIX-to-provider and provider-to-SIX directions.
 - aid: six-group:swiss-bank-master-api
   name: Swiss Bank Master API
   tags:
@@ -224,8 +228,6 @@ apis:
   properties:
   - url: https://apiportal.six-group.com/apis/swiss-bank-master-api-ch-v3/docs
     type: Documentation
-  - url: openapi/six-group-bankmaster-api-openapi.yml
-    type: OpenAPI
   - url: overlays/six-group-bankmaster-api-overlay.yaml
     type: Overlay
   - url: openapi/six-group-iban-api-openapi.yml
@@ -234,9 +236,10 @@ apis:
     type: Overlay
   - url: openapi/_original/six-group-swiss-bank-master-openapi.json
     type: OpenAPI
-  description: Master data required for electronic payments in Switzerland - bank master records
-    in JSON and CSV plus IBAN tooling - published openly on the SIX API portal; the documented
-    production endpoints respond without registration (healthcheck HTTP 200 on 2026-07-21).
+  description: >-
+    Master data required for electronic payments in Switzerland - bank master records in JSON and CSV
+    plus IBAN tooling - published openly on the SIX API portal; the documented production endpoints respond
+    without registration (healthcheck HTTP 200 on 2026-07-21).
 - aid: six-group:sic-service-status-api
   name: SIC Service Status API
   tags:
@@ -255,9 +258,10 @@ apis:
     type: Overlay
   - url: openapi/_original/six-group-sic-service-status-openapi.json
     type: OpenAPI
-  description: Current operational status of the electronic payment services run by SIX Interbank
-    Clearing Ltd, publicly documented with downloadable OpenAPI; GET /servicestatus on the documented
-    production host returned HTTP 200 without authentication on 2026-07-21.
+  description: >-
+    Current operational status of the electronic payment services run by SIX Interbank Clearing Ltd, publicly
+    documented with downloadable OpenAPI; GET /servicestatus on the documented production host returned
+    HTTP 200 without authentication on 2026-07-21.
 - aid: six-group:sic-clearing-day-calendar-api
   name: SIC Clearing Day Calendar API
   tags:
@@ -276,9 +280,10 @@ apis:
     type: Overlay
   - url: openapi/_original/six-group-sic-clearing-day-calendar-openapi.json
     type: OpenAPI
-  description: Scheduling information for the electronic payment services provided by SIX Interbank
-    Clearing Ltd - clearing day calendar lookups - publicly documented on the SIX API portal
-    with a downloadable OpenAPI 3.0 definition.
+  description: >-
+    Scheduling information for the electronic payment services provided by SIX Interbank Clearing Ltd
+    - clearing day calendar lookups - publicly documented on the SIX API portal with a downloadable OpenAPI
+    3.0 definition.
 - aid: six-group:settlement-info-reporting-api
   name: Settlement Info Reporting API
   tags:
@@ -305,9 +310,35 @@ apis:
     type: Overlay
   - url: openapi/_original/six-group-settlement-info-reporting-openapi.json
     type: OpenAPI
-  description: Security settlement information reporting from the SIX custody cockpit for the
-    Swiss market, publicly documented on the SIX API portal with a downloadable OpenAPI 3.0
-    definition (CC BY-ND 4.0 licensed).
+  description: >-
+    Security settlement information reporting from the SIX custody cockpit for the Swiss market, publicly
+    documented on the SIX API portal with a downloadable OpenAPI 3.0 definition (CC BY-ND 4.0 licensed).
+- aid: six-group:six-group-3-ds-api
+  name: SIX 3 DS API
+  description: 3DS lifecycle, 3DS details, OTRC order.
+  humanURL: >-
+    https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
+  baseURL: https://api.six-group.com/api/debix/bank/v2
+  tags:
+  - 3 DS
+  properties:
+  - type: OpenAPI
+    url: openapi/six-group-3-ds-api-openapi.yml
+- aid: six-group:six-group-bank-master-api
+  name: SIX Bank Master API
+  description: >-
+    **Bankmaster API**
+
+    All public REST endpoints of the bank master data are located here, such as the bank master data as
+    JSON and downloadable files.
+  humanURL: >-
+    https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
+  baseURL: https://api.six-group.com/api/debix/bank/v2
+  tags:
+  - Bank Master
+  properties:
+  - type: OpenAPI
+    url: openapi/six-group-bank-master-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/six-group-capability-edges.yml
