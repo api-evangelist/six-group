@@ -191,6 +191,10 @@ apis:
   name: SIX debiX Auth Provider API
   tags:
   - Authentication
+  - 3D
+  - Debit Cards
+  tags_raw:
+  - Authentication
   - 3DS
   - Debit Cards
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
@@ -320,6 +324,8 @@ apis:
     https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
   baseURL: https://api.six-group.com/api/debix/bank/v2
   tags:
+  - 3D
+  tags_raw:
   - 3 DS
   properties:
   - type: OpenAPI
