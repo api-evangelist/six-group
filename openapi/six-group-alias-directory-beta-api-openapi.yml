@@ -1,21 +1,34 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 'debiX Auth Provider API: Provider-to-SIX 3DS Alias Directory (Beta) API'
-  version: 2.1.9
-  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+  title: Six Group Alias Directory (Beta) API
+  version: 2.36.0
+  description: 'Operations tagged Alias Directory (Beta) across 2 of this provider''s published API definitions: six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml, six-group-debix-bank-api-v2-bank-to-six-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
+- url: https://api.six-group.com/api/debix/bank/cardtoken/v2
   description: PROD - Internet
-- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
+- url: https://api-preprod.np.six-group.com/api/debix/bank/cardtoken/v2
   description: TEST - Internet
-- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
+- url: https://api.six.ssfn.ch/api/debix/bank/cardtoken/v2
   description: PROD - SSFN
-- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
+- url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/cardtoken/v2
   description: TEST - SSFN
-- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
+- url: https://api.p2p.six-group.com/api/debix/bank/cardtoken/v2
   description: PROD - P2P
-- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
+- url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/cardtoken/v2
   description: TEST - P2P
+- url: https://api.six-group.com/api/debix/bank/v2
+  description: PROD - Internet
+- url: https://api-preprod.np.six-group.com/api/debix/bank/v2
+  description: TEST - Internet
+- url: https://api.six.ssfn.ch/api/debix/bank/v2
+  description: PROD - SSFN
+- url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/v2
+  description: TEST - SSFN
+- url: https://api.p2p.six-group.com/api/debix/bank/v2
+  description: PROD - P2P
+- url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/v2
+  description: TEST - P2P
+security: []
 tags:
 - name: Alias Directory (Beta)
   description: Visa Alias Directory related operations. Feature under development, subject to change.
@@ -25,7 +38,7 @@ paths:
       operationId: createAliasAndRegisterCardsVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Creates an alias in the Alias Directory.
+      summary: Creates an alias in the Alias Directory
       description: 'Creates an alias in the Alias Directory and associates the specified cards with the alias.
 
 
@@ -37,9 +50,7 @@ paths:
 
         * 4523 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       requestBody:
         content:
           application/json:
@@ -70,12 +81,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+    servers:
+    - url: https://api.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - Internet
+    - url: https://api-preprod.np.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - Internet
+    - url: https://api.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: PROD - SSFN
+    - url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: TEST - SSFN
+    - url: https://api.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - P2P
+    - url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - P2P
   /visa-alias-directory/aliases/{aliasId}:
     get:
       operationId: retrieveAliasVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Retrieves an alias from the Alias Directory.
+      summary: Retrieves an alias from the Alias Directory
       description: 'Retrieves information about a specific alias.
 
 
@@ -83,9 +107,7 @@ paths:
 
         * 4520 - UNKNOWN_ALIAS
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -124,7 +146,7 @@ paths:
       operationId: updateAliasVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Updates an alias in the Alias Directory.
+      summary: Updates an alias in the Alias Directory
       description: 'Updates the information associated with the alias such as the identification, profile, or consent.
 
 
@@ -132,9 +154,7 @@ paths:
 
         * 4520 - UNKNOWN_ALIAS
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -174,7 +194,7 @@ paths:
       operationId: deleteAliasVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Deletes an alias in the Alias Directory.
+      summary: Deletes an alias in the Alias Directory
       description: 'Deletes a specified alias which entails a deletion of the corresponding Visa Alias Directory card registrations.
 
 
@@ -182,9 +202,7 @@ paths:
 
         * 4520 - UNKNOWN_ALIAS
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -215,12 +233,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+    servers:
+    - url: https://api.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - Internet
+    - url: https://api-preprod.np.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - Internet
+    - url: https://api.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: PROD - SSFN
+    - url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: TEST - SSFN
+    - url: https://api.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - P2P
+    - url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - P2P
   /visa-alias-directory/aliases/{aliasId}/status:
     put:
       operationId: updateAliasStatusVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Updates the status of an alias in the Alias Directory.
+      summary: Updates the status of an alias in the Alias Directory
       description: 'Updates the status of the specified alias.
 
 
@@ -228,9 +259,7 @@ paths:
 
         * 4520 - UNKNOWN_ALIAS
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -266,12 +295,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+    servers:
+    - url: https://api.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - Internet
+    - url: https://api-preprod.np.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - Internet
+    - url: https://api.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: PROD - SSFN
+    - url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: TEST - SSFN
+    - url: https://api.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - P2P
+    - url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - P2P
   /visa-alias-directory/aliases/{aliasId}/cards:
     get:
       operationId: retrieveAllCardsVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Retrieves all the cards corresponding to an alias.
+      summary: Retrieves all the cards corresponding to an alias
       description: 'Retrieves all the cards corresponding to the alias of the specified Alias ID.
 
 
@@ -279,9 +321,7 @@ paths:
 
         * 4520 - UNKNOWN_ALIAS
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -320,7 +360,7 @@ paths:
       operationId: registerCardVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Registers a card for Visa Alias Directory.
+      summary: Registers a card for Visa Alias Directory
       description: 'Registers the given card for Visa Alias Directory under the alias of the specified Alias ID.
 
 
@@ -332,9 +372,7 @@ paths:
 
         * 4423 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -374,7 +412,7 @@ paths:
       operationId: updateCardVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Updates a card in the Alias Directory.
+      summary: Updates a card in the Alias Directory
       description: 'Updates the given card for Visa Alias Directory under the alias of the specified Alias ID.
 
 
@@ -388,9 +426,7 @@ paths:
 
         * 4423 - VISA_ALIAS_DIRECTORY_INVALID_CARD_EXPIRATION
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -426,12 +462,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+    servers:
+    - url: https://api.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - Internet
+    - url: https://api-preprod.np.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - Internet
+    - url: https://api.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: PROD - SSFN
+    - url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: TEST - SSFN
+    - url: https://api.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - P2P
+    - url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - P2P
   /visa-alias-directory/aliases/{aliasId}/cards/{cardToken}:
     get:
       operationId: retrieveCardVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Retrieves a card registered in the Alias Directory.
+      summary: Retrieves a card registered in the Alias Directory
       description: 'Retrieves a specific card corresponding to the alias of the specified Alias ID.
 
 
@@ -443,9 +492,7 @@ paths:
 
         * 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -490,7 +537,7 @@ paths:
       operationId: deleteCardVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Deletes a card from the Alias Directory.
+      summary: Deletes a card from the Alias Directory
       description: 'Deletes the given card from the alias of the specified Alias ID.
 
 
@@ -502,9 +549,7 @@ paths:
 
         * 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -541,12 +586,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+    servers:
+    - url: https://api.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - Internet
+    - url: https://api-preprod.np.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - Internet
+    - url: https://api.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: PROD - SSFN
+    - url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/cardtoken/v2
+      description: TEST - SSFN
+    - url: https://api.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: PROD - P2P
+    - url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/cardtoken/v2
+      description: TEST - P2P
   /visa-alias-directory/aliases/{aliasId}/cards/retrieve:
     post:
       operationId: retrieveCardVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Retrieves a card registered in the Alias Directory.
+      summary: Retrieves a card registered in the Alias Directory
       description: 'Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards/retrieve` instead.
 
 
@@ -561,9 +619,7 @@ paths:
 
         * 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -603,12 +659,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+    servers:
+    - url: https://api.six-group.com/api/debix/bank/v2
+      description: PROD - Internet
+    - url: https://api-preprod.np.six-group.com/api/debix/bank/v2
+      description: TEST - Internet
+    - url: https://api.six.ssfn.ch/api/debix/bank/v2
+      description: PROD - SSFN
+    - url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/v2
+      description: TEST - SSFN
+    - url: https://api.p2p.six-group.com/api/debix/bank/v2
+      description: PROD - P2P
+    - url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/v2
+      description: TEST - P2P
   /visa-alias-directory/aliases/{aliasId}/cards/delete:
     post:
       operationId: deleteCardVisaAD
       tags:
       - Alias Directory (Beta)
-      summary: Deletes a card from the Alias Directory.
+      summary: Deletes a card from the Alias Directory
       description: 'Deprecated, use `POST /debix/bank/cardtoken/v2/visa-alias-directory/aliases/{aliasId}/cards/delete` instead.
 
 
@@ -623,9 +692,7 @@ paths:
 
         * 4522 - CARD_NOT_REGISTERED_IN_VISA_ALIAS_DIRECTORY
 
-        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY
-
-        '
+        * 4524 - ISSUER_NOT_CONFIGURED_FOR_VISA_ALIAS_DIRECTORY'
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -661,25 +728,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+    servers:
+    - url: https://api.six-group.com/api/debix/bank/v2
+      description: PROD - Internet
+    - url: https://api-preprod.np.six-group.com/api/debix/bank/v2
+      description: TEST - Internet
+    - url: https://api.six.ssfn.ch/api/debix/bank/v2
+      description: PROD - SSFN
+    - url: https://api-preprod.np.six.ssfn.ch/api/debix/bank/v2
+      description: TEST - SSFN
+    - url: https://api.p2p.six-group.com/api/debix/bank/v2
+      description: PROD - P2P
+    - url: https://api-preprod.np.p2p.six-group.com/api/debix/bank/v2
+      description: TEST - P2P
 components:
   schemas:
-    VisaADAliasStatus:
-      description: The status of an alias.
+    VisaADAliasUpdatingStatus:
+      description: The updating status of an alias.
       type: string
       enum:
       - ACTIVE
       - DISABLED
-      - BLOCKED
-      - EXPIRED
       examples:
       - ACTIVE
-    VisaADAliasId:
-      description: The UUID generated by Alias Directory which identifies the alias.
-      type: string
-      minLength: 36
-      maxLength: 36
-      examples:
-      - e336c8c8-2945-4be3-af3e-951ec2d01219
+    VisaADRetrieveCardResponse:
+      description: Retrieve Card response.
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaADCard'
     VisaADPreferredForType:
       type: string
       enum:
@@ -688,64 +767,32 @@ components:
       - PAY
       examples:
       - RECEIVE
-    ErrorDetail:
+    VisaADGetAliasResponse:
+      description: Get Alias response.
       type: object
       required:
-      - errorCode
+      - aliasValue
+      - consent
+      - profile
       properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
-    BankClearingNumber:
-      description: Unique number used to identify each bank agency or branch in the bank directory.
-      type: integer
-      format: int32
-      minimum: 100
-      maximum: 99999
-      examples:
-      - 50000
-    VisaADUpdateCardRequest:
-      description: Update Card request.
+        aliasValue:
+          $ref: '#/components/schemas/VisaADAliasValue'
+        consent:
+          $ref: '#/components/schemas/VisaADConsent'
+        profile:
+          $ref: '#/components/schemas/VisaADProfile'
+        aliasType:
+          $ref: '#/components/schemas/VisaADAliasType'
+        aliasStatus:
+          $ref: '#/components/schemas/VisaADAliasStatus'
+    VisaADCreateAliasAndRegisterCardsResponse:
+      description: Create Alias and Register Cards response.
       type: object
       required:
-      - card
+      - aliasId
       properties:
-        card:
-          $ref: '#/components/schemas/VisaADCard'
-    VisaADConsent:
-      description: Consent details.
-      type: object
-      required:
-      - presenter
-      - validFromDateTime
-      - version
-      properties:
-        presenter:
-          description: Identifies the presenter of consent to the consumer.
-          type: string
-          examples:
-          - Bank A
-        validFromDateTime:
-          description: Date and time from which on the consent is valid, in ISO UTC format YYYY-MM-DDThh:mm:ss.000Z. Only accepts present and past dates.
-          type: string
-          format: date-time
-          examples:
-          - '2021-12-01T10:00:00Z'
-        version:
-          description: Specific version of the terms and conditions that the customer accepts for the user solution.
-          type: string
-          minLength: 1
-          maxLength: 9
-          examples:
-          - '1.0'
+        aliasId:
+          $ref: '#/components/schemas/VisaADAliasId'
     VisaADBillingAddress:
       type: object
       required:
@@ -850,26 +897,145 @@ components:
           - ZH
           minLength: 1
           maxLength: 50
-    CardType:
-      description: 'A single digit that distinguishes the card types of the schemes.
-
-        - 1: Debit mastercard
-
-        - 3: Visa debit
-
-        - 6: Bank card'
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 6
-    VisaADDeleteCardRequest:
-      description: Delete Card request.
+    VisaADNameOnCard:
+      description: The name which is printed on the card.
+      type: string
+      minLength: 1
+      maxLength: 120
+      examples:
+      - Peter Schweizer
+    ErrorDetail:
       type: object
       required:
-      - shortCardId
+      - errorCode
       properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    VisaADCreateAliasAndRegisterCardsRequest:
+      description: Create Alias and Register Cards request.
+      type: object
+      required:
+      - aliasType
+      - aliasValue
+      - consent
+      - profile
+      - cards
+      properties:
+        aliasType:
+          $ref: '#/components/schemas/VisaADAliasType'
+        aliasValue:
+          $ref: '#/components/schemas/VisaADAliasValue'
+        consent:
+          $ref: '#/components/schemas/VisaADConsent'
+        profile:
+          $ref: '#/components/schemas/VisaADProfile'
+        cards:
+          type: array
+          minItems: 1
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/VisaADCard'
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    VisaADConsent:
+      description: Consent details.
+      type: object
+      required:
+      - presenter
+      - validFromDateTime
+      - version
+      properties:
+        presenter:
+          description: Identifies the presenter of consent to the consumer.
+          type: string
+          examples:
+          - Bank A
+        validFromDateTime:
+          description: Date and time from which on the consent is valid, in ISO UTC format YYYY-MM-DDThh:mm:ss.000Z. Only accepts present and past dates.
+          type: string
+          format: date-time
+          examples:
+          - '2021-12-01T10:00:00Z'
+        version:
+          description: Specific version of the terms and conditions that the customer accepts for the user solution.
+          type: string
+          minLength: 1
+          maxLength: 9
+          examples:
+          - '1.0'
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+    VisaADAliasType:
+      description: The type of alias provided in aliasValue.
+      type: string
+      enum:
+      - PHONE
+      - EMAIL
+      examples:
+      - PHONE
+    VisaADRegisterCardRequest:
+      description: Register Card request.
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaADCard'
+    VisaADUpdateAliasStatusRequest:
+      description: Update Alias Status request.
+      type: object
+      required:
+      - aliasStatus
+      properties:
+        aliasStatus:
+          $ref: '#/components/schemas/VisaADAliasUpdatingStatus'
     VisaADPreferredFor:
       description: "Indicates if a payment credential is a preferred **Receiving**, **Sending**, or **Paying** account. \n**Receiving** allows for funds to be pushed into the payment credential. \n**Sending** allows for funds to be sent from the payment credential. \n**Paying** allows for the payment credential to be used for purchases. \nMore than one preferred type can be used.\n"
       type: array
@@ -877,6 +1043,184 @@ components:
       maxItems: 3
       items:
         $ref: '#/components/schemas/VisaADPreferredForType'
+    VisaADUpdateAliasRequest:
+      description: Update Alias request.
+      type: object
+      required:
+      - consent
+      - profile
+      properties:
+        consent:
+          $ref: '#/components/schemas/VisaADConsent'
+        profile:
+          $ref: '#/components/schemas/VisaADProfile'
+    VisaADUpdateCardRequest:
+      description: Update Card request.
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaADCard'
+    VisaADCard:
+      description: Card in the context of Visa Alias Directory.
+      type: object
+      required:
+      - nameOnCard
+      - cardType
+      - billingAddress
+      - cardToken
+      properties:
+        nameOnCard:
+          $ref: '#/components/schemas/VisaADNameOnCard'
+        cardType:
+          $ref: '#/components/schemas/VisaADCardType'
+        billingAddress:
+          $ref: '#/components/schemas/VisaADBillingAddress'
+        cardToken:
+          $ref: '#/components/schemas/CardToken'
+        preferredFor:
+          $ref: '#/components/schemas/VisaADPreferredFor'
+    VisaADAliasStatus:
+      description: The status of an alias.
+      type: string
+      enum:
+      - ACTIVE
+      - DISABLED
+      - BLOCKED
+      - EXPIRED
+      examples:
+      - ACTIVE
+    VisaADCardType:
+      description: Card type description. Reference to Field 62.23—Product ID of available card products.
+      type: string
+      minLength: 1
+      maxLength: 70
+      examples:
+      - Visa Platinum
+    VisaADAliasValue:
+      description: "The value of the alias, e.g., phone number or email address. \nIf phone number is used for alias, this should be provided in accordance with ITU-T E.164 (2010) number structure. \nPlease note that in the E.164 format, the \"+\" prefix or leading zeros are not included.\n"
+      type: string
+      minLength: 1
+      maxLength: 128
+      examples:
+      - '41791112233'
+    VisaADProfile:
+      description: Profile details for the customer that owns the alias.
+      type: object
+      required:
+      - firstName
+      - lastName
+      properties:
+        lastName:
+          description: 'Last name in English. Clients in CEMEA and the EU must use only one first letter of customer’s last name followed by dot symbol to create or modify an Alias record.
+
+            For example, Alias record for customer John Smith should be created or modified by the issuer with First and Last name fields as ''John S.''
+
+
+            ISO20022 element name: Creditor -> Name
+
+            '
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - R.
+        firstName:
+          description: 'First name in English
+
+
+            ISO20022 element name: Creditor -> Name
+
+            '
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - Hans
+        middleName:
+          description: Middle name in English
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - Ruedi
+        contactInfo:
+          description: Contact information.
+          minItems: 1
+          maxItems: 2
+          type: array
+          items:
+            type: object
+            required:
+            - type
+            - value
+            properties:
+              type:
+                $ref: '#/components/schemas/VisaADAliasType'
+              value:
+                $ref: '#/components/schemas/VisaADAliasValue'
+        dateOfBirth:
+          $ref: '#/components/schemas/VisaADDateOfBirth'
+        lastNameLocal:
+          description: "Last name in local language. Clients in CEMEA and the EU must use only one first letter of customer’s last name followed by dot symbol to create or modify an Alias record. \nFor example, Alias record for customer John Smith should be created or modified by the issuer with First and Last name fields as 'John S.'\n"
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - R.
+        preferredName:
+          description: Preferred name (or the 'known-as' name).
+          type: string
+          examples:
+          - Hansruedi
+        firstNameLocal:
+          description: First name in local language.
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - Hans
+        middleNameLocal:
+          description: Middle name in local language.
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - Ruedi
+    VisaADRetrieveAllCardsResponse:
+      description: Retrieve All Card response.
+      type: object
+      required:
+      - cards
+      properties:
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisaADCard'
+    VisaADDateOfBirth:
+      description: Date ISO-8601 Format https://www.w3.org/TR/NOTE-datetime.
+      type: string
+      minLength: 10
+      maxLength: 10
+      pattern: ^\d\d\d\d\-\d\d\-\d\d$
+      examples:
+      - '1947-02-01'
+    VisaADAliasId:
+      description: The UUID generated by Alias Directory which identifies the alias.
+      type: string
+      minLength: 36
+      maxLength: 36
+      examples:
+      - e336c8c8-2945-4be3-af3e-951ec2d01219
+    VisaADRetrieveCardResponse_2:
+      description: Retrieve Card response
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaADCard_2'
     VisaADBillingAddress_2:
       type: object
       required:
@@ -982,153 +1326,32 @@ components:
           - ZH
           minLength: 1
           maxLength: 50
-    VisaADRegisterCardRequest:
-      description: Register Card request.
-      type: object
-      required:
-      - card
-      properties:
-        card:
-          $ref: '#/components/schemas/VisaADCard'
-    VisaADAliasUpdatingStatus:
-      description: The updating status of an alias.
-      type: string
-      enum:
-      - ACTIVE
-      - DISABLED
-      examples:
-      - ACTIVE
-    VisaADRetrieveCardResponse_2:
-      description: Retrieve Card response
-      type: object
-      required:
-      - card
-      properties:
-        card:
-          $ref: '#/components/schemas/VisaADCard_2'
-    VisaADNameOnCard:
-      description: The name which is printed on the card.
-      type: string
-      minLength: 1
-      maxLength: 120
-      examples:
-      - Peter Schweizer
-    CardNumber:
-      description: Card number of the card.
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
       type: integer
       format: int32
       minimum: 1
-      maximum: 99999999
-      examples:
-      - 12345678
-    VisaADCreateAliasAndRegisterCardsRequest:
-      description: Create Alias and Register Cards request.
+      maximum: 6
+    ShortCardId:
+      description: Complex object representing a card consisting of bank clearing number, card number and card type.
       type: object
       required:
-      - aliasType
-      - aliasValue
-      - consent
-      - profile
-      - cards
-      properties:
-        aliasType:
-          $ref: '#/components/schemas/VisaADAliasType'
-        aliasValue:
-          $ref: '#/components/schemas/VisaADAliasValue'
-        consent:
-          $ref: '#/components/schemas/VisaADConsent'
-        profile:
-          $ref: '#/components/schemas/VisaADProfile'
-        cards:
-          type: array
-          minItems: 1
-          maxItems: 10
-          items:
-            $ref: '#/components/schemas/VisaADCard'
-    BankApiError:
-      description: Information about an error on API requests.
-      type: object
-      required:
-      - applicationError
-      - errorCode
-      properties:
-        applicationError:
-          description: The name of the application error.
-          type: string
-          examples:
-          - OPERATION_FAILED
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 5001
-        description:
-          description: A human readable explanation specific to this occurrence of the problem.
-          type: string
-          examples:
-          - The requested operation failed.
-        errors:
-          description: List of error details.
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-        errorToken:
-          description: A generated error token referencing the actual error and logged on the server.
-          type: string
-          examples:
-          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    VisaADAliasId_2:
-      description: The UUID generated by Alias Directory which identifies the alias
-      type: string
-      minLength: 36
-      maxLength: 36
-      examples:
-      - e336c8c8-2945-4be3-af3e-951ec2d01219
-    VisaADDateOfBirth:
-      description: Date ISO-8601 Format https://www.w3.org/TR/NOTE-datetime.
-      type: string
-      minLength: 10
-      maxLength: 10
-      pattern: ^\d\d\d\d\-\d\d\-\d\d$
-      examples:
-      - '1947-02-01'
-    VisaADUpdateAliasStatusRequest:
-      description: Update Alias Status request.
-      type: object
-      required:
-      - aliasStatus
-      properties:
-        aliasStatus:
-          $ref: '#/components/schemas/VisaADAliasUpdatingStatus'
-    CardToken:
-      description: Unique card token of a card.
-      type: string
-      pattern: ^CTK-[0-9a-fA-F]{32}$
-      minLength: 36
-      maxLength: 36
-      examples:
-      - CTK-54716A6080B14CF19CEA3C170F85B1DD
-    VisaADCard:
-      description: Card in the context of Visa Alias Directory.
-      type: object
-      required:
-      - nameOnCard
+      - bankClearingNumber
+      - cardNumber
       - cardType
-      - billingAddress
-      - cardToken
       properties:
-        nameOnCard:
-          $ref: '#/components/schemas/VisaADNameOnCard'
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
         cardType:
-          $ref: '#/components/schemas/VisaADCardType'
-        billingAddress:
-          $ref: '#/components/schemas/VisaADBillingAddress'
-        cardToken:
-          $ref: '#/components/schemas/CardToken'
-        preferredFor:
-          $ref: '#/components/schemas/VisaADPreferredFor'
+          $ref: '#/components/schemas/CardType'
     VisaADRetrieveCardRequest:
       description: Retrieve Card request.
       type: object
@@ -1137,7 +1360,42 @@ components:
       properties:
         shortCardId:
           $ref: '#/components/schemas/ShortCardId'
-    VisaADProfile:
+    CardNumber:
+      description: Card number of the card.
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 99999999
+      examples:
+      - 12345678
+    VisaADCard_2:
+      description: Card in the context of Visa Alias Directory.
+      type: object
+      required:
+      - nameOnCard
+      - cardType
+      - billingAddress
+      - shortCardId
+      properties:
+        nameOnCard:
+          $ref: '#/components/schemas/VisaADNameOnCard'
+        cardType:
+          $ref: '#/components/schemas/VisaADCardType'
+        billingAddress:
+          $ref: '#/components/schemas/VisaADBillingAddress_2'
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+        preferredFor:
+          $ref: '#/components/schemas/VisaADPreferredFor'
+    VisaADDeleteCardRequest:
+      description: Delete Card request.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+    VisaADProfile_2:
       description: Profile details for the customer that owns the alias.
       type: object
       required:
@@ -1159,7 +1417,7 @@ components:
           examples:
           - R.
         firstName:
-          description: 'First name in English
+          description: 'First name in English.
 
 
             ISO20022 element name: Creditor -> Name
@@ -1171,7 +1429,7 @@ components:
           examples:
           - Hans
         middleName:
-          description: Middle name in English
+          description: Middle name in English.
           type: string
           minLength: 1
           maxLength: 35
@@ -1193,7 +1451,7 @@ components:
               value:
                 $ref: '#/components/schemas/VisaADAliasValue'
         dateOfBirth:
-          $ref: '#/components/schemas/VisaADDateOfBirth'
+          $ref: '#/components/schemas/VisaADDateOfBirth_2'
         lastNameLocal:
           description: "Last name in local language. Clients in CEMEA and the EU must use only one first letter of customer’s last name followed by dot symbol to create or modify an Alias record. \nFor example, Alias record for customer John Smith should be created or modified by the issuer with First and Last name fields as 'John S.'\n"
           type: string
@@ -1220,123 +1478,30 @@ components:
           maxLength: 35
           examples:
           - Ruedi
-    ShortCardId:
-      description: Complex object representing a card consisting of bank clearing number, card number and card type.
-      type: object
-      required:
-      - bankClearingNumber
-      - cardNumber
-      - cardType
-      properties:
-        bankClearingNumber:
-          $ref: '#/components/schemas/BankClearingNumber'
-        cardNumber:
-          $ref: '#/components/schemas/CardNumber'
-        cardType:
-          $ref: '#/components/schemas/CardType'
-    VisaADAliasValue:
-      description: "The value of the alias, e.g., phone number or email address. \nIf phone number is used for alias, this should be provided in accordance with ITU-T E.164 (2010) number structure. \nPlease note that in the E.164 format, the \"+\" prefix or leading zeros are not included.\n"
+    VisaADDateOfBirth_2:
+      description: Date ISO-8601 Format https://www.w3.org/TR/NOTE-datetime
       type: string
-      minLength: 1
-      maxLength: 128
+      minLength: 10
+      maxLength: 10
+      pattern: ^\d\d\d\d\-\d\d\-\d\d$
       examples:
-      - '41791112233'
-    VisaADRetrieveCardResponse:
-      description: Retrieve Card response.
-      type: object
-      required:
-      - card
-      properties:
-        card:
-          $ref: '#/components/schemas/VisaADCard'
-    VisaADCardType:
-      description: Card type description. Reference to Field 62.23—Product ID of available card products.
+      - '1947-02-01'
+    VisaADAliasId_2:
+      description: The UUID generated by Alias Directory which identifies the alias
       type: string
-      minLength: 1
-      maxLength: 70
+      minLength: 36
+      maxLength: 36
       examples:
-      - Visa Platinum
-    VisaADAliasType:
-      description: The type of alias provided in aliasValue.
-      type: string
-      enum:
-      - PHONE
-      - EMAIL
+      - e336c8c8-2945-4be3-af3e-951ec2d01219
+    BankClearingNumber:
+      description: Unique number used to identify each bank agency or branch in the bank directory.
+      type: integer
+      format: int32
+      minimum: 100
+      maximum: 99999
       examples:
-      - PHONE
-    VisaADUpdateAliasRequest:
-      description: Update Alias request.
-      type: object
-      required:
-      - consent
-      - profile
-      properties:
-        consent:
-          $ref: '#/components/schemas/VisaADConsent'
-        profile:
-          $ref: '#/components/schemas/VisaADProfile'
-    VisaADCard_2:
-      description: Card in the context of Visa Alias Directory.
-      type: object
-      required:
-      - nameOnCard
-      - cardType
-      - billingAddress
-      - shortCardId
-      properties:
-        nameOnCard:
-          $ref: '#/components/schemas/VisaADNameOnCard'
-        cardType:
-          $ref: '#/components/schemas/VisaADCardType'
-        billingAddress:
-          $ref: '#/components/schemas/VisaADBillingAddress_2'
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-        preferredFor:
-          $ref: '#/components/schemas/VisaADPreferredFor'
-    VisaADGetAliasResponse:
-      description: Get Alias response.
-      type: object
-      required:
-      - aliasValue
-      - consent
-      - profile
-      properties:
-        aliasValue:
-          $ref: '#/components/schemas/VisaADAliasValue'
-        consent:
-          $ref: '#/components/schemas/VisaADConsent'
-        profile:
-          $ref: '#/components/schemas/VisaADProfile'
-        aliasType:
-          $ref: '#/components/schemas/VisaADAliasType'
-        aliasStatus:
-          $ref: '#/components/schemas/VisaADAliasStatus'
-    VisaADRetrieveAllCardsResponse:
-      description: Retrieve All Card response.
-      type: object
-      required:
-      - cards
-      properties:
-        cards:
-          type: array
-          items:
-            $ref: '#/components/schemas/VisaADCard'
-    VisaADCreateAliasAndRegisterCardsResponse:
-      description: Create Alias and Register Cards response.
-      type: object
-      required:
-      - aliasId
-      properties:
-        aliasId:
-          $ref: '#/components/schemas/VisaADAliasId'
+      - 50000
   parameters:
-    RequestIdHeader:
-      in: header
-      name: x-request-id
-      description: A unique identifier for a request and response pair.
-      schema:
-        type: string
     IssuerTraceIdHeader:
       in: header
       name: issuer-trace-id
@@ -1345,3 +1510,12 @@ components:
         type: string
         minLength: 1
         maxLength: 26
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
+x-refined-from:
+- six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
+- six-group-debix-bank-api-v2-bank-to-six-openapi.yml

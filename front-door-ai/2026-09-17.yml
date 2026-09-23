@@ -1,0 +1,26 @@
+# Front Door AI Index — six-group — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: six-group
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.six-group.com
+  final_host: www.six-group.com
+  ownership: own
+  owner: six-group
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 1
+  host_score: 1
+  density: 0.47
+  words: 2143
+  tiers:
+    agentic: 0
+    core: 1
+    model: 0
+  ambiguous: 1
+  top_terms:
+    AI: 1
+    agent: 1

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 'debiX Auth Provider API: Provider-to-SIX 3DS Authentication callback API'
+  title: 'debiX Auth Provider API: Provider-to-SIX Authentication…'
   version: 2.1.9
   description: Callback API used by the Authentication Provider and implemented by SIX / debiX
 servers:
@@ -23,7 +23,7 @@ paths:
     post:
       tags:
       - Authentication callback
-      summary: Processes the result of the authentication request.
+      summary: Processes the result of the authentication request
       description: The operation processes the result of the authentication request and notifies the ACS.
       operationId: authenticationRequestCallback
       parameters:
@@ -51,6 +51,51 @@ paths:
                 $ref: '#/components/schemas/ApiError'
 components:
   schemas:
+    AuthenticationRequestCallbackRequest:
+      type: object
+      required:
+      - threeDsTransactionId
+      - confirmationStatus
+      properties:
+        threeDsTransactionId:
+          type: string
+          examples:
+          - a5b86c4e-0caa-11e8-ba89-0ed5f89f718b
+          description: The 3DS transaction id.
+        confirmationStatus:
+          type: string
+          description: Status of the authentication request. It may be either ACCEPTED or DECLINED by the cardholder. If a technical error occurs preventing the successful display of the Push Notification on the device, then FAILED must be used. If the authentication provider sets a time window for the cardholder to accept or decline the authentication request and the cardholder fails to respond, then CANCELLED must be used as the confirmationStatus.
+          examples:
+          - ACCEPTED
+          enum:
+          - ACCEPTED
+          - DECLINED
+          - FAILED
+          - CANCELLED
+        oobAuthenticationMethod:
+          type: string
+          description: This indicates the type of second factor used for authentication. This property is mandatory if the confirmationStatus is ACCEPTED, but not required if the confirmationStatus is FAILED, DECLINED or CANCELLED.
+          examples:
+          - BIOMETRICS
+          enum:
+          - BIOMETRICS
+          - OTHER
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
     ApiError:
       description: Information about an error on API requests.
       type: object
@@ -84,51 +129,6 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
-    AuthenticationRequestCallbackRequest:
-      type: object
-      required:
-      - threeDsTransactionId
-      - confirmationStatus
-      properties:
-        threeDsTransactionId:
-          type: string
-          examples:
-          - a5b86c4e-0caa-11e8-ba89-0ed5f89f718b
-          description: The 3DS transaction id.
-        confirmationStatus:
-          type: string
-          description: Status of the authentication request. It may be either ACCEPTED or DECLINED by the cardholder. If a technical error occurs preventing the successful display of the Push Notification on the device, then FAILED must be used. If the authentication provider sets a time window for the cardholder to accept or decline the authentication request and the cardholder fails to respond, then CANCELLED must be used as the confirmationStatus.
-          examples:
-          - ACCEPTED
-          enum:
-          - ACCEPTED
-          - DECLINED
-          - FAILED
-          - CANCELLED
-        oobAuthenticationMethod:
-          type: string
-          description: This indicates the type of second factor used for authentication. This property is mandatory if the confirmationStatus is ACCEPTED, but not required if the confirmationStatus is FAILED, DECLINED or CANCELLED.
-          examples:
-          - BIOMETRICS
-          enum:
-          - BIOMETRICS
-          - OTHER
   parameters:
     CorrelationIdHeader:
       in: header

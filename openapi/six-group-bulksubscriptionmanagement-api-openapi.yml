@@ -1,21 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 'debiX Auth Provider API: Provider-to-SIX 3DS BulkSubscriptionManagement API'
-  version: 2.1.9
-  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+  title: Security Settlement Information - External Bulk…
+  description: Settlement Info Reporting
+  contact:
+    email: am-support@six-group.com
+  license:
+    name: Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
+    url: https://creativecommons.org/licenses/by-nd/4.0/
+  version: 1.0.7
 servers:
-- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - Internet
-- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - Internet
-- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: PROD - SSFN
-- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: TEST - SSFN
-- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - P2P
-- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - P2P
+- url: https://api.six-group.com/custody/cockpit/setlInfo/v1
+- url: https://api.p2p.six-group.com/custody/cockpit/setlInfo/v1
+- url: https://api.fip.six-group.com/custody/cockpit/setlInfo/v1
 tags:
 - name: BulkSubscriptionManagement
   description: Manage the list of securities a business partner susbscribes to.
@@ -118,7 +114,7 @@ paths:
     get:
       tags:
       - BulkSubscriptionManagement
-      summary: Get the list of securities the business partner is subscribed to.
+      summary: Get the list of securities the business partner is subscribed to
       description: Get the subscription list of securities for a business partner.
       operationId: getSubscription
       parameters:
@@ -144,15 +140,370 @@ paths:
         '504':
           $ref: '#/components/responses/Http504ErrorResponse'
 components:
+  examples:
+    Error400_InvalidPathParam:
+      value:
+        message: 'path "isin" validation failed with error: "failed to match pattern "^[A-Z]{2}([A-Z0-9]){9}[0-9]$" with "CH003886335"'
+    Error400_SubscriptionTooBig:
+      value:
+        message: Validation failed
+        errorDetail:
+          title: Bad Request
+          status: 400
+          detail: Subscription is limited to 400'000 financial instruments, cannot set it larger.
+    Error400_InvalidHeaderParam:
+      value:
+        message: 'header "X-Correlation-ID" validation failed with error: "failed to match pattern "^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}" with ""'
+    Error400_SubscriptionWithInvalidIsins:
+      value:
+        message: Validation failed
+        errorDetail:
+          title: Bad Request
+          status: 400
+          detail: 'Subscription request contains the following invalid ISIN(s): ''DE000SD4J14'', ''CH104032437'', ''CH055341828''.'
+  responses:
+    Http401ErrorResponse:
+      description: Unauthorized
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            401 Unauthorized - no certificate provided:
+              value:
+                message: No required TLS certificate was sent
+            401 Unauthorized - invalid certificate (no trust in certificate):
+              value:
+                message: TLS certificate failed verification
+            401 Unauthorized - not authorized (wrong client credentials):
+              value:
+                message: Unauthorized
+    Http429ErrorResponse:
+      description: Too Many Requests
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+        Retry-After:
+          $ref: '#/components/headers/Retry-After'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            429 Too Many Requests:
+              value:
+                message: API rate limit exceeded
+    Http400ErrorResponse_GetSubscription:
+      description: Bad Request
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400'
+          examples:
+            400 Bad Request - Invalid header parameter:
+              $ref: '#/components/examples/Error400_InvalidHeaderParam'
+    Http400ErrorResponse_BulkSet:
+      description: Bad Request
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400'
+          examples:
+            400 Bad Request - Invalid content in request body:
+              $ref: '#/components/examples/Error400_SubscriptionWithInvalidIsins'
+            400 Bad Request - Subscription too big:
+              $ref: '#/components/examples/Error400_SubscriptionTooBig'
+            400 Bad Request - Invalid header parameter:
+              $ref: '#/components/examples/Error400_InvalidHeaderParam'
+    Http204NoContent:
+      description: No Content
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/vnd.api+json: {}
+    Http304NotModified:
+      description: Not Modified
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        ETag:
+          $ref: '#/components/headers/ETag'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/vnd.api+json: {}
+    Http404ErrorResponse_NoIsin:
+      description: Not Found
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Not Found:
+              value:
+                message: Resource not found
+                errorDetail:
+                  title: Not Found
+                  status: 404
+                  detail: ISIN 'US012071998' does not exist.
+    Http400ErrorResponse_RemoveIsin:
+      description: Bad Request
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400'
+          examples:
+            400 Bad Request - Invalid ISIN:
+              $ref: '#/components/examples/Error400_InvalidPathParam'
+            400 Bad Request - Invalid header parameter:
+              $ref: '#/components/examples/Error400_InvalidHeaderParam'
+    Http200Subscription:
+      description: The list of securities a business partner is subscribed to for the bulk service.
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        ETag:
+          $ref: '#/components/headers/ETag'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ResponseSubscriptionQuery'
+          examples:
+            200 Subscription:
+              value:
+                data:
+                  id: 95b1b467-bd69-4436-8181-96c16408c230
+                  type: Subscription
+                  attributes:
+                    subscription:
+                    - US0378331005
+                    - US5949181045
+                    - CH0038863350
+                    - CH0025751329
+                    - CH0012221716
+                    - US5949181045
+                    - US9311421039
+                    - GB00BP6MXD84
+                    - INF277K01MZ6
+                    - KR7319400008
+    Http500ErrorResponse:
+      description: Internal Server Error
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            500 Internal Server Error:
+              value:
+                message: Server error
+                errorDetail:
+                  title: Internal Server Error
+                  status: 500
+                  detail: Something went wrong.
+    Http504ErrorResponse:
+      description: Gateway Timeout
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            504 Service Unavailable:
+              value:
+                message: The upstream server is timing out.
+    Http413ErrorResponse:
+      description: Content Too Large
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            413 Content Too Large:
+              value:
+                message: Request size limit exceeded
+    Http403ErrorResponse:
+      description: Forbidden
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            403 Forbidden:
+              value:
+                message: Forbidden
+    Http503ErrorResponse:
+      description: Service Unavailable
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            503 Service Unavailable:
+              value:
+                message: unavailable
+    Http400ErrorResponse_AddIsin:
+      description: Bad Request
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400'
+          examples:
+            400 Bad Request - Subscription too big:
+              $ref: '#/components/examples/Error400_SubscriptionTooBig'
+            400 Bad Request - Invalid ISIN:
+              $ref: '#/components/examples/Error400_InvalidPathParam'
+            400 Bad Request - Invalid header parameter:
+              $ref: '#/components/examples/Error400_InvalidHeaderParam'
   schemas:
-    ResourceSubscriptionAttributes:
+    SubscriptionRequestBodyData:
       required:
-      - subscription
+      - attributes
+      - type
       type: object
       properties:
-        subscription:
-          $ref: '#/components/schemas/Subscription'
-      description: A subscription (i.e., list of ISINs) for a business partner as a resource.
+        type:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Type of the resource.
+        attributes:
+          $ref: '#/components/schemas/ResourceSubscriptionAttributes'
+      description: List of securities (identified by ISIN) a business partner is subscribed to for the bulk service.
+      example:
+        type: Subscription
+        attributes:
+          subscription:
+          - US0378331005
+          - US5949181045
+    ETag:
+      pattern: ^(W\/)?"([^"]|\\")*"$
+      type: string
+      description: The RFC7232 ETag (Entity Tag) header field (see https://www.rfc-editor.org/rfc/rfc7232#section-2.3) in a response provides the current entity-tag for the selected resource. An entity-tag is an opaque identifier for different versions of a resource over time, regardless whether multiple versions are valid at the same time. An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness indicator ('W/').
+      example: W/"xyzzy"
+    InvalidParameter:
+      required:
+      - in
+      - name
+      - value
+      type: object
+      properties:
+        in:
+          description: Location of the invalid parameter.
+          allOf:
+          - $ref: '#/components/schemas/ParameterLocation'
+        name:
+          type: string
+          description: Name of the invalid parameter.
+        reason:
+          type: string
+          description: The reason why the parameter's value is invalid.
+        value:
+          type: string
+          description: The invalid value.
+      description: Description of a parameter with invalid value.
     ErrorDetail:
       required:
       - status
@@ -187,14 +538,22 @@ components:
           format: uri
           example: https://www.example.com/books/1234
       description: Detailed description of an error to help remediation. It follows RFC 7807 (https://datatracker.ietf.org/doc/html/rfc7807).
-    ResponseSubscriptionQuery:
+    PropertiesBasicResource:
       required:
-      - data
+      - id
+      - type
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/ResourceSubscription'
-      description: HTTP 200 response (OK) for the query about the subscription of a business partner for the bulk service.
+        id:
+          type: string
+          description: Identifier of the resource
+          format: uuid
+        type:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Type of the resource.
+      description: Properties of any resource.
     ResourceSubscription:
       required:
       - attributes
@@ -205,64 +564,11 @@ components:
       description: ''
       allOf:
       - $ref: '#/components/schemas/PropertiesBasicResource'
-    Error:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable explanation specific to this error.
-          example: Unauthorized
-        errorDetail:
-          description: Additional information about the error.
-          allOf:
-          - $ref: '#/components/schemas/ErrorDetail'
-      description: Description of an error to help remediation.
-    ErrorDetail400:
-      type: object
-      description: Detailed description of a 400 error to help remediation. It extends RFC 7807 (https://datatracker.ietf.org/doc/html/rfc7807) with missing and invalid parameters information.
-      allOf:
-      - $ref: '#/components/schemas/ErrorDetail'
-      - properties:
-          invalidParams:
-            minItems: 1
-            type: array
-            description: List of parameters with invalid values.
-            items:
-              $ref: '#/components/schemas/InvalidParameter'
-          missingParams:
-            minItems: 1
-            type: array
-            description: List of missing parameters.
-            items:
-              $ref: '#/components/schemas/MissingParameter'
-    InvalidParameter:
-      required:
-      - in
-      - name
-      - value
-      type: object
-      properties:
-        in:
-          description: Location of the invalid parameter.
-          allOf:
-          - $ref: '#/components/schemas/ParameterLocation'
-        name:
-          type: string
-          description: Name of the invalid parameter.
-        reason:
-          type: string
-          description: The reason why the parameter's value is invalid.
-        value:
-          type: string
-          description: The invalid value.
-      description: Description of a parameter with invalid value.
-    ETag:
-      pattern: ^(W\/)?"([^"]|\\")*"$
+    Isin:
+      pattern: ^[A-Z]{2}([A-Z0-9]){9}[0-9]$
       type: string
-      description: The RFC7232 ETag (Entity Tag) header field (see https://www.rfc-editor.org/rfc/rfc7232#section-2.3) in a response provides the current entity-tag for the selected resource. An entity-tag is an opaque identifier for different versions of a resource over time, regardless whether multiple versions are valid at the same time. An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness indicator ('W/').
-      example: W/"xyzzy"
+      description: 'The ISIN (International Securities Identification Number) uniquely identifies a financial instrument. See ISO 6166:2021: Financial services — International securities identification number (ISIN).'
+      example: CH0038863350
     MissingParameter:
       required:
       - in
@@ -290,42 +596,73 @@ components:
           description: A human-readable explanation specific to this error.
           example: Unauthorized
       description: Description of an error as provided by the API GW to help remediation.
-    SubscriptionRequestBodyData:
+    XCorrelationIdType:
+      pattern: ^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}(#[1-9][0-9]*)?$
+      type: string
+      description: Value of the correlation ID for the server, i.e., a UUID v4 (with or without the dash to separate the blocks), optionally followed by a '#' and a positive integer.
+    Error400:
       required:
-      - attributes
-      - type
+      - message
       type: object
       properties:
-        type:
-          maxLength: 255
-          minLength: 1
+        message:
           type: string
-          description: Type of the resource.
-        attributes:
-          $ref: '#/components/schemas/ResourceSubscriptionAttributes'
+          description: A human-readable explanation specific to this error.
+          example: Unauthorized
+        errorDetail:
+          description: Additional information about the error.
+          allOf:
+          - $ref: '#/components/schemas/ErrorDetail400'
+      description: Description of a 400 error to help remediation.
+    ParameterLocation:
+      type: string
+      description: The location of the parameter in question
+      enum:
+      - BODY
+      - PATH
+      - QUERY
+      - HEADER
+    Error:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable explanation specific to this error.
+          example: Unauthorized
+        errorDetail:
+          description: Additional information about the error.
+          allOf:
+          - $ref: '#/components/schemas/ErrorDetail'
+      description: Description of an error to help remediation.
+    Subscription:
+      maxItems: 400000
+      type: array
       description: List of securities (identified by ISIN) a business partner is subscribed to for the bulk service.
       example:
-        type: Subscription
-        attributes:
-          subscription:
-          - US0378331005
-          - US5949181045
-    PropertiesBasicResource:
-      required:
-      - id
-      - type
+      - US0378331005
+      - US5949181045
+      items:
+        $ref: '#/components/schemas/Isin'
+    ErrorDetail400:
       type: object
-      properties:
-        id:
-          type: string
-          description: Identifier of the resource
-          format: uuid
-        type:
-          maxLength: 255
-          minLength: 1
-          type: string
-          description: Type of the resource.
-      description: Properties of any resource.
+      description: Detailed description of a 400 error to help remediation. It extends RFC 7807 (https://datatracker.ietf.org/doc/html/rfc7807) with missing and invalid parameters information.
+      allOf:
+      - $ref: '#/components/schemas/ErrorDetail'
+      - properties:
+          invalidParams:
+            minItems: 1
+            type: array
+            description: List of parameters with invalid values.
+            items:
+              $ref: '#/components/schemas/InvalidParameter'
+          missingParams:
+            minItems: 1
+            type: array
+            description: List of missing parameters.
+            items:
+              $ref: '#/components/schemas/MissingParameter'
     SubscriptionRequestBody:
       required:
       - data
@@ -341,47 +678,30 @@ components:
             subscription:
             - US0378331005
             - US5949181045
-    ParameterLocation:
-      type: string
-      description: The location of the parameter in question
-      enum:
-      - BODY
-      - PATH
-      - QUERY
-      - HEADER
-    Subscription:
-      maxItems: 400000
-      type: array
-      description: List of securities (identified by ISIN) a business partner is subscribed to for the bulk service.
-      example:
-      - US0378331005
-      - US5949181045
-      items:
-        $ref: '#/components/schemas/Isin'
-    Error400:
+    ResourceSubscriptionAttributes:
       required:
-      - message
+      - subscription
       type: object
       properties:
-        message:
-          type: string
-          description: A human-readable explanation specific to this error.
-          example: Unauthorized
-        errorDetail:
-          description: Additional information about the error.
-          allOf:
-          - $ref: '#/components/schemas/ErrorDetail400'
-      description: Description of a 400 error to help remediation.
-    Isin:
-      pattern: ^[A-Z]{2}([A-Z0-9]){9}[0-9]$
-      type: string
-      description: 'The ISIN (International Securities Identification Number) uniquely identifies a financial instrument. See ISO 6166:2021: Financial services — International securities identification number (ISIN).'
-      example: CH0038863350
-    XCorrelationIdType:
-      pattern: ^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}(#[1-9][0-9]*)?$
-      type: string
-      description: Value of the correlation ID for the server, i.e., a UUID v4 (with or without the dash to separate the blocks), optionally followed by a '#' and a positive integer.
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+      description: A subscription (i.e., list of ISINs) for a business partner as a resource.
+    ResponseSubscriptionQuery:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ResourceSubscription'
+      description: HTTP 200 response (OK) for the query about the subscription of a business partner for the bulk service.
   headers:
+    ETag:
+      description: Identifier of the current version of the resource.
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/ETag'
+      example: '"A39AC1BFFADB215999106EC2B74AAA"'
     RateLimit-Remaining:
       description: 'Provides the remaining requests quota in the current time window (for the specific client).
 
@@ -435,13 +755,6 @@ components:
         minimum: 0
         type: integer
       example: 50
-    ETag:
-      description: Identifier of the current version of the resource.
-      style: simple
-      explode: false
-      schema:
-        $ref: '#/components/schemas/ETag'
-      example: '"A39AC1BFFADB215999106EC2B74AAA"'
   parameters:
     IfNoneMatch:
       name: If-None-Match
@@ -477,320 +790,3 @@ components:
           value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820
         As generated by API GW:
           value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820#23
-  responses:
-    Http503ErrorResponse:
-      description: Service Unavailable
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            503 Service Unavailable:
-              value:
-                message: unavailable
-    Http404ErrorResponse_NoIsin:
-      description: Not Found
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            404 Not Found:
-              value:
-                message: Resource not found
-                errorDetail:
-                  title: Not Found
-                  status: 404
-                  detail: ISIN 'US012071998' does not exist.
-    Http500ErrorResponse:
-      description: Internal Server Error
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            500 Internal Server Error:
-              value:
-                message: Server error
-                errorDetail:
-                  title: Internal Server Error
-                  status: 500
-                  detail: Something went wrong.
-    Http400ErrorResponse_GetSubscription:
-      description: Bad Request
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error400'
-          examples:
-            400 Bad Request - Invalid header parameter:
-              $ref: '#/components/examples/Error400_InvalidHeaderParam'
-    Http204NoContent:
-      description: No Content
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/vnd.api+json: {}
-    Http400ErrorResponse_RemoveIsin:
-      description: Bad Request
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error400'
-          examples:
-            400 Bad Request - Invalid ISIN:
-              $ref: '#/components/examples/Error400_InvalidPathParam'
-            400 Bad Request - Invalid header parameter:
-              $ref: '#/components/examples/Error400_InvalidHeaderParam'
-    Http400ErrorResponse_AddIsin:
-      description: Bad Request
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error400'
-          examples:
-            400 Bad Request - Subscription too big:
-              $ref: '#/components/examples/Error400_SubscriptionTooBig'
-            400 Bad Request - Invalid ISIN:
-              $ref: '#/components/examples/Error400_InvalidPathParam'
-            400 Bad Request - Invalid header parameter:
-              $ref: '#/components/examples/Error400_InvalidHeaderParam'
-    Http400ErrorResponse_BulkSet:
-      description: Bad Request
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error400'
-          examples:
-            400 Bad Request - Invalid content in request body:
-              $ref: '#/components/examples/Error400_SubscriptionWithInvalidIsins'
-            400 Bad Request - Subscription too big:
-              $ref: '#/components/examples/Error400_SubscriptionTooBig'
-            400 Bad Request - Invalid header parameter:
-              $ref: '#/components/examples/Error400_InvalidHeaderParam'
-    Http429ErrorResponse:
-      description: Too Many Requests
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-        Retry-After:
-          $ref: '#/components/headers/Retry-After'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            429 Too Many Requests:
-              value:
-                message: API rate limit exceeded
-    Http403ErrorResponse:
-      description: Forbidden
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            403 Forbidden:
-              value:
-                message: Forbidden
-    Http200Subscription:
-      description: The list of securities a business partner is subscribed to for the bulk service.
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        ETag:
-          $ref: '#/components/headers/ETag'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/ResponseSubscriptionQuery'
-          examples:
-            200 Subscription:
-              value:
-                data:
-                  id: 95b1b467-bd69-4436-8181-96c16408c230
-                  type: Subscription
-                  attributes:
-                    subscription:
-                    - US0378331005
-                    - US5949181045
-                    - CH0038863350
-                    - CH0025751329
-                    - CH0012221716
-                    - US5949181045
-                    - US9311421039
-                    - GB00BP6MXD84
-                    - INF277K01MZ6
-                    - KR7319400008
-    Http504ErrorResponse:
-      description: Gateway Timeout
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            504 Service Unavailable:
-              value:
-                message: The upstream server is timing out.
-    Http401ErrorResponse:
-      description: Unauthorized
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            401 Unauthorized - no certificate provided:
-              value:
-                message: No required TLS certificate was sent
-            401 Unauthorized - invalid certificate (no trust in certificate):
-              value:
-                message: TLS certificate failed verification
-            401 Unauthorized - not authorized (wrong client credentials):
-              value:
-                message: Unauthorized
-    Http304NotModified:
-      description: Not Modified
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        ETag:
-          $ref: '#/components/headers/ETag'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/vnd.api+json: {}
-    Http413ErrorResponse:
-      description: Content Too Large
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            413 Content Too Large:
-              value:
-                message: Request size limit exceeded
-  examples:
-    Error400_InvalidHeaderParam:
-      value:
-        message: 'header "X-Correlation-ID" validation failed with error: "failed to match pattern "^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}" with ""'
-    Error400_SubscriptionTooBig:
-      value:
-        message: Validation failed
-        errorDetail:
-          title: Bad Request
-          status: 400
-          detail: Subscription is limited to 400'000 financial instruments, cannot set it larger.
-    Error400_SubscriptionWithInvalidIsins:
-      value:
-        message: Validation failed
-        errorDetail:
-          title: Bad Request
-          status: 400
-          detail: 'Subscription request contains the following invalid ISIN(s): ''DE000SD4J14'', ''CH104032437'', ''CH055341828''.'
-    Error400_InvalidPathParam:
-      value:
-        message: 'path "isin" validation failed with error: "failed to match pattern "^[A-Z]{2}([A-Z0-9]){9}[0-9]$" with "CH003886335"'

@@ -1,34 +1,26 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 'debiX Auth Provider API: Provider-to-SIX 3DS bankmaster API'
-  version: 2.1.9
-  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+  title: Swiss Bank Master API v3 Bankmaster API
+  description: The Swiss Bank Master API allows to access master data required for electronic payments in Switzerland. All participants connected to the Swiss payment systems SIC and euroSIC are listed.
+  contact:
+    url: https://www.six-group.com/de/products-services/banking-services/interbank-clearing/online-services/download-bank-master.html
+    email: contact.sic@six-group.com
+  version: 3.1 (generated 2025-12-05T07:26:41Z)
 servers:
-- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - Internet
-- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - Internet
-- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: PROD - SSFN
-- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: TEST - SSFN
-- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - P2P
-- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - P2P
+- url: https://api.six-group.com/api/epcd/bankmaster/v3
+- url: https://api.p2p.six-group.com/api/epcd/bankmaster/v3
+- url: https://api.fip.six-group.com/api/epcd/bankmaster/v3
 tags:
-- name: bankmaster
+- name: Bank Master
   description: '**Bankmaster API**
 
-    All public REST endpoints of the bank master data are located here, such as the bank master data as JSON and downloadable files.
-
-    '
+    All public REST endpoints of the bank master data are located here, such as the bank master data as JSON and downloadable files.'
 paths:
   /bankmaster:
     get:
       tags:
-      - bankmaster
-      summary: Bank master data as JSON object.
+      - Bank Master
+      summary: Bank master data as JSON object
       description: Bank master data as JSON object.
       operationId: getBankmaster
       parameters:
@@ -56,8 +48,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     head:
       tags:
-      - bankmaster
-      summary: Bank master data as JSON object (only head, no content).
+      - Bank Master
+      summary: Bank master data as JSON object (only head, no content)
       description: Bank master data as JSON object (only head, no content).
       operationId: headBankmaster
       responses:
@@ -68,8 +60,8 @@ paths:
   /bankmaster_V3.csv:
     get:
       tags:
-      - bankmaster
-      summary: Bank master data file in the CSV format.
+      - Bank Master
+      summary: Bank master data file in the CSV format
       description: Bank master data file in the CSV format, with header row. The CSV file contains UTF-8 encoded characters (important e.g. for umlauts and Euro sign).
       operationId: getBankmasterCsv
       responses:
@@ -83,8 +75,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     head:
       tags:
-      - bankmaster
-      summary: Bank master data file in the CSV format (only head, no content).
+      - Bank Master
+      summary: Bank master data file in the CSV format (only head, no content)
       description: Bank master data file in the CSV format, with header row. The CSV file contains UTF-8 encoded characters (important e.g. for umlauts and Euro sign) (only head, no content).
       operationId: headBankmasterCsv
       responses:
@@ -95,8 +87,8 @@ paths:
   /bankmaster.json:
     get:
       tags:
-      - bankmaster
-      summary: Bank master data as JSON object.
+      - Bank Master
+      summary: Bank master data as JSON object
       description: Bank master data as a JSON object.
       operationId: getBankmasterJson
       parameters:
@@ -124,8 +116,8 @@ paths:
                 $ref: '#/components/schemas/Problem'
     head:
       tags:
-      - bankmaster
-      summary: Bank master data as JSON object (only head, no content).
+      - Bank Master
+      summary: Bank master data as JSON object (only head, no content)
       description: Bank master data as a JSON object (only head, no content).
       operationId: headBankmasterJson
       responses:
@@ -135,31 +127,6 @@ paths:
           description: Unexpected error.
 components:
   schemas:
-    BankMasterBase:
-      required:
-      - entryType
-      - iid
-      - validOn
-      type: object
-      properties:
-        iid:
-          type: integer
-          description: Each bank / financial institution is identified by an IID (institution identification). IIDs are three to five digits long. QR-IIDs consist exclusively of numbers from 30000 to 31999.
-          example: 9703
-        validOn:
-          type: string
-          description: Date to which the information in a record applies. This date (written as per ISO8601 standard) is identical for all records.
-          format: date
-          example: '2023-01-23'
-        entryType:
-          type: string
-          description: '"New IID/QR-IID" must be used instead of "IID / QR-IID" if entryType is BankMasterConcatenated.'
-          example: BankMaster
-          enum:
-          - BankMasterConcatenated
-          - BankMaster
-      discriminator:
-        propertyName: entryType
     BankMasterJsonResponse:
       required:
       - entries
@@ -186,6 +153,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BankMasterBase'
+    BankMasterBase:
+      required:
+      - entryType
+      - iid
+      - validOn
+      type: object
+      properties:
+        iid:
+          type: integer
+          description: Each bank / financial institution is identified by an IID (institution identification). IIDs are three to five digits long. QR-IIDs consist exclusively of numbers from 30000 to 31999.
+          example: 9703
+        validOn:
+          type: string
+          description: Date to which the information in a record applies. This date (written as per ISO8601 standard) is identical for all records.
+          format: date
+          example: '2023-01-23'
+        entryType:
+          type: string
+          description: '"New IID/QR-IID" must be used instead of "IID / QR-IID" if entryType is BankMasterConcatenated.'
+          example: BankMaster
+          enum:
+          - BankMasterConcatenated
+          - BankMaster
+      discriminator:
+        propertyName: entryType
     Problem:
       required:
       - detail
@@ -210,8 +202,6 @@ components:
             '
           example: Request parameter has missing or invalid values
         status:
-          maximum: 600
-          exclusiveMaximum: true
           minimum: 100
           type: integer
           description: 'The HTTP status code generated by the origin server for this occurrence
@@ -221,6 +211,7 @@ components:
             '
           format: int32
           example: 400
+          exclusiveMaximum: 600
         detail:
           type: string
           description: 'A human readable explanation specific to this occurrence of the

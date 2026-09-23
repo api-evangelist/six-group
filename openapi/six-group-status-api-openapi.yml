@@ -1,33 +1,25 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 'debiX Auth Provider API: Provider-to-SIX 3DS status API'
-  version: 2.1.9
-  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+  title: SIC API v1 Status API
+  description: The SIC status API provides information about the current status of the electronic payment services provided by SIX Interbank Clearing Ltd. The information in the status API shows live data.
+  contact:
+    url: https://www.six-group.com/de/products-services/banking-services/interbank-clearing/online-services/system-status.html
+    email: contact.sic@six-group.com
+  version: 1.0 (generated 2024-06-27T11:51:13Z)
 servers:
-- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - Internet
-- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - Internet
-- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: PROD - SSFN
-- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: TEST - SSFN
-- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - P2P
-- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - P2P
+- url: https://api.six-group.com/api/sic/pci_p/status/v1
+- url: https://api.p2p.six-group.com/api/sic/pci_p/status/v1
+- url: https://api.fip.six-group.com/api/sic/pci_p/status/v1
 tags:
-- name: status
+- name: Status
   description: '**SIC Status**
 
-    Information about about the status of various services can be found here.
-
-    '
+    Information about about the status of various services can be found here.'
 paths:
   /servicestatus:
     get:
       tags:
-      - status
+      - Status
       summary: GET Status in JSON Format
       description: Returns the service status data of the SIC service as a JSON object.
       operationId: getServiceStatusJson
@@ -40,7 +32,7 @@ paths:
                 $ref: '#/components/schemas/ServiceStatusResponseEntry'
     head:
       tags:
-      - status
+      - Status
       summary: HEAD Status in JSON Format
       description: Service status data of the SIC service in JSON format (only head, no content).
       operationId: headServiceStatusJson
@@ -75,3 +67,4 @@ components:
           format: date-time
           example: '2024-12-21T10:52:05.1904957+01:00'
       description: Status data for one service.
+x-original-swagger-version: '2.0'

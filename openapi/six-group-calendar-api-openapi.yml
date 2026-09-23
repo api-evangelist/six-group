@@ -1,28 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 'debiX Auth Provider API: Provider-to-SIX 3DS calendar API'
-  version: 2.1.9
-  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+  title: Clearing Day v1 Calendar API
+  description: The clearing day calendar contains scheduling information for the electronic payment services provided by SIX Interbank Clearing Ltd. The information in the clearing day calendar includes events scheduled for future dates.
+  contact:
+    url: https://www.six-group.com/en/products-services/banking-services/interbank-clearing/online-services/download-clearing-day-calendar.html
+    email: contact.sic@six-group.com
+  version: 1.0 (generated 2024-03-27T17:02:01Z)
 servers:
-- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - Internet
-- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - Internet
-- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: PROD - SSFN
-- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: TEST - SSFN
-- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - P2P
-- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - P2P
+- url: https://api.six-group.com/api/epcd/clearingday/v1
+- url: https://api.p2p.six-group.com/api/epcd/clearingday/v1
+- url: https://api.fip.six-group.com/api/epcd/clearingday/v1
 tags:
-- name: calendar
+- name: Calendar
   description: '**Clearing Day Calendar**
 
-    Informations about future clearing days can be found here.
-
-    '
+    Informations about future clearing days can be found here.'
 paths:
   /calendar:
     parameters:
@@ -30,7 +22,7 @@ paths:
     - $ref: '#/components/parameters/query_serviceIdentification'
     get:
       tags:
-      - calendar
+      - Calendar
       summary: GET Calendar in JSON Format
       description: Returns the clearing day calendar data as a JSON object.
       operationId: getClearingDayCalendarJson
@@ -49,7 +41,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
     head:
       tags:
-      - calendar
+      - Calendar
       summary: HEAD Calendar in JSON Format
       description: Clearing day calendar file in JSON format (only head, no content).
       operationId: headClearingDayCalendarJson
@@ -66,7 +58,7 @@ paths:
     - $ref: '#/components/parameters/query_serviceIdentification'
     get:
       tags:
-      - calendar
+      - Calendar
       summary: GET Calendar File in CSV Format
       description: Clearing day calendar file in CSV format, with header row. The file encoding corresponds to the Unicode character set UTF-8 and must be read accordingly (umlauts, etc.).
       operationId: getClearingDayCalendarCsv
@@ -82,7 +74,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
     head:
       tags:
-      - calendar
+      - Calendar
       summary: HEAD Calendar in CSV Format
       description: Clearing day calendar file in CSV format (only head, no content).
       operationId: headClearingDayCalendarCsv
@@ -95,6 +87,42 @@ paths:
           content: {}
 components:
   schemas:
+    ClearingDayCalendarJsonResponseEntry:
+      required:
+      - calendarDay
+      - dayOfWeek
+      - services
+      type: object
+      properties:
+        calendarDay:
+          type: string
+          description: Calendar day (according to ISO 8601) of the record. All dependent information can be found as child elements.
+          format: date
+          example: '2024-12-23'
+        dayOfWeek:
+          maxLength: 15
+          minLength: 1
+          type: string
+          description: Day of week of the current record in english. This redundant information is only available to support readability.
+          example: Wednesday
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+      description: Contains clearing day information for a specific calendar date.
+    ClearingDayCalendarJsonResponse:
+      required:
+      - entries
+      - metaData
+      type: object
+      properties:
+        metaData:
+          $ref: '#/components/schemas/ClearingDayCalendarMetaData'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClearingDayCalendarJsonResponseEntry'
+      description: Toplevel element that contains metadata and clearing day calendar entries.
     ClearingDayCalendarMetaData:
       required:
       - createdStamp
@@ -106,6 +134,107 @@ components:
           format: date-time
           example: '2024-12-21T10:52:05.1904957+01:00'
       description: Information about the validity and creation stamp.
+    Service:
+      required:
+      - clearingDay
+      - serviceDescription
+      - serviceIdentification
+      type: object
+      properties:
+        serviceIdentification:
+          maxLength: 10
+          minLength: 1
+          type: string
+          description: "Values for Production Services: PCR_P; PER_P; PCI_P \nValues for Test environments:\n- SIC RTGS service: XCR_E; XCR_P; ACR_E; ACR_P \n- SIC IP service: XCI_E; ACI_E; XCI_P; ACI_P; VCI_E; VCI_P\n- euroSIC RTGS service: XER_E; XER_P; AER_E; AER_P\n"
+          example: PCR_P
+        serviceDescription:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Additional information to the serviceIdentification. No predefined values.
+          example: 'SIC-RTGS-Service: External test environment for tests with production data and the current development status of the next release'
+        clearingDay:
+          type: string
+          description: The clearing day that is active on the start (00:00) of the related calendar day.
+          format: date
+          example: '2024-12-23'
+        scheduledDowntimes:
+          type: array
+          description: Planned downtime(s) of the service on this calendar day. If a downtime does not end by midnight, the end is 24:00 and the downtime continues at 00:00 on the next calendar day.
+          items:
+            $ref: '#/components/schemas/Duration'
+        scheduledClearingDayChange:
+          $ref: '#/components/schemas/ScheduledClearingDayChange'
+      description: Clearing day information for a specific service (e.g. SIC RTGS service or SIC IP service). This always includes the currently valid clearing day and may include planned downtimes and planned clearing day changes - if any.
+    Problem:
+      required:
+      - detail
+      - status
+      - title
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'An absolute URI that identifies the problem type.
+
+            We may provide human-readable documentation for the problem type in the future, when the URI is dereferenced.
+
+            '
+          format: uri
+          example: /problems/REQUEST_PARAMETER_VALIDATION_FAILED
+          default: about:blank
+        title:
+          type: string
+          description: 'A short, human readable summary of the problem type.
+
+            '
+          example: Request parameter has missing or invalid values
+        status:
+          minimum: 100
+          type: integer
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          format: int32
+          example: 400
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: The submitted request contains invalid or missing request parameters which cannot be processed.
+        instance:
+          type: string
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+          format: uri
+          example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
+        metadata:
+          $ref: '#/components/schemas/GenericObject'
+    Duration:
+      required:
+      - endDateTime
+      - startDateTime
+      type: object
+      properties:
+        startDateTime:
+          type: string
+          description: Start date and time of the duration.
+          format: date-time
+          example: '2024-12-23T12:00:00+01:00'
+        endDateTime:
+          type: string
+          description: End date and time of the duration.
+          format: date-time
+      description: A duration composed of start and end. The date-time fields are structured according to RFC3339, section 5.6 in ISO 8601 with timezone and milliseconds.
     ScheduledClearingDayChange:
       required:
       - nextClearingDay
@@ -154,121 +283,6 @@ components:
         The date-time fields are structured according to RFC3339, section 5.6 in ISO 8601 with timezone and milliseconds.
 
         '
-    Duration:
-      required:
-      - endDateTime
-      - startDateTime
-      type: object
-      properties:
-        startDateTime:
-          type: string
-          description: Start date and time of the duration.
-          format: date-time
-          example: '2024-12-23T12:00:00+01:00'
-        endDateTime:
-          type: string
-          description: End date and time of the duration.
-          format: date-time
-      description: A duration composed of start and end. The date-time fields are structured according to RFC3339, section 5.6 in ISO 8601 with timezone and milliseconds.
-    Problem:
-      required:
-      - detail
-      - status
-      - title
-      type: object
-      properties:
-        type:
-          type: string
-          description: 'An absolute URI that identifies the problem type.
-
-            We may provide human-readable documentation for the problem type in the future, when the URI is dereferenced.
-
-            '
-          format: uri
-          example: /problems/REQUEST_PARAMETER_VALIDATION_FAILED
-          default: about:blank
-        title:
-          type: string
-          description: 'A short, human readable summary of the problem type.
-
-            '
-          example: Request parameter has missing or invalid values
-        status:
-          maximum: 600
-          exclusiveMaximum: true
-          minimum: 100
-          type: integer
-          description: 'The HTTP status code generated by the origin server for this occurrence
-
-            of the problem.
-
-            '
-          format: int32
-          example: 400
-        detail:
-          type: string
-          description: 'A human readable explanation specific to this occurrence of the
-
-            problem.
-
-            '
-          example: The submitted request contains invalid or missing request parameters which cannot be processed.
-        instance:
-          type: string
-          description: 'An absolute URI that identifies the specific occurrence of the problem.
-
-            It may or may not yield further information if dereferenced.
-
-            '
-          format: uri
-          example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
-        metadata:
-          $ref: '#/components/schemas/GenericObject'
-    Service:
-      required:
-      - clearingDay
-      - serviceDescription
-      - serviceIdentification
-      type: object
-      properties:
-        serviceIdentification:
-          maxLength: 10
-          minLength: 1
-          type: string
-          description: "Values for Production Services: PCR_P; PER_P; PCI_P \nValues for Test environments:\n- SIC RTGS service: XCR_E; XCR_P; ACR_E; ACR_P \n- SIC IP service: XCI_E; ACI_E; XCI_P; ACI_P; VCI_E; VCI_P\n- euroSIC RTGS service: XER_E; XER_P; AER_E; AER_P\n"
-          example: PCR_P
-        serviceDescription:
-          maxLength: 250
-          minLength: 1
-          type: string
-          description: Additional information to the serviceIdentification. No predefined values.
-          example: 'SIC-RTGS-Service: External test environment for tests with production data and the current development status of the next release'
-        clearingDay:
-          type: string
-          description: The clearing day that is active on the start (00:00) of the related calendar day.
-          format: date
-          example: '2024-12-23'
-        scheduledDowntimes:
-          type: array
-          description: Planned downtime(s) of the service on this calendar day. If a downtime does not end by midnight, the end is 24:00 and the downtime continues at 00:00 on the next calendar day.
-          items:
-            $ref: '#/components/schemas/Duration'
-        scheduledClearingDayChange:
-          $ref: '#/components/schemas/ScheduledClearingDayChange'
-      description: Clearing day information for a specific service (e.g. SIC RTGS service or SIC IP service). This always includes the currently valid clearing day and may include planned downtimes and planned clearing day changes - if any.
-    ClearingDayCalendarJsonResponse:
-      required:
-      - entries
-      - metaData
-      type: object
-      properties:
-        metaData:
-          $ref: '#/components/schemas/ClearingDayCalendarMetaData'
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClearingDayCalendarJsonResponseEntry'
-      description: Toplevel element that contains metadata and clearing day calendar entries.
     GenericObject:
       required:
       - '@type'
@@ -292,29 +306,6 @@ components:
       example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
 
         '
-    ClearingDayCalendarJsonResponseEntry:
-      required:
-      - calendarDay
-      - dayOfWeek
-      - services
-      type: object
-      properties:
-        calendarDay:
-          type: string
-          description: Calendar day (according to ISO 8601) of the record. All dependent information can be found as child elements.
-          format: date
-          example: '2024-12-23'
-        dayOfWeek:
-          maxLength: 15
-          minLength: 1
-          type: string
-          description: Day of week of the current record in english. This redundant information is only available to support readability.
-          example: Wednesday
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
-      description: Contains clearing day information for a specific calendar date.
   parameters:
     query_serviceIdentification:
       name: serviceIdentification
@@ -335,3 +326,4 @@ components:
       schema:
         type: string
         format: date
+x-original-swagger-version: '2.0'

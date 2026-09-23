@@ -1,21 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 'debiX Auth Provider API: Provider-to-SIX 3DS BulkSubscriptionResults API'
-  version: 2.1.9
-  description: Callback API used by the Authentication Provider and implemented by SIX / debiX
+  title: Security Settlement Information - External Bulk…
+  description: Settlement Info Reporting
+  contact:
+    email: am-support@six-group.com
+  license:
+    name: Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
+    url: https://creativecommons.org/licenses/by-nd/4.0/
+  version: 1.0.7
 servers:
-- url: https://api.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - Internet
-- url: https://api-preprod.np.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - Internet
-- url: https://api.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: PROD - SSFN
-- url: https://api-preprod.np.six.ssfn.ch/api/debix-auth/provider-auth/v2
-  description: TEST - SSFN
-- url: https://api.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: PROD - P2P
-- url: https://api-preprod.np.p2p.six-group.com/api/debix-auth/provider-auth/v2
-  description: TEST - P2P
+- url: https://api.six-group.com/custody/cockpit/setlInfo/v1
+- url: https://api.p2p.six-group.com/custody/cockpit/setlInfo/v1
+- url: https://api.fip.six-group.com/custody/cockpit/setlInfo/v1
 tags:
 - name: BulkSubscriptionResults
   description: Obtain the (basic) settlement information for securities included in the business partner's subscription.
@@ -25,7 +21,7 @@ paths:
     get:
       tags:
       - BulkSubscriptionResults
-      summary: Get the (basic) settlement information for all securities in the business partner's subscription as a gzipped file.
+      summary: Get the (basic) settlement information for all securities in the business…
       description: 'Get the basic settlement information for all securities defined by the business partner in its subscription as a gzipped file.
 
 
@@ -56,7 +52,219 @@ paths:
         '504':
           $ref: '#/components/responses/Http504ErrorResponse'
 components:
+  responses:
+    Http401ErrorResponse:
+      description: Unauthorized
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            401 Unauthorized - no certificate provided:
+              value:
+                message: No required TLS certificate was sent
+            401 Unauthorized - invalid certificate (no trust in certificate):
+              value:
+                message: TLS certificate failed verification
+            401 Unauthorized - not authorized (wrong client credentials):
+              value:
+                message: Unauthorized
+    Http429ErrorResponse:
+      description: Too Many Requests
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+        Retry-After:
+          $ref: '#/components/headers/Retry-After'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            429 Too Many Requests:
+              value:
+                message: API rate limit exceeded
+    Http304NotModified:
+      description: Not Modified
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        ETag:
+          $ref: '#/components/headers/ETag'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/vnd.api+json: {}
+    Http400ErrorResponse_GetResults:
+      description: Bad Request
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400'
+          examples:
+            400 Bad Request - Invalid header parameter:
+              $ref: '#/components/examples/Error400_InvalidHeaderParam'
+    Http500ErrorResponse:
+      description: Internal Server Error
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            500 Internal Server Error:
+              value:
+                message: Server error
+                errorDetail:
+                  title: Internal Server Error
+                  status: 500
+                  detail: Something went wrong.
+    Http504ErrorResponse:
+      description: Gateway Timeout
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            504 Service Unavailable:
+              value:
+                message: The upstream server is timing out.
+    Http503ErrorResponse:
+      description: Service Unavailable
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            503 Service Unavailable:
+              value:
+                message: unavailable
+    Http403ErrorResponse:
+      description: Forbidden
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            403 Forbidden:
+              value:
+                message: Forbidden
+    Http200BasicSettlementInfoFile:
+      description: 'The basic settlement information for all securities defined in the business partner''s subscription.
+
+
+        The format of the file is given by the type ''ResponseSubscriptionBasicSettlementInfoQuery''; see ''SampleResultsFileContents'' as an example.'
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        ETag:
+          $ref: '#/components/headers/ETag'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/gzip:
+          schema:
+            type: string
+            format: binary
+    Http404ErrorResponse_NoResults:
+      description: Not Found
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            404 Not Found:
+              value:
+                message: no Route matched with those values
+                errorDetail:
+                  title: Not Found
+                  status: 404
+                  detail: Bulk subscription results not available.
   schemas:
+    ETag:
+      pattern: ^(W\/)?"([^"]|\\")*"$
+      type: string
+      description: The RFC7232 ETag (Entity Tag) header field (see https://www.rfc-editor.org/rfc/rfc7232#section-2.3) in a response provides the current entity-tag for the selected resource. An entity-tag is an opaque identifier for different versions of a resource over time, regardless whether multiple versions are valid at the same time. An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness indicator ('W/').
+      example: W/"xyzzy"
+    InvalidParameter:
+      required:
+      - in
+      - name
+      - value
+      type: object
+      properties:
+        in:
+          description: Location of the invalid parameter.
+          allOf:
+          - $ref: '#/components/schemas/ParameterLocation'
+        name:
+          type: string
+          description: Name of the invalid parameter.
+        reason:
+          type: string
+          description: The reason why the parameter's value is invalid.
+        value:
+          type: string
+          description: The invalid value.
+      description: Description of a parameter with invalid value.
     ErrorDetail:
       required:
       - status
@@ -91,6 +299,59 @@ components:
           format: uri
           example: https://www.example.com/books/1234
       description: Detailed description of an error to help remediation. It follows RFC 7807 (https://datatracker.ietf.org/doc/html/rfc7807).
+    MissingParameter:
+      required:
+      - in
+      - name
+      type: object
+      properties:
+        in:
+          description: Location of the missing parameter.
+          allOf:
+          - $ref: '#/components/schemas/ParameterLocation'
+        name:
+          type: string
+          description: Name of the missing parameter.
+        reason:
+          type: string
+          description: The reason why the parameter's value is missing.
+      description: Description of a missing parameter.
+    ApiGwError:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable explanation specific to this error.
+          example: Unauthorized
+      description: Description of an error as provided by the API GW to help remediation.
+    XCorrelationIdType:
+      pattern: ^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}(#[1-9][0-9]*)?$
+      type: string
+      description: Value of the correlation ID for the server, i.e., a UUID v4 (with or without the dash to separate the blocks), optionally followed by a '#' and a positive integer.
+    Error400:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable explanation specific to this error.
+          example: Unauthorized
+        errorDetail:
+          description: Additional information about the error.
+          allOf:
+          - $ref: '#/components/schemas/ErrorDetail400'
+      description: Description of a 400 error to help remediation.
+    ParameterLocation:
+      type: string
+      description: The location of the parameter in question
+      enum:
+      - BODY
+      - PATH
+      - QUERY
+      - HEADER
     Error:
       required:
       - message
@@ -123,86 +384,14 @@ components:
             description: List of missing parameters.
             items:
               $ref: '#/components/schemas/MissingParameter'
-    InvalidParameter:
-      required:
-      - in
-      - name
-      - value
-      type: object
-      properties:
-        in:
-          description: Location of the invalid parameter.
-          allOf:
-          - $ref: '#/components/schemas/ParameterLocation'
-        name:
-          type: string
-          description: Name of the invalid parameter.
-        reason:
-          type: string
-          description: The reason why the parameter's value is invalid.
-        value:
-          type: string
-          description: The invalid value.
-      description: Description of a parameter with invalid value.
-    ETag:
-      pattern: ^(W\/)?"([^"]|\\")*"$
-      type: string
-      description: The RFC7232 ETag (Entity Tag) header field (see https://www.rfc-editor.org/rfc/rfc7232#section-2.3) in a response provides the current entity-tag for the selected resource. An entity-tag is an opaque identifier for different versions of a resource over time, regardless whether multiple versions are valid at the same time. An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness indicator ('W/').
-      example: W/"xyzzy"
-    MissingParameter:
-      required:
-      - in
-      - name
-      type: object
-      properties:
-        in:
-          description: Location of the missing parameter.
-          allOf:
-          - $ref: '#/components/schemas/ParameterLocation'
-        name:
-          type: string
-          description: Name of the missing parameter.
-        reason:
-          type: string
-          description: The reason why the parameter's value is missing.
-      description: Description of a missing parameter.
-    ApiGwError:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable explanation specific to this error.
-          example: Unauthorized
-      description: Description of an error as provided by the API GW to help remediation.
-    ParameterLocation:
-      type: string
-      description: The location of the parameter in question
-      enum:
-      - BODY
-      - PATH
-      - QUERY
-      - HEADER
-    Error400:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable explanation specific to this error.
-          example: Unauthorized
-        errorDetail:
-          description: Additional information about the error.
-          allOf:
-          - $ref: '#/components/schemas/ErrorDetail400'
-      description: Description of a 400 error to help remediation.
-    XCorrelationIdType:
-      pattern: ^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}(#[1-9][0-9]*)?$
-      type: string
-      description: Value of the correlation ID for the server, i.e., a UUID v4 (with or without the dash to separate the blocks), optionally followed by a '#' and a positive integer.
   headers:
+    ETag:
+      description: Identifier of the current version of the resource.
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/ETag'
+      example: '"A39AC1BFFADB215999106EC2B74AAA"'
     RateLimit-Remaining:
       description: 'Provides the remaining requests quota in the current time window (for the specific client).
 
@@ -256,13 +445,6 @@ components:
         minimum: 0
         type: integer
       example: 50
-    ETag:
-      description: Identifier of the current version of the resource.
-      style: simple
-      explode: false
-      schema:
-        $ref: '#/components/schemas/ETag'
-      example: '"A39AC1BFFADB215999106EC2B74AAA"'
   parameters:
     IfNoneMatch:
       name: If-None-Match
@@ -288,192 +470,6 @@ components:
           value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820
         As generated by API GW:
           value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820#23
-  responses:
-    Http503ErrorResponse:
-      description: Service Unavailable
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            503 Service Unavailable:
-              value:
-                message: unavailable
-    Http500ErrorResponse:
-      description: Internal Server Error
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            500 Internal Server Error:
-              value:
-                message: Server error
-                errorDetail:
-                  title: Internal Server Error
-                  status: 500
-                  detail: Something went wrong.
-    Http400ErrorResponse_GetResults:
-      description: Bad Request
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error400'
-          examples:
-            400 Bad Request - Invalid header parameter:
-              $ref: '#/components/examples/Error400_InvalidHeaderParam'
-    Http404ErrorResponse_NoResults:
-      description: Not Found
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            404 Not Found:
-              value:
-                message: no Route matched with those values
-                errorDetail:
-                  title: Not Found
-                  status: 404
-                  detail: Bulk subscription results not available.
-    Http403ErrorResponse:
-      description: Forbidden
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            403 Forbidden:
-              value:
-                message: Forbidden
-    Http429ErrorResponse:
-      description: Too Many Requests
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-        Retry-After:
-          $ref: '#/components/headers/Retry-After'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            429 Too Many Requests:
-              value:
-                message: API rate limit exceeded
-    Http504ErrorResponse:
-      description: Gateway Timeout
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            504 Service Unavailable:
-              value:
-                message: The upstream server is timing out.
-    Http200BasicSettlementInfoFile:
-      description: 'The basic settlement information for all securities defined in the business partner''s subscription.
-
-
-        The format of the file is given by the type ''ResponseSubscriptionBasicSettlementInfoQuery''; see ''SampleResultsFileContents'' as an example.'
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        ETag:
-          $ref: '#/components/headers/ETag'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/gzip:
-          schema:
-            type: string
-            format: binary
-    Http401ErrorResponse:
-      description: Unauthorized
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            401 Unauthorized - no certificate provided:
-              value:
-                message: No required TLS certificate was sent
-            401 Unauthorized - invalid certificate (no trust in certificate):
-              value:
-                message: TLS certificate failed verification
-            401 Unauthorized - not authorized (wrong client credentials):
-              value:
-                message: Unauthorized
-    Http304NotModified:
-      description: Not Modified
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        ETag:
-          $ref: '#/components/headers/ETag'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/vnd.api+json: {}
   examples:
     Error400_InvalidHeaderParam:
       value:
