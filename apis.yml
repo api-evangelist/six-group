@@ -39,6 +39,17 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/six-group.png
 tags:
+- Finance
+- Market Data
+- Stocks
+- Reference Data
+- Corporate Actions
+- Real-Time
+- Exchange
+- Open Banking
+- Payments
+- Switzerland
+tags_raw:
 - Financial
 - Market Data
 - Stocks
@@ -122,7 +133,7 @@ apis:
     (PSS), OpenWealth custody services, and consent base modules. Publicly documented with a downloadable
     Postman collection and example payloads; participation requires bLink admission.
 - aid: six-group:debix-api
-  name: SIX debiX API
+  name: SIX Debi X API
   tags:
   - Debit Cards
   - Payments
@@ -324,8 +335,6 @@ apis:
     https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
   baseURL: https://api.six-group.com/api/debix/bank/v2
   tags:
-  - 3D
-  tags_raw:
   - 3 DS
   properties:
   - type: OpenAPI

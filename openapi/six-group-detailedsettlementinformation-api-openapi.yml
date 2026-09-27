@@ -49,60 +49,205 @@ paths:
           $ref: '#/components/responses/Http504ErrorResponse'
 components:
   schemas:
-    FinancialInstitutionBIC:
+    Isin:
+      pattern: ^[A-Z]{2}([A-Z0-9]){9}[0-9]$
+      type: string
+      description: 'The ISIN (International Securities Identification Number) uniquely identifies a financial instrument. See ISO 6166:2021: Financial services — International securities identification number (ISIN).'
+      example: CH0038863350
+    XCorrelationIdType:
+      pattern: ^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}(#[1-9][0-9]*)?$
+      type: string
+      description: Value of the correlation ID for the server, i.e., a UUID v4 (with or without the dash to separate the blocks), optionally followed by a '#' and a positive integer.
+    PropertiesBasicResource:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifier of the resource
+          format: uuid
+        type:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Type of the resource.
+      description: Properties of any resource.
+    MissingParameter:
+      required:
+      - in
+      - name
+      type: object
+      properties:
+        in:
+          description: Location of the missing parameter.
+          allOf:
+          - $ref: '#/components/schemas/ParameterLocation'
+        name:
+          type: string
+          description: Name of the missing parameter.
+        reason:
+          type: string
+          description: The reason why the parameter's value is missing.
+      description: Description of a missing parameter.
+    BasicSettlementInfoPerCustodian:
       required:
       - bic
       type: object
       properties:
         bic:
-          $ref: '#/components/schemas/AnyBIC'
-      description: BIC of a financial institution
-      example:
-        bic: INSECHZZXXX
-    PositionType:
-      pattern: ^[A-Z]{2}$
-      type: string
-      description: Market segregation code, aka position type.
-      example: 'NO'
-    ResponseDetailedSettlementInfoQuery:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ResourceDetailedSettlementInfo'
-      description: HTTP 200 response (OK) for the query about detailed security settlement information.
-    ResourceDetailedSettlementInfo:
-      description: Detailed settlement information for a security, including custodians-specific information.
-      allOf:
-      - $ref: '#/components/schemas/PropertiesBasicResource'
-      - required:
-        - attributes
-        type: object
-        properties:
-          attributes:
-            $ref: '#/components/schemas/DetailedSettlementInfo'
-    InvalidParameter:
-      required:
-      - in
-      - name
-      - value
-      type: object
-      properties:
-        in:
-          description: Location of the invalid parameter.
+          description: Identifier of the custodian.
+          example: MELNUS3PGSS
           allOf:
-          - $ref: '#/components/schemas/ParameterLocation'
+          - $ref: '#/components/schemas/AnyBIC'
+        settlementEligibility:
+          type: boolean
+          description: Settlement eligibility. If missing, to be interpreted as SIX SIS needs to  be contacted.
+          example: true
+        marketSegregationCode:
+          description: Market segregation code, aka position type.
+          example: 'NO'
+          allOf:
+          - $ref: '#/components/schemas/PositionType'
+        sdrtCountry:
+          maxItems: 2
+          minItems: 1
+          type: array
+          description: SDRT country code.
+          example:
+          - GB
+          items:
+            $ref: '#/components/schemas/PositionType'
+      description: Basic settlement information for a security for a custodian (aka 'market').
+    URL:
+      maxLength: 2048
+      minLength: 1
+      type: string
+      description: Uniform Resource Locator (URL) as defined in RFC 1738 (https://datatracker.ietf.org/doc/html/rfc1738).
+    ApiGwError:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable explanation specific to this error.
+          example: Unauthorized
+      description: Description of an error as provided by the API GW to help remediation.
+    AnyBIC:
+      pattern: ^[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$
+      type: string
+      description: Business Identifier Code (BIC) 8 or 11 according to ISO 9362:2014.
+      example: CITIUS33XXX
+    DetailedSettlementInfoPerCustodian:
+      required:
+      - bookingBasis
+      - bpId
+      - externalOrdinarioAccount
+      - marketGuides
+      - name
+      description: Detailed settlement information for a security for a custodian (aka 'market').
+      allOf:
+      - $ref: '#/components/schemas/BasicSettlementInfoPerCustodian'
+      - type: object
+        properties:
+          bpId:
+            description: SIX SIS BP-ID for the custodian.
+            example: CA100045
+            allOf:
+            - $ref: '#/components/schemas/BpId'
+          name:
+            maxLength: 72
+            type: string
+            description: Custodian name.
+            example: CIBC MELLON TRUST COMPANY, TORONTO
+          participantId:
+            maxLength: 200
+            type: string
+            description: Participant ID with local CSD
+            example: 'DTC: 00000908FRB: ABA 021000089 A/C CUST'
+          accountT2S:
+            maxLength: 200
+            type: string
+            description: T2S safekeeping account.
+            example: DAKV71210000
+          externalOrdinarioAccount:
+            maxLength: 200
+            type: string
+            description: External ordinario account number at local custodian.
+            example: '71210000'
+          settlementEligibilityNotes:
+            maxLength: 720
+            type: string
+            description: Settlement eligibility notes/restrictions.
+            example: 'RFP: Please contact your dedicated settlement desk'
+          bookingBasis:
+            description: "Booking Basis for local custodian:\n * FAMT: face amount\n * UNIT: unit."
+            allOf:
+            - $ref: '#/components/schemas/BookingBasis'
+          marketGuides:
+            minItems: 1
+            type: array
+            description: Hyperlink (URL) to the relevant SIX SIS Market Guides for this custodian as well as the market name.
+            example:
+            - marketName: USA - Citibank
+              url: https://sws.six-group.com/private/en/home/market-guide/overview/usa/usa-citibank.html
+            items:
+              $ref: '#/components/schemas/MarketGuideInfo'
+    SdrtAttributesOnISIN:
+      type: object
+      properties:
+        eligibilityCrossBorder:
+          type: boolean
+          description: SDRT eligibility for cross-border orders. If missing, the information is unknown.
+          example: false
+        eligibilityInHouse:
+          type: boolean
+          description: SDRT eligibility for SIX SIS inhouse orders. If missing, the information is unknown.
+          example: false
+        inhouseForbidden:
+          type: boolean
+          description: SDRT SIX SIS inhouse transactions forbidden flag. If missing, the information is unknown.
+          example: false
+      description: SDRT attributes for the security
+    FinancialInstitutionName:
+      required:
+      - name
+      type: object
+      properties:
         name:
+          maxLength: 72
+          minLength: 1
           type: string
-          description: Name of the invalid parameter.
-        reason:
+          description: name
+      description: Name of a financial institution.
+      example:
+        name: SIX SIS AG
+    MarketGuideInfo:
+      required:
+      - url
+      type: object
+      properties:
+        marketName:
+          maxLength: 50
+          minLength: 1
           type: string
-          description: The reason why the parameter's value is invalid.
-        value:
-          type: string
-          description: The invalid value.
-      description: Description of a parameter with invalid value.
+          description: SIX SIS name for the market. If not provided, no market could be univoquely identified, in which case the sibling 'url' property provides a link to all market guides.
+        url:
+          description: Hyperlink (URL) to relevant SIX SIS Market Guide.
+          example: https://sws.six-group.com/private/en/home/market-guide/overview/usa/usa-citibank.html
+          allOf:
+          - $ref: '#/components/schemas/URL'
+      description: ''
+    ParameterLocation:
+      type: string
+      description: The location of the parameter in question
+      enum:
+      - BODY
+      - PATH
+      - QUERY
+      - HEADER
     ErrorDetail:
       required:
       - status
@@ -137,39 +282,32 @@ components:
           format: uri
           example: https://www.example.com/books/1234
       description: Detailed description of an error to help remediation. It follows RFC 7807 (https://datatracker.ietf.org/doc/html/rfc7807).
-    DetailedSettlementInfo:
-      description: Detailed settlement information for a security, with custodians-specific information.
-      allOf:
-      - $ref: '#/components/schemas/DetailedSettlementInfoWithoutCustodians'
-      - type: object
-        properties:
-          custodians:
-            minItems: 1
-            type: array
-            description: Detailed settlement information for a security per custodian (aka 'market'). If not provided, the security is not cross-border eligible.
-            items:
-              $ref: '#/components/schemas/DetailedSettlementInfoPerCustodian'
-    PropertiesBasicResource:
+    BpId:
+      pattern: ^[A-Z]{2}[0-9]{6}$
+      type: string
+      description: Identifier of a business partner (BP) within SIX SIS.
+      example: CH123456
+    InvalidParameter:
       required:
-      - id
-      - type
+      - in
+      - name
+      - value
       type: object
       properties:
-        id:
+        in:
+          description: Location of the invalid parameter.
+          allOf:
+          - $ref: '#/components/schemas/ParameterLocation'
+        name:
           type: string
-          description: Identifier of the resource
-          format: uuid
-        type:
-          maxLength: 255
-          minLength: 1
+          description: Name of the invalid parameter.
+        reason:
           type: string
-          description: Type of the resource.
-      description: Properties of any resource.
-    Isin:
-      pattern: ^[A-Z]{2}([A-Z0-9]){9}[0-9]$
-      type: string
-      description: 'The ISIN (International Securities Identification Number) uniquely identifies a financial instrument. See ISO 6166:2021: Financial services — International securities identification number (ISIN).'
-      example: CH0038863350
+          description: The reason why the parameter's value is invalid.
+        value:
+          type: string
+          description: The invalid value.
+      description: Description of a parameter with invalid value.
     BookingBasis:
       type: string
       description: "The booking basis for the security:\n * FAMT: face amount\n * UNIT: unit"
@@ -177,6 +315,69 @@ components:
       enum:
       - FAMT
       - UNIT
+    Error400:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable explanation specific to this error.
+          example: Unauthorized
+        errorDetail:
+          description: Additional information about the error.
+          allOf:
+          - $ref: '#/components/schemas/ErrorDetail400'
+      description: Description of a 400 error to help remediation.
+    FinancialInstitutionBIC:
+      required:
+      - bic
+      type: object
+      properties:
+        bic:
+          $ref: '#/components/schemas/AnyBIC'
+      description: BIC of a financial institution
+      example:
+        bic: INSECHZZXXX
+    ErrorDetail400:
+      type: object
+      description: Detailed description of a 400 error to help remediation. It extends RFC 7807 (https://datatracker.ietf.org/doc/html/rfc7807) with missing and invalid parameters information.
+      allOf:
+      - $ref: '#/components/schemas/ErrorDetail'
+      - properties:
+          invalidParams:
+            minItems: 1
+            type: array
+            description: List of parameters with invalid values.
+            items:
+              $ref: '#/components/schemas/InvalidParameter'
+          missingParams:
+            minItems: 1
+            type: array
+            description: List of missing parameters.
+            items:
+              $ref: '#/components/schemas/MissingParameter'
+    PositionType:
+      pattern: ^[A-Z]{2}$
+      type: string
+      description: Market segregation code, aka position type.
+      example: 'NO'
+    PrincipalCustodianReference:
+      type: object
+      description: Reference to the principal custodian, i.e., a BIC or (if none available) the name of the custodian.
+      example:
+        bic: INSECHZZXXX
+      oneOf:
+      - $ref: '#/components/schemas/FinancialInstitutionBIC'
+      - $ref: '#/components/schemas/FinancialInstitutionName'
+    ResponseDetailedSettlementInfoQuery:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ResourceDetailedSettlementInfo'
+      description: HTTP 200 response (OK) for the query about detailed security settlement information.
     BasicSettlementInfoWithoutCustodians:
       required:
       - bookingBasis
@@ -245,203 +446,6 @@ components:
         bookingBasis: UNIT
         principalCustodian:
           bic: PARBGB2LXXX
-    BasicSettlementInfoPerCustodian:
-      required:
-      - bic
-      type: object
-      properties:
-        bic:
-          description: Identifier of the custodian.
-          example: MELNUS3PGSS
-          allOf:
-          - $ref: '#/components/schemas/AnyBIC'
-        settlementEligibility:
-          type: boolean
-          description: Settlement eligibility. If missing, to be interpreted as SIX SIS needs to  be contacted.
-          example: true
-        marketSegregationCode:
-          description: Market segregation code, aka position type.
-          example: 'NO'
-          allOf:
-          - $ref: '#/components/schemas/PositionType'
-        sdrtCountry:
-          maxItems: 2
-          minItems: 1
-          type: array
-          description: SDRT country code.
-          example:
-          - GB
-          items:
-            $ref: '#/components/schemas/PositionType'
-      description: Basic settlement information for a security for a custodian (aka 'market').
-    SdrtAttributesOnISIN:
-      type: object
-      properties:
-        eligibilityCrossBorder:
-          type: boolean
-          description: SDRT eligibility for cross-border orders. If missing, the information is unknown.
-          example: false
-        eligibilityInHouse:
-          type: boolean
-          description: SDRT eligibility for SIX SIS inhouse orders. If missing, the information is unknown.
-          example: false
-        inhouseForbidden:
-          type: boolean
-          description: SDRT SIX SIS inhouse transactions forbidden flag. If missing, the information is unknown.
-          example: false
-      description: SDRT attributes for the security
-    URL:
-      maxLength: 2048
-      minLength: 1
-      type: string
-      description: Uniform Resource Locator (URL) as defined in RFC 1738 (https://datatracker.ietf.org/doc/html/rfc1738).
-    MissingParameter:
-      required:
-      - in
-      - name
-      type: object
-      properties:
-        in:
-          description: Location of the missing parameter.
-          allOf:
-          - $ref: '#/components/schemas/ParameterLocation'
-        name:
-          type: string
-          description: Name of the missing parameter.
-        reason:
-          type: string
-          description: The reason why the parameter's value is missing.
-      description: Description of a missing parameter.
-    DetailedSettlementInfoPerCustodian:
-      required:
-      - bookingBasis
-      - bpId
-      - externalOrdinarioAccount
-      - marketGuides
-      - name
-      description: Detailed settlement information for a security for a custodian (aka 'market').
-      allOf:
-      - $ref: '#/components/schemas/BasicSettlementInfoPerCustodian'
-      - type: object
-        properties:
-          bpId:
-            description: SIX SIS BP-ID for the custodian.
-            example: CA100045
-            allOf:
-            - $ref: '#/components/schemas/BpId'
-          name:
-            maxLength: 72
-            type: string
-            description: Custodian name.
-            example: CIBC MELLON TRUST COMPANY, TORONTO
-          participantId:
-            maxLength: 200
-            type: string
-            description: Participant ID with local CSD
-            example: 'DTC: 00000908FRB: ABA 021000089 A/C CUST'
-          accountT2S:
-            maxLength: 200
-            type: string
-            description: T2S safekeeping account.
-            example: DAKV71210000
-          externalOrdinarioAccount:
-            maxLength: 200
-            type: string
-            description: External ordinario account number at local custodian.
-            example: '71210000'
-          settlementEligibilityNotes:
-            maxLength: 720
-            type: string
-            description: Settlement eligibility notes/restrictions.
-            example: 'RFP: Please contact your dedicated settlement desk'
-          bookingBasis:
-            description: "Booking Basis for local custodian:\n * FAMT: face amount\n * UNIT: unit."
-            allOf:
-            - $ref: '#/components/schemas/BookingBasis'
-          marketGuides:
-            minItems: 1
-            type: array
-            description: Hyperlink (URL) to the relevant SIX SIS Market Guides for this custodian as well as the market name.
-            example:
-            - marketName: USA - Citibank
-              url: https://sws.six-group.com/private/en/home/market-guide/overview/usa/usa-citibank.html
-            items:
-              $ref: '#/components/schemas/MarketGuideInfo'
-    ApiGwError:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable explanation specific to this error.
-          example: Unauthorized
-      description: Description of an error as provided by the API GW to help remediation.
-    MarketGuideInfo:
-      required:
-      - url
-      type: object
-      properties:
-        marketName:
-          maxLength: 50
-          minLength: 1
-          type: string
-          description: SIX SIS name for the market. If not provided, no market could be univoquely identified, in which case the sibling 'url' property provides a link to all market guides.
-        url:
-          description: Hyperlink (URL) to relevant SIX SIS Market Guide.
-          example: https://sws.six-group.com/private/en/home/market-guide/overview/usa/usa-citibank.html
-          allOf:
-          - $ref: '#/components/schemas/URL'
-      description: ''
-    XCorrelationIdType:
-      pattern: ^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}(#[1-9][0-9]*)?$
-      type: string
-      description: Value of the correlation ID for the server, i.e., a UUID v4 (with or without the dash to separate the blocks), optionally followed by a '#' and a positive integer.
-    Error400:
-      required:
-      - message
-      type: object
-      properties:
-        message:
-          type: string
-          description: A human-readable explanation specific to this error.
-          example: Unauthorized
-        errorDetail:
-          description: Additional information about the error.
-          allOf:
-          - $ref: '#/components/schemas/ErrorDetail400'
-      description: Description of a 400 error to help remediation.
-    BpId:
-      pattern: ^[A-Z]{2}[0-9]{6}$
-      type: string
-      description: Identifier of a business partner (BP) within SIX SIS.
-      example: CH123456
-    FinancialInstitutionName:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 72
-          minLength: 1
-          type: string
-          description: name
-      description: Name of a financial institution.
-      example:
-        name: SIX SIS AG
-    ParameterLocation:
-      type: string
-      description: The location of the parameter in question
-      enum:
-      - BODY
-      - PATH
-      - QUERY
-      - HEADER
-    AnyBIC:
-      pattern: ^[A-Z]{6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3})?$
-      type: string
-      description: Business Identifier Code (BIC) 8 or 11 according to ISO 9362:2014.
-      example: CITIUS33XXX
     Error:
       required:
       - message
@@ -456,48 +460,37 @@ components:
           allOf:
           - $ref: '#/components/schemas/ErrorDetail'
       description: Description of an error to help remediation.
-    PrincipalCustodianReference:
-      type: object
-      description: Reference to the principal custodian, i.e., a BIC or (if none available) the name of the custodian.
-      example:
-        bic: INSECHZZXXX
-      oneOf:
-      - $ref: '#/components/schemas/FinancialInstitutionBIC'
-      - $ref: '#/components/schemas/FinancialInstitutionName'
-    ErrorDetail400:
-      type: object
-      description: Detailed description of a 400 error to help remediation. It extends RFC 7807 (https://datatracker.ietf.org/doc/html/rfc7807) with missing and invalid parameters information.
+    ResourceDetailedSettlementInfo:
+      description: Detailed settlement information for a security, including custodians-specific information.
       allOf:
-      - $ref: '#/components/schemas/ErrorDetail'
-      - properties:
-          invalidParams:
-            minItems: 1
-            type: array
-            description: List of parameters with invalid values.
-            items:
-              $ref: '#/components/schemas/InvalidParameter'
-          missingParams:
-            minItems: 1
-            type: array
-            description: List of missing parameters.
-            items:
-              $ref: '#/components/schemas/MissingParameter'
+      - $ref: '#/components/schemas/PropertiesBasicResource'
+      - required:
+        - attributes
+        type: object
+        properties:
+          attributes:
+            $ref: '#/components/schemas/DetailedSettlementInfo'
     DetailedSettlementInfoWithoutCustodians:
       required:
       - bookingBasis
       description: Detailed settlement information for a security, without custodians-specific information.
       allOf:
       - $ref: '#/components/schemas/BasicSettlementInfoWithoutCustodians'
-  examples:
-    Error400_InvalidPathParam:
-      value:
-        message: 'path "isin" validation failed with error: "failed to match pattern "^[A-Z]{2}([A-Z0-9]){9}[0-9]$" with "CH003886335"'
-    Error400_InvalidHeaderParam:
-      value:
-        message: 'header "X-Correlation-ID" validation failed with error: "failed to match pattern "^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}" with ""'
+    DetailedSettlementInfo:
+      description: Detailed settlement information for a security, with custodians-specific information.
+      allOf:
+      - $ref: '#/components/schemas/DetailedSettlementInfoWithoutCustodians'
+      - type: object
+        properties:
+          custodians:
+            minItems: 1
+            type: array
+            description: Detailed settlement information for a security per custodian (aka 'market'). If not provided, the security is not cross-border eligible.
+            items:
+              $ref: '#/components/schemas/DetailedSettlementInfoPerCustodian'
   responses:
-    Http401ErrorResponse:
-      description: Unauthorized
+    Http400ErrorResponse_DetailedQuery:
+      description: Bad Request
       headers:
         X-Correlation-Id:
           $ref: '#/components/headers/X-Correlation-Id'
@@ -510,17 +503,25 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Error400'
           examples:
-            401 Unauthorized - no certificate provided:
+            400 Bad Request - Invalid ISIN:
+              $ref: '#/components/examples/Error400_InvalidPathParam'
+            400 Bad Request - Invalid header parameter:
+              $ref: '#/components/examples/Error400_InvalidHeaderParam'
+    Http503ErrorResponse:
+      description: Service Unavailable
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            503 Service Unavailable:
               value:
-                message: No required TLS certificate was sent
-            401 Unauthorized - invalid certificate (no trust in certificate):
-              value:
-                message: TLS certificate failed verification
-            401 Unauthorized - not authorized (wrong client credentials):
-              value:
-                message: Unauthorized
+                message: unavailable
     Http429ErrorResponse:
       description: Too Many Requests
       headers:
@@ -542,6 +543,42 @@ components:
             429 Too Many Requests:
               value:
                 message: API rate limit exceeded
+    Http500ErrorResponse:
+      description: Internal Server Error
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            500 Internal Server Error:
+              value:
+                message: Server error
+                errorDetail:
+                  title: Internal Server Error
+                  status: 500
+                  detail: Something went wrong.
+    Http403ErrorResponse:
+      description: Forbidden
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+        RateLimit-Limit:
+          $ref: '#/components/headers/RateLimit-Limit'
+        RateLimit-Remaining:
+          $ref: '#/components/headers/RateLimit-Remaining'
+        RateLimit-Reset:
+          $ref: '#/components/headers/RateLimit-Reset'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            403 Forbidden:
+              value:
+                message: Forbidden
     Http200DetailedSettlementInfo:
       description: Detailed settlement information for a security.
       headers:
@@ -696,26 +733,6 @@ components:
                       marketGuides:
                       - marketName: Germany
                         url: https://sws.six-group.com/private/en/home/market-guide/overview/germany-cbf.html
-    Http400ErrorResponse_DetailedQuery:
-      description: Bad Request
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-        RateLimit-Limit:
-          $ref: '#/components/headers/RateLimit-Limit'
-        RateLimit-Remaining:
-          $ref: '#/components/headers/RateLimit-Remaining'
-        RateLimit-Reset:
-          $ref: '#/components/headers/RateLimit-Reset'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error400'
-          examples:
-            400 Bad Request - Invalid ISIN:
-              $ref: '#/components/examples/Error400_InvalidPathParam'
-            400 Bad Request - Invalid header parameter:
-              $ref: '#/components/examples/Error400_InvalidHeaderParam'
     Http501ErrorResponse:
       description: Not Implemented
       headers:
@@ -733,6 +750,19 @@ components:
                   title: Not Implemented
                   status: 501
                   detail: This API endpoint is not yet implemented.
+    Http504ErrorResponse:
+      description: Gateway Timeout
+      headers:
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiGwError'
+          examples:
+            504 Service Unavailable:
+              value:
+                message: The upstream server is timing out.
     Http404ErrorResponse_NoIsin:
       description: Not Found
       headers:
@@ -756,38 +786,8 @@ components:
                   title: Not Found
                   status: 404
                   detail: ISIN 'US012071998' does not exist.
-    Http500ErrorResponse:
-      description: Internal Server Error
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            500 Internal Server Error:
-              value:
-                message: Server error
-                errorDetail:
-                  title: Internal Server Error
-                  status: 500
-                  detail: Something went wrong.
-    Http504ErrorResponse:
-      description: Gateway Timeout
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            504 Service Unavailable:
-              value:
-                message: The upstream server is timing out.
-    Http403ErrorResponse:
-      description: Forbidden
+    Http401ErrorResponse:
+      description: Unauthorized
       headers:
         X-Correlation-Id:
           $ref: '#/components/headers/X-Correlation-Id'
@@ -802,87 +802,16 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
           examples:
-            403 Forbidden:
+            401 Unauthorized - no certificate provided:
               value:
-                message: Forbidden
-    Http503ErrorResponse:
-      description: Service Unavailable
-      headers:
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiGwError'
-          examples:
-            503 Service Unavailable:
+                message: No required TLS certificate was sent
+            401 Unauthorized - invalid certificate (no trust in certificate):
               value:
-                message: unavailable
-  headers:
-    RateLimit-Remaining:
-      description: 'Provides the remaining requests quota in the current time window (for the specific client).
-
-        See the ''RateLimit Header Fields for HTTP'' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.'
-      style: simple
-      explode: false
-      schema:
-        minimum: 0
-        type: integer
-      example: 1
-    RateLimit-Limit:
-      description: 'Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).
-
-        See the ''RateLimit Header Fields for HTTP'' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.'
-      style: simple
-      explode: false
-      schema:
-        minimum: 0
-        type: integer
-      example: 10
-    X-Correlation-Id:
-      description: Correlation identifier of the original request.
-      style: simple
-      explode: false
-      schema:
-        $ref: '#/components/schemas/XCorrelationIdType'
-      examples:
-        As generated by client:
-          value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820
-        As generated by API GW:
-          value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820#23
-    RateLimit-Reset:
-      description: 'Indicates the number of seconds until the quota resets.
-
-        See the ''RateLimit Header Fields for HTTP'' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.'
-      style: simple
-      explode: false
-      schema:
-        minimum: 0
-        type: integer
-      example: 50
-    Retry-After:
-      description: 'Indicates the number of seconds the client ought to wait before making a follow-up request.
-
-        See RFC7231, §7.1.3 (https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3).
-
-        *Note: might be higher than ''RateLimit-Reset''.*'
-      style: simple
-      explode: false
-      schema:
-        minimum: 0
-        type: integer
-      example: 50
+                message: TLS certificate failed verification
+            401 Unauthorized - not authorized (wrong client credentials):
+              value:
+                message: Unauthorized
   parameters:
-    SecurityID:
-      name: isin
-      in: path
-      description: Identifier of the security.
-      required: true
-      style: simple
-      explode: false
-      schema:
-        $ref: '#/components/schemas/Isin'
-      example: CH0038863350
     CorrelationId:
       name: X-Correlation-Id
       in: header
@@ -897,3 +826,74 @@ components:
           value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820
         As generated by API GW:
           value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820#23
+    SecurityID:
+      name: isin
+      in: path
+      description: Identifier of the security.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/Isin'
+      example: CH0038863350
+  examples:
+    Error400_InvalidPathParam:
+      value:
+        message: 'path "isin" validation failed with error: "failed to match pattern "^[A-Z]{2}([A-Z0-9]){9}[0-9]$" with "CH003886335"'
+    Error400_InvalidHeaderParam:
+      value:
+        message: 'header "X-Correlation-ID" validation failed with error: "failed to match pattern "^[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}" with ""'
+  headers:
+    RateLimit-Reset:
+      description: 'Indicates the number of seconds until the quota resets.
+
+        See the ''RateLimit Header Fields for HTTP'' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.'
+      style: simple
+      explode: false
+      schema:
+        minimum: 0
+        type: integer
+      example: 50
+    X-Correlation-Id:
+      description: Correlation identifier of the original request.
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/XCorrelationIdType'
+      examples:
+        As generated by client:
+          value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820
+        As generated by API GW:
+          value: ef199b05-d1ff-4a2b-b5ef-2bb3ab3f0820#23
+    RateLimit-Limit:
+      description: 'Provides the the requests quota in the time window (i.e., the maximal number of acceptable requests for the client within the time window).
+
+        See the ''RateLimit Header Fields for HTTP'' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.'
+      style: simple
+      explode: false
+      schema:
+        minimum: 0
+        type: integer
+      example: 10
+    Retry-After:
+      description: 'Indicates the number of seconds the client ought to wait before making a follow-up request.
+
+        See RFC7231, §7.1.3 (https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.3).
+
+        *Note: might be higher than ''RateLimit-Reset''.*'
+      style: simple
+      explode: false
+      schema:
+        minimum: 0
+        type: integer
+      example: 50
+    RateLimit-Remaining:
+      description: 'Provides the remaining requests quota in the current time window (for the specific client).
+
+        See the ''RateLimit Header Fields for HTTP'' (https://datatracker.ietf.org/doc/html/draft-polli-ratelimit-headers-01) for more information.'
+      style: simple
+      explode: false
+      schema:
+        minimum: 0
+        type: integer
+      example: 1

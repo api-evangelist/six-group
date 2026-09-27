@@ -63,39 +63,6 @@ paths:
                 $ref: '#/components/schemas/ApiError'
 components:
   schemas:
-    TransactionDetail:
-      type: object
-      required:
-      - maskedCardNumber
-      - merchantName
-      properties:
-        maskedCardNumber:
-          type: string
-          description: The masked primary account number.
-          example: '**** **** **** 1234'
-        purchaseDate:
-          type: string
-          format: date-time
-          description: Date and time of the transaction.
-          example: '2017-07-21T17:32:28Z'
-        merchantName:
-          type: string
-          description: The name of the merchant.
-          example: ACME Corporation
-        purchaseAmount:
-          type: string
-          description: The transaction amount.
-          example: '120012'
-        purchaseAmountExponent:
-          type: number
-          description: The transaction amount exponent.
-          minimum: 0
-          maximum: 9
-          example: 2
-        purchaseCurrency:
-          type: string
-          description: The ISO-4217 three-letter alphabetic currency code.
-          example: CHF
     AuthenticationRequest:
       type: object
       required:
@@ -133,6 +100,39 @@ components:
           description: The message describing the error.
           type: string
           example: The answer to the great question of Life, the Universe and Everything.
+    TransactionDetail:
+      type: object
+      required:
+      - maskedCardNumber
+      - merchantName
+      properties:
+        maskedCardNumber:
+          type: string
+          description: The masked primary account number.
+          example: '**** **** **** 1234'
+        purchaseDate:
+          type: string
+          format: date-time
+          description: Date and time of the transaction.
+          example: '2017-07-21T17:32:28Z'
+        merchantName:
+          type: string
+          description: The name of the merchant.
+          example: ACME Corporation
+        purchaseAmount:
+          type: string
+          description: The transaction amount.
+          example: '120012'
+        purchaseAmountExponent:
+          type: number
+          description: The transaction amount exponent.
+          minimum: 0
+          maximum: 9
+          example: 2
+        purchaseCurrency:
+          type: string
+          description: The ISO-4217 three-letter alphabetic currency code.
+          example: CHF
     ApiError:
       description: Information about an error on API requests.
       type: object
@@ -163,17 +163,17 @@ components:
           type: string
           example: 618503aa-7beb-4d3d-986e-36f1fdbd0e13
   parameters:
-    CorrelationIdHeader:
-      in: header
-      name: x-correlation-id
-      description: A unique identifier for an authentication request and authentication callback
-      schema:
-        type: string
     ThreeDsTransactionId:
       in: path
       name: threeDsTransactionId
       required: true
       example: a5b86c4e-0caa-11e8-ba89-0ed5f89f718b
       description: The 3DS transaction id.
+      schema:
+        type: string
+    CorrelationIdHeader:
+      in: header
+      name: x-correlation-id
+      description: A unique identifier for an authentication request and authentication callback
       schema:
         type: string

@@ -415,7 +415,7 @@ paths:
         * 4467 - THREE_DS_PASSWORD_NOT_ALLOWED
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: threeDsRegister
+      operationId: postCards3ds
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -447,6 +447,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: threeDsRegister
     put:
       tags:
       - 3 DS
@@ -466,7 +468,7 @@ paths:
         * 4453 - THREE_DS_OOB_NOT_ENABLED_FOR_ISSUER
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: threeDsUpdate
+      operationId: putCards3ds
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -498,6 +500,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: threeDsUpdate
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -527,7 +531,7 @@ paths:
         * 4430 - UNKNOWN_CARD
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: threeDsDelete
+      operationId: postCards3dsDelete
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -559,6 +563,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: threeDsDelete
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -594,7 +600,7 @@ paths:
         * 4457 - CARD_NOT_REGISTERED_FOR_THREE_DS
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: threeDsDetails
+      operationId: postCards3dsDetails
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -629,6 +635,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: threeDsDetails
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -658,7 +666,7 @@ paths:
         * 4430 - UNKNOWN_CARD
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: otrcOrder
+      operationId: postCardsOtrc
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -687,6 +695,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: otrcOrder
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -716,7 +726,7 @@ paths:
         * 4430 - UNKNOWN_CARD
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: otrcOrderDatamailer
+      operationId: postCardsOtrcDatamailer
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -741,6 +751,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: otrcOrderDatamailer
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -756,18 +768,52 @@ paths:
       description: TEST - P2P
 components:
   schemas:
-    Password:
-      description: This parameter must be used exclusively by issuers with special regulations (e.g., PSD2). It must be provided if the issuer intends to register a card for 3DS with SMS as secondary authentication method (i.e. SMS as fallback) or if the issuer intends to register a card with SMS_ONLY as primary and unique authentication method. In these cases, the phoneNumber field must also be provided.
-      type: string
-      minLength: 1
-      examples:
-      - password
-    BiometricType:
-      description: Type of biometric authentication; required for authentication method BIOMETRIC and BIOMETRIC_WITH_PIN_FALLBACK.
+    ThreeDsAuthenticationMethod:
+      description: User authentication method for either 3DS via debiX Api, via debiX+ App or via SMS.
       type: string
       enum:
-      - ANDROID_BIOMETRIC
-      - IOS_BIOMETRIC
+      - PIN
+      - BIOMETRIC
+      - BIOMETRIC_WITH_PIN_FALLBACK
+      - BIOMETRIC_AND_PIN
+      - DELEGATED
+      - SMS_ONLY
+      - NONE
+    CardSequenceNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
+    ThreeDsData:
+      description: Relevant data to register a card for 3DS with a specific authentication method based on the setup desired by the issuer (i.e. for 3DS via SIX SDK or 3DS OOB).
+      type: object
+      required:
+      - language
+      - authenticationMethod
+      properties:
+        userId:
+          description: 'Identifier assigned to a particular user by the issuer. Note: userId is a mandatory parameter when registering a card with authentication method PIN, BIOMETRIC or BIOMETRIC_WITH_PIN_FALLBACK.'
+          type: string
+          minLength: 1
+          examples:
+          - '2345872'
+        phoneNumber:
+          $ref: '#/components/schemas/PhoneNumber'
+        language:
+          $ref: '#/components/schemas/Language'
+        authId:
+          $ref: '#/components/schemas/AuthId'
+        authenticationMethod:
+          $ref: '#/components/schemas/AuthenticationMethod'
+        biometricType:
+          $ref: '#/components/schemas/BiometricType'
+        pinCode:
+          $ref: '#/components/schemas/PinCode'
+        password:
+          $ref: '#/components/schemas/Password'
     PartialThreeDsData:
       description: Partial data pertaining to a 3DS registration.
       type: object
@@ -792,33 +838,103 @@ components:
           $ref: '#/components/schemas/PinCode'
         password:
           $ref: '#/components/schemas/Password'
-    ThreeDsAuthenticationMethod:
-      description: User authentication method for either 3DS via debiX Api, via debiX+ App or via SMS.
+    AuthId:
+      description: 'Identifier for the device used for 3DS. Note: authId is a mandatory parameter which must be provided when registering a card with authentication method PIN, BIOMETRIC, BIOMETRIC_WITH_PIN_FALLBACK or DELEGATED.'
+      type: string
+      minLength: 1
+      maxLength: 36
+      examples:
+      - '480463608'
+    OtrcDatamailerOrderRequest:
+      description: Details of the OTRC datamailer order request.
+      type: object
+      required:
+      - delivery
+      - expressCode
+      properties:
+        delivery:
+          description: Delivery destination of the OTRC datamailer.
+          $ref: '#/components/schemas/DatamailerDeliveryDestination'
+        expressCode:
+          description: Defines the express code of the OTRC datamailer delivery.
+          $ref: '#/components/schemas/DatamailerExpressCode'
+        deliveryInformation:
+          description: Delivery information for the OTRC datamailer.
+          $ref: '#/components/schemas/DeliveryInformation'
+        mailerText:
+          $ref: '#/components/schemas/MailerTextCode'
+    ThreeDsDetailsRequest:
+      description: Identifiers of the card for which to return the 3DS details.
+      type: object
+      required:
+      - cardTokenExtension
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+    UnstructuredAddress:
+      description: Unstructured address of simple address lines.
+      type: array
+      minItems: 1
+      maxItems: 6
+      items:
+        type: string
+        maxLength: 35
+      examples:
+      - - Peter Schweizer
+        - Bahnhofstrasse 1
+        - 8000 Zürich
+    ThreeDsUpdateRequest:
+      description: Contains the 3DS-related data to be updated.
+      type: object
+      required:
+      - threeDsData
+      properties:
+        threeDsData:
+          $ref: '#/components/schemas/PartialThreeDsData'
+    PinCode:
+      description: PIN code used for 3DS authentication; required for authentication method PIN and BIOMETRIC_WITH_PIN_FALLBACK.
+      type: string
+      minLength: 1
+      examples:
+      - '12345'
+    Language:
+      description: Correspondence language.
+      type: string
+      enum:
+      - DE
+      - FR
+      - IT
+      - EN
+    MailerTextCode:
+      description: Reference to a predefined text container that will be printed on the datamailer.
+      type: integer
+      format: int32
+    YearMonth:
+      type: object
+      required:
+      - month
+      - year
+      properties:
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    AuthenticationMethod:
+      description: User authentication method. For 3DS Out-of-Band (OOB), authentication method DELEGATED must be selected.
       type: string
       enum:
       - PIN
       - BIOMETRIC
       - BIOMETRIC_WITH_PIN_FALLBACK
-      - BIOMETRIC_AND_PIN
       - DELEGATED
       - SMS_ONLY
       - NONE
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
     BankApiError:
       description: Information about an error on API requests.
       type: object
@@ -853,22 +969,6 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    AuthenticationMethod:
-      description: User authentication method. For 3DS Out-of-Band (OOB), authentication method DELEGATED must be selected.
-      type: string
-      enum:
-      - PIN
-      - BIOMETRIC
-      - BIOMETRIC_WITH_PIN_FALLBACK
-      - DELEGATED
-      - SMS_ONLY
-      - NONE
-    Country:
-      description: Country code in format ISO 3166-1 alpha 2.
-      type: string
-      pattern: '[A-Z]{2}'
-      examples:
-      - CH
     CardToken:
       description: Unique card token of a card.
       type: string
@@ -877,14 +977,28 @@ components:
       maxLength: 36
       examples:
       - CTK-54716A6080B14CF19CEA3C170F85B1DD
-    DatamailerExpressCode:
-      description: Defines the express code of OTRC and PIN datamailer delivery.
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    BiometricType:
+      description: Type of biometric authentication; required for authentication method BIOMETRIC and BIOMETRIC_WITH_PIN_FALLBACK.
       type: string
       enum:
-      - A_POST
-      - B_POST
-      - REGISTERED
-      default: A_POST
+      - ANDROID_BIOMETRIC
+      - IOS_BIOMETRIC
     DeliveryInformation:
       description: Delivery address of card, PIN and OTRC.
       type: object
@@ -900,12 +1014,31 @@ components:
           description: Salutation text for the delivery.
           type: string
           maxLength: 50
-    PhoneNumber:
-      description: 'Mobile or landline phone number. Note: phoneNumber is a mandatory parameter which must be provided to register a card with authentication method SMS_ONLY, PIN, BIOMETRIC or BIOMETRIC_WITH_PIN_FALLBACK. Furthermore, phoneNumber must also be provided in case the issuer desires to register a card for DELEGATED as primary authentication method, with additionally SMS as fallback (as secondary authentication method).  For issuers with special regulations (e.g. PSD2), please refer to the additional indications provided under the “password” field.'
+    DatamailerDeliveryDestination:
+      description: Specifies the delivery destination for OTRC, PIN, and card datamailer.
       type: string
-      pattern: ^([+]|00)[1-9][0-9]{8,18}$
-      examples:
-      - '+41797778899'
+      enum:
+      - DELIVER_TO_BANK
+      - DELIVER_TO_CARDHOLDER
+    DatamailerExpressCode:
+      description: Defines the express code of OTRC and PIN datamailer delivery.
+      type: string
+      enum:
+      - A_POST
+      - B_POST
+      - REGISTERED
+      default: A_POST
+    ThreeDsRegisterRequest:
+      description: Contains the card identifiers and 3DS-related data for the registration of a card.
+      type: object
+      required:
+      - cardTokenExtension
+      - threeDsData
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        threeDsData:
+          $ref: '#/components/schemas/ThreeDsData'
     OtrcOrderResponse:
       description: Contains the OTRC information.
       type: object
@@ -922,62 +1055,35 @@ components:
           format: date-time
           examples:
           - '2024-10-03T16:03:09.101+02:00'
-    ThreeDsRegisterRequest:
-      description: Contains the card identifiers and 3DS-related data for the registration of a card.
+    PhoneNumber:
+      description: 'Mobile or landline phone number. Note: phoneNumber is a mandatory parameter which must be provided to register a card with authentication method SMS_ONLY, PIN, BIOMETRIC or BIOMETRIC_WITH_PIN_FALLBACK. Furthermore, phoneNumber must also be provided in case the issuer desires to register a card for DELEGATED as primary authentication method, with additionally SMS as fallback (as secondary authentication method).  For issuers with special regulations (e.g. PSD2), please refer to the additional indications provided under the “password” field.'
+      type: string
+      pattern: ^([+]|00)[1-9][0-9]{8,18}$
+      examples:
+      - '+41797778899'
+    Country:
+      description: Country code in format ISO 3166-1 alpha 2.
+      type: string
+      pattern: '[A-Z]{2}'
+      examples:
+      - CH
+    CardTokenExtension:
+      description: Extension to card token to identify a card.
       type: object
       required:
-      - cardTokenExtension
-      - threeDsData
+      - cardExpiry
+      - cardSequenceNumber
       properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        threeDsData:
-          $ref: '#/components/schemas/ThreeDsData'
-    Language:
-      description: Correspondence language.
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        cardSequenceNumber:
+          $ref: '#/components/schemas/CardSequenceNumber'
+    Password:
+      description: This parameter must be used exclusively by issuers with special regulations (e.g., PSD2). It must be provided if the issuer intends to register a card for 3DS with SMS as secondary authentication method (i.e. SMS as fallback) or if the issuer intends to register a card with SMS_ONLY as primary and unique authentication method. In these cases, the phoneNumber field must also be provided.
       type: string
-      enum:
-      - DE
-      - FR
-      - IT
-      - EN
-    ThreeDsData:
-      description: Relevant data to register a card for 3DS with a specific authentication method based on the setup desired by the issuer (i.e. for 3DS via SIX SDK or 3DS OOB).
-      type: object
-      required:
-      - language
-      - authenticationMethod
-      properties:
-        userId:
-          description: 'Identifier assigned to a particular user by the issuer. Note: userId is a mandatory parameter when registering a card with authentication method PIN, BIOMETRIC or BIOMETRIC_WITH_PIN_FALLBACK.'
-          type: string
-          minLength: 1
-          examples:
-          - '2345872'
-        phoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-        language:
-          $ref: '#/components/schemas/Language'
-        authId:
-          $ref: '#/components/schemas/AuthId'
-        authenticationMethod:
-          $ref: '#/components/schemas/AuthenticationMethod'
-        biometricType:
-          $ref: '#/components/schemas/BiometricType'
-        pinCode:
-          $ref: '#/components/schemas/PinCode'
-        password:
-          $ref: '#/components/schemas/Password'
-    DatamailerDeliveryDestination:
-      description: Specifies the delivery destination for OTRC, PIN, and card datamailer.
-      type: string
-      enum:
-      - DELIVER_TO_BANK
-      - DELIVER_TO_CARDHOLDER
-    MailerTextCode:
-      description: Reference to a predefined text container that will be printed on the datamailer.
-      type: integer
-      format: int32
+      minLength: 1
+      examples:
+      - password
     ThreeDsDetailsResponse:
       description: Contains detailed information about 3DS.
       type: object
@@ -1031,89 +1137,16 @@ components:
           format: date-time
           examples:
           - '2021-10-03T16:03:09.101+02:00'
-    UnstructuredAddress:
-      description: Unstructured address of simple address lines.
-      type: array
-      minItems: 1
-      maxItems: 6
-      items:
-        type: string
-        maxLength: 35
-      examples:
-      - - Peter Schweizer
-        - Bahnhofstrasse 1
-        - 8000 Zürich
-    ThreeDsDetailsRequest:
-      description: Identifiers of the card for which to return the 3DS details.
-      type: object
-      required:
-      - cardTokenExtension
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-    ThreeDsUpdateRequest:
-      description: Contains the 3DS-related data to be updated.
-      type: object
-      required:
-      - threeDsData
-      properties:
-        threeDsData:
-          $ref: '#/components/schemas/PartialThreeDsData'
-    CardSequenceNumber:
-      description: Sequence number of the card.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
-      examples:
-      - 2
-    CardTokenExtension:
-      description: Extension to card token to identify a card.
-      type: object
-      required:
-      - cardExpiry
-      - cardSequenceNumber
-      properties:
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
-        cardSequenceNumber:
-          $ref: '#/components/schemas/CardSequenceNumber'
-    PinCode:
-      description: PIN code used for 3DS authentication; required for authentication method PIN and BIOMETRIC_WITH_PIN_FALLBACK.
-      type: string
-      minLength: 1
-      examples:
-      - '12345'
-    YearMonth:
-      type: object
-      required:
-      - month
-      - year
-      properties:
-        month:
-          description: The two digit number of the month starting at 01 for January.
-          type: string
-          examples:
-          - '01'
-        year:
-          description: The last two digits of the year.
-          type: string
-          examples:
-          - '21'
-    AuthId:
-      description: 'Identifier for the device used for 3DS. Note: authId is a mandatory parameter which must be provided when registering a card with authentication method PIN, BIOMETRIC, BIOMETRIC_WITH_PIN_FALLBACK or DELEGATED.'
-      type: string
-      minLength: 1
-      maxLength: 36
-      examples:
-      - '480463608'
-    OtrcDatamailerOrderRequest:
+    OtrcDatamailerOrderRequest_2:
       description: Details of the OTRC datamailer order request.
       type: object
       required:
+      - shortCardId
       - delivery
       - expressCode
       properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
         delivery:
           description: Delivery destination of the OTRC datamailer.
           $ref: '#/components/schemas/DatamailerDeliveryDestination'
@@ -1125,6 +1158,14 @@ components:
           $ref: '#/components/schemas/DeliveryInformation'
         mailerText:
           $ref: '#/components/schemas/MailerTextCode'
+    ThreeDsDetailsRequest_2:
+      description: Identifier of the card for which to return the 3DS details.
+      type: object
+      required:
+      - cardId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
     CardSeqNumber:
       description: Sequence number of the card.
       type: integer
@@ -1133,26 +1174,6 @@ components:
       maximum: 9
       examples:
       - 2
-    ThreeDsDeleteRequest:
-      description: Contains the card identifier to perform a 3DS deregistration.
-      type: object
-      required:
-      - shortCardId
-      properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-    CardType:
-      description: 'A single digit that distinguishes the card types of the schemes.
-
-        - 1: Debit mastercard
-
-        - 3: Visa debit
-
-        - 6: Bank card'
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 6
     ShortCardId:
       description: Complex object representing a card consisting of bank clearing number, card number and card type.
       type: object
@@ -1167,6 +1188,14 @@ components:
           $ref: '#/components/schemas/CardNumber'
         cardType:
           $ref: '#/components/schemas/CardType'
+    OtrcOrderRequest:
+      description: Contains the card identifier to order an OTRC.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
     ThreeDsRegisterRequest_2:
       description: Contains the card identifier and 3DS-related data for the registration of a card.
       type: object
@@ -1178,6 +1207,34 @@ components:
           $ref: '#/components/schemas/CardId'
         threeDsData:
           $ref: '#/components/schemas/ThreeDsData'
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
+    ThreeDsDeleteRequest:
+      description: Contains the card identifier to perform a 3DS deregistration.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+    BankClearingNumber:
+      description: Unique number used to identify each bank agency or branch in the bank directory.
+      type: integer
+      format: int32
+      minimum: 100
+      maximum: 99999
+      examples:
+      - 50000
     CardNumber:
       description: Card number of the card.
       type: integer
@@ -1186,22 +1243,6 @@ components:
       maximum: 99999999
       examples:
       - 12345678
-    OtrcOrderRequest:
-      description: Contains the card identifier to order an OTRC.
-      type: object
-      required:
-      - shortCardId
-      properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-    ThreeDsDetailsRequest_2:
-      description: Identifier of the card for which to return the 3DS details.
-      type: object
-      required:
-      - cardId
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId'
     CardId:
       description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
       type: object
@@ -1233,35 +1274,6 @@ components:
           $ref: '#/components/schemas/ShortCardId'
         threeDsData:
           $ref: '#/components/schemas/PartialThreeDsData'
-    BankClearingNumber:
-      description: Unique number used to identify each bank agency or branch in the bank directory.
-      type: integer
-      format: int32
-      minimum: 100
-      maximum: 99999
-      examples:
-      - 50000
-    OtrcDatamailerOrderRequest_2:
-      description: Details of the OTRC datamailer order request.
-      type: object
-      required:
-      - shortCardId
-      - delivery
-      - expressCode
-      properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-        delivery:
-          description: Delivery destination of the OTRC datamailer.
-          $ref: '#/components/schemas/DatamailerDeliveryDestination'
-        expressCode:
-          description: Defines the express code of the OTRC datamailer delivery.
-          $ref: '#/components/schemas/DatamailerExpressCode'
-        deliveryInformation:
-          description: Delivery information for the OTRC datamailer.
-          $ref: '#/components/schemas/DeliveryInformation'
-        mailerText:
-          $ref: '#/components/schemas/MailerTextCode'
   parameters:
     IssuerTraceIdHeader:
       in: header

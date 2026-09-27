@@ -601,7 +601,7 @@ paths:
       description: TEST - P2P
   /visa-alias-directory/aliases/{aliasId}/cards/retrieve:
     post:
-      operationId: retrieveCardVisaAD
+      operationId: postVisaAliasDirectoryAliasesByAliasIdCardsRetrieve
       tags:
       - Alias Directory (Beta)
       summary: Retrieves a card registered in the Alias Directory
@@ -659,6 +659,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: retrieveCardVisaAD
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -674,7 +676,7 @@ paths:
       description: TEST - P2P
   /visa-alias-directory/aliases/{aliasId}/cards/delete:
     post:
-      operationId: deleteCardVisaAD
+      operationId: postVisaAliasDirectoryAliasesByAliasIdCardsDelete
       tags:
       - Alias Directory (Beta)
       summary: Deletes a card from the Alias Directory
@@ -728,6 +730,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteCardVisaAD
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -743,30 +747,48 @@ paths:
       description: TEST - P2P
 components:
   schemas:
-    VisaADAliasUpdatingStatus:
-      description: The updating status of an alias.
-      type: string
-      enum:
-      - ACTIVE
-      - DISABLED
-      examples:
-      - ACTIVE
-    VisaADRetrieveCardResponse:
-      description: Retrieve Card response.
+    VisaADRegisterCardRequest:
+      description: Register Card request.
       type: object
       required:
       - card
       properties:
         card:
           $ref: '#/components/schemas/VisaADCard'
-    VisaADPreferredForType:
+    VisaADConsent:
+      description: Consent details.
+      type: object
+      required:
+      - presenter
+      - validFromDateTime
+      - version
+      properties:
+        presenter:
+          description: Identifies the presenter of consent to the consumer.
+          type: string
+          examples:
+          - Bank A
+        validFromDateTime:
+          description: Date and time from which on the consent is valid, in ISO UTC format YYYY-MM-DDThh:mm:ss.000Z. Only accepts present and past dates.
+          type: string
+          format: date-time
+          examples:
+          - '2021-12-01T10:00:00Z'
+        version:
+          description: Specific version of the terms and conditions that the customer accepts for the user solution.
+          type: string
+          minLength: 1
+          maxLength: 9
+          examples:
+          - '1.0'
+    VisaADAliasType:
+      description: The type of alias provided in aliasValue.
       type: string
       enum:
-      - RECEIVE
-      - SEND
-      - PAY
+      - PHONE
+      - EMAIL
       examples:
-      - RECEIVE
+      - PHONE
     VisaADGetAliasResponse:
       description: Get Alias response.
       type: object
@@ -785,14 +807,97 @@ components:
           $ref: '#/components/schemas/VisaADAliasType'
         aliasStatus:
           $ref: '#/components/schemas/VisaADAliasStatus'
-    VisaADCreateAliasAndRegisterCardsResponse:
-      description: Create Alias and Register Cards response.
+    VisaADPreferredForType:
+      type: string
+      enum:
+      - RECEIVE
+      - SEND
+      - PAY
+      examples:
+      - RECEIVE
+    VisaADProfile:
+      description: Profile details for the customer that owns the alias.
       type: object
       required:
-      - aliasId
+      - firstName
+      - lastName
       properties:
-        aliasId:
-          $ref: '#/components/schemas/VisaADAliasId'
+        lastName:
+          description: 'Last name in English. Clients in CEMEA and the EU must use only one first letter of customer’s last name followed by dot symbol to create or modify an Alias record.
+
+            For example, Alias record for customer John Smith should be created or modified by the issuer with First and Last name fields as ''John S.''
+
+
+            ISO20022 element name: Creditor -> Name
+
+            '
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - R.
+        firstName:
+          description: 'First name in English
+
+
+            ISO20022 element name: Creditor -> Name
+
+            '
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - Hans
+        middleName:
+          description: Middle name in English
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - Ruedi
+        contactInfo:
+          description: Contact information.
+          minItems: 1
+          maxItems: 2
+          type: array
+          items:
+            type: object
+            required:
+            - type
+            - value
+            properties:
+              type:
+                $ref: '#/components/schemas/VisaADAliasType'
+              value:
+                $ref: '#/components/schemas/VisaADAliasValue'
+        dateOfBirth:
+          $ref: '#/components/schemas/VisaADDateOfBirth'
+        lastNameLocal:
+          description: "Last name in local language. Clients in CEMEA and the EU must use only one first letter of customer’s last name followed by dot symbol to create or modify an Alias record. \nFor example, Alias record for customer John Smith should be created or modified by the issuer with First and Last name fields as 'John S.'\n"
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - R.
+        preferredName:
+          description: Preferred name (or the 'known-as' name).
+          type: string
+          examples:
+          - Hansruedi
+        firstNameLocal:
+          description: First name in local language.
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - Hans
+        middleNameLocal:
+          description: Middle name in local language.
+          type: string
+          minLength: 1
+          maxLength: 35
+          examples:
+          - Ruedi
     VisaADBillingAddress:
       type: object
       required:
@@ -897,6 +1002,21 @@ components:
           - ZH
           minLength: 1
           maxLength: 50
+    VisaADPreferredFor:
+      description: "Indicates if a payment credential is a preferred **Receiving**, **Sending**, or **Paying** account. \n**Receiving** allows for funds to be pushed into the payment credential. \n**Sending** allows for funds to be sent from the payment credential. \n**Paying** allows for the payment credential to be used for purchases. \nMore than one preferred type can be used.\n"
+      type: array
+      minItems: 1
+      maxItems: 3
+      items:
+        $ref: '#/components/schemas/VisaADPreferredForType'
+    VisaADUpdateAliasStatusRequest:
+      description: Update Alias Status request.
+      type: object
+      required:
+      - aliasStatus
+      properties:
+        aliasStatus:
+          $ref: '#/components/schemas/VisaADAliasUpdatingStatus'
     VisaADNameOnCard:
       description: The name which is printed on the card.
       type: string
@@ -904,46 +1024,21 @@ components:
       maxLength: 120
       examples:
       - Peter Schweizer
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
-    VisaADCreateAliasAndRegisterCardsRequest:
-      description: Create Alias and Register Cards request.
-      type: object
-      required:
-      - aliasType
-      - aliasValue
-      - consent
-      - profile
-      - cards
-      properties:
-        aliasType:
-          $ref: '#/components/schemas/VisaADAliasType'
-        aliasValue:
-          $ref: '#/components/schemas/VisaADAliasValue'
-        consent:
-          $ref: '#/components/schemas/VisaADConsent'
-        profile:
-          $ref: '#/components/schemas/VisaADProfile'
-        cards:
-          type: array
-          minItems: 1
-          maxItems: 10
-          items:
-            $ref: '#/components/schemas/VisaADCard'
+    VisaADAliasValue:
+      description: "The value of the alias, e.g., phone number or email address. \nIf phone number is used for alias, this should be provided in accordance with ITU-T E.164 (2010) number structure. \nPlease note that in the E.164 format, the \"+\" prefix or leading zeros are not included.\n"
+      type: string
+      minLength: 1
+      maxLength: 128
+      examples:
+      - '41791112233'
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
     BankApiError:
       description: Information about an error on API requests.
       type: object
@@ -978,71 +1073,73 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    VisaADConsent:
-      description: Consent details.
-      type: object
-      required:
-      - presenter
-      - validFromDateTime
-      - version
-      properties:
-        presenter:
-          description: Identifies the presenter of consent to the consumer.
-          type: string
-          examples:
-          - Bank A
-        validFromDateTime:
-          description: Date and time from which on the consent is valid, in ISO UTC format YYYY-MM-DDThh:mm:ss.000Z. Only accepts present and past dates.
-          type: string
-          format: date-time
-          examples:
-          - '2021-12-01T10:00:00Z'
-        version:
-          description: Specific version of the terms and conditions that the customer accepts for the user solution.
-          type: string
-          minLength: 1
-          maxLength: 9
-          examples:
-          - '1.0'
-    CardToken:
-      description: Unique card token of a card.
-      type: string
-      pattern: ^CTK-[0-9a-fA-F]{32}$
-      minLength: 36
-      maxLength: 36
-      examples:
-      - CTK-54716A6080B14CF19CEA3C170F85B1DD
-    VisaADAliasType:
-      description: The type of alias provided in aliasValue.
+    VisaADAliasUpdatingStatus:
+      description: The updating status of an alias.
       type: string
       enum:
-      - PHONE
-      - EMAIL
+      - ACTIVE
+      - DISABLED
       examples:
-      - PHONE
-    VisaADRegisterCardRequest:
-      description: Register Card request.
+      - ACTIVE
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    VisaADRetrieveCardResponse:
+      description: Retrieve Card response.
       type: object
       required:
       - card
       properties:
         card:
           $ref: '#/components/schemas/VisaADCard'
-    VisaADUpdateAliasStatusRequest:
-      description: Update Alias Status request.
+    VisaADAliasStatus:
+      description: The status of an alias.
+      type: string
+      enum:
+      - ACTIVE
+      - DISABLED
+      - BLOCKED
+      - EXPIRED
+      examples:
+      - ACTIVE
+    VisaADCardType:
+      description: Card type description. Reference to Field 62.23—Product ID of available card products.
+      type: string
+      minLength: 1
+      maxLength: 70
+      examples:
+      - Visa Platinum
+    VisaADRetrieveAllCardsResponse:
+      description: Retrieve All Card response.
       type: object
       required:
-      - aliasStatus
+      - cards
       properties:
-        aliasStatus:
-          $ref: '#/components/schemas/VisaADAliasUpdatingStatus'
-    VisaADPreferredFor:
-      description: "Indicates if a payment credential is a preferred **Receiving**, **Sending**, or **Paying** account. \n**Receiving** allows for funds to be pushed into the payment credential. \n**Sending** allows for funds to be sent from the payment credential. \n**Paying** allows for the payment credential to be used for purchases. \nMore than one preferred type can be used.\n"
-      type: array
-      minItems: 1
-      maxItems: 3
-      items:
-        $ref: '#/components/schemas/VisaADPreferredForType'
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisaADCard'
+    VisaADUpdateCardRequest:
+      description: Update Card request.
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaADCard'
     VisaADUpdateAliasRequest:
       description: Update Alias request.
       type: object
@@ -1054,14 +1151,46 @@ components:
           $ref: '#/components/schemas/VisaADConsent'
         profile:
           $ref: '#/components/schemas/VisaADProfile'
-    VisaADUpdateCardRequest:
-      description: Update Card request.
+    VisaADCreateAliasAndRegisterCardsResponse:
+      description: Create Alias and Register Cards response.
       type: object
       required:
-      - card
+      - aliasId
       properties:
-        card:
-          $ref: '#/components/schemas/VisaADCard'
+        aliasId:
+          $ref: '#/components/schemas/VisaADAliasId'
+    VisaADCreateAliasAndRegisterCardsRequest:
+      description: Create Alias and Register Cards request.
+      type: object
+      required:
+      - aliasType
+      - aliasValue
+      - consent
+      - profile
+      - cards
+      properties:
+        aliasType:
+          $ref: '#/components/schemas/VisaADAliasType'
+        aliasValue:
+          $ref: '#/components/schemas/VisaADAliasValue'
+        consent:
+          $ref: '#/components/schemas/VisaADConsent'
+        profile:
+          $ref: '#/components/schemas/VisaADProfile'
+        cards:
+          type: array
+          minItems: 1
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/VisaADCard'
+    VisaADDateOfBirth:
+      description: Date ISO-8601 Format https://www.w3.org/TR/NOTE-datetime.
+      type: string
+      minLength: 10
+      maxLength: 10
+      pattern: ^\d\d\d\d\-\d\d\-\d\d$
+      examples:
+      - '1947-02-01'
     VisaADCard:
       description: Card in the context of Visa Alias Directory.
       type: object
@@ -1081,31 +1210,22 @@ components:
           $ref: '#/components/schemas/CardToken'
         preferredFor:
           $ref: '#/components/schemas/VisaADPreferredFor'
-    VisaADAliasStatus:
-      description: The status of an alias.
+    VisaADAliasId:
+      description: The UUID generated by Alias Directory which identifies the alias.
       type: string
-      enum:
-      - ACTIVE
-      - DISABLED
-      - BLOCKED
-      - EXPIRED
+      minLength: 36
+      maxLength: 36
       examples:
-      - ACTIVE
-    VisaADCardType:
-      description: Card type description. Reference to Field 62.23—Product ID of available card products.
-      type: string
-      minLength: 1
-      maxLength: 70
-      examples:
-      - Visa Platinum
-    VisaADAliasValue:
-      description: "The value of the alias, e.g., phone number or email address. \nIf phone number is used for alias, this should be provided in accordance with ITU-T E.164 (2010) number structure. \nPlease note that in the E.164 format, the \"+\" prefix or leading zeros are not included.\n"
-      type: string
-      minLength: 1
-      maxLength: 128
-      examples:
-      - '41791112233'
-    VisaADProfile:
+      - e336c8c8-2945-4be3-af3e-951ec2d01219
+    VisaADRetrieveCardRequest:
+      description: Retrieve Card request.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+    VisaADProfile_2:
       description: Profile details for the customer that owns the alias.
       type: object
       required:
@@ -1127,7 +1247,7 @@ components:
           examples:
           - R.
         firstName:
-          description: 'First name in English
+          description: 'First name in English.
 
 
             ISO20022 element name: Creditor -> Name
@@ -1139,7 +1259,7 @@ components:
           examples:
           - Hans
         middleName:
-          description: Middle name in English
+          description: Middle name in English.
           type: string
           minLength: 1
           maxLength: 35
@@ -1161,7 +1281,7 @@ components:
               value:
                 $ref: '#/components/schemas/VisaADAliasValue'
         dateOfBirth:
-          $ref: '#/components/schemas/VisaADDateOfBirth'
+          $ref: '#/components/schemas/VisaADDateOfBirth_2'
         lastNameLocal:
           description: "Last name in local language. Clients in CEMEA and the EU must use only one first letter of customer’s last name followed by dot symbol to create or modify an Alias record. \nFor example, Alias record for customer John Smith should be created or modified by the issuer with First and Last name fields as 'John S.'\n"
           type: string
@@ -1188,39 +1308,6 @@ components:
           maxLength: 35
           examples:
           - Ruedi
-    VisaADRetrieveAllCardsResponse:
-      description: Retrieve All Card response.
-      type: object
-      required:
-      - cards
-      properties:
-        cards:
-          type: array
-          items:
-            $ref: '#/components/schemas/VisaADCard'
-    VisaADDateOfBirth:
-      description: Date ISO-8601 Format https://www.w3.org/TR/NOTE-datetime.
-      type: string
-      minLength: 10
-      maxLength: 10
-      pattern: ^\d\d\d\d\-\d\d\-\d\d$
-      examples:
-      - '1947-02-01'
-    VisaADAliasId:
-      description: The UUID generated by Alias Directory which identifies the alias.
-      type: string
-      minLength: 36
-      maxLength: 36
-      examples:
-      - e336c8c8-2945-4be3-af3e-951ec2d01219
-    VisaADRetrieveCardResponse_2:
-      description: Retrieve Card response
-      type: object
-      required:
-      - card
-      properties:
-        card:
-          $ref: '#/components/schemas/VisaADCard_2'
     VisaADBillingAddress_2:
       type: object
       required:
@@ -1326,18 +1413,6 @@ components:
           - ZH
           minLength: 1
           maxLength: 50
-    CardType:
-      description: 'A single digit that distinguishes the card types of the schemes.
-
-        - 1: Debit mastercard
-
-        - 3: Visa debit
-
-        - 6: Bank card'
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 6
     ShortCardId:
       description: Complex object representing a card consisting of bank clearing number, card number and card type.
       type: object
@@ -1352,14 +1427,42 @@ components:
           $ref: '#/components/schemas/CardNumber'
         cardType:
           $ref: '#/components/schemas/CardType'
-    VisaADRetrieveCardRequest:
-      description: Retrieve Card request.
+    VisaADDeleteCardRequest:
+      description: Delete Card request.
       type: object
       required:
       - shortCardId
       properties:
         shortCardId:
           $ref: '#/components/schemas/ShortCardId'
+    VisaADRetrieveCardResponse_2:
+      description: Retrieve Card response
+      type: object
+      required:
+      - card
+      properties:
+        card:
+          $ref: '#/components/schemas/VisaADCard_2'
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
+    BankClearingNumber:
+      description: Unique number used to identify each bank agency or branch in the bank directory.
+      type: integer
+      format: int32
+      minimum: 100
+      maximum: 99999
+      examples:
+      - 50000
     CardNumber:
       description: Card number of the card.
       type: integer
@@ -1368,6 +1471,14 @@ components:
       maximum: 99999999
       examples:
       - 12345678
+    VisaADDateOfBirth_2:
+      description: Date ISO-8601 Format https://www.w3.org/TR/NOTE-datetime
+      type: string
+      minLength: 10
+      maxLength: 10
+      pattern: ^\d\d\d\d\-\d\d\-\d\d$
+      examples:
+      - '1947-02-01'
     VisaADCard_2:
       description: Card in the context of Visa Alias Directory.
       type: object
@@ -1387,105 +1498,6 @@ components:
           $ref: '#/components/schemas/ShortCardId'
         preferredFor:
           $ref: '#/components/schemas/VisaADPreferredFor'
-    VisaADDeleteCardRequest:
-      description: Delete Card request.
-      type: object
-      required:
-      - shortCardId
-      properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-    VisaADProfile_2:
-      description: Profile details for the customer that owns the alias.
-      type: object
-      required:
-      - firstName
-      - lastName
-      properties:
-        lastName:
-          description: 'Last name in English. Clients in CEMEA and the EU must use only one first letter of customer’s last name followed by dot symbol to create or modify an Alias record.
-
-            For example, Alias record for customer John Smith should be created or modified by the issuer with First and Last name fields as ''John S.''
-
-
-            ISO20022 element name: Creditor -> Name
-
-            '
-          type: string
-          minLength: 1
-          maxLength: 35
-          examples:
-          - R.
-        firstName:
-          description: 'First name in English.
-
-
-            ISO20022 element name: Creditor -> Name
-
-            '
-          type: string
-          minLength: 1
-          maxLength: 35
-          examples:
-          - Hans
-        middleName:
-          description: Middle name in English.
-          type: string
-          minLength: 1
-          maxLength: 35
-          examples:
-          - Ruedi
-        contactInfo:
-          description: Contact information.
-          minItems: 1
-          maxItems: 2
-          type: array
-          items:
-            type: object
-            required:
-            - type
-            - value
-            properties:
-              type:
-                $ref: '#/components/schemas/VisaADAliasType'
-              value:
-                $ref: '#/components/schemas/VisaADAliasValue'
-        dateOfBirth:
-          $ref: '#/components/schemas/VisaADDateOfBirth_2'
-        lastNameLocal:
-          description: "Last name in local language. Clients in CEMEA and the EU must use only one first letter of customer’s last name followed by dot symbol to create or modify an Alias record. \nFor example, Alias record for customer John Smith should be created or modified by the issuer with First and Last name fields as 'John S.'\n"
-          type: string
-          minLength: 1
-          maxLength: 35
-          examples:
-          - R.
-        preferredName:
-          description: Preferred name (or the 'known-as' name).
-          type: string
-          examples:
-          - Hansruedi
-        firstNameLocal:
-          description: First name in local language.
-          type: string
-          minLength: 1
-          maxLength: 35
-          examples:
-          - Hans
-        middleNameLocal:
-          description: Middle name in local language.
-          type: string
-          minLength: 1
-          maxLength: 35
-          examples:
-          - Ruedi
-    VisaADDateOfBirth_2:
-      description: Date ISO-8601 Format https://www.w3.org/TR/NOTE-datetime
-      type: string
-      minLength: 10
-      maxLength: 10
-      pattern: ^\d\d\d\d\-\d\d\-\d\d$
-      examples:
-      - '1947-02-01'
     VisaADAliasId_2:
       description: The UUID generated by Alias Directory which identifies the alias
       type: string
@@ -1493,14 +1505,6 @@ components:
       maxLength: 36
       examples:
       - e336c8c8-2945-4be3-af3e-951ec2d01219
-    BankClearingNumber:
-      description: Unique number used to identify each bank agency or branch in the bank directory.
-      type: integer
-      format: int32
-      minimum: 100
-      maximum: 99999
-      examples:
-      - 50000
   parameters:
     IssuerTraceIdHeader:
       in: header

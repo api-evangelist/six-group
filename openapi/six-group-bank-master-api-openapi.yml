@@ -127,32 +127,30 @@ paths:
           description: Unexpected error.
 components:
   schemas:
-    BankMasterJsonResponse:
+    GenericObject:
       required:
-      - entries
-      - readTime
-      - totalSize
-      - validOn
+      - '@type'
+      - data
       type: object
       properties:
-        totalSize:
-          type: integer
-          description: The total count of records in the entries list.
-          example: 42
-        validOn:
+        '@type':
           type: string
-          description: Master data is edited and published on a daily basis. Therefore the data is valid on that exact date only.
-          format: date
-          example: '2023-01-23'
-        readTime:
-          type: string
-          description: Date and time (according to ISO 8601) at which this response was created.
-          format: date-time
-          example: '2023-01-21T10:52:05.1904957+01:00'
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/BankMasterBase'
+          description: 'The field "@type" contains a URI/name identifying the type.
+
+            '
+          example: types.example.com/standard/id
+        data:
+          type: object
+          description: 'An object of type @type containing custom fields.
+
+            '
+          example: '-'
+      description: 'Structured type that contains an object and its type.
+
+        '
+      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
+
+        '
     BankMasterBase:
       required:
       - entryType
@@ -231,27 +229,29 @@ components:
           example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
         metadata:
           $ref: '#/components/schemas/GenericObject'
-    GenericObject:
+    BankMasterJsonResponse:
       required:
-      - '@type'
-      - data
+      - entries
+      - readTime
+      - totalSize
+      - validOn
       type: object
       properties:
-        '@type':
+        totalSize:
+          type: integer
+          description: The total count of records in the entries list.
+          example: 42
+        validOn:
           type: string
-          description: 'The field "@type" contains a URI/name identifying the type.
-
-            '
-          example: types.example.com/standard/id
-        data:
-          type: object
-          description: 'An object of type @type containing custom fields.
-
-            '
-          example: '-'
-      description: 'Structured type that contains an object and its type.
-
-        '
-      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
-
-        '
+          description: Master data is edited and published on a daily basis. Therefore the data is valid on that exact date only.
+          format: date
+          example: '2023-01-23'
+        readTime:
+          type: string
+          description: Date and time (according to ISO 8601) at which this response was created.
+          format: date-time
+          example: '2023-01-21T10:52:05.1904957+01:00'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BankMasterBase'

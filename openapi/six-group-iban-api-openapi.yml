@@ -39,20 +39,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
 components:
-  parameters:
-    query_iban:
-      name: iban
-      in: query
-      description: International bank account number (IBAN) parameter of the API call.
-      required: true
-      style: form
-      explode: true
-      schema:
-        maxLength: 100
-        minLength: 10
-        type: string
-        example: CHpp bbbb bkkk kkkk kkkk k
   schemas:
+    IbanValidationResult:
+      type: string
+      description: 'Validation result. Possible values:
+
+        - OK                    # This IBAN is formally correct
+
+        - INVALID_COUNTRY_CODE  # This IBAN has an invalid country code
+
+        - INVALID_LENGTH        # This IBAN has an invalid length
+
+        - INVALID_FORMAT,       # This IBAN is formally incorrect according to ISO-13616-1
+
+        - INVALID_CHECKSUM      # This IBAN has an invalid checksum
+
+        - INVALID_IID           # This IBAN has an invalid CH or LI institution identification (IID)
+
+        '
     IbanResponse:
       required:
       - validationResult
@@ -65,6 +69,30 @@ components:
           description: Each bank / financial institution is identified by an IID (institution identification). IIDs are three to five digits long. QR-IIDs consist exclusively of numbers from 30000 to 31999.
           example: 9703
       description: IBAN validation result and IID if available.
+    GenericObject:
+      required:
+      - '@type'
+      - data
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: 'The field "@type" contains a URI/name identifying the type.
+
+            '
+          example: types.example.com/standard/id
+        data:
+          type: object
+          description: 'An object of type @type containing custom fields.
+
+            '
+          example: '-'
+      description: 'Structured type that contains an object and its type.
+
+        '
+      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
+
+        '
     Problem:
       required:
       - detail
@@ -118,44 +146,16 @@ components:
           example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
         metadata:
           $ref: '#/components/schemas/GenericObject'
-    IbanValidationResult:
-      type: string
-      description: 'Validation result. Possible values:
-
-        - OK                    # This IBAN is formally correct
-
-        - INVALID_COUNTRY_CODE  # This IBAN has an invalid country code
-
-        - INVALID_LENGTH        # This IBAN has an invalid length
-
-        - INVALID_FORMAT,       # This IBAN is formally incorrect according to ISO-13616-1
-
-        - INVALID_CHECKSUM      # This IBAN has an invalid checksum
-
-        - INVALID_IID           # This IBAN has an invalid CH or LI institution identification (IID)
-
-        '
-    GenericObject:
-      required:
-      - '@type'
-      - data
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: 'The field "@type" contains a URI/name identifying the type.
-
-            '
-          example: types.example.com/standard/id
-        data:
-          type: object
-          description: 'An object of type @type containing custom fields.
-
-            '
-          example: '-'
-      description: 'Structured type that contains an object and its type.
-
-        '
-      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
-
-        '
+  parameters:
+    query_iban:
+      name: iban
+      in: query
+      description: International bank account number (IBAN) parameter of the API call.
+      required: true
+      style: form
+      explode: true
+      schema:
+        maxLength: 100
+        minLength: 10
+        type: string
+        example: CHpp bbbb bkkk kkkk kkkk k

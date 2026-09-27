@@ -90,62 +90,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/BankApiError'
 components:
-  parameters:
-    RequestIdHeader:
-      in: header
-      name: x-request-id
-      description: A unique identifier for a request and response pair.
-      schema:
-        type: string
-    IssuerTraceIdHeader:
-      in: header
-      name: issuer-trace-id
-      description: A issuer‑provided unique trace identifier to correlate the complete flow started by this request.
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 26
   schemas:
-    CardEncryptionSubCardType:
-      description: Specifies the sub card type of the card, if any. Set the 'value' property to the sub card type if available; otherwise, set it to 'null'. Providing this object avoids additional requests to Worldline to retrieve the card's PAN.
-      type: object
-      properties:
-        value:
-          $ref: '#/components/schemas/SubCardType'
-    CardTokenExtension:
-      description: Extension to card token to identify a card.
-      type: object
-      required:
-      - cardExpiry
-      - cardSequenceNumber
-      properties:
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
-        cardSequenceNumber:
-          $ref: '#/components/schemas/CardSequenceNumber'
-    CardSequenceNumber:
-      description: Sequence number of the card.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
-      examples:
-      - 2
-    SubCardType:
-      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
+    CardHolderName:
+      description: The cardholder name as printed on the card.
       type: string
       minLength: 2
-      maxLength: 2
+      maxLength: 26
       examples:
-      - A1
-    CardToken:
-      description: Unique card token of a card.
-      type: string
-      pattern: ^CTK-[0-9a-fA-F]{32}$
-      minLength: 36
-      maxLength: 36
-      examples:
-      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+      - Peter Meier
     CardEncryptionRequest:
       description: Contains data for the card encryption.
       type: object
@@ -159,38 +111,6 @@ components:
           $ref: '#/components/schemas/CardHolderName'
         subCardType:
           $ref: '#/components/schemas/CardEncryptionSubCardType'
-    YearMonth:
-      type: object
-      required:
-      - month
-      - year
-      properties:
-        month:
-          description: The two digit number of the month starting at 01 for January.
-          type: string
-          examples:
-          - '01'
-        year:
-          description: The last two digits of the year.
-          type: string
-          examples:
-          - '21'
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
     CardEncryptionResponse:
       description: Contains the encrypted card data for the provisioning of the card with Thales SDK.
       type: object
@@ -231,6 +151,30 @@ components:
           type: string
           examples:
           - tshKid
+    YearMonth:
+      type: object
+      required:
+      - month
+      - year
+      properties:
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
     BankApiError:
       description: Information about an error on API requests.
       type: object
@@ -265,10 +209,66 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    CardHolderName:
-      description: The cardholder name as printed on the card.
+    CardSequenceNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    CardEncryptionSubCardType:
+      description: Specifies the sub card type of the card, if any. Set the 'value' property to the sub card type if available; otherwise, set it to 'null'. Providing this object avoids additional requests to Worldline to retrieve the card's PAN.
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/SubCardType'
+    CardTokenExtension:
+      description: Extension to card token to identify a card.
+      type: object
+      required:
+      - cardExpiry
+      - cardSequenceNumber
+      properties:
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        cardSequenceNumber:
+          $ref: '#/components/schemas/CardSequenceNumber'
+    SubCardType:
+      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
       type: string
       minLength: 2
-      maxLength: 26
+      maxLength: 2
       examples:
-      - Peter Meier
+      - A1
+  parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
+    IssuerTraceIdHeader:
+      in: header
+      name: issuer-trace-id
+      description: A issuer‑provided unique trace identifier to correlate the complete flow started by this request.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 26

@@ -738,7 +738,7 @@ paths:
         * 4509 - C2P_PARAMETER_VALIDATION_FAILED_AT_SCHEME
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: setClickToPayMastercardProvisioningData
+      operationId: postCardsClicktopayMastercardProvisioning
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -769,6 +769,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: setClickToPayMastercardProvisioningData
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -801,7 +803,7 @@ paths:
         * 4449 - TOKENIZATION_NOT_SUPPORTED
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: setClickToPayVisaProvisioningData
+      operationId: postCardsClicktopayVisaProvisioning
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -832,6 +834,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: setClickToPayVisaProvisioningData
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -869,7 +873,7 @@ paths:
         * 4454 - EXCLUDED_WALLET_PROVIDER
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: getApplePayProvisioningData
+      operationId: postCardsApplePayProvisioningData
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -908,6 +912,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getApplePayProvisioningData
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -945,7 +951,7 @@ paths:
         * 4454 - EXCLUDED_WALLET_PROVIDER
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: getGooglePayProvisioningData
+      operationId: postCardsGooglePayProvisioningData
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -983,6 +989,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getGooglePayProvisioningData
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -1020,7 +1028,7 @@ paths:
         * 4454 - EXCLUDED_WALLET_PROVIDER
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: getSamsungPayProvisioningData
+      operationId: postCardsSamsungPayProvisioningData
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -1058,6 +1066,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getSamsungPayProvisioningData
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -1097,7 +1107,7 @@ paths:
         * 4449 - TOKENIZATION_NOT_SUPPORTED
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: getEncryptedCardData
+      operationId: postCardsEncryptCardData
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -1133,6 +1143,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getEncryptedCardData
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -1172,7 +1184,7 @@ paths:
         * 4461 - INCOMPLETE_OR_MISSING_ADDRESS_DATA
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: getEncryptedCardDataClickToPay
+      operationId: postCardsEncryptCardDataClickToPay
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -1202,6 +1214,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getEncryptedCardDataClickToPay
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -1235,7 +1249,7 @@ paths:
         * 4449 - TOKENIZATION_NOT_SUPPORTED
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: getClickToPayStatus
+      operationId: postCardsClickToPayStatus
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -1271,6 +1285,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getClickToPayStatus
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -1312,7 +1328,7 @@ paths:
         * 4454 - EXCLUDED_WALLET_PROVIDER
 
         * 4483 - OPERATION_NOT_ALLOWED_FOR_BANK_CARD'
-      operationId: getAuthorizationCode
+      operationId: postCardsGenerateAuthorizationCode
       parameters:
       - $ref: '#/components/parameters/RequestIdHeader'
       - $ref: '#/components/parameters/IssuerTraceIdHeader'
@@ -1348,6 +1364,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BankApiError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getAuthorizationCode
     servers:
     - url: https://api.six-group.com/api/debix/bank/v2
       description: PROD - Internet
@@ -1363,6 +1381,462 @@ paths:
       description: TEST - P2P
 components:
   schemas:
+    CardHolderName:
+      description: The cardholder name as printed on the card.
+      type: string
+      minLength: 2
+      maxLength: 26
+      examples:
+      - Peter Meier
+    SamsungPayProvisioningResponse:
+      description: Data required for push provisioning with a Samsung Pay wallet.
+      type: object
+      required:
+      - base64SamsungPayOpaquePaymentCard
+      properties:
+        base64SamsungPayOpaquePaymentCard:
+          description: Samsung Pay OpaquePaymentCard base64 encoded.
+          type: string
+          examples:
+          - for Mastercard see '#/components/schemas/MastercardGooglePayOpaquePaymentCard'
+    CardSequenceNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
+    ClickToPayCardEncryptionResponse:
+      description: Contains the encrypted card data for the provisioning of the card with Thales SDK.
+      type: object
+      required:
+      - encryptedCardData
+      - scheme
+      - publicKeyId
+      - tokenRequestorId
+      properties:
+        encryptedCardData:
+          description: 'Encrypted card data in PKCS#7 format as specified by Thales SDK.
+
+            Once deciphered, the JSON payload contains the following fields:
+
+            - issuerCardRefId
+
+            - fpan
+
+            - exp
+
+            - cardholderName
+
+            - postalAddress
+
+            - phoneNumber
+
+            - phoneNumberCountryCode
+
+            - email
+
+            - issuerClientInformation
+
+            '
+          type: string
+        scheme:
+          $ref: '#/components/schemas/Scheme'
+        publicKeyId:
+          description: Id of the public key used to encrypt the card data
+          type: string
+          examples:
+          - tshKid
+        tokenRequestorId:
+          description: The Click to Pay token requestor id.
+          type: string
+          examples:
+          - '40010075338'
+    ClickToPayCardEncryptionRequest:
+      description: Contains data for the card encryption.
+      type: object
+      required:
+      - cardTokenExtension
+      - cardholderName
+      - emailAddress
+      - phoneNumber
+      - phoneNumberCountryCode
+      - address
+      - issuerClientInformation
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        emailAddress:
+          description: Email address to identify the customer.
+          type: string
+          minLength: 1
+          examples:
+          - peter.schweizer@mailbox.org
+        phoneNumber:
+          description: The phone number without country code.
+          type: string
+          pattern: ^[0-9]{5,12}$
+          examples:
+          - '795625655'
+        phoneNumberCountryCode:
+          description: The country code of the phone number.
+          type: string
+          pattern: ^[1-9][0-9]{0,3}$
+          examples:
+          - '41'
+        address:
+          $ref: '#/components/schemas/ClickToPayCardholderPostalAddress'
+        issuerClientInformation:
+          $ref: '#/components/schemas/ClickToPayIssuerClientInformation'
+        subCardType:
+          $ref: '#/components/schemas/CardEncryptionSubCardType'
+    AuthorizationCodeRequest:
+      description: Contains the card identifiers and wallet for the generation of the authorization code.
+      type: object
+      required:
+      - cardTokenExtension
+      - wallet
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        wallet:
+          $ref: '#/components/schemas/WalletProvider'
+    ApplePayProvisioningResponse:
+      description: Data required for push provisioning with a Apple Pay wallet.
+      type: object
+      required:
+      - activationData
+      - ephemeralPublicKey
+      - encryptedData
+      properties:
+        activationData:
+          description: base64 encoded tokenization authentication value.
+          type: string
+          examples:
+          - for Mastercard see '#/components/schemas/MastercardTokenizationAuthenticationValue'
+        ephemeralPublicKey:
+          type: string
+          description: debiX's ephemeral public key used in the Diffie-Hellman key exchange.
+        encryptedData:
+          type: string
+          description: Encrypted card data, base64 encoded
+          examples:
+          - see '#/components/schemas/ApplePayCardCredentials'
+    VisaC2PCustomerId:
+      description: Unique identifier for the customer.
+      type: string
+      format: uuid
+    CardEncryptionRequest:
+      description: Contains data for the card encryption.
+      type: object
+      required:
+      - cardTokenExtension
+      - cardholderName
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        subCardType:
+          $ref: '#/components/schemas/CardEncryptionSubCardType'
+    CardEncryptionResponse:
+      description: Contains the encrypted card data for the provisioning of the card with Thales SDK.
+      type: object
+      required:
+      - encryptedCardData
+      - panSuffix
+      - publicKeyId
+      properties:
+        encryptedCardData:
+          description: 'Encrypted card data in PKCS#7 format as specified by Thales SDK.
+
+            Once deciphered, the JSON payload contains the following fields:
+
+            - issuerCardRefId
+
+            - fpan
+
+            - exp
+
+            - cardholderName
+
+            '
+          type: string
+          maxLength: 1500
+        primaryAccountIdentifier:
+          description: Primary account id; currently only for Apple Pay and only if the card has already been digitized on at least one Apple device.
+          type: string
+          minLength: 1
+        panSuffix:
+          description: Last four digits of the pan.
+          type: string
+          minLength: 4
+          maxLength: 4
+          examples:
+          - '0123'
+        publicKeyId:
+          description: Id of the public key used to encrypt the card data.
+          type: string
+          examples:
+          - tshKid
+    EmailAddress:
+      description: Email address to identify the customer.
+      type: string
+      minLength: 1
+      examples:
+      - peter.schweizer@mailbox.org
+    ClickToPayCardholderPostalAddress:
+      description: Postal address of cardholder as specified by the TSH Token Push and Control specification.
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
+      type: object
+      properties:
+        line1:
+          description: First line of address containing the street and street number.
+          type: string
+          minLength: 1
+          maxLength: 64
+          examples:
+          - Hardturmstrasse 201
+        city:
+          description: The city of the address.
+          type: string
+          minLength: 1
+          maxLength: 32
+          examples:
+          - Zürich
+        postalCode:
+          description: Postal or zip code of the address.
+          type: string
+          minLength: 1
+          maxLength: 10
+          examples:
+          - '8005'
+        country:
+          description: 3-letter (alpha-3) country code as defined in ISO 3166-1.
+          type: string
+          minLength: 3
+          maxLength: 3
+          examples:
+          - CHE
+    ClickToPayVisaProvisioningRequest:
+      description: Request data to provision Visa Click to Pay.
+      type: object
+      required:
+      - cardTokenExtension
+      - consumer
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        consumer:
+          $ref: '#/components/schemas/ClickToPayVisaConsumer'
+    ClickToPayMastercardProvisioningRequest:
+      description: Request data to provision Mastercard Click to Pay.
+      type: object
+      required:
+      - cardTokenExtension
+      - consumer
+      - complianceSettings
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        consumer:
+          $ref: '#/components/schemas/ClickToPayMastercardConsumer'
+        complianceSettings:
+          $ref: '#/components/schemas/ClickToPayMastercardComplianceSettings'
+    ClickToPayMastercardConsumer:
+      description: Consumer details for Mastercard Click to Pay
+      type: object
+      required:
+      - emailAddress
+      - mobilePhoneNumber
+      - mobilePhoneNumberCountryCode
+      - languageCode
+      - firstName
+      - lastName
+      - street
+      - postalCode
+      - city
+      - countryCode
+      properties:
+        emailAddress:
+          description: The customer's email address.
+          type: string
+          minLength: 1
+          maxLength: 256
+          examples:
+          - peter.schweizer@mailbox.org
+        mobilePhoneNumber:
+          description: The phone number without country code.
+          type: string
+          pattern: ^[0-9]{5,12}$
+          examples:
+          - '795625655'
+        mobilePhoneNumberCountryCode:
+          description: The country code of the phone number.
+          type: string
+          pattern: ^[1-9][0-9]{0,3}$
+          examples:
+          - '41'
+        languageCode:
+          description: Consumer-provided language choice. ISO 639-1 Code.
+          minLength: 2
+          type: string
+          examples:
+          - de
+        firstName:
+          description: Consumer-provided first name.
+          type: string
+          maxLength: 30
+          examples:
+          - John
+        lastName:
+          description: Consumer-provided last name.
+          type: string
+          maxLength: 30
+          examples:
+          - Doe
+        street:
+          description: Consumer-provided street name.
+          type: string
+          maxLength: 25
+          examples:
+          - Main Street
+        streetNo:
+          description: Consumer-provided street number.
+          type: string
+          maxLength: 5
+          examples:
+          - '123'
+        postalCode:
+          description: Postal or zip code of the address.
+          type: string
+          minLength: 1
+          maxLength: 10
+          examples:
+          - '8005'
+        city:
+          description: The city of the address.
+          type: string
+          minLength: 1
+          maxLength: 32
+          examples:
+          - Zürich
+        countryCode:
+          description: ISO 3166 alpha 2 country code.
+          type: string
+          minLength: 2
+          maxLength: 2
+          examples:
+          - CH
+    SamsungPayCardEncryptionRequest:
+      description: Contains data for the Samsung Pay card encryption.
+      type: object
+      required:
+      - cardTokenExtension
+      - cardholderName
+      - clientWalletAccountId
+      - clientDeviceId
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        clientWalletAccountId:
+          type: string
+          description: The active wallet id of the current Samsung Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
+        clientDeviceId:
+          type: string
+          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
+    ClickToPayMastercardComplianceSettings:
+      description: Contains URIs to the latest privacy policy and terms and conditions for Mastercard Click to Pay.
+      type: object
+      required:
+      - privacyUri
+      - termsAndConditionsUri
+      properties:
+        privacyUri:
+          type: string
+          minLength: 15
+          description: Latest version of privacy policy URI.
+          examples:
+          - https://www.mastercard.com/global/click-to-pay/country-listing/privacy.html?locale=de_CH
+        termsAndConditionsUri:
+          type: string
+          minLength: 15
+          description: Latest version of terms and conditions URI.
+          examples:
+          - https://www.mastercard.com/global/click-to-pay/country-listing/terms.html?locale=de_CH
+    YearMonth:
+      type: object
+      required:
+      - month
+      - year
+      properties:
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    Scheme:
+      description: Scheme of the card.
+      type: string
+      enum:
+      - MASTERCARD
+      - VISA
     WalletProvider:
       description: '- "WALLET"
 
@@ -1416,12 +1890,53 @@ components:
       type: string
       examples:
       - APPLE_PAY
-    EmailAddress:
-      description: Email address to identify the customer.
+    Dpan:
+      description: Number of the digital card.
       type: string
-      minLength: 1
+      pattern: ^[4,5][0-9]{15}$
+      minLength: 16
+      maxLength: 16
       examples:
-      - peter.schweizer@mailbox.org
+      - '4234567890123456'
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    ClickToPayStatusResponse:
+      description: The DPAN associated with the given arguments. None if none exists.
+      type: object
+      properties:
+        dpan:
+          $ref: '#/components/schemas/Dpan'
+    GooglePayProvisioningResponse:
+      description: Data required for push provisioning with a Google Pay wallet.
+      type: object
+      required:
+      - base64GooglePayOpaquePaymentCard
+      properties:
+        base64GooglePayOpaquePaymentCard:
+          description: Google Pay OpaquePaymentCard base64 encoded.
+          type: string
+          examples:
+          - for Mastercard see '#/components/schemas/MastercardGooglePayOpaquePaymentCard'
+    CardEncryptionSubCardType:
+      description: Specifies the sub card type of the card, if any. Set the 'value' property to the sub card type if available; otherwise, set it to 'null'. Providing this object avoids additional requests to Worldline to retrieve the card's PAN.
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/SubCardType'
     GooglePayCardEncryptionRequest:
       description: Contains data for the Google Pay card encryption.
       type: object
@@ -1441,112 +1956,40 @@ components:
         clientDeviceId:
           type: string
           description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
-    ClickToPayCardholderPostalAddress:
-      description: Postal address of cardholder as specified by the TSH Token Push and Control specification.
-      required:
-      - line1
-      - city
-      - postalCode
-      - country
-      type: object
-      properties:
-        line1:
-          description: First line of address containing the street and street number.
-          type: string
-          minLength: 1
-          maxLength: 64
-          examples:
-          - Hardturmstrasse 201
-        city:
-          description: The city of the address.
-          type: string
-          minLength: 1
-          maxLength: 32
-          examples:
-          - Zürich
-        postalCode:
-          description: Postal or zip code of the address.
-          type: string
-          minLength: 1
-          maxLength: 10
-          examples:
-          - '8005'
-        country:
-          description: 3-letter (alpha-3) country code as defined in ISO 3166-1.
-          type: string
-          minLength: 3
-          maxLength: 3
-          examples:
-          - CHE
-    CardEncryptionRequest:
-      description: Contains data for the card encryption.
+    ApplePayCardEncryptionRequest:
+      description: Contains data for the Apple Pay card encryption.
       type: object
       required:
       - cardTokenExtension
       - cardholderName
+      - nonce
+      - nonceSignature
+      - applePublicCertificates
       properties:
         cardTokenExtension:
           $ref: '#/components/schemas/CardTokenExtension'
         cardholderName:
           $ref: '#/components/schemas/CardHolderName'
-        subCardType:
-          $ref: '#/components/schemas/CardEncryptionSubCardType'
-    ClickToPayStatusResponse:
-      description: The DPAN associated with the given arguments. None if none exists.
-      type: object
-      properties:
-        dpan:
-          $ref: '#/components/schemas/Dpan'
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
+        nonce:
           type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
-    BankApiError:
-      description: Information about an error on API requests.
-      type: object
-      required:
-      - applicationError
-      - errorCode
-      properties:
-        applicationError:
-          description: The name of the application error.
+          description: Nonce, passed back in the response.
+        nonceSignature:
           type: string
-          examples:
-          - OPERATION_FAILED
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 5001
-        description:
-          description: A human readable explanation specific to this occurrence of the problem.
-          type: string
-          examples:
-          - The requested operation failed.
-        errors:
-          description: List of error details.
+          description: Nonce signature, passed back in the response.
+        applePublicCertificates:
           type: array
-          minItems: 1
+          description: Apple's certificates to be used in the Diffie-Hellman key exchange. Base64 encoded DER certificate chain.
           items:
-            $ref: '#/components/schemas/ErrorDetail'
-        errorToken:
-          description: A generated error token referencing the actual error and logged on the server.
-          type: string
-          examples:
-          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+            type: string
+            description: Base64 encoded DER certificate.
+    ClickToPayStatusRequest:
+      description: Contains the email address for which to return the DPAN.
+      type: object
+      required:
+      - emailAddress
+      properties:
+        emailAddress:
+          $ref: '#/components/schemas/EmailAddress'
     AuthorizationCodeResponse:
       description: Contains the authorization code for the provisioning of a card into a wallet with Thales SDK.
       type: object
@@ -1556,202 +1999,6 @@ components:
         authorizationCode:
           description: A signed JSON Web Token (JWT/JWS) as specified by Thales SDK.
           type: string
-    SamsungPayProvisioningResponse:
-      description: Data required for push provisioning with a Samsung Pay wallet.
-      type: object
-      required:
-      - base64SamsungPayOpaquePaymentCard
-      properties:
-        base64SamsungPayOpaquePaymentCard:
-          description: Samsung Pay OpaquePaymentCard base64 encoded.
-          type: string
-          examples:
-          - for Mastercard see '#/components/schemas/MastercardGooglePayOpaquePaymentCard'
-    CardToken:
-      description: Unique card token of a card.
-      type: string
-      pattern: ^CTK-[0-9a-fA-F]{32}$
-      minLength: 36
-      maxLength: 36
-      examples:
-      - CTK-54716A6080B14CF19CEA3C170F85B1DD
-    ClickToPayVisaProvisioningRequest:
-      description: Request data to provision Visa Click to Pay.
-      type: object
-      required:
-      - cardTokenExtension
-      - consumer
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        consumer:
-          $ref: '#/components/schemas/ClickToPayVisaConsumer'
-    ClickToPayMastercardProvisioningRequest:
-      description: Request data to provision Mastercard Click to Pay.
-      type: object
-      required:
-      - cardTokenExtension
-      - consumer
-      - complianceSettings
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        consumer:
-          $ref: '#/components/schemas/ClickToPayMastercardConsumer'
-        complianceSettings:
-          $ref: '#/components/schemas/ClickToPayMastercardComplianceSettings'
-    ClickToPayIssuerClientInformation:
-      type: object
-      required:
-      - firstName
-      - lastName
-      properties:
-        issuerAccountID:
-          description: This is not the card's PAN. It is required by VISA.
-          type: string
-          maxLength: 24
-          examples:
-          - '1234567890'
-        firstName:
-          type: string
-          minLength: 1
-          maxLength: 80
-          examples:
-          - Peter
-        lastName:
-          type: string
-          minLength: 1
-          maxLength: 80
-          examples:
-          - Meier
-        locale:
-          description: "Language in which to communicate with the customer. \nThis is the ISO639-1 language code followed by \"_\" separator then ISO 3166-1 alpha-2 country code.\n"
-          type: string
-          minLength: 5
-          maxLength: 5
-          examples:
-          - de_CH
-        country:
-          description: '2-letter (alpha-2) country code as defined in ISO 3166-1.
-
-            '
-          type: string
-          minLength: 2
-          maxLength: 2
-          examples:
-          - CH
-    ClickToPayCardEncryptionResponse:
-      description: Contains the encrypted card data for the provisioning of the card with Thales SDK.
-      type: object
-      required:
-      - encryptedCardData
-      - scheme
-      - publicKeyId
-      - tokenRequestorId
-      properties:
-        encryptedCardData:
-          description: 'Encrypted card data in PKCS#7 format as specified by Thales SDK.
-
-            Once deciphered, the JSON payload contains the following fields:
-
-            - issuerCardRefId
-
-            - fpan
-
-            - exp
-
-            - cardholderName
-
-            - postalAddress
-
-            - phoneNumber
-
-            - phoneNumberCountryCode
-
-            - email
-
-            - issuerClientInformation
-
-            '
-          type: string
-        scheme:
-          $ref: '#/components/schemas/Scheme'
-        publicKeyId:
-          description: Id of the public key used to encrypt the card data
-          type: string
-          examples:
-          - tshKid
-        tokenRequestorId:
-          description: The Click to Pay token requestor id.
-          type: string
-          examples:
-          - '40010075338'
-    Dpan:
-      description: Number of the digital card.
-      type: string
-      pattern: ^[4,5][0-9]{15}$
-      minLength: 16
-      maxLength: 16
-      examples:
-      - '4234567890123456'
-    GooglePayProvisioningResponse:
-      description: Data required for push provisioning with a Google Pay wallet.
-      type: object
-      required:
-      - base64GooglePayOpaquePaymentCard
-      properties:
-        base64GooglePayOpaquePaymentCard:
-          description: Google Pay OpaquePaymentCard base64 encoded.
-          type: string
-          examples:
-          - for Mastercard see '#/components/schemas/MastercardGooglePayOpaquePaymentCard'
-    SubCardType:
-      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
-      type: string
-      minLength: 2
-      maxLength: 2
-      examples:
-      - A1
-    ClickToPayCardEncryptionRequest:
-      description: Contains data for the card encryption.
-      type: object
-      required:
-      - cardTokenExtension
-      - cardholderName
-      - emailAddress
-      - phoneNumber
-      - phoneNumberCountryCode
-      - address
-      - issuerClientInformation
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        cardholderName:
-          $ref: '#/components/schemas/CardHolderName'
-        emailAddress:
-          description: Email address to identify the customer.
-          type: string
-          minLength: 1
-          examples:
-          - peter.schweizer@mailbox.org
-        phoneNumber:
-          description: The phone number without country code.
-          type: string
-          pattern: ^[0-9]{5,12}$
-          examples:
-          - '795625655'
-        phoneNumberCountryCode:
-          description: The country code of the phone number.
-          type: string
-          pattern: ^[1-9][0-9]{0,3}$
-          examples:
-          - '41'
-        address:
-          $ref: '#/components/schemas/ClickToPayCardholderPostalAddress'
-        issuerClientInformation:
-          $ref: '#/components/schemas/ClickToPayIssuerClientInformation'
-        subCardType:
-          $ref: '#/components/schemas/CardEncryptionSubCardType'
     ClickToPayVisaConsumer:
       description: Consumer details for Visa Click to Pay
       type: object
@@ -1839,118 +2086,6 @@ components:
           maxLength: 2
           examples:
           - CH
-    AuthorizationCodeRequest:
-      description: Contains the card identifiers and wallet for the generation of the authorization code.
-      type: object
-      required:
-      - cardTokenExtension
-      - wallet
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        wallet:
-          $ref: '#/components/schemas/WalletProvider'
-    ApplePayProvisioningResponse:
-      description: Data required for push provisioning with a Apple Pay wallet.
-      type: object
-      required:
-      - activationData
-      - ephemeralPublicKey
-      - encryptedData
-      properties:
-        activationData:
-          description: base64 encoded tokenization authentication value.
-          type: string
-          examples:
-          - for Mastercard see '#/components/schemas/MastercardTokenizationAuthenticationValue'
-        ephemeralPublicKey:
-          type: string
-          description: debiX's ephemeral public key used in the Diffie-Hellman key exchange.
-        encryptedData:
-          type: string
-          description: Encrypted card data, base64 encoded
-          examples:
-          - see '#/components/schemas/ApplePayCardCredentials'
-    CardEncryptionSubCardType:
-      description: Specifies the sub card type of the card, if any. Set the 'value' property to the sub card type if available; otherwise, set it to 'null'. Providing this object avoids additional requests to Worldline to retrieve the card's PAN.
-      type: object
-      properties:
-        value:
-          $ref: '#/components/schemas/SubCardType'
-    CardEncryptionResponse:
-      description: Contains the encrypted card data for the provisioning of the card with Thales SDK.
-      type: object
-      required:
-      - encryptedCardData
-      - panSuffix
-      - publicKeyId
-      properties:
-        encryptedCardData:
-          description: 'Encrypted card data in PKCS#7 format as specified by Thales SDK.
-
-            Once deciphered, the JSON payload contains the following fields:
-
-            - issuerCardRefId
-
-            - fpan
-
-            - exp
-
-            - cardholderName
-
-            '
-          type: string
-          maxLength: 1500
-        primaryAccountIdentifier:
-          description: Primary account id; currently only for Apple Pay and only if the card has already been digitized on at least one Apple device.
-          type: string
-          minLength: 1
-        panSuffix:
-          description: Last four digits of the pan.
-          type: string
-          minLength: 4
-          maxLength: 4
-          examples:
-          - '0123'
-        publicKeyId:
-          description: Id of the public key used to encrypt the card data.
-          type: string
-          examples:
-          - tshKid
-    ApplePayCardEncryptionRequest:
-      description: Contains data for the Apple Pay card encryption.
-      type: object
-      required:
-      - cardTokenExtension
-      - cardholderName
-      - nonce
-      - nonceSignature
-      - applePublicCertificates
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        cardholderName:
-          $ref: '#/components/schemas/CardHolderName'
-        nonce:
-          type: string
-          description: Nonce, passed back in the response.
-        nonceSignature:
-          type: string
-          description: Nonce signature, passed back in the response.
-        applePublicCertificates:
-          type: array
-          description: Apple's certificates to be used in the Diffie-Hellman key exchange. Base64 encoded DER certificate chain.
-          items:
-            type: string
-            description: Base64 encoded DER certificate.
-    CardSequenceNumber:
-      description: Sequence number of the card.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
-      examples:
-      - 2
     CardTokenExtension:
       description: Extension to card token to identify a card.
       type: object
@@ -1962,276 +2097,53 @@ components:
           $ref: '#/components/schemas/YearMonth'
         cardSequenceNumber:
           $ref: '#/components/schemas/CardSequenceNumber'
-    Scheme:
-      description: Scheme of the card.
-      type: string
-      enum:
-      - MASTERCARD
-      - VISA
-    ClickToPayStatusRequest:
-      description: Contains the email address for which to return the DPAN.
+    ClickToPayIssuerClientInformation:
       type: object
       required:
-      - emailAddress
-      properties:
-        emailAddress:
-          $ref: '#/components/schemas/EmailAddress'
-    ClickToPayMastercardComplianceSettings:
-      description: Contains URIs to the latest privacy policy and terms and conditions for Mastercard Click to Pay.
-      type: object
-      required:
-      - privacyUri
-      - termsAndConditionsUri
-      properties:
-        privacyUri:
-          type: string
-          minLength: 15
-          description: Latest version of privacy policy URI.
-          examples:
-          - https://www.mastercard.com/global/click-to-pay/country-listing/privacy.html?locale=de_CH
-        termsAndConditionsUri:
-          type: string
-          minLength: 15
-          description: Latest version of terms and conditions URI.
-          examples:
-          - https://www.mastercard.com/global/click-to-pay/country-listing/terms.html?locale=de_CH
-    ClickToPayMastercardConsumer:
-      description: Consumer details for Mastercard Click to Pay
-      type: object
-      required:
-      - emailAddress
-      - mobilePhoneNumber
-      - mobilePhoneNumberCountryCode
-      - languageCode
       - firstName
       - lastName
-      - street
-      - postalCode
-      - city
-      - countryCode
       properties:
-        emailAddress:
-          description: The customer's email address.
+        issuerAccountID:
+          description: This is not the card's PAN. It is required by VISA.
+          type: string
+          maxLength: 24
+          examples:
+          - '1234567890'
+        firstName:
           type: string
           minLength: 1
-          maxLength: 256
+          maxLength: 80
           examples:
-          - peter.schweizer@mailbox.org
-        mobilePhoneNumber:
-          description: The phone number without country code.
-          type: string
-          pattern: ^[0-9]{5,12}$
-          examples:
-          - '795625655'
-        mobilePhoneNumberCountryCode:
-          description: The country code of the phone number.
-          type: string
-          pattern: ^[1-9][0-9]{0,3}$
-          examples:
-          - '41'
-        languageCode:
-          description: Consumer-provided language choice. ISO 639-1 Code.
-          minLength: 2
-          type: string
-          examples:
-          - de
-        firstName:
-          description: Consumer-provided first name.
-          type: string
-          maxLength: 30
-          examples:
-          - John
+          - Peter
         lastName:
-          description: Consumer-provided last name.
           type: string
-          maxLength: 30
+          minLength: 1
+          maxLength: 80
           examples:
-          - Doe
-        street:
-          description: Consumer-provided street name.
+          - Meier
+        locale:
+          description: "Language in which to communicate with the customer. \nThis is the ISO639-1 language code followed by \"_\" separator then ISO 3166-1 alpha-2 country code.\n"
           type: string
-          maxLength: 25
-          examples:
-          - Main Street
-        streetNo:
-          description: Consumer-provided street number.
-          type: string
+          minLength: 5
           maxLength: 5
           examples:
-          - '123'
-        postalCode:
-          description: Postal or zip code of the address.
-          type: string
-          minLength: 1
-          maxLength: 10
-          examples:
-          - '8005'
-        city:
-          description: The city of the address.
-          type: string
-          minLength: 1
-          maxLength: 32
-          examples:
-          - Zürich
-        countryCode:
-          description: ISO 3166 alpha 2 country code.
+          - de_CH
+        country:
+          description: '2-letter (alpha-2) country code as defined in ISO 3166-1.
+
+            '
           type: string
           minLength: 2
           maxLength: 2
           examples:
           - CH
-    YearMonth:
-      type: object
-      required:
-      - month
-      - year
-      properties:
-        month:
-          description: The two digit number of the month starting at 01 for January.
-          type: string
-          examples:
-          - '01'
-        year:
-          description: The last two digits of the year.
-          type: string
-          examples:
-          - '21'
-    SamsungPayCardEncryptionRequest:
-      description: Contains data for the Samsung Pay card encryption.
-      type: object
-      required:
-      - cardTokenExtension
-      - cardholderName
-      - clientWalletAccountId
-      - clientDeviceId
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        cardholderName:
-          $ref: '#/components/schemas/CardHolderName'
-        clientWalletAccountId:
-          type: string
-          description: The active wallet id of the current Samsung Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
-        clientDeviceId:
-          type: string
-          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
-    VisaC2PCustomerId:
-      description: Unique identifier for the customer.
-      type: string
-      format: uuid
-    CardHolderName:
-      description: The cardholder name as printed on the card.
+    SubCardType:
+      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
       type: string
       minLength: 2
-      maxLength: 26
+      maxLength: 2
       examples:
-      - Peter Meier
-    CardSeqNumber:
-      description: Sequence number of the card.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
-      examples:
-      - 2
-    GooglePayCardEncryptionRequest_2:
-      description: Contains data for the Google Pay card encryption.
-      type: object
-      required:
-      - cardId
-      - cardholderName
-      - clientWalletAccountId
-      - clientDeviceId
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId'
-        cardholderName:
-          $ref: '#/components/schemas/CardHolderName'
-        clientWalletAccountId:
-          type: string
-          description: The active wallet id of the current Google Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
-        clientDeviceId:
-          type: string
-          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
-    CardEncryptionRequest_2:
-      description: Contains data for the card encryption.
-      type: object
-      required:
-      - cardId
-      - cardholderName
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId'
-        cardholderName:
-          $ref: '#/components/schemas/CardHolderName'
-        subCardType:
-          $ref: '#/components/schemas/CardEncryptionSubCardType'
-    CardType:
-      description: 'A single digit that distinguishes the card types of the schemes.
-
-        - 1: Debit mastercard
-
-        - 3: Visa debit
-
-        - 6: Bank card'
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 6
-    ClickToPayVisaProvisioningRequest_2:
-      description: Request data to provision Visa Click to Pay.
-      type: object
-      required:
-      - cardId
-      - consumer
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId'
-        consumer:
-          $ref: '#/components/schemas/ClickToPayVisaConsumer'
-    ClickToPayMastercardProvisioningRequest_2:
-      description: Request data to provision Mastercard Click to Pay.
-      type: object
-      required:
-      - cardId
-      - consumer
-      - complianceSettings
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId'
-        consumer:
-          $ref: '#/components/schemas/ClickToPayMastercardConsumer'
-        complianceSettings:
-          $ref: '#/components/schemas/ClickToPayMastercardComplianceSettings'
-    ShortCardId:
-      description: Complex object representing a card consisting of bank clearing number, card number and card type.
-      type: object
-      required:
-      - bankClearingNumber
-      - cardNumber
-      - cardType
-      properties:
-        bankClearingNumber:
-          $ref: '#/components/schemas/BankClearingNumber'
-        cardNumber:
-          $ref: '#/components/schemas/CardNumber'
-        cardType:
-          $ref: '#/components/schemas/CardType'
-    Dpan_2:
-      description: Number of the digital card.
-      type: string
-      minLength: 16
-      maxLength: 16
-      examples:
-      - '1234567890123456'
-    CardNumber:
-      description: Card number of the card.
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 99999999
-      examples:
-      - 12345678
+      - A1
     ClickToPayCardEncryptionRequest_2:
       description: Contains data for the card encryption.
       type: object
@@ -2283,15 +2195,26 @@ components:
           $ref: '#/components/schemas/CardId'
         wallet:
           $ref: '#/components/schemas/WalletProvider'
-    CardId:
-      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
+    CardEncryptionRequest_2:
+      description: Contains data for the card encryption.
+      type: object
+      required:
+      - cardId
+      - cardholderName
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        subCardType:
+          $ref: '#/components/schemas/CardEncryptionSubCardType'
+    ShortCardId:
+      description: Complex object representing a card consisting of bank clearing number, card number and card type.
       type: object
       required:
       - bankClearingNumber
       - cardNumber
       - cardType
-      - cardSeqNumber
-      - cardExpiry
       properties:
         bankClearingNumber:
           $ref: '#/components/schemas/BankClearingNumber'
@@ -2299,10 +2222,84 @@ components:
           $ref: '#/components/schemas/CardNumber'
         cardType:
           $ref: '#/components/schemas/CardType'
-        cardSeqNumber:
-          $ref: '#/components/schemas/CardSeqNumber'
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
+    CardSeqNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
+    ClickToPayVisaProvisioningRequest_2:
+      description: Request data to provision Visa Click to Pay.
+      type: object
+      required:
+      - cardId
+      - consumer
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        consumer:
+          $ref: '#/components/schemas/ClickToPayVisaConsumer'
+    ClickToPayMastercardProvisioningRequest_2:
+      description: Request data to provision Mastercard Click to Pay.
+      type: object
+      required:
+      - cardId
+      - consumer
+      - complianceSettings
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        consumer:
+          $ref: '#/components/schemas/ClickToPayMastercardConsumer'
+        complianceSettings:
+          $ref: '#/components/schemas/ClickToPayMastercardComplianceSettings'
+    SamsungPayCardEncryptionRequest_2:
+      description: Contains data for the Samsung Pay card encryption.
+      type: object
+      required:
+      - cardId
+      - cardholderName
+      - clientWalletAccountId
+      - clientDeviceId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        clientWalletAccountId:
+          type: string
+          description: The active wallet id of the current Google Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
+        clientDeviceId:
+          type: string
+          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
+    Dpan_2:
+      description: Number of the digital card.
+      type: string
+      minLength: 16
+      maxLength: 16
+      examples:
+      - '1234567890123456'
+    GooglePayCardEncryptionRequest_2:
+      description: Contains data for the Google Pay card encryption.
+      type: object
+      required:
+      - cardId
+      - cardholderName
+      - clientWalletAccountId
+      - clientDeviceId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        cardholderName:
+          $ref: '#/components/schemas/CardHolderName'
+        clientWalletAccountId:
+          type: string
+          description: The active wallet id of the current Google Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
+        clientDeviceId:
+          type: string
+          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
     ApplePayCardEncryptionRequest_2:
       description: Contains data for the Apple Pay card encryption.
       type: object
@@ -2329,6 +2326,18 @@ components:
           items:
             type: string
             description: Base64 encoded DER certificate.
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
     BankClearingNumber:
       description: Unique number used to identify each bank agency or branch in the bank directory.
       type: integer
@@ -2348,25 +2357,34 @@ components:
           $ref: '#/components/schemas/ShortCardId'
         emailAddress:
           $ref: '#/components/schemas/EmailAddress'
-    SamsungPayCardEncryptionRequest_2:
-      description: Contains data for the Samsung Pay card encryption.
+    CardNumber:
+      description: Card number of the card.
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 99999999
+      examples:
+      - 12345678
+    CardId:
+      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
       type: object
       required:
-      - cardId
-      - cardholderName
-      - clientWalletAccountId
-      - clientDeviceId
+      - bankClearingNumber
+      - cardNumber
+      - cardType
+      - cardSeqNumber
+      - cardExpiry
       properties:
-        cardId:
-          $ref: '#/components/schemas/CardId'
-        cardholderName:
-          $ref: '#/components/schemas/CardHolderName'
-        clientWalletAccountId:
-          type: string
-          description: The active wallet id of the current Google Pay wallet. Client-provided consumer ID that identifies the wallet account holder entity.
-        clientDeviceId:
-          type: string
-          description: Stable device identification set by wallet provider. Could be a computer identifier or ID tied to hardware such as TEE_ID or SE_ID.
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+        cardSeqNumber:
+          $ref: '#/components/schemas/CardSeqNumber'
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
   parameters:
     IssuerTraceIdHeader:
       in: header
