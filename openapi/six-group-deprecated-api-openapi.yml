@@ -91,6 +91,40 @@ paths:
                 $ref: '#/components/schemas/BankApiError'
 components:
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    SubCardType:
+      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
+      type: string
+      minLength: 2
+      maxLength: 2
+      examples:
+      - A1
+    CardTokenExtension:
+      description: Extension to card token to identify a card.
+      type: object
+      required:
+      - cardExpiry
+      - cardSequenceNumber
+      properties:
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        cardSequenceNumber:
+          $ref: '#/components/schemas/CardSequenceNumber'
     CardHolderName:
       description: The cardholder name as printed on the card.
       type: string
@@ -98,6 +132,48 @@ components:
       maxLength: 26
       examples:
       - Peter Meier
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
     CardEncryptionRequest:
       description: Contains data for the card encryption.
       type: object
@@ -151,6 +227,14 @@ components:
           type: string
           examples:
           - tshKid
+    CardSequenceNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
     YearMonth:
       type: object
       required:
@@ -167,103 +251,13 @@ components:
           type: string
           examples:
           - '21'
-    CardToken:
-      description: Unique card token of a card.
-      type: string
-      pattern: ^CTK-[0-9a-fA-F]{32}$
-      minLength: 36
-      maxLength: 36
-      examples:
-      - CTK-54716A6080B14CF19CEA3C170F85B1DD
-    BankApiError:
-      description: Information about an error on API requests.
-      type: object
-      required:
-      - applicationError
-      - errorCode
-      properties:
-        applicationError:
-          description: The name of the application error.
-          type: string
-          examples:
-          - OPERATION_FAILED
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 5001
-        description:
-          description: A human readable explanation specific to this occurrence of the problem.
-          type: string
-          examples:
-          - The requested operation failed.
-        errors:
-          description: List of error details.
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-        errorToken:
-          description: A generated error token referencing the actual error and logged on the server.
-          type: string
-          examples:
-          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    CardSequenceNumber:
-      description: Sequence number of the card.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
-      examples:
-      - 2
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
     CardEncryptionSubCardType:
       description: Specifies the sub card type of the card, if any. Set the 'value' property to the sub card type if available; otherwise, set it to 'null'. Providing this object avoids additional requests to Worldline to retrieve the card's PAN.
       type: object
       properties:
         value:
           $ref: '#/components/schemas/SubCardType'
-    CardTokenExtension:
-      description: Extension to card token to identify a card.
-      type: object
-      required:
-      - cardExpiry
-      - cardSequenceNumber
-      properties:
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
-        cardSequenceNumber:
-          $ref: '#/components/schemas/CardSequenceNumber'
-    SubCardType:
-      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
-      type: string
-      minLength: 2
-      maxLength: 2
-      examples:
-      - A1
   parameters:
-    RequestIdHeader:
-      in: header
-      name: x-request-id
-      description: A unique identifier for a request and response pair.
-      schema:
-        type: string
     IssuerTraceIdHeader:
       in: header
       name: issuer-trace-id
@@ -272,3 +266,9 @@ components:
         type: string
         minLength: 1
         maxLength: 26
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string

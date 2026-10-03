@@ -446,759 +446,12 @@ paths:
       description: TEST - P2P
 components:
   schemas:
-    Presentment:
-      description: Contains the data of a presentment.
-      type: object
-      required:
-      - cardToken
-      - settlementData
-      properties:
-        transactionType:
-          description: '- 100: Cash withdrawal
-
-            - 101: Purchase of goods and services
-
-            - 102: Refund to the cardholder
-
-            - 103: ATM operator refund
-
-            - 104: Cardholder change
-
-            - 109: Deposit
-
-            - 117: P2P payment charge sender
-
-            - 118: P2P payment credit recipient
-
-            - 132: Mail order
-
-            - 133: Phone order
-
-            - 136: Cash advance
-
-            - 158: Purchase with Cashback (PwCB)
-
-            - 189: Payment credit / Receive
-
-            - 200: DCC cash withdrawal
-
-            - 203: ATM operator refund DCC'
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 999
-          examples:
-          - 101
-        transactionDateTime:
-          description: Date and time of the transaction.
-          type: string
-          format: date-time
-          examples:
-          - '2021-10-03T16:03:09.101+02:00'
-        cardToken:
-          $ref: '#/components/schemas/CardToken'
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        settlementData:
-          $ref: '#/components/schemas/SettlementData'
-        transactionDataDetails:
-          $ref: '#/components/schemas/TransactionDataDetails'
-        originalCurrencyData:
-          $ref: '#/components/schemas/OriginalCurrencyData'
-        reversalData:
-          $ref: '#/components/schemas/ReversalData'
-        matchFlag:
-          description: Indicates if the presentment was successfully matched with a transaction authorization.
-          type: boolean
-          examples:
-          - true
-        authorizationReference:
-          description: The authorization which is referenced by this presentment. This is equal to the TransactionId of the referenced authorization returned by the authorization endpoint.
-          type: string
-          examples:
-          - 6f4a6efe-fd8e-411a-8f23-adbf4bc4a6b6
-    CardSequenceNumber:
-      description: Sequence number of the card.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
-      examples:
-      - 2
     TransactionId:
       description: Worldline unique id of the authorization.
       type: string
       maxLength: 36
       examples:
       - 9e19df54-47cb-494b-84dc-1c126e95a05c
-    Contact:
-      type: object
-      properties:
-        website:
-          description: Website
-          type: string
-          minLength: 1
-          examples:
-          - www.myshop.ch
-        phoneNumber:
-          description: Phone number
-          type: string
-          minLength: 1
-          examples:
-          - '+41795625655'
-    AuthorizationsResponse:
-      description: Contains a list of authorizations, ordered by transaction date from newest to oldest.
-      type: object
-      properties:
-        authorizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Authorization'
-        totalRecords:
-          description: Total available records.
-          type: integer
-          format: int64
-          examples:
-          - 1021
-    TransactionDataDetails:
-      type: object
-      properties:
-        retrievalReference:
-          $ref: '#/components/schemas/RetrievalReference'
-        schemeTransactionId:
-          $ref: '#/components/schemas/SchemeTransactionId'
-        approvalCode:
-          $ref: '#/components/schemas/ApprovalCode'
-        retrievalSituation:
-          description: 'Customer and location transaction context.
-
-            - "SIS": Swiss in Switzerland / Liechtensteiner in Liechtenstein
-
-            - "AIS": Foreigner in Switzerland / Foreigner in Liechtenstein
-
-            - "SIA": Swiss abroad / Liechtensteiner abroad'
-          type: string
-          maxLength: 3
-        transactionCapture:
-          description: 'Information about the place of authorization and the conclusion of the transaction.
-
-            - "ONL": Online (authorized by SIX)
-
-            - "OFF": Offline (authorized at the terminal)
-
-            - "PIA": Authorized via PIA link at the issuer
-
-            - "SAF": Store and forward
-
-            - "VIS": Authorized via Visa network at the issuer
-
-            - "SIE": Stand-In authorized through MCI
-
-            - "SIP": Stand-In authorized through SIX
-
-            - "MCI": Authorized via MCI net authorized by issuer'
-          type: string
-          maxLength: 3
-        captureMethod:
-          description: "Method by which the card was captured.\n- \"MAG\": Magnetic stripe\n- \"EMV\": Chip\n- \"EFB\": EMV fallback\n- \"MAN\": Manual entering \n- \"ECO\": Electronic acquisition (e-commerce)\n- \"CLS\": Contactless\n- \"QRC\": QR code reader\n- \"COF\": Credential on file"
-          type: string
-          maxLength: 3
-        cardDataSource:
-          description: 'Source of the card data
-
-            - "CPR": Cardholder present
-
-            - "CNP": Cardholder not present or unknown
-
-            - "MOR": Order via mail
-
-            - "TOR": Order via telephone
-
-            - "MTO": Order via mail or telephone
-
-            - "REC": Recurring transaction
-
-            - "ECO": E-commerce'
-          type: string
-          maxLength: 3
-        multipleClearingIndicator:
-          description: Indicates whether multiple clearings exist or it is a single booking
-          type: boolean
-          examples:
-          - true
-        settlementIndicator:
-          description: Indicates whether the transaction is a settlement
-          type: boolean
-          examples:
-          - true
-        paymentTransactionType:
-          description: '- 0: Unknown
-
-            - 1: Person to person
-
-            - 2: Account to account
-
-            - 3: Agent cash out
-
-            - 4: Credit card bill payment
-
-            - 5: Business disbursement
-
-            - 6: Government/non-profit disbursement
-
-            - 7: Merchant settlement
-
-            - 8: Online gambling payout
-
-            - 9: Other
-
-            - 10: Business to business transfer
-
-            - 11: Payroll pension disbursements
-
-            - 12: Loyalty payments
-
-            - 13: Gambling payout
-
-            - 14: Cash to card
-
-            - 901: Person to business'
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 999
-          examples:
-          - 1
-        cardAcceptor:
-          $ref: '#/components/schemas/CardAcceptor'
-        merchant:
-          $ref: '#/components/schemas/Merchant'
-        dpan:
-          $ref: '#/components/schemas/Dpan'
-        walletType:
-          $ref: '#/components/schemas/WalletType'
-        threeDsIndicator:
-          $ref: '#/components/schemas/ThreeDsIndicator'
-    PresentmentsSearchRequestFilter:
-      description: Contains the filters for the presentments search. The date range lower and upper bounds are inclusive.
-      type: object
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        walletType:
-          $ref: '#/components/schemas/WalletType'
-        transactionDateRange:
-          $ref: '#/components/schemas/DateRange'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    Location:
-      type: object
-      required:
-      - longitude
-      - latitude
-      properties:
-        longitude:
-          description: Longitude
-          type: number
-          format: double
-          examples:
-          - 8.5426102
-        latitude:
-          description: Latitude
-          type: number
-          format: double
-          examples:
-          - 47.3717597
-    PresentmentsResponse:
-      description: Contains a list of presentments, ordered by transaction date from newest to oldest.
-      type: object
-      properties:
-        presentments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Presentment'
-        totalRecords:
-          description: Total available records.
-          type: integer
-          format: int64
-          examples:
-          - 1021
-    ApprovalCode:
-      description: Series of characters that can be set by the issuer when the authorization takes place.
-      type: string
-      maxLength: 6
-      examples:
-      - '803051'
-    Currency:
-      description: The currency according to ISO 4217.
-      type: string
-      maxLength: 3
-      examples:
-      - CHF
-    Amount:
-      description: Original transaction amount.
-      type: object
-      required:
-      - currency
-      - unscaledAmount
-      - scale
-      properties:
-        currency:
-          $ref: '#/components/schemas/Currency'
-        unscaledAmount:
-          description: Original unscaled transaction amount.
-          type: integer
-          format: int64
-          examples:
-          - 2000
-        scale:
-          description: Scale of transaction amount.
-          type: integer
-          format: int32
-          examples:
-          - 1
-    YearMonth:
-      type: object
-      required:
-      - month
-      - year
-      properties:
-        month:
-          description: The two digit number of the month starting at 01 for January.
-          type: string
-          examples:
-          - '01'
-        year:
-          description: The last two digits of the year.
-          type: string
-          examples:
-          - '21'
-    CardToken:
-      description: Unique card token of a card.
-      type: string
-      pattern: ^CTK-[0-9a-fA-F]{32}$
-      minLength: 36
-      maxLength: 36
-      examples:
-      - CTK-54716A6080B14CF19CEA3C170F85B1DD
-    BankApiError:
-      description: Information about an error on API requests.
-      type: object
-      required:
-      - applicationError
-      - errorCode
-      properties:
-        applicationError:
-          description: The name of the application error.
-          type: string
-          examples:
-          - OPERATION_FAILED
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 5001
-        description:
-          description: A human readable explanation specific to this occurrence of the problem.
-          type: string
-          examples:
-          - The requested operation failed.
-        errors:
-          description: List of error details.
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-        errorToken:
-          description: A generated error token referencing the actual error and logged on the server.
-          type: string
-          examples:
-          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    Address:
-      type: object
-      properties:
-        street:
-          description: Street name and street number
-          type: string
-          minLength: 1
-          examples:
-          - Hardturmstrasse 201
-        postalCode:
-          description: Postal code
-          type: string
-          minLength: 1
-          examples:
-          - '8004'
-        city:
-          description: City name
-          type: string
-          minLength: 1
-          examples:
-          - Zürich
-        countryCode:
-          description: Country code (ISO 3166 alpha-2 or alpha-3)
-          type: string
-          minLength: 2
-          maxLength: 3
-          examples:
-          - CH
-    OriginalCurrencyData:
-      type: object
-      properties:
-        originalTransactionAmounts:
-          type: object
-          properties:
-            originalAmount:
-              $ref: '#/components/schemas/Amount'
-            cashbackAmount:
-              $ref: '#/components/schemas/Amount'
-            surchargeAmount:
-              $ref: '#/components/schemas/Amount'
-            tipAmount:
-              $ref: '#/components/schemas/Amount'
-        exchangeRate:
-          description: Customer exchange rate for the original transaction
-          type: string
-          maxLength: 12
-          examples:
-          - '1.211226'
-        referenceCountryCode:
-          description: Country code of reference country according to ISO 3166
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 999
-          examples:
-          - 756
-    Dpan:
-      description: Number of the digital card.
-      type: string
-      pattern: ^[4,5][0-9]{15}$
-      minLength: 16
-      maxLength: 16
-      examples:
-      - '4234567890123456'
-    DigitalCardAuthorizationsSearchRequestFilter:
-      description: Contains the filters for the authorizations search. The date range lower and upper bounds are inclusive.
-      type: object
-      properties:
-        transactionDateRange:
-          $ref: '#/components/schemas/DateRange'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    SettlementData:
-      type: object
-      description: Data pertaining to the settlement of a presentment.
-      properties:
-        clearingDate:
-          description: Date of the settlement clearing.
-          type: string
-          format: date
-          examples:
-          - '2023-12-31'
-        totalAmountClearingType:
-          $ref: '#/components/schemas/ClearingType'
-        transactionAmountClearingType:
-          $ref: '#/components/schemas/ClearingType'
-        feesProcessingType:
-          $ref: '#/components/schemas/ClearingType'
-        feesType:
-          description: '- 0: None
-
-            - 1: Interchange or service fee: Commission in favor of / at the expense of the issuer bank
-
-            - 2: Compensation to the location bank for transactions with foreign cards'
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 9
-          examples:
-          - 1
-        settlementAmounts:
-          $ref: '#/components/schemas/SettlementAmounts'
-    SettlementAmounts:
-      type: object
-      description: Settlement amounts in card currency.
-      required:
-      - totalAmount
-      properties:
-        totalAmount:
-          $ref: '#/components/schemas/Amount'
-        transactionAmount:
-          $ref: '#/components/schemas/Amount'
-        feesAmount:
-          $ref: '#/components/schemas/Amount'
-        transactionCashbackAmount:
-          $ref: '#/components/schemas/Amount'
-        transactionSurchargeAmount:
-          $ref: '#/components/schemas/Amount'
-        transactionTipAmount:
-          $ref: '#/components/schemas/Amount'
-    ClearingType:
-      description: Payment clearing type.
-      type: string
-      enum:
-      - DEBIT
-      - CREDIT
-    ReversalData:
-      type: object
-      properties:
-        reversalType:
-          description: '- 0: Normal booking
-
-            - 1: Second presentment
-
-            - 2: (Partial) Reversal of presentment
-
-            - 3: Reversal of second presentment
-
-            - 4: Chargeback
-
-            - 5: Reversal of chargeback
-
-            - 7: Partial chargeback
-
-            - 8: Partial second presentment'
-          type: integer
-          format: int32
-          maximum: 9
-          examples:
-          - 7
-        originalTransactionDateTime:
-          description: Datetime of the original transaction
-          type: string
-          format: date-time
-          examples:
-          - '2021-10-03T16:03:09.101+02:00'
-        issuerReference:
-          description: Card issuer reference
-          type: integer
-          format: int32
-          maximum: 999999
-          examples:
-          - 230776
-        chargebackReasonCode:
-          description: Reason for a chargeback transaction
-          type: integer
-          format: int32
-          maximum: 9999
-          examples:
-          - 4555
-    MerchantLogoResponse:
-      type: object
-      properties:
-        merchantLogo:
-          $ref: '#/components/schemas/Image'
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
-    SchemeTransactionId:
-      description: Transaction id assigned by the scheme during the first authorization.
-      type: string
-      maxLength: 36
-      examples:
-      - MDSJ9CC6I1134
-    DateRange:
-      description: Date range lower and upper bounds (both inclusive).
-      type: object
-      properties:
-        from:
-          description: Start date (inclusive).
-          type: string
-          format: date
-          examples:
-          - '2024-01-01'
-        to:
-          description: End date (inclusive).
-          type: string
-          format: date
-          examples:
-          - '2024-12-31'
-    RetrievalReference:
-      description: Reference number assigned by acquirer.
-      type: string
-      maxLength: 12
-      examples:
-      - '120909092386'
-    WalletType:
-      description: '- "A": Apple Pay
-
-        - "F": Fitbit
-
-        - "G": G&D Wallet ErsteBank
-
-        - "I": Raipay
-
-        - "L": LAKS/Disiseq
-
-        - "M": Merchant Tokenization
-
-        - "O": Google Pay
-
-        - "P": PSA-Wallet
-
-        - "R": Garmin/Fitpay
-
-        - "S": Samsung Pay
-
-        - "T": Tappy
-
-        - "W": Fidesmo
-
-        - "X": Xiaomi
-
-        - "Z": Zepp1
-
-        - "?": Unknown Wallet Type'
-      type: string
-      maxLength: 1
-      examples:
-      - A
-    AuthorizationOrigin:
-      description: 'Origin of the authorization.
-
-        - "ATM": ATM over shortcut
-
-        - "ATMD": domestic ATM
-
-        - "BM-I": international ATM
-
-        - "EP2": retail over shortcut
-
-        - "POSD": domestic retail
-
-        - "POSI": international retail'
-      type: string
-      examples:
-      - ATM
-    ThreeDsIndicator:
-      description: '- 0: 3DS not supported by merchant
-
-        - 1: 3DS supported by merchant but not provided by issuer
-
-        - 2: Full 3DS transaction
-
-        - 3: 3DS supported by merchant (Maestro Adv.Reg.Prog)
-
-        - 4: Data only
-
-        - 5: Issuer risk-based decisioning (only for Wallet transactions)
-
-        - 6: Merchant risk-based decisioning
-
-        - 7: Partial shipment or recurring payment
-
-        - 8: ACQ SCA exemption no authentication
-
-        - 9: Not applicable'
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
-      examples:
-      - 1
-    CardAcceptor:
-      description: The card acceptor, e.g. merchant, as assigned by the acquirer.
-      type: object
-      required:
-      - id
-      - merchantCategoryCode
-      properties:
-        id:
-          description: Identification of the card acceptor.
-          type: string
-          minLength: 1
-          maxLength: 15
-          examples:
-          - '87040'
-        name:
-          description: Name.
-          type: string
-          examples:
-          - Meier Gmbh
-        streetName:
-          description: Location street name.
-          type: string
-        postalCode:
-          description: Location postal code.
-          type: string
-        city:
-          description: Location city.
-          type: string
-        regionCode:
-          description: Location region code.
-          type: string
-        countryCode:
-          description: Location country code.
-          type: string
-        merchantCategoryCode:
-          description: Category code of the merchant.
-          type: string
-    Image:
-      description: Image used for the merchant logo.
-      required:
-      - image
-      - version
-      - mimeType
-      type: object
-      properties:
-        image:
-          description: Base64-encoded image
-          type: string
-          format: byte
-          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-          examples:
-          - 2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT=
-        width:
-          description: Width of the image in number of pixels.
-          type: integer
-          examples:
-          - 1000
-        height:
-          description: Height of the image in number of pixels.
-          type: integer
-          examples:
-          - 600
-        version:
-          description: Version of the current image. The value changes when image is changed. This value will be compared with value from 'If-None-Match' to find out if the image is in sync with the client.
-          type: string
-          examples:
-          - be5d87a6-1c76-49d7-9a7f-75fa411b7e96
-        mimeType:
-          description: MIME type of the current image.
-          type: string
-          examples:
-          - image/svg+xml
-    AuthorizationsSearchRequestFilter:
-      description: Contains the filters for the authorizations search. The date range lower and upper bounds are inclusive.
-      type: object
-      properties:
-        cardTokenEntension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        walletType:
-          $ref: '#/components/schemas/WalletType'
-        onlyDigitalCardBased:
-          description: Determines if only digital card based authorizations should be returned.
-          type: boolean
-          default: true
-        transactionDateRange:
-          $ref: '#/components/schemas/DateRange'
-        paging:
-          $ref: '#/components/schemas/Paging'
     Authorization:
       description: Authorization notification.
       type: object
@@ -1496,6 +749,129 @@ components:
         isoResponseCode:
           description: Response code sent to the scheme in the authorization response.
           type: string
+    DateRange:
+      description: Date range lower and upper bounds (both inclusive).
+      type: object
+      properties:
+        from:
+          description: Start date (inclusive).
+          type: string
+          format: date
+          examples:
+          - '2024-01-01'
+        to:
+          description: End date (inclusive).
+          type: string
+          format: date
+          examples:
+          - '2024-12-31'
+    SettlementData:
+      type: object
+      description: Data pertaining to the settlement of a presentment.
+      properties:
+        clearingDate:
+          description: Date of the settlement clearing.
+          type: string
+          format: date
+          examples:
+          - '2023-12-31'
+        totalAmountClearingType:
+          $ref: '#/components/schemas/ClearingType'
+        transactionAmountClearingType:
+          $ref: '#/components/schemas/ClearingType'
+        feesProcessingType:
+          $ref: '#/components/schemas/ClearingType'
+        feesType:
+          description: '- 0: None
+
+            - 1: Interchange or service fee: Commission in favor of / at the expense of the issuer bank
+
+            - 2: Compensation to the location bank for transactions with foreign cards'
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 9
+          examples:
+          - 1
+        settlementAmounts:
+          $ref: '#/components/schemas/SettlementAmounts'
+    ClearingType:
+      description: Payment clearing type.
+      type: string
+      enum:
+      - DEBIT
+      - CREDIT
+    Paging:
+      description: Contains paging properties.
+      type: object
+      properties:
+        pageNumber:
+          description: Page number for paging starting with zero.
+          type: integer
+          format: int32
+          default: 0
+          examples:
+          - 0
+        pageSize:
+          description: Limitation of the page size.
+          type: integer
+          format: int32
+          minimum: 20
+          maximum: 100
+          default: 100
+          examples:
+          - 50
+    Dpan:
+      description: Number of the digital card.
+      type: string
+      pattern: ^[4,5][0-9]{15}$
+      minLength: 16
+      maxLength: 16
+      examples:
+      - '4234567890123456'
+    DigitalCardAuthorizationsSearchRequestFilter:
+      description: Contains the filters for the authorizations search. The date range lower and upper bounds are inclusive.
+      type: object
+      properties:
+        transactionDateRange:
+          $ref: '#/components/schemas/DateRange'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    RetrievalReference:
+      description: Reference number assigned by acquirer.
+      type: string
+      maxLength: 12
+      examples:
+      - '120909092386'
+    PresentmentsResponse:
+      description: Contains a list of presentments, ordered by transaction date from newest to oldest.
+      type: object
+      properties:
+        presentments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Presentment'
+        totalRecords:
+          description: Total available records.
+          type: integer
+          format: int64
+          examples:
+          - 1021
+    Contact:
+      type: object
+      properties:
+        website:
+          description: Website
+          type: string
+          minLength: 1
+          examples:
+          - www.myshop.ch
+        phoneNumber:
+          description: Phone number
+          type: string
+          minLength: 1
+          examples:
+          - '+41795625655'
     CardTokenExtension:
       description: Extension to card token to identify a card.
       type: object
@@ -1507,6 +883,150 @@ components:
           $ref: '#/components/schemas/YearMonth'
         cardSequenceNumber:
           $ref: '#/components/schemas/CardSequenceNumber'
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+    PresentmentsSearchRequestFilter:
+      description: Contains the filters for the presentments search. The date range lower and upper bounds are inclusive.
+      type: object
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        walletType:
+          $ref: '#/components/schemas/WalletType'
+        transactionDateRange:
+          $ref: '#/components/schemas/DateRange'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    Location:
+      type: object
+      required:
+      - longitude
+      - latitude
+      properties:
+        longitude:
+          description: Longitude
+          type: number
+          format: double
+          examples:
+          - 8.5426102
+        latitude:
+          description: Latitude
+          type: number
+          format: double
+          examples:
+          - 47.3717597
+    Amount:
+      description: Original transaction amount.
+      type: object
+      required:
+      - currency
+      - unscaledAmount
+      - scale
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        unscaledAmount:
+          description: Original unscaled transaction amount.
+          type: integer
+          format: int64
+          examples:
+          - 2000
+        scale:
+          description: Scale of transaction amount.
+          type: integer
+          format: int32
+          examples:
+          - 1
+    Address:
+      type: object
+      properties:
+        street:
+          description: Street name and street number
+          type: string
+          minLength: 1
+          examples:
+          - Hardturmstrasse 201
+        postalCode:
+          description: Postal code
+          type: string
+          minLength: 1
+          examples:
+          - '8004'
+        city:
+          description: City name
+          type: string
+          minLength: 1
+          examples:
+          - Zürich
+        countryCode:
+          description: Country code (ISO 3166 alpha-2 or alpha-3)
+          type: string
+          minLength: 2
+          maxLength: 3
+          examples:
+          - CH
+    SchemeTransactionId:
+      description: Transaction id assigned by the scheme during the first authorization.
+      type: string
+      maxLength: 36
+      examples:
+      - MDSJ9CC6I1134
+    AuthorizationsSearchRequestFilter:
+      description: Contains the filters for the authorizations search. The date range lower and upper bounds are inclusive.
+      type: object
+      properties:
+        cardTokenEntension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        walletType:
+          $ref: '#/components/schemas/WalletType'
+        onlyDigitalCardBased:
+          description: Determines if only digital card based authorizations should be returned.
+          type: boolean
+          default: true
+        transactionDateRange:
+          $ref: '#/components/schemas/DateRange'
+        paging:
+          $ref: '#/components/schemas/Paging'
     Merchant:
       description: The enriched merchant data, only delivered if the issuer is enabled for enriched merchant data.
       type: object
@@ -1542,31 +1062,108 @@ components:
           $ref: '#/components/schemas/Location'
         contact:
           $ref: '#/components/schemas/Contact'
-    Paging:
-      description: Contains paging properties.
+    WalletType:
+      description: '- "A": Apple Pay
+
+        - "F": Fitbit
+
+        - "G": G&D Wallet ErsteBank
+
+        - "I": Raipay
+
+        - "L": LAKS/Disiseq
+
+        - "M": Merchant Tokenization
+
+        - "O": Google Pay
+
+        - "P": PSA-Wallet
+
+        - "R": Garmin/Fitpay
+
+        - "S": Samsung Pay
+
+        - "T": Tappy
+
+        - "W": Fidesmo
+
+        - "X": Xiaomi
+
+        - "Z": Zepp1
+
+        - "?": Unknown Wallet Type'
+      type: string
+      maxLength: 1
+      examples:
+      - A
+    ApprovalCode:
+      description: Series of characters that can be set by the issuer when the authorization takes place.
+      type: string
+      maxLength: 6
+      examples:
+      - '803051'
+    CardSequenceNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
+    Image:
+      description: Image used for the merchant logo.
+      required:
+      - image
+      - version
+      - mimeType
       type: object
       properties:
-        pageNumber:
-          description: Page number for paging starting with zero.
-          type: integer
-          format: int32
-          default: 0
+        image:
+          description: Base64-encoded image
+          type: string
+          format: byte
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
           examples:
-          - 0
-        pageSize:
-          description: Limitation of the page size.
+          - 2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT=
+        width:
+          description: Width of the image in number of pixels.
           type: integer
-          format: int32
-          minimum: 20
-          maximum: 100
-          default: 100
           examples:
-          - 50
-    Presentment_2:
+          - 1000
+        height:
+          description: Height of the image in number of pixels.
+          type: integer
+          examples:
+          - 600
+        version:
+          description: Version of the current image. The value changes when image is changed. This value will be compared with value from 'If-None-Match' to find out if the image is in sync with the client.
+          type: string
+          examples:
+          - be5d87a6-1c76-49d7-9a7f-75fa411b7e96
+        mimeType:
+          description: MIME type of the current image.
+          type: string
+          examples:
+          - image/svg+xml
+    AuthorizationsResponse:
+      description: Contains a list of authorizations, ordered by transaction date from newest to oldest.
+      type: object
+      properties:
+        authorizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorization'
+        totalRecords:
+          description: Total available records.
+          type: integer
+          format: int64
+          examples:
+          - 1021
+    Presentment:
       description: Contains the data of a presentment.
       type: object
       required:
-      - shortCardId
+      - cardToken
       - settlementData
       properties:
         transactionType:
@@ -1611,12 +1208,10 @@ components:
           format: date-time
           examples:
           - '2021-10-03T16:03:09.101+02:00'
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-        cardSeqNumber:
-          $ref: '#/components/schemas/CardSeqNumber'
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
+        cardToken:
+          $ref: '#/components/schemas/CardToken'
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
         settlementData:
           $ref: '#/components/schemas/SettlementData'
         transactionDataDetails:
@@ -1635,38 +1230,338 @@ components:
           type: string
           examples:
           - 6f4a6efe-fd8e-411a-8f23-adbf4bc4a6b6
-    PresentmentsSearchRequestFilter_2:
-      description: Contains the filters for the presentments search. The date range lower and upper bounds are inclusive.
+    SettlementAmounts:
+      type: object
+      description: Settlement amounts in card currency.
+      required:
+      - totalAmount
+      properties:
+        totalAmount:
+          $ref: '#/components/schemas/Amount'
+        transactionAmount:
+          $ref: '#/components/schemas/Amount'
+        feesAmount:
+          $ref: '#/components/schemas/Amount'
+        transactionCashbackAmount:
+          $ref: '#/components/schemas/Amount'
+        transactionSurchargeAmount:
+          $ref: '#/components/schemas/Amount'
+        transactionTipAmount:
+          $ref: '#/components/schemas/Amount'
+    ErrorDetail:
       type: object
       required:
-      - shortCardId
+      - errorCode
       properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-        cardSeqNumber:
-          $ref: '#/components/schemas/CardSeqNumber'
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    CardAcceptor:
+      description: The card acceptor, e.g. merchant, as assigned by the acquirer.
+      type: object
+      required:
+      - id
+      - merchantCategoryCode
+      properties:
+        id:
+          description: Identification of the card acceptor.
+          type: string
+          minLength: 1
+          maxLength: 15
+          examples:
+          - '87040'
+        name:
+          description: Name.
+          type: string
+          examples:
+          - Meier Gmbh
+        streetName:
+          description: Location street name.
+          type: string
+        postalCode:
+          description: Location postal code.
+          type: string
+        city:
+          description: Location city.
+          type: string
+        regionCode:
+          description: Location region code.
+          type: string
+        countryCode:
+          description: Location country code.
+          type: string
+        merchantCategoryCode:
+          description: Category code of the merchant.
+          type: string
+    ReversalData:
+      type: object
+      properties:
+        reversalType:
+          description: '- 0: Normal booking
+
+            - 1: Second presentment
+
+            - 2: (Partial) Reversal of presentment
+
+            - 3: Reversal of second presentment
+
+            - 4: Chargeback
+
+            - 5: Reversal of chargeback
+
+            - 7: Partial chargeback
+
+            - 8: Partial second presentment'
+          type: integer
+          format: int32
+          maximum: 9
+          examples:
+          - 7
+        originalTransactionDateTime:
+          description: Datetime of the original transaction
+          type: string
+          format: date-time
+          examples:
+          - '2021-10-03T16:03:09.101+02:00'
+        issuerReference:
+          description: Card issuer reference
+          type: integer
+          format: int32
+          maximum: 999999
+          examples:
+          - 230776
+        chargebackReasonCode:
+          description: Reason for a chargeback transaction
+          type: integer
+          format: int32
+          maximum: 9999
+          examples:
+          - 4555
+    ThreeDsIndicator:
+      description: '- 0: 3DS not supported by merchant
+
+        - 1: 3DS supported by merchant but not provided by issuer
+
+        - 2: Full 3DS transaction
+
+        - 3: 3DS supported by merchant (Maestro Adv.Reg.Prog)
+
+        - 4: Data only
+
+        - 5: Issuer risk-based decisioning (only for Wallet transactions)
+
+        - 6: Merchant risk-based decisioning
+
+        - 7: Partial shipment or recurring payment
+
+        - 8: ACQ SCA exemption no authentication
+
+        - 9: Not applicable'
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 1
+    MerchantLogoResponse:
+      type: object
+      properties:
+        merchantLogo:
+          $ref: '#/components/schemas/Image'
+    OriginalCurrencyData:
+      type: object
+      properties:
+        originalTransactionAmounts:
+          type: object
+          properties:
+            originalAmount:
+              $ref: '#/components/schemas/Amount'
+            cashbackAmount:
+              $ref: '#/components/schemas/Amount'
+            surchargeAmount:
+              $ref: '#/components/schemas/Amount'
+            tipAmount:
+              $ref: '#/components/schemas/Amount'
+        exchangeRate:
+          description: Customer exchange rate for the original transaction
+          type: string
+          maxLength: 12
+          examples:
+          - '1.211226'
+        referenceCountryCode:
+          description: Country code of reference country according to ISO 3166
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 999
+          examples:
+          - 756
+    AuthorizationOrigin:
+      description: 'Origin of the authorization.
+
+        - "ATM": ATM over shortcut
+
+        - "ATMD": domestic ATM
+
+        - "BM-I": international ATM
+
+        - "EP2": retail over shortcut
+
+        - "POSD": domestic retail
+
+        - "POSI": international retail'
+      type: string
+      examples:
+      - ATM
+    Currency:
+      description: The currency according to ISO 4217.
+      type: string
+      maxLength: 3
+      examples:
+      - CHF
+    TransactionDataDetails:
+      type: object
+      properties:
+        retrievalReference:
+          $ref: '#/components/schemas/RetrievalReference'
+        schemeTransactionId:
+          $ref: '#/components/schemas/SchemeTransactionId'
+        approvalCode:
+          $ref: '#/components/schemas/ApprovalCode'
+        retrievalSituation:
+          description: 'Customer and location transaction context.
+
+            - "SIS": Swiss in Switzerland / Liechtensteiner in Liechtenstein
+
+            - "AIS": Foreigner in Switzerland / Foreigner in Liechtenstein
+
+            - "SIA": Swiss abroad / Liechtensteiner abroad'
+          type: string
+          maxLength: 3
+        transactionCapture:
+          description: 'Information about the place of authorization and the conclusion of the transaction.
+
+            - "ONL": Online (authorized by SIX)
+
+            - "OFF": Offline (authorized at the terminal)
+
+            - "PIA": Authorized via PIA link at the issuer
+
+            - "SAF": Store and forward
+
+            - "VIS": Authorized via Visa network at the issuer
+
+            - "SIE": Stand-In authorized through MCI
+
+            - "SIP": Stand-In authorized through SIX
+
+            - "MCI": Authorized via MCI net authorized by issuer'
+          type: string
+          maxLength: 3
+        captureMethod:
+          description: "Method by which the card was captured.\n- \"MAG\": Magnetic stripe\n- \"EMV\": Chip\n- \"EFB\": EMV fallback\n- \"MAN\": Manual entering \n- \"ECO\": Electronic acquisition (e-commerce)\n- \"CLS\": Contactless\n- \"QRC\": QR code reader\n- \"COF\": Credential on file"
+          type: string
+          maxLength: 3
+        cardDataSource:
+          description: 'Source of the card data
+
+            - "CPR": Cardholder present
+
+            - "CNP": Cardholder not present or unknown
+
+            - "MOR": Order via mail
+
+            - "TOR": Order via telephone
+
+            - "MTO": Order via mail or telephone
+
+            - "REC": Recurring transaction
+
+            - "ECO": E-commerce'
+          type: string
+          maxLength: 3
+        multipleClearingIndicator:
+          description: Indicates whether multiple clearings exist or it is a single booking
+          type: boolean
+          examples:
+          - true
+        settlementIndicator:
+          description: Indicates whether the transaction is a settlement
+          type: boolean
+          examples:
+          - true
+        paymentTransactionType:
+          description: '- 0: Unknown
+
+            - 1: Person to person
+
+            - 2: Account to account
+
+            - 3: Agent cash out
+
+            - 4: Credit card bill payment
+
+            - 5: Business disbursement
+
+            - 6: Government/non-profit disbursement
+
+            - 7: Merchant settlement
+
+            - 8: Online gambling payout
+
+            - 9: Other
+
+            - 10: Business to business transfer
+
+            - 11: Payroll pension disbursements
+
+            - 12: Loyalty payments
+
+            - 13: Gambling payout
+
+            - 14: Cash to card
+
+            - 901: Person to business'
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999
+          examples:
+          - 1
+        cardAcceptor:
+          $ref: '#/components/schemas/CardAcceptor'
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+        dpan:
+          $ref: '#/components/schemas/Dpan'
         walletType:
           $ref: '#/components/schemas/WalletType'
-        transactionDateRange:
-          $ref: '#/components/schemas/DateRange'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    ShortCardId:
-      description: Complex object representing a card consisting of bank clearing number, card number and card type.
+        threeDsIndicator:
+          $ref: '#/components/schemas/ThreeDsIndicator'
+    YearMonth:
       type: object
       required:
-      - bankClearingNumber
-      - cardNumber
-      - cardType
+      - month
+      - year
       properties:
-        bankClearingNumber:
-          $ref: '#/components/schemas/BankClearingNumber'
-        cardNumber:
-          $ref: '#/components/schemas/CardNumber'
-        cardType:
-          $ref: '#/components/schemas/CardType'
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
     CardSeqNumber:
       description: Sequence number of the card.
       type: integer
@@ -1675,33 +1570,6 @@ components:
       maximum: 9
       examples:
       - 2
-    Dpan_2:
-      description: Number of the digital card.
-      type: string
-      minLength: 16
-      maxLength: 16
-      examples:
-      - '1234567890123456'
-    CardType:
-      description: 'A single digit that distinguishes the card types of the schemes.
-
-        - 1: Debit mastercard
-
-        - 3: Visa debit
-
-        - 6: Bank card'
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 6
-    BankClearingNumber:
-      description: Unique number used to identify each bank agency or branch in the bank directory.
-      type: integer
-      format: int32
-      minimum: 100
-      maximum: 99999
-      examples:
-      - 50000
     CardNumber:
       description: Card number of the card.
       type: integer
@@ -1710,48 +1578,6 @@ components:
       maximum: 99999999
       examples:
       - 12345678
-    CardId:
-      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
-      type: object
-      required:
-      - bankClearingNumber
-      - cardNumber
-      - cardType
-      - cardSeqNumber
-      - cardExpiry
-      properties:
-        bankClearingNumber:
-          $ref: '#/components/schemas/BankClearingNumber'
-        cardNumber:
-          $ref: '#/components/schemas/CardNumber'
-        cardType:
-          $ref: '#/components/schemas/CardType'
-        cardSeqNumber:
-          $ref: '#/components/schemas/CardSeqNumber'
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
-    AuthorizationsSearchRequestFilter_2:
-      description: Contains the filters for the authorizations search. The date range lower and upper bounds are inclusive.
-      type: object
-      required:
-      - shortCardId
-      properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-        cardSeqNumber:
-          $ref: '#/components/schemas/CardSeqNumber'
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
-        walletType:
-          $ref: '#/components/schemas/WalletType'
-        onlyDigitalCardBased:
-          description: Determines if only digital card based authorizations should be returned.
-          type: boolean
-          default: true
-        transactionDateRange:
-          $ref: '#/components/schemas/DateRange'
-        paging:
-          $ref: '#/components/schemas/Paging'
     Authorization_2:
       description: Authorization notification.
       type: object
@@ -2046,7 +1872,187 @@ components:
         isoResponseCode:
           description: Response code sent to the scheme in the authorization response.
           type: string
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
+    Dpan_2:
+      description: Number of the digital card.
+      type: string
+      minLength: 16
+      maxLength: 16
+      examples:
+      - '1234567890123456'
+    PresentmentsSearchRequestFilter_2:
+      description: Contains the filters for the presentments search. The date range lower and upper bounds are inclusive.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+        cardSeqNumber:
+          $ref: '#/components/schemas/CardSeqNumber'
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        walletType:
+          $ref: '#/components/schemas/WalletType'
+        transactionDateRange:
+          $ref: '#/components/schemas/DateRange'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    AuthorizationsSearchRequestFilter_2:
+      description: Contains the filters for the authorizations search. The date range lower and upper bounds are inclusive.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+        cardSeqNumber:
+          $ref: '#/components/schemas/CardSeqNumber'
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        walletType:
+          $ref: '#/components/schemas/WalletType'
+        onlyDigitalCardBased:
+          description: Determines if only digital card based authorizations should be returned.
+          type: boolean
+          default: true
+        transactionDateRange:
+          $ref: '#/components/schemas/DateRange'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    BankClearingNumber:
+      description: Unique number used to identify each bank agency or branch in the bank directory.
+      type: integer
+      format: int32
+      minimum: 100
+      maximum: 99999
+      examples:
+      - 50000
+    Presentment_2:
+      description: Contains the data of a presentment.
+      type: object
+      required:
+      - shortCardId
+      - settlementData
+      properties:
+        transactionType:
+          description: '- 100: Cash withdrawal
+
+            - 101: Purchase of goods and services
+
+            - 102: Refund to the cardholder
+
+            - 103: ATM operator refund
+
+            - 104: Cardholder change
+
+            - 109: Deposit
+
+            - 117: P2P payment charge sender
+
+            - 118: P2P payment credit recipient
+
+            - 132: Mail order
+
+            - 133: Phone order
+
+            - 136: Cash advance
+
+            - 158: Purchase with Cashback (PwCB)
+
+            - 189: Payment credit / Receive
+
+            - 200: DCC cash withdrawal
+
+            - 203: ATM operator refund DCC'
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 999
+          examples:
+          - 101
+        transactionDateTime:
+          description: Date and time of the transaction.
+          type: string
+          format: date-time
+          examples:
+          - '2021-10-03T16:03:09.101+02:00'
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+        cardSeqNumber:
+          $ref: '#/components/schemas/CardSeqNumber'
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        settlementData:
+          $ref: '#/components/schemas/SettlementData'
+        transactionDataDetails:
+          $ref: '#/components/schemas/TransactionDataDetails'
+        originalCurrencyData:
+          $ref: '#/components/schemas/OriginalCurrencyData'
+        reversalData:
+          $ref: '#/components/schemas/ReversalData'
+        matchFlag:
+          description: Indicates if the presentment was successfully matched with a transaction authorization.
+          type: boolean
+          examples:
+          - true
+        authorizationReference:
+          description: The authorization which is referenced by this presentment. This is equal to the TransactionId of the referenced authorization returned by the authorization endpoint.
+          type: string
+          examples:
+          - 6f4a6efe-fd8e-411a-8f23-adbf4bc4a6b6
+    CardId:
+      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
+      type: object
+      required:
+      - bankClearingNumber
+      - cardNumber
+      - cardType
+      - cardSeqNumber
+      - cardExpiry
+      properties:
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+        cardSeqNumber:
+          $ref: '#/components/schemas/CardSeqNumber'
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+    ShortCardId:
+      description: Complex object representing a card consisting of bank clearing number, card number and card type.
+      type: object
+      required:
+      - bankClearingNumber
+      - cardNumber
+      - cardType
+      properties:
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
   parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
     IssuerTraceIdHeader:
       in: header
       name: issuer-trace-id
@@ -2055,12 +2061,6 @@ components:
         type: string
         minLength: 1
         maxLength: 26
-    RequestIdHeader:
-      in: header
-      name: x-request-id
-      description: A unique identifier for a request and response pair.
-      schema:
-        type: string
     ImageVersionHeader:
       description: Version of the image currently stored in the client.
       name: If-None-Match

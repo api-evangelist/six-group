@@ -1971,100 +1971,179 @@ paths:
       description: TEST - P2P
 components:
   schemas:
-    ParentCardReference:
-      description: Reference to a card from which settings can be inherited.
-      type: object
-      required:
-      - cardToken
-      - cardTokenExtension
-      - shareLimits
-      - deleteAfterFirstUse
-      - takeoverPin
-      - takeoverContactlessActivationStatus
-      - takeoverFeatureToggles
-      - takeoverBillingUpdater
-      properties:
-        cardToken:
-          $ref: '#/components/schemas/CardToken'
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        shareLimits:
-          description: Indicates if the limits should be shared with the parent card.
-          type: boolean
-        deleteAfterFirstUse:
-          description: Indicates if the parent card shall be deleted after first use of new card.
-          type: boolean
-        takeoverPin:
-          description: Indicates if the PIN shall be taken over from the parent card.
-          type: boolean
-        takeoverContactlessActivationStatus:
-          description: Indicates if the contactless activation status shall be taken over from the parent card.
-          type: boolean
-        takeoverFeatureToggles:
-          description: Indicates if the feature toggles shall be taken over from the parent card.
-          type: boolean
-        takeoverBillingUpdater:
-          type: boolean
-          description: Indicates if the new card shall be linked to the account of the parent card within the Mastercard automated billing updater (ABU) resp. the VISA Account Updater (VAU).
-    PinDatamailerOrderRequest:
-      description: Details of the PIN datamailer order request. The referenced card must be a physical card.
-      type: object
-      required:
-      - cardTokenExtension
-      - deliveryDestination
-      - expressCode
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        deliveryDestination:
-          description: Delivery destination of PIN.
-          $ref: '#/components/schemas/DatamailerDeliveryDestination'
-        expressCode:
-          description: The quickness of the PIN delivery.
-          $ref: '#/components/schemas/DatamailerExpressCode'
-        deliveryInformation:
-          description: The delivery information must be set if the PIN is delivered to the cardholder.
-          $ref: '#/components/schemas/DeliveryInformation'
-        mailerText:
-          description: Selects the individual text container for printing onto the datamailer. Can be set if the PIN is delivered to the cardholder.
-          $ref: '#/components/schemas/MailerTextCode'
-    ThreeDsInformation:
-      description: Contains 3DS data provided by Worldline.
-      type: object
-      required:
-      - paymentAuthenticationMethods
-      properties:
-        paymentAuthenticationMethods:
-          $ref: '#/components/schemas/PaymentAuthenticationMethods'
-        mobilePhoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-    CardMutationRequest:
-      description: Fields to modify. Fields that are set will be modified. Others will be ignored.
+    RestrictedCountries:
+      description: 'A list of countries from which authorizations will be declined. Country code values are expected in ISO 3166-1 alpha-2 format.
+
+
+        The option to define a restriction for individual countries is only available on request; please contact SIX if you are interested.'
+      type: array
+      minItems: 1
+      maxItems: 300
+      items:
+        $ref: '#/components/schemas/Country'
+    CardDetailsRequest:
+      description: Contains identifiers of the card for which to return the details.
       type: object
       required:
       - cardTokenExtension
       properties:
         cardTokenExtension:
           $ref: '#/components/schemas/CardTokenExtension'
-        bccData:
-          $ref: '#/components/schemas/CardMutationBccData'
-        fraudConfiguration:
-          $ref: '#/components/schemas/CardMutationFraudConfiguration'
-        cardApplication:
-          $ref: '#/components/schemas/CardMutationCardApplication'
-        contactlessActivationStatus:
-          $ref: '#/components/schemas/CardMutationContactlessActivationStatus'
-        featureToggles:
-          $ref: '#/components/schemas/CardMutationFeatureToggles'
-    CardBlockOriginViaBank:
-      description: Initiator and channel of the card blocking when the card is blocked via the bank.
+    CardBlockInformation:
+      description: Contains information about blocked cards.
+      type: object
+      properties:
+        blockReason:
+          $ref: '#/components/schemas/CardBlockReason'
+        blockOrigin:
+          $ref: '#/components/schemas/CardBlockOrigin'
+        blockInterface:
+          $ref: '#/components/schemas/CardBlockInterface'
+        blockedCardReplacement:
+          $ref: '#/components/schemas/BlockedCardReplacement'
+        unblockCardByCardholderAllowed:
+          description: 'Defines if the cardholder is allowed to unblock the card.
+
+            '
+          type: boolean
+          examples:
+          - true
+    DeliveryInformation:
+      description: Delivery address of card, PIN and OTRC.
+      type: object
+      required:
+      - address
+      - country
+      properties:
+        address:
+          $ref: '#/components/schemas/UnstructuredAddress'
+        country:
+          $ref: '#/components/schemas/Country'
+        salutationText:
+          description: Salutation text for the delivery.
+          type: string
+          maxLength: 50
+    SubCardType:
+      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
+      type: string
+      minLength: 2
+      maxLength: 2
+      examples:
+      - A1
+    CardLine:
+      description: This line will be printed on the front side of the card. At least the first card line is required for a physical card order.
+      type: string
+    CardBlockInterface:
+      description: The interface used for blocking the card.
       type: string
       enum:
-      - ONLINE_BANKING_BY_CARDHOLDER
-      - MOBILE_BANKING_BY_CARDHOLDER
-      - THREE_DS_CARDMANAGEMENT_APP_BY_CARDHOLDER
-      - BACKEND_OF_BANK_BY_BANK
-      - BACKEND_OF_BANK_BY_CARDHOLDER
+      - DEBIX_API
+      - DEBIX_APP
+      - DEBIX_PORTAL
+      - DEBIT_ONLINE_WEB
+      - DEBIT_ONLINE_XML
+      - BLOCKING_APPLICATION_GENERATED_BY_SIX
+    CardInstanceToken:
+      description: Unique card instance token of the card.
+      type: string
+      pattern: ^CITK-[0-9a-fA-F]{32}$
+      minLength: 37
+      maxLength: 37
+      examples:
+      - CITK-1744BC4B31C945A1942F4CCF65EC8D99
+    CardOrderReversalRequest:
+      type: object
+      required:
+      - cardTokenExtension
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+    FeatureToggles:
+      description: Contains the values of the feature toggles for the card. In card order requests, the contactlessActivationStatus will be ignored. Will be ignored in card order requests for bank cards.
+      type: object
+      required:
+      - eCommerceAllowed
+      - trxOnlyAsChipAndPin
+      - magStripePaymentAllowed
+      - automaticBilling
+      - purchaseWithCashBackAllowed
+      - merchantInitiatedTrxAllowed
+      - atmAllowed
+      - posAllowed
+      - motoAllowed
+      - bypassGeoblocking
+      - moneySendReceiveAllowance
+      - reservationAllowed
+      - transactionPushEnabled
+      - gamblingAndBettingAllowance
+      properties:
+        eCommerceAllowed:
+          description: Indicates if the use of ecommerce is allowed.
+          type: boolean
+        trxOnlyAsChipAndPin:
+          description: Indicates if cvm is active, i.e. card can do transaction only as Chip and PIN.
+          type: boolean
+        magStripePaymentAllowed:
+          description: Defines if magnetic stripe payments are allowed.
+          type: boolean
+        automaticBilling:
+          description: Indicates if the cardholder participates to the automatic billing update.
+          type: boolean
+        purchaseWithCashBackAllowed:
+          description: Defines if purchase with cash back is allowed.
+          type: boolean
+        blockedMerchantCategoryCodes:
+          description: List of blocked merchant category codes.
+          type: array
+          minItems: 1
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/MerchantCategoryCode'
+        merchantInitiatedTrxAllowed:
+          description: Indicates if merchant initiated transactions - such as Recurring, Installment, Unscheduled - are allowed.
+          type: boolean
+        atmAllowed:
+          description: Defines if withdrawals are allowed at ATMs.
+          type: boolean
+        posAllowed:
+          description: Defines if payments are allowed at POS terminals.
+          type: boolean
+        motoAllowed:
+          description: Defines if mail or phone orders are allowed.
+          type: boolean
+        bypassGeoblocking:
+          description: Defines if geo blocking is ignored for the card.
+          type: boolean
+        moneySendReceiveAllowance:
+          $ref: '#/components/schemas/MoneySendReceiveAllowance'
+        reservationAllowed:
+          description: Defines if reservation transactions are allowed.
+          type: boolean
+        transactionPushEnabled:
+          description: Defines if transactions are pushed to debiX.
+          type: boolean
+        gamblingAndBettingAllowance:
+          $ref: '#/components/schemas/GamblingAndBettingAllowance'
+        contactlessActivationStatus:
+          $ref: '#/components/schemas/ContactlessActivationStatus'
+    Language:
+      description: Correspondence language.
+      type: string
+      enum:
+      - DE
+      - FR
+      - IT
+      - EN
+    BlockedCardReplacement:
+      description: Indicates the need of a card replacement when the card has been blocked. This is only an indicator and does not trigger the actual card replacement.
+      type: string
+      enum:
+      - NO_REPLACEMENT
+      - CARD
+      - CARD_WITH_PIN_MAILER
+      - CARD_WITH_PIN_AND_OTRC_MAILER
+      - CARD_WITH_OTRC_MAILER
+      - CARD_WITH_UNKNOWN_MAILER
     OnlineLimits:
       description: The monthly and daily retail and cash transactions limits.
       type: object
@@ -2107,408 +2186,40 @@ components:
       type: string
       minLength: 1
       maxLength: 60
-    ProducerCode:
-      description: Defines the producer of the ordered card. Must only be set for a physical card order.
+    CardBlockReason:
+      description: The reason why the card was blocked.
       type: string
       enum:
-      - THALES
-      - EXCEET_GERMANY
-      - EXCEET_SWITZERLAND
-      - NID
-    RestrictedRegions:
-      description: A list of regions from which authorizations will be declined.
-      type: array
-      minItems: 1
-      maxItems: 10
-      items:
-        $ref: '#/components/schemas/Region'
-    StartSetPinByCardIdRequest:
-      type: string
-      description: "JSON Web Token signed by the issuer to get an ephemeral public key from debiX for the given cardId. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
-      examples:
-      - see "#/components/schemas/StartSetPinByCardIdRequestJwsPayload"
-    UnstructuredAddress:
-      description: Unstructured address of simple address lines.
-      type: array
-      minItems: 1
-      maxItems: 6
-      items:
-        type: string
-        maxLength: 35
-      examples:
-      - - Peter Schweizer
-        - Bahnhofstrasse 1
-        - 8000 Zürich
-    CardToken:
-      description: Unique card token of a card.
-      type: string
-      pattern: ^CTK-[0-9a-fA-F]{32}$
-      minLength: 36
-      maxLength: 36
-      examples:
-      - CTK-54716A6080B14CF19CEA3C170F85B1DD
-    ContactlessActivationMode:
-      description: Describes the contactless activation mode used during card ordering.
-      type: string
-      enum:
-      - ACCORDING_TO_EMV
-      - IMMEDIATE
-      - AUTOMATIC
-      - DEFERRED
-    DatamailerDeliveryDestination:
-      description: Specifies the delivery destination for OTRC, PIN, and card datamailer.
-      type: string
-      enum:
-      - DELIVER_TO_BANK
-      - DELIVER_TO_CARDHOLDER
-    AccountNumber:
-      description: Unique number identifying a bank account.
-      type: string
-      minLength: 1
-      maxLength: 16
-      examples:
-      - AB-4567890123456
-    Iban:
-      description: IBAN of the bank account for which the card was issued.
-      type: string
-      minLength: 21
-      maxLength: 21
-      examples:
-      - CH3456789012345678901
-    GetPinResponse:
-      type: string
-      description: "JSON Web Token signed by debiX containing the encrypted PIN and an ephemeral public key to complete the Diffie-Hellman key exchange. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519.\n* The JOSE header contains a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
-      examples:
-      - see encrypted object at "#/components/schemas/GetPinResponseJwsPayload".
-    CardOrderPinData:
-      type: string
-      description: 'JSON Web Token signed by the issuer to set the PIN for the ordered card.
-
-        * The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.
-
-        * The JOSE header must contain a ''x5t#S256'' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)
-
-        '
-      examples:
-      - see '#/components/schemas/CardOrderPinDataJwsPayload'
-    CardOrderRequest:
-      description: Configuration specifying the new card to be ordered.
-      type: object
-      required:
-      - cardOrderData
-      properties:
-        cardOrderData:
-          $ref: '#/components/schemas/CardOrderData'
-        parentCardReference:
-          $ref: '#/components/schemas/ParentCardReference'
-        bccData:
-          $ref: '#/components/schemas/BccData'
-        fraudConfiguration:
-          $ref: '#/components/schemas/FraudConfiguration'
-        isBlocked:
-          description: Defines if the card is ordered blocked.
-          type: boolean
-          examples:
-          - false
-    CardOrderReason:
-      description: This setting determines the priority in which a physical card is ordered. Daily business orders are processed with higher priority and sent to the producer after 18:30. Card renewal orders due to card expiration are processed with lower priority and sent to the producer after 08:00.
-      type: string
-      enum:
-      - DAILY_BUSINESS
-      - CARD_RENEWAL
-      default: DAILY_BUSINESS
-    CardId:
-      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
-      type: object
-      required:
-      - bankClearingNumber
-      - cardNumber
-      - cardType
-      - cardSequenceNumber
-      - cardExpiry
-      properties:
-        bankClearingNumber:
-          $ref: '#/components/schemas/BankClearingNumber'
-        cardNumber:
-          $ref: '#/components/schemas/CardNumber'
-        cardType:
-          $ref: '#/components/schemas/CardType'
-        cardSequenceNumber:
-          $ref: '#/components/schemas/CardSequenceNumber'
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
-    CardInstanceToken:
-      description: Unique card instance token of the card.
-      type: string
-      pattern: ^CITK-[0-9a-fA-F]{32}$
-      minLength: 37
-      maxLength: 37
-      examples:
-      - CITK-1744BC4B31C945A1942F4CCF65EC8D99
-    CardTokenExtension:
-      description: Extension to card token to identify a card.
-      type: object
-      required:
-      - cardExpiry
-      - cardSequenceNumber
-      properties:
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
-        cardSequenceNumber:
-          $ref: '#/components/schemas/CardSequenceNumber'
-    CardMutationContactlessActivationStatus:
-      description: Controls whether contactless is enabled.
-      type: boolean
-    UseBankCardWithPin:
-      type: boolean
-      description: Bank card specific field. Indicator of whether the bank card is used with or without PIN.
-    CardCredentialsRequest:
-      type: string
-      description: "JSON Web Token signed by the issuer, containing all parameters for securely retrieving sensitive card credentials. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
-      examples:
-      - see "#/components/schemas/CardCredentialsRequestJwsPayload"
-    StartSetPinResponse:
-      type: string
-      description: "JSON Web Token signed by debiX containing an ephemeral public key to complete the Diffie-Hellman key exchange, used to encrypt the new PIN to be set for this card. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519.\n* The JOSE header contains a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
-      examples:
-      - see unencrypted object at  "#/components/schemas/StartSetPinResponseJwsPayload"
-    UpdateCardStatusRequest:
-      description: Contains the request to update the status of the card. The card block reason is required when blocking the card. Only when blocking a card, the information in card block reason, card block origin and blocked card replacement are taken into account; in other cases, they are ignored.
-      type: object
-      required:
-      - action
-      - cardTokenExtension
-      - cardStatusUpdateReason
-      properties:
-        action:
-          $ref: '#/components/schemas/UpdateCardStatusAction'
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-        cardStatusUpdateReason:
-          $ref: '#/components/schemas/CardStatusUpdateReason'
-        cardBlockReason:
-          $ref: '#/components/schemas/CardBlockReason'
-          description: 'The reason why the card was blocked. Note: cardBlockReason is a mandatory parameter which must be provided when action = BLOCK.'
-        cardBlockOrigin:
-          $ref: '#/components/schemas/CardBlockOriginViaBank'
-        blockedCardReplacement:
-          $ref: '#/components/schemas/BlockedCardReplacement'
-    Language:
-      description: Correspondence language.
-      type: string
-      enum:
-      - DE
-      - FR
-      - IT
-      - EN
-    YearMonth:
-      type: object
-      required:
-      - month
-      - year
-      properties:
-        month:
-          description: The two digit number of the month starting at 01 for January.
-          type: string
-          examples:
-          - '01'
-        year:
-          description: The last two digits of the year.
-          type: string
-          examples:
-          - '21'
-    CardInstanceTokenRequest:
-      description: Contains the identifier of the card for which to return the card instance token.
-      type: object
-      required:
-      - cardTokenExtension
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-    RiskShieldList:
-      description: '- "EXCLUSION_LIST": General whitelist, i.e. all rules that lead to RiskShield declines and automatic blockings are overridden.
-
-        - "GREY_LIST_CNP": The non-secure card not present transactions are declined.
-
-        - "GREY_LIST_F2F": Card present transactions are declined.
-
-        - "INTERNAL_DECLINE_LIST": General blacklist, i.e. the transactions are declined.
-
-        - "MONITORED_CARDS_LIST": For card present transactions an alert is generated.
-
-        - "RULE_WHITE_CARD_LIST": Certain rules for cards are disabled, i.e. no transactions are declined and no alerts generated.'
-      type: string
-    TransactionAuthorizer:
-      type: string
-      description: Authorizer for retail and ATM transactions.
-      enum:
-      - ALWAYS_SIX
-      - ISSUER_WITH_FALLBACK_SIX
-      - SIX_WITH_FALLBACK_ISSUER
-      - ISSUER_WITH_FALLBACK_SIX_AND_OTHER_LIMITS
-    DatamailerExpressCode:
-      description: Defines the express code of OTRC and PIN datamailer delivery.
-      type: string
-      enum:
-      - A_POST
-      - B_POST
-      - REGISTERED
-      default: A_POST
-    SetPinRequest:
-      type: string
-      description: 'JSON Web Token signed by the issuer to set the PIN for the given card.
-
-        * The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.
-
-        * The JOSE header must contain a ''x5t#S256'' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)
-
-        '
-      examples:
-      - see '#/components/schemas/SetPinRequestJwsPayload'
-    ProducerInfo:
-      description: Information for the producer of the card. E.g. to print the EUR-label on the card.
-      type: string
-    CardType:
-      description: 'A single digit that distinguishes the card types of the schemes.
-
-        - 1: Debit mastercard
-
-        - 3: Visa debit
-
-        - 6: Bank card'
+      - NO_INFORMATION
+      - CARD_LOST_WITHOUT_PIN
+      - CARD_STOLEN_WITHOUT_PIN
+      - FRAUD
+      - CREDIT_STANDING
+      - TOO_MANY_INVALID_PIN_ATTEMPTS
+      - CARD_LOST_WITH_PIN
+      - CARD_STOLEN_WITH_PIN
+      - PICK_UP_BM_TM
+      - CARD_DID_NOT_ARRIVE
+      - PIN_DID_NOT_ARRIVE
+      - FRAUD_SUSPECTED_ANALYSIS
+      - FRAUD_SUSPECTED_CARDHOLDER_FEEDBACK_REQUIRED
+      - TECHNICAL_REASON
+      - DEFECTIVE_CARD
+      - CARD_TEMPORARILY_BLOCKED
+    MailerTextCode:
+      description: Reference to a predefined text container that will be printed on the datamailer.
       type: integer
       format: int32
-      minimum: 1
-      maximum: 6
-    OtrcDelivery:
-      description: Deprecated and will be ignored. Delivery type of OTRC.
-      type: string
-      enum:
-      - NONE
-      - DATAMAILER
-      - ONLINE
-      default: NONE
-    CardNumber:
-      description: Card number of the card.
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 99999999
-      examples:
-      - 12345678
-    VisaADAliasId:
-      description: The UUID generated by Alias Directory which identifies the alias.
-      type: string
-      minLength: 36
-      maxLength: 36
-      examples:
-      - e336c8c8-2945-4be3-af3e-951ec2d01219
-    CardInstanceTokenByCardIdRequest:
-      description: Contains the identifier of the card for which to return the card instance token.
+    AccountAuthority:
+      description: Indicates who has the right to draw on the account.
       type: object
-      required:
-      - cardId
       properties:
-        cardId:
-          $ref: '#/components/schemas/CardId'
-    RestrictedCountries:
-      description: 'A list of countries from which authorizations will be declined. Country code values are expected in ISO 3166-1 alpha-2 format.
-
-
-        The option to define a restriction for individual countries is only available on request; please contact SIX if you are interested.'
-      type: array
-      minItems: 1
-      maxItems: 300
-      items:
-        $ref: '#/components/schemas/Country'
-    BranchNumber:
-      description: Branch number of the site where the account was initially created.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9999
-      examples:
-      - 1
-    ShortCardIdResponse:
-      description: Contains the identifier of the card that corresponds to the given card token.
-      type: object
-      required:
-      - shortCardId
-      properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-    StartSetPinRequest:
-      type: string
-      description: "JSON Web Token signed by the issuer to get an ephemeral public key from debiX for the given card. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
-      examples:
-      - see "#/components/schemas/StartSetPinRequestJwsPayload"
-    CardStatusUpdateReason:
-      description: The reason for the status update of the card.
-      type: string
-      enum:
-      - ISSUER_DECISION
-      - USER_DECISION
-      examples:
-      - USER_DECISION
-    VisaC2PCustomerId:
-      description: Unique identifier for the customer.
-      type: string
-      format: uuid
-    CommonCardInformation:
-      description: Common information about the card.
-      type: object
-      required:
-      - accountNumber
-      - iban
-      - cardMaterial
-      - markedAsDelayedDelete
-      - transactionAuthorizer
-      properties:
-        accountNumber:
-          $ref: '#/components/schemas/AccountNumber'
-        iban:
-          $ref: '#/components/schemas/Iban'
-        cardMaterial:
-          $ref: '#/components/schemas/CardMaterial'
-        plasticCode:
-          $ref: '#/components/schemas/CardPlasticCode'
-        subCardType:
-          $ref: '#/components/schemas/SubCardType'
-        language:
-          $ref: '#/components/schemas/Language'
-        status:
-          $ref: '#/components/schemas/CardStatus'
-        cardStatusUpdateReason:
-          $ref: '#/components/schemas/CardStatusUpdateReason'
-        blockInformation:
-          $ref: '#/components/schemas/CardBlockInformation'
-        pinRemainingRetries:
-          description: The number of remaining PIN retries.
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 3
-          examples:
-          - 2
-        pinRecoveryStatus:
-          $ref: '#/components/schemas/PinRecoveryStatus'
-        markedAsDelayedDelete:
-          description: Flag indicating card is scheduled for delayed deletion.
-          type: boolean
-        transactionAuthorizer:
-          $ref: '#/components/schemas/TransactionAuthorizer'
-        cardOrderDateTime:
-          description: Datetime when the card was ordered.
-          type: string
-          format: date-time
-          examples:
-          - '2024-04-13T08:30:00Z'
-    Currency:
-      description: The currency according to ISO 4217.
-      type: string
-      maxLength: 3
-      examples:
-      - CHF
+        firstName:
+          $ref: '#/components/schemas/FirstName'
+        familyName:
+          $ref: '#/components/schemas/FamilyName'
+        birthdate:
+          $ref: '#/components/schemas/Birthdate'
     CardOrderData:
       description: Card data needed to order the card. Online limits are required if they should not be taken over from the parent card. EMV-Profile must be set for a physical card order.
       type: object
@@ -2609,47 +2320,15 @@ components:
           $ref: '#/components/schemas/UseBankCardWithPin'
         contactlessActivationMode:
           $ref: '#/components/schemas/ContactlessActivationMode'
-    CardTokenRequest:
-      description: Contains the identifier of the card for which to return the card token.
-      type: object
-      required:
-      - shortCardId
-      properties:
-        shortCardId:
-          $ref: '#/components/schemas/ShortCardId'
-    CardDetailsResponse:
-      description: Contains detailed information about the card.
-      type: object
-      required:
-      - commonCardInformation
-      - threeDsInformation
-      - cardInstanceToken
-      properties:
-        aliasId:
-          $ref: '#/components/schemas/VisaADAliasId'
-        commonCardInformation:
-          $ref: '#/components/schemas/CommonCardInformation'
-        customerId:
-          $ref: '#/components/schemas/VisaC2PCustomerId'
-        bccData:
-          $ref: '#/components/schemas/BccData'
-        fraudConfiguration:
-          $ref: '#/components/schemas/FraudConfiguration'
-        featureToggles:
-          $ref: '#/components/schemas/FeatureToggles'
-        onlineLimits:
-          $ref: '#/components/schemas/OnlineLimits'
-        threeDsInformation:
-          $ref: '#/components/schemas/ThreeDsInformation'
-        cardInstanceToken:
-          $ref: '#/components/schemas/CardInstanceToken'
-    ShortCardId:
-      description: Complex object representing a card consisting of bank clearing number, card number and card type.
+    CardId:
+      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
       type: object
       required:
       - bankClearingNumber
       - cardNumber
       - cardType
+      - cardSequenceNumber
+      - cardExpiry
       properties:
         bankClearingNumber:
           $ref: '#/components/schemas/BankClearingNumber'
@@ -2657,111 +2336,23 @@ components:
           $ref: '#/components/schemas/CardNumber'
         cardType:
           $ref: '#/components/schemas/CardType'
-    AuthenticationMethodStatus:
-      description: Status of an authentication method.
-      type: string
-      enum:
-      - ENABLED
-      - DISABLED
-      - BLOCKED
-    CardOrderResponse:
-      description: 'Contains the card token and the card instance token for the newly created card.
-
-        These tokens can be used immediately to perform subsequent card-related operations.
-
-        '
+        cardSequenceNumber:
+          $ref: '#/components/schemas/CardSequenceNumber'
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+    CardTokenResponse:
+      description: Contains the card token of the card.
       type: object
       required:
       - cardToken
-      - cardInstanceToken
       properties:
         cardToken:
           $ref: '#/components/schemas/CardToken'
-        cardInstanceToken:
-          $ref: '#/components/schemas/CardInstanceToken'
-    Birthdate:
-      description: Date of birth.
+    CardCredentialsRequest:
       type: string
-      format: date
+      description: "JSON Web Token signed by the issuer, containing all parameters for securely retrieving sensitive card credentials. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
       examples:
-      - '2000-12-31'
-    MoneySendReceiveAllowance:
-      description: Defines conditions if money send to and receive from another cardholder is allowed.
-      type: string
-      enum:
-      - NOT_ALLOWED
-      - RECEIVE_ALLOWED
-      - SEND_ALLOWED
-      - RECEIVE_AND_SEND_ALLOWED
-    CardBlockOrigin:
-      description: Initiator and channel of the card blocking.
-      type: string
-      enum:
-      - ONLINE_BANKING_BY_CARDHOLDER
-      - MOBILE_BANKING_BY_CARDHOLDER
-      - THREE_DS_CARDMANAGEMENT_APP_BY_CARDHOLDER
-      - BACKEND_OF_BANK_BY_BANK
-      - BACKEND_OF_BANK_BY_CARDHOLDER
-      - BANK_DEBIT_ONLINE_WEB_BY_BANK
-      - BANK_DEBIT_ONLINE_WEB_BY_CALL_CARDHOLDER
-      - SIX_CALLCENTER_BY_CALL_CARDHOLDER
-      - SIX_CALLCENTER_DEBIT_ONLINE_WEB_VIA_BLOCKING_MASK_BY_CALL_CARDHOLDER
-      - SIX_BY_THIRD_PARTY_ORDER
-      - SIX_DEBIT_ONLINE_WEB_VIA_BLOCKING_MASK_BY_THIRD_PARTY_ORDER
-      - SIX_DEBIT_ONLINE_WEB_VIA_CARD_MASK_BY_THIRD_PARTY_ORDER
-      - SIX_FRAUD_BY_RISKSHIELD_MANUAL
-      - SIX_FRAUD_BY_RISKSHIELD_AUTOMATIC
-      - SIX_FRAUD_BY_DEBIX
-      - SIX_BY_BLOCKING_APPLICATION
-    MailerTextCode:
-      description: Reference to a predefined text container that will be printed on the datamailer.
-      type: integer
-      format: int32
-    GamblingAndBettingAllowance:
-      description: Defines condition when gambling and betting transactions are allowed.
-      type: string
-      enum:
-      - ALLOWED
-      - NOT_ALLOWED
-      - CARD_NOT_PRESENT_NOT_ALLOWED
-      - CARD_PRESENT_NOT_ALLOWED
-    CardLine:
-      description: This line will be printed on the front side of the card. At least the first card line is required for a physical card order.
-      type: string
-    BankApiError:
-      description: Information about an error on API requests.
-      type: object
-      required:
-      - applicationError
-      - errorCode
-      properties:
-        applicationError:
-          description: The name of the application error.
-          type: string
-          examples:
-          - OPERATION_FAILED
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 5001
-        description:
-          description: A human readable explanation specific to this occurrence of the problem.
-          type: string
-          examples:
-          - The requested operation failed.
-        errors:
-          description: List of error details.
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-        errorToken:
-          description: A generated error token referencing the actual error and logged on the server.
-          type: string
-          examples:
-          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+      - see "#/components/schemas/CardCredentialsRequestJwsPayload"
     CardMutationFraudConfiguration:
       description: Controls the fraud configuration of a card.
       type: object
@@ -2772,156 +2363,156 @@ components:
           $ref: '#/components/schemas/RestrictedRegions'
         restrictedCountries:
           $ref: '#/components/schemas/RestrictedCountries'
-    BccData:
-      description: Information about the cardholder from the bank card central.
+    CommonCardInformation:
+      description: Common information about the card.
       type: object
       required:
-      - salutation
-      - firstName
-      - familyName
-      - street
-      - city
-      - postalCode
-      - country
+      - accountNumber
+      - iban
+      - cardMaterial
+      - markedAsDelayedDelete
+      - transactionAuthorizer
       properties:
-        salutation:
-          $ref: '#/components/schemas/Salutation'
-        firstName:
-          $ref: '#/components/schemas/FirstName'
-        familyName:
-          $ref: '#/components/schemas/FamilyName'
-        street:
-          description: Street name.
-          type: string
-          maxLength: 25
+        accountNumber:
+          $ref: '#/components/schemas/AccountNumber'
+        iban:
+          $ref: '#/components/schemas/Iban'
+        cardMaterial:
+          $ref: '#/components/schemas/CardMaterial'
+        plasticCode:
+          $ref: '#/components/schemas/CardPlasticCode'
+        subCardType:
+          $ref: '#/components/schemas/SubCardType'
+        language:
+          $ref: '#/components/schemas/Language'
+        status:
+          $ref: '#/components/schemas/CardStatus'
+        cardStatusUpdateReason:
+          $ref: '#/components/schemas/CardStatusUpdateReason'
+        blockInformation:
+          $ref: '#/components/schemas/CardBlockInformation'
+        pinRemainingRetries:
+          description: The number of remaining PIN retries.
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 3
           examples:
-          - Bahnhofstrasse
-        streetNo:
-          description: Street number.
-          type: string
-          maxLength: 5
-          examples:
-          - '1'
-        city:
-          description: Location city.
-          type: string
-          maxLength: 25
-          examples:
-          - Zürich
-        postalCode:
-          description: Postal code.
-          type: string
-          maxLength: 10
-          examples:
-          - '8001'
-        country:
-          $ref: '#/components/schemas/Country'
-        phoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-        birthdate:
-          description: Birthdate to identify the customer.
-          type: string
-          format: date
-          examples:
-          - '2000-12-31'
-        emailAddress:
-          description: Email address to identify the customer.
-          type: string
-          examples:
-          - peter.schweizer@mailbox.org
-        customerRelationshipOpeningDate:
-          description: Date when the customer relationship was opened; used to identify the customer.
-          type: string
-          format: date
-          examples:
-          - '2021-12-31'
-        accountOpeningDate:
-          description: Date when the account was opened; used to identify the customer.
-          type: string
-          format: date
-          examples:
-          - '2021-12-31'
-        accountAuthorities:
-          type: array
-          minItems: 0
-          maxItems: 4
-          items:
-            $ref: '#/components/schemas/AccountAuthority'
-        individualIdentificationTag:
-          description: Individual tag to identify the customer.
-          type: string
-          maxLength: 80
-          examples:
-          - Owner of a sailing boat
-        ebankingContractNo:
-          description: Ebanking contract number to identify the customer.
-          type: string
-          maxLength: 15
-          examples:
-          - ABC-56789012345
-    PhoneNumber:
-      description: 'Mobile or landline phone number. Note: phoneNumber is a mandatory parameter which must be provided to register a card with authentication method SMS_ONLY, PIN, BIOMETRIC or BIOMETRIC_WITH_PIN_FALLBACK. Furthermore, phoneNumber must also be provided in case the issuer desires to register a card for DELEGATED as primary authentication method, with additionally SMS as fallback (as secondary authentication method).  For issuers with special regulations (e.g. PSD2), please refer to the additional indications provided under the “password” field.'
-      type: string
-      pattern: ^([+]|00)[1-9][0-9]{8,18}$
-      examples:
-      - '+41797778899'
-    Country:
-      description: Country code in format ISO 3166-1 alpha 2.
-      type: string
-      pattern: '[A-Z]{2}'
-      examples:
-      - CH
-    CardOrderReversalRequest:
-      type: object
-      required:
-      - cardTokenExtension
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-    PinRecoveryStatus:
-      description: The status of the PIN recovery.
-      type: string
-      enum:
-      - NO_PIN_ORDERED
-      - NEW_PIN_ORDERED_PIN_CHANGE_REQUIRED
-      - NEW_PIN_ORDERED_RECOVERY_PROCESSED
-      - NEW_PIN_ORDERED_RECOVERY_CONFIRMED
-      - NEW_PIN_ORDERED_RECOVERY_NOK
-    CardCredentialsResponse:
-      type: string
-      description: "JSON Web Token containing the encrypted card credentials and an ephemeral public key to complete the Diffie-Hellman key exchange. \n* The algorithm of the JWS signature is 'none'.\n"
-      examples:
-      - see unencrypted object at  "#/components/schemas/CardCredentialsResponseJwsPayload".
-    CardBlockInterface:
-      description: The interface used for blocking the card.
-      type: string
-      enum:
-      - DEBIX_API
-      - DEBIX_APP
-      - DEBIX_PORTAL
-      - DEBIT_ONLINE_WEB
-      - DEBIT_ONLINE_XML
-      - BLOCKING_APPLICATION_GENERATED_BY_SIX
-    BlockedCardReplacement:
-      description: Indicates the need of a card replacement when the card has been blocked. This is only an indicator and does not trigger the actual card replacement.
-      type: string
-      enum:
-      - NO_REPLACEMENT
-      - CARD
-      - CARD_WITH_PIN_MAILER
-      - CARD_WITH_PIN_AND_OTRC_MAILER
-      - CARD_WITH_OTRC_MAILER
-      - CARD_WITH_UNKNOWN_MAILER
-    CardMutationCardApplication:
-      description: Controls card application settings for the EMV-Profile, online limits and transaction authorizer.
-      type: object
-      properties:
-        emvProfile:
-          $ref: '#/components/schemas/EmvProfile'
-        onlineLimits:
-          $ref: '#/components/schemas/OnlineLimits'
+          - 2
+        pinRecoveryStatus:
+          $ref: '#/components/schemas/PinRecoveryStatus'
+        markedAsDelayedDelete:
+          description: Flag indicating card is scheduled for delayed deletion.
+          type: boolean
         transactionAuthorizer:
           $ref: '#/components/schemas/TransactionAuthorizer'
+        cardOrderDateTime:
+          description: Datetime when the card was ordered.
+          type: string
+          format: date-time
+          examples:
+          - '2024-04-13T08:30:00Z'
+    CardStatusUpdateReason:
+      description: The reason for the status update of the card.
+      type: string
+      enum:
+      - ISSUER_DECISION
+      - USER_DECISION
+      examples:
+      - USER_DECISION
+    AccountNumber:
+      description: Unique number identifying a bank account.
+      type: string
+      minLength: 1
+      maxLength: 16
+      examples:
+      - AB-4567890123456
+    CardStatus:
+      description: The status of the card.
+      type: string
+      enum:
+      - ACTIVE
+      - SUSPENDED
+      - DELETED
+      - SUSPENSION_PENDING
+      - RESUMPTION_PENDING
+      - DELETE_PENDING
+    RestrictedRegions:
+      description: A list of regions from which authorizations will be declined.
+      type: array
+      minItems: 1
+      maxItems: 10
+      items:
+        $ref: '#/components/schemas/Region'
+    ThreeDsInformation:
+      description: Contains 3DS data provided by Worldline.
+      type: object
+      required:
+      - paymentAuthenticationMethods
+      properties:
+        paymentAuthenticationMethods:
+          $ref: '#/components/schemas/PaymentAuthenticationMethods'
+        mobilePhoneNumber:
+          $ref: '#/components/schemas/PhoneNumber'
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
+    ParentCardReference:
+      description: Reference to a card from which settings can be inherited.
+      type: object
+      required:
+      - cardToken
+      - cardTokenExtension
+      - shareLimits
+      - deleteAfterFirstUse
+      - takeoverPin
+      - takeoverContactlessActivationStatus
+      - takeoverFeatureToggles
+      - takeoverBillingUpdater
+      properties:
+        cardToken:
+          $ref: '#/components/schemas/CardToken'
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        shareLimits:
+          description: Indicates if the limits should be shared with the parent card.
+          type: boolean
+        deleteAfterFirstUse:
+          description: Indicates if the parent card shall be deleted after first use of new card.
+          type: boolean
+        takeoverPin:
+          description: Indicates if the PIN shall be taken over from the parent card.
+          type: boolean
+        takeoverContactlessActivationStatus:
+          description: Indicates if the contactless activation status shall be taken over from the parent card.
+          type: boolean
+        takeoverFeatureToggles:
+          description: Indicates if the feature toggles shall be taken over from the parent card.
+          type: boolean
+        takeoverBillingUpdater:
+          type: boolean
+          description: Indicates if the new card shall be linked to the account of the parent card within the Mastercard automated billing updater (ABU) resp. the VISA Account Updater (VAU).
+    UnstructuredAddress:
+      description: Unstructured address of simple address lines.
+      type: array
+      minItems: 1
+      maxItems: 6
+      items:
+        type: string
+        maxLength: 35
+      examples:
+      - - Peter Schweizer
+        - Bahnhofstrasse 1
+        - 8000 Zürich
     CardMutationBccData:
       description: Information about the cardholder to mutate.
       type: object
@@ -3009,139 +2600,51 @@ components:
           maxLength: 15
           examples:
           - ABC-56789012345
-    CardSequenceNumber:
-      description: Sequence number of the card.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
-      examples:
-      - 2
-    FirstName:
-      description: First name
+    SetPinRequest:
       type: string
-      maxLength: 25
-      examples:
-      - Peter
-    CardBlockInformation:
-      description: Contains information about blocked cards.
-      type: object
-      properties:
-        blockReason:
-          $ref: '#/components/schemas/CardBlockReason'
-        blockOrigin:
-          $ref: '#/components/schemas/CardBlockOrigin'
-        blockInterface:
-          $ref: '#/components/schemas/CardBlockInterface'
-        blockedCardReplacement:
-          $ref: '#/components/schemas/BlockedCardReplacement'
-        unblockCardByCardholderAllowed:
-          description: 'Defines if the cardholder is allowed to unblock the card.
+      description: 'JSON Web Token signed by the issuer to set the PIN for the given card.
 
-            '
-          type: boolean
-          examples:
-          - true
-    CardStatus:
-      description: The status of the card.
+        * The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.
+
+        * The JOSE header must contain a ''x5t#S256'' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)
+
+        '
+      examples:
+      - see '#/components/schemas/SetPinRequestJwsPayload'
+    StartSetPinRequest:
+      type: string
+      description: "JSON Web Token signed by the issuer to get an ephemeral public key from debiX for the given card. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
+      examples:
+      - see "#/components/schemas/StartSetPinRequestJwsPayload"
+    OtrcDelivery:
+      description: Deprecated and will be ignored. Delivery type of OTRC.
       type: string
       enum:
-      - ACTIVE
-      - SUSPENDED
-      - DELETED
-      - SUSPENSION_PENDING
-      - RESUMPTION_PENDING
-      - DELETE_PENDING
-    AccountAuthority:
-      description: Indicates who has the right to draw on the account.
-      type: object
-      properties:
-        firstName:
-          $ref: '#/components/schemas/FirstName'
-        familyName:
-          $ref: '#/components/schemas/FamilyName'
-        birthdate:
-          $ref: '#/components/schemas/Birthdate'
-    FeatureToggles:
-      description: Contains the values of the feature toggles for the card. In card order requests, the contactlessActivationStatus will be ignored. Will be ignored in card order requests for bank cards.
+      - NONE
+      - DATAMAILER
+      - ONLINE
+      default: NONE
+    CardMaterial:
+      description: Distinguishes physical from virtual cards. VIRTUAL not allowed for bank cards.
+      type: string
+      enum:
+      - PHYSICAL
+      - VIRTUAL
+    CardOrderResponse:
+      description: 'Contains the card token and the card instance token for the newly created card.
+
+        These tokens can be used immediately to perform subsequent card-related operations.
+
+        '
       type: object
       required:
-      - eCommerceAllowed
-      - trxOnlyAsChipAndPin
-      - magStripePaymentAllowed
-      - automaticBilling
-      - purchaseWithCashBackAllowed
-      - merchantInitiatedTrxAllowed
-      - atmAllowed
-      - posAllowed
-      - motoAllowed
-      - bypassGeoblocking
-      - moneySendReceiveAllowance
-      - reservationAllowed
-      - transactionPushEnabled
-      - gamblingAndBettingAllowance
+      - cardToken
+      - cardInstanceToken
       properties:
-        eCommerceAllowed:
-          description: Indicates if the use of ecommerce is allowed.
-          type: boolean
-        trxOnlyAsChipAndPin:
-          description: Indicates if cvm is active, i.e. card can do transaction only as Chip and PIN.
-          type: boolean
-        magStripePaymentAllowed:
-          description: Defines if magnetic stripe payments are allowed.
-          type: boolean
-        automaticBilling:
-          description: Indicates if the cardholder participates to the automatic billing update.
-          type: boolean
-        purchaseWithCashBackAllowed:
-          description: Defines if purchase with cash back is allowed.
-          type: boolean
-        blockedMerchantCategoryCodes:
-          description: List of blocked merchant category codes.
-          type: array
-          minItems: 1
-          maxItems: 10
-          items:
-            $ref: '#/components/schemas/MerchantCategoryCode'
-        merchantInitiatedTrxAllowed:
-          description: Indicates if merchant initiated transactions - such as Recurring, Installment, Unscheduled - are allowed.
-          type: boolean
-        atmAllowed:
-          description: Defines if withdrawals are allowed at ATMs.
-          type: boolean
-        posAllowed:
-          description: Defines if payments are allowed at POS terminals.
-          type: boolean
-        motoAllowed:
-          description: Defines if mail or phone orders are allowed.
-          type: boolean
-        bypassGeoblocking:
-          description: Defines if geo blocking is ignored for the card.
-          type: boolean
-        moneySendReceiveAllowance:
-          $ref: '#/components/schemas/MoneySendReceiveAllowance'
-        reservationAllowed:
-          description: Defines if reservation transactions are allowed.
-          type: boolean
-        transactionPushEnabled:
-          description: Defines if transactions are pushed to debiX.
-          type: boolean
-        gamblingAndBettingAllowance:
-          $ref: '#/components/schemas/GamblingAndBettingAllowance'
-        contactlessActivationStatus:
-          $ref: '#/components/schemas/ContactlessActivationStatus'
-    Region:
-      description: Region from where an authorization is requested.
-      type: string
-      enum:
-      - SWITZERLAND_AND_LIECHTENSTEIN
-      - EUROPE
-      - EASTERN_EUROPE_AND_CENTRAL_ASIA
-      - AFRICA
-      - CANADA
-      - USA_AND_MEXICO
-      - LATIN_AMERICA_AND_CARIBBEAN
-      - MIDDLE_EAST_ASIA_PACIFIC_AUSTRALIA
+        cardToken:
+          $ref: '#/components/schemas/CardToken'
+        cardInstanceToken:
+          $ref: '#/components/schemas/CardInstanceToken'
     UpdateCardStatusAction:
       description: Distinguishes the type of the card update.
       type: string
@@ -3150,12 +2653,110 @@ components:
       - UNBLOCK
       - DELETE_IMMEDIATELY
       - DELETE_AT_END_OF_NEXT_MONTH
-    CardMaterial:
-      description: Distinguishes physical from virtual cards. VIRTUAL not allowed for bank cards.
+    CardCredentialsResponse:
+      type: string
+      description: "JSON Web Token containing the encrypted card credentials and an ephemeral public key to complete the Diffie-Hellman key exchange. \n* The algorithm of the JWS signature is 'none'.\n"
+      examples:
+      - see unencrypted object at  "#/components/schemas/CardCredentialsResponseJwsPayload".
+    Birthdate:
+      description: Date of birth.
+      type: string
+      format: date
+      examples:
+      - '2000-12-31'
+    StartSetPinResponse:
+      type: string
+      description: "JSON Web Token signed by debiX containing an ephemeral public key to complete the Diffie-Hellman key exchange, used to encrypt the new PIN to be set for this card. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519.\n* The JOSE header contains a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
+      examples:
+      - see unencrypted object at  "#/components/schemas/StartSetPinResponseJwsPayload"
+    BankApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          examples:
+          - OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 5001
+        description:
+          description: A human readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the actual error and logged on the server.
+          type: string
+          examples:
+          - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    ContactlessActivationMode:
+      description: Describes the contactless activation mode used during card ordering.
       type: string
       enum:
-      - PHYSICAL
-      - VIRTUAL
+      - ACCORDING_TO_EMV
+      - IMMEDIATE
+      - AUTOMATIC
+      - DEFERRED
+    BranchNumber:
+      description: Branch number of the site where the account was initially created.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9999
+      examples:
+      - 1
+    CardholderDataTrack:
+      description: "A formatted combination of family name, name and title. Must only be set for a Mastercard physical card order.\nValid formats include:\n  - FAMILYNAME/\n  - FAMILYNAME/NAME\n  - FAMILYNAME/NAME.DR\n  - FAMILYNAME/.DR\n"
+      type: string
+      maxLength: 26
+      minLength: 2
+      examples:
+      - SCHWEIZER/PETER
+    CardOrderReason:
+      description: This setting determines the priority in which a physical card is ordered. Daily business orders are processed with higher priority and sent to the producer after 18:30. Card renewal orders due to card expiration are processed with lower priority and sent to the producer after 08:00.
+      type: string
+      enum:
+      - DAILY_BUSINESS
+      - CARD_RENEWAL
+      default: DAILY_BUSINESS
+    BankClearingNumber:
+      description: Unique number used to identify each bank agency or branch in the bank directory.
+      type: integer
+      format: int32
+      minimum: 100
+      maximum: 99999
+      examples:
+      - 50000
+    ShortCardIdResponse:
+      description: Contains the identifier of the card that corresponds to the given card token.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+    CardSequenceNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
     ContactlessActivationStatus:
       description: Describes the contactless activation status of the card.
       type: string
@@ -3169,26 +2770,50 @@ components:
       - ACTIVATED_UNCONFIRMED
       - ACTIVATION_PENDING
       - NEVER_ACTIVATED
-    CardBlockReason:
-      description: The reason why the card was blocked.
+    VisaC2PCustomerId:
+      description: Unique identifier for the customer.
       type: string
-      enum:
-      - NO_INFORMATION
-      - CARD_LOST_WITHOUT_PIN
-      - CARD_STOLEN_WITHOUT_PIN
-      - FRAUD
-      - CREDIT_STANDING
-      - TOO_MANY_INVALID_PIN_ATTEMPTS
-      - CARD_LOST_WITH_PIN
-      - CARD_STOLEN_WITH_PIN
-      - PICK_UP_BM_TM
-      - CARD_DID_NOT_ARRIVE
-      - PIN_DID_NOT_ARRIVE
-      - FRAUD_SUSPECTED_ANALYSIS
-      - FRAUD_SUSPECTED_CARDHOLDER_FEEDBACK_REQUIRED
-      - TECHNICAL_REASON
-      - DEFECTIVE_CARD
-      - CARD_TEMPORARILY_BLOCKED
+      format: uuid
+    FraudConfiguration:
+      description: The fraud configuration, containing restrictions for countries and regions. Authorizations from a country will be declined if the country itself, or the region it belongs to, is restricted.
+      type: object
+      properties:
+        restrictedRegions:
+          $ref: '#/components/schemas/RestrictedRegions'
+        restrictedCountries:
+          $ref: '#/components/schemas/RestrictedCountries'
+        riskShieldListing:
+          description: A list of monitoring lists in RiskShield on which a card can be listed. Deprecated and ignored in card order requests.
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/RiskShieldList'
+    CardOrderRequest:
+      description: Configuration specifying the new card to be ordered.
+      type: object
+      required:
+      - cardOrderData
+      properties:
+        cardOrderData:
+          $ref: '#/components/schemas/CardOrderData'
+        parentCardReference:
+          $ref: '#/components/schemas/ParentCardReference'
+        bccData:
+          $ref: '#/components/schemas/BccData'
+        fraudConfiguration:
+          $ref: '#/components/schemas/FraudConfiguration'
+        isBlocked:
+          description: Defines if the card is ordered blocked.
+          type: boolean
+          examples:
+          - false
+    Currency:
+      description: The currency according to ISO 4217.
+      type: string
+      maxLength: 3
+      examples:
+      - CHF
     CardInstanceTokenResponse:
       description: Contains the card instance token of the card.
       type: object
@@ -3197,14 +2822,270 @@ components:
       properties:
         cardInstanceToken:
           $ref: '#/components/schemas/CardInstanceToken'
-    ResetPinTryCounterRequest:
-      description: Contains the cardTokenExtension used together with the cardToken path parameter for card identification.
+    YearMonth:
+      type: object
+      required:
+      - month
+      - year
+      properties:
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    ProducerCode:
+      description: Defines the producer of the ordered card. Must only be set for a physical card order.
+      type: string
+      enum:
+      - THALES
+      - EXCEET_GERMANY
+      - EXCEET_SWITZERLAND
+      - NID
+    CardNumber:
+      description: Card number of the card.
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 99999999
+      examples:
+      - 12345678
+    CardTokenRequest:
+      description: Contains the identifier of the card for which to return the card token.
+      type: object
+      required:
+      - shortCardId
+      properties:
+        shortCardId:
+          $ref: '#/components/schemas/ShortCardId'
+    UpdateCardStatusRequest:
+      description: Contains the request to update the status of the card. The card block reason is required when blocking the card. Only when blocking a card, the information in card block reason, card block origin and blocked card replacement are taken into account; in other cases, they are ignored.
+      type: object
+      required:
+      - action
+      - cardTokenExtension
+      - cardStatusUpdateReason
+      properties:
+        action:
+          $ref: '#/components/schemas/UpdateCardStatusAction'
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        cardStatusUpdateReason:
+          $ref: '#/components/schemas/CardStatusUpdateReason'
+        cardBlockReason:
+          $ref: '#/components/schemas/CardBlockReason'
+          description: 'The reason why the card was blocked. Note: cardBlockReason is a mandatory parameter which must be provided when action = BLOCK.'
+        cardBlockOrigin:
+          $ref: '#/components/schemas/CardBlockOriginViaBank'
+        blockedCardReplacement:
+          $ref: '#/components/schemas/BlockedCardReplacement'
+    DatamailerExpressCode:
+      description: Defines the express code of OTRC and PIN datamailer delivery.
+      type: string
+      enum:
+      - A_POST
+      - B_POST
+      - REGISTERED
+      default: A_POST
+    CardMutationCardApplication:
+      description: Controls card application settings for the EMV-Profile, online limits and transaction authorizer.
+      type: object
+      properties:
+        emvProfile:
+          $ref: '#/components/schemas/EmvProfile'
+        onlineLimits:
+          $ref: '#/components/schemas/OnlineLimits'
+        transactionAuthorizer:
+          $ref: '#/components/schemas/TransactionAuthorizer'
+    GetPinResponse:
+      type: string
+      description: "JSON Web Token signed by debiX containing the encrypted PIN and an ephemeral public key to complete the Diffie-Hellman key exchange. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519.\n* The JOSE header contains a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
+      examples:
+      - see encrypted object at "#/components/schemas/GetPinResponseJwsPayload".
+    CardDetailsResponse:
+      description: Contains detailed information about the card.
+      type: object
+      required:
+      - commonCardInformation
+      - threeDsInformation
+      - cardInstanceToken
+      properties:
+        aliasId:
+          $ref: '#/components/schemas/VisaADAliasId'
+        commonCardInformation:
+          $ref: '#/components/schemas/CommonCardInformation'
+        customerId:
+          $ref: '#/components/schemas/VisaC2PCustomerId'
+        bccData:
+          $ref: '#/components/schemas/BccData'
+        fraudConfiguration:
+          $ref: '#/components/schemas/FraudConfiguration'
+        featureToggles:
+          $ref: '#/components/schemas/FeatureToggles'
+        onlineLimits:
+          $ref: '#/components/schemas/OnlineLimits'
+        threeDsInformation:
+          $ref: '#/components/schemas/ThreeDsInformation'
+        cardInstanceToken:
+          $ref: '#/components/schemas/CardInstanceToken'
+    PinDatamailerOrderRequest:
+      description: Details of the PIN datamailer order request. The referenced card must be a physical card.
+      type: object
+      required:
+      - cardTokenExtension
+      - deliveryDestination
+      - expressCode
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        deliveryDestination:
+          description: Delivery destination of PIN.
+          $ref: '#/components/schemas/DatamailerDeliveryDestination'
+        expressCode:
+          description: The quickness of the PIN delivery.
+          $ref: '#/components/schemas/DatamailerExpressCode'
+        deliveryInformation:
+          description: The delivery information must be set if the PIN is delivered to the cardholder.
+          $ref: '#/components/schemas/DeliveryInformation'
+        mailerText:
+          description: Selects the individual text container for printing onto the datamailer. Can be set if the PIN is delivered to the cardholder.
+          $ref: '#/components/schemas/MailerTextCode'
+    RiskShieldList:
+      description: '- "EXCLUSION_LIST": General whitelist, i.e. all rules that lead to RiskShield declines and automatic blockings are overridden.
+
+        - "GREY_LIST_CNP": The non-secure card not present transactions are declined.
+
+        - "GREY_LIST_F2F": Card present transactions are declined.
+
+        - "INTERNAL_DECLINE_LIST": General blacklist, i.e. the transactions are declined.
+
+        - "MONITORED_CARDS_LIST": For card present transactions an alert is generated.
+
+        - "RULE_WHITE_CARD_LIST": Certain rules for cards are disabled, i.e. no transactions are declined and no alerts generated.'
+      type: string
+    BccData:
+      description: Information about the cardholder from the bank card central.
+      type: object
+      required:
+      - salutation
+      - firstName
+      - familyName
+      - street
+      - city
+      - postalCode
+      - country
+      properties:
+        salutation:
+          $ref: '#/components/schemas/Salutation'
+        firstName:
+          $ref: '#/components/schemas/FirstName'
+        familyName:
+          $ref: '#/components/schemas/FamilyName'
+        street:
+          description: Street name.
+          type: string
+          maxLength: 25
+          examples:
+          - Bahnhofstrasse
+        streetNo:
+          description: Street number.
+          type: string
+          maxLength: 5
+          examples:
+          - '1'
+        city:
+          description: Location city.
+          type: string
+          maxLength: 25
+          examples:
+          - Zürich
+        postalCode:
+          description: Postal code.
+          type: string
+          maxLength: 10
+          examples:
+          - '8001'
+        country:
+          $ref: '#/components/schemas/Country'
+        phoneNumber:
+          $ref: '#/components/schemas/PhoneNumber'
+        birthdate:
+          description: Birthdate to identify the customer.
+          type: string
+          format: date
+          examples:
+          - '2000-12-31'
+        emailAddress:
+          description: Email address to identify the customer.
+          type: string
+          examples:
+          - peter.schweizer@mailbox.org
+        customerRelationshipOpeningDate:
+          description: Date when the customer relationship was opened; used to identify the customer.
+          type: string
+          format: date
+          examples:
+          - '2021-12-31'
+        accountOpeningDate:
+          description: Date when the account was opened; used to identify the customer.
+          type: string
+          format: date
+          examples:
+          - '2021-12-31'
+        accountAuthorities:
+          type: array
+          minItems: 0
+          maxItems: 4
+          items:
+            $ref: '#/components/schemas/AccountAuthority'
+        individualIdentificationTag:
+          description: Individual tag to identify the customer.
+          type: string
+          maxLength: 80
+          examples:
+          - Owner of a sailing boat
+        ebankingContractNo:
+          description: Ebanking contract number to identify the customer.
+          type: string
+          maxLength: 15
+          examples:
+          - ABC-56789012345
+    CardInstanceTokenRequest:
+      description: Contains the identifier of the card for which to return the card instance token.
       type: object
       required:
       - cardTokenExtension
       properties:
         cardTokenExtension:
           $ref: '#/components/schemas/CardTokenExtension'
+    CardExpressCode:
+      description: Defines the express code of the card delivery. Must be set for a physical card order and CardDelivery is DELIVER_TO_CARDHOLDER.
+      type: string
+      enum:
+      - A_POST
+      - B_POST
+      - REGISTERED
+      - COURIER
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
     CardMutationFeatureToggles:
       description: Feature Toggles to mutate.
       type: object
@@ -3256,89 +3137,52 @@ components:
           type: boolean
         gamblingAndBettingAllowance:
           $ref: '#/components/schemas/GamblingAndBettingAllowance'
-    CardDetailsRequest:
-      description: Contains identifiers of the card for which to return the details.
-      type: object
-      required:
-      - cardTokenExtension
-      properties:
-        cardTokenExtension:
-          $ref: '#/components/schemas/CardTokenExtension'
-    MerchantCategoryCode:
-      description: The merchant category code. In a whitelist, the presence of 0 signifies that all merchant category codes are allowed.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9999
-      examples:
-      - 7995
-    FraudConfiguration:
-      description: The fraud configuration, containing restrictions for countries and regions. Authorizations from a country will be declined if the country itself, or the region it belongs to, is restricted.
-      type: object
-      properties:
-        restrictedRegions:
-          $ref: '#/components/schemas/RestrictedRegions'
-        restrictedCountries:
-          $ref: '#/components/schemas/RestrictedCountries'
-        riskShieldListing:
-          description: A list of monitoring lists in RiskShield on which a card can be listed. Deprecated and ignored in card order requests.
-          type: array
-          minItems: 1
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/RiskShieldList'
-    CardholderDataTrack:
-      description: "A formatted combination of family name, name and title. Must only be set for a Mastercard physical card order.\nValid formats include:\n  - FAMILYNAME/\n  - FAMILYNAME/NAME\n  - FAMILYNAME/NAME.DR\n  - FAMILYNAME/.DR\n"
-      type: string
-      maxLength: 26
-      minLength: 2
-      examples:
-      - SCHWEIZER/PETER
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
-    CardTokenResponse:
-      description: Contains the card token of the card.
-      type: object
-      required:
-      - cardToken
-      properties:
-        cardToken:
-          $ref: '#/components/schemas/CardToken'
-    FamilyName:
-      description: Family name
+    FirstName:
+      description: First name
       type: string
       maxLength: 25
       examples:
-      - Schweizer
-    DeliveryInformation:
-      description: Delivery address of card, PIN and OTRC.
+      - Peter
+    ShortCardId:
+      description: Complex object representing a card consisting of bank clearing number, card number and card type.
       type: object
       required:
-      - address
-      - country
+      - bankClearingNumber
+      - cardNumber
+      - cardType
       properties:
-        address:
-          $ref: '#/components/schemas/UnstructuredAddress'
-        country:
-          $ref: '#/components/schemas/Country'
-        salutationText:
-          description: Salutation text for the delivery.
-          type: string
-          maxLength: 50
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+    TransactionAuthorizer:
+      type: string
+      description: Authorizer for retail and ATM transactions.
+      enum:
+      - ALWAYS_SIX
+      - ISSUER_WITH_FALLBACK_SIX
+      - SIX_WITH_FALLBACK_ISSUER
+      - ISSUER_WITH_FALLBACK_SIX_AND_OTHER_LIMITS
+    ProducerInfo:
+      description: Information for the producer of the card. E.g. to print the EUR-label on the card.
+      type: string
+    Salutation:
+      description: Salutation code of a cardholder.
+      type: string
+      enum:
+      - NOT_SET
+      - MR
+      - MS
+      - FIRM
+    VisaADAliasId:
+      description: The UUID generated by Alias Directory which identifies the alias.
+      type: string
+      minLength: 36
+      maxLength: 36
+      examples:
+      - e336c8c8-2945-4be3-af3e-951ec2d01219
     EmvProfile:
       description: Information about the EMV-Profile. Must be set for a physical card order.
       type: object
@@ -3352,14 +3196,128 @@ components:
           type: integer
           examples:
           - 4
-    BankClearingNumber:
-      description: Unique number used to identify each bank agency or branch in the bank directory.
+    GamblingAndBettingAllowance:
+      description: Defines condition when gambling and betting transactions are allowed.
+      type: string
+      enum:
+      - ALLOWED
+      - NOT_ALLOWED
+      - CARD_NOT_PRESENT_NOT_ALLOWED
+      - CARD_PRESENT_NOT_ALLOWED
+    Region:
+      description: Region from where an authorization is requested.
+      type: string
+      enum:
+      - SWITZERLAND_AND_LIECHTENSTEIN
+      - EUROPE
+      - EASTERN_EUROPE_AND_CENTRAL_ASIA
+      - AFRICA
+      - CANADA
+      - USA_AND_MEXICO
+      - LATIN_AMERICA_AND_CARIBBEAN
+      - MIDDLE_EAST_ASIA_PACIFIC_AUSTRALIA
+    CardInstanceTokenByCardIdRequest:
+      description: Contains the identifier of the card for which to return the card instance token.
+      type: object
+      required:
+      - cardId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+    StartSetPinByCardIdRequest:
+      type: string
+      description: "JSON Web Token signed by the issuer to get an ephemeral public key from debiX for the given cardId. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
+      examples:
+      - see "#/components/schemas/StartSetPinByCardIdRequestJwsPayload"
+    UseBankCardWithPin:
+      type: boolean
+      description: Bank card specific field. Indicator of whether the bank card is used with or without PIN.
+    CardOrderPinData:
+      type: string
+      description: 'JSON Web Token signed by the issuer to set the PIN for the ordered card.
+
+        * The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.
+
+        * The JOSE header must contain a ''x5t#S256'' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)
+
+        '
+      examples:
+      - see '#/components/schemas/CardOrderPinDataJwsPayload'
+    MerchantCategoryCode:
+      description: The merchant category code. In a whitelist, the presence of 0 signifies that all merchant category codes are allowed.
       type: integer
       format: int32
-      minimum: 100
-      maximum: 99999
+      minimum: 0
+      maximum: 9999
       examples:
-      - 50000
+      - 7995
+    PhoneNumber:
+      description: 'Mobile or landline phone number. Note: phoneNumber is a mandatory parameter which must be provided to register a card with authentication method SMS_ONLY, PIN, BIOMETRIC or BIOMETRIC_WITH_PIN_FALLBACK. Furthermore, phoneNumber must also be provided in case the issuer desires to register a card for DELEGATED as primary authentication method, with additionally SMS as fallback (as secondary authentication method).  For issuers with special regulations (e.g. PSD2), please refer to the additional indications provided under the “password” field.'
+      type: string
+      pattern: ^([+]|00)[1-9][0-9]{8,18}$
+      examples:
+      - '+41797778899'
+    CardPlasticCode:
+      description: Plastic code of the card.
+      type: string
+      minLength: 2
+      maxLength: 2
+      examples:
+      - F0
+    CardTokenExtension:
+      description: Extension to card token to identify a card.
+      type: object
+      required:
+      - cardExpiry
+      - cardSequenceNumber
+      properties:
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
+        cardSequenceNumber:
+          $ref: '#/components/schemas/CardSequenceNumber'
+    CardToken:
+      description: Unique card token of a card.
+      type: string
+      pattern: ^CTK-[0-9a-fA-F]{32}$
+      minLength: 36
+      maxLength: 36
+      examples:
+      - CTK-54716A6080B14CF19CEA3C170F85B1DD
+    Country:
+      description: Country code in format ISO 3166-1 alpha 2.
+      type: string
+      pattern: '[A-Z]{2}'
+      examples:
+      - CH
+    CardMutationContactlessActivationStatus:
+      description: Controls whether contactless is enabled.
+      type: boolean
+    CardMutationRequest:
+      description: Fields to modify. Fields that are set will be modified. Others will be ignored.
+      type: object
+      required:
+      - cardTokenExtension
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
+        bccData:
+          $ref: '#/components/schemas/CardMutationBccData'
+        fraudConfiguration:
+          $ref: '#/components/schemas/CardMutationFraudConfiguration'
+        cardApplication:
+          $ref: '#/components/schemas/CardMutationCardApplication'
+        contactlessActivationStatus:
+          $ref: '#/components/schemas/CardMutationContactlessActivationStatus'
+        featureToggles:
+          $ref: '#/components/schemas/CardMutationFeatureToggles'
+    ResetPinTryCounterRequest:
+      description: Contains the cardTokenExtension used together with the cardToken path parameter for card identification.
+      type: object
+      required:
+      - cardTokenExtension
+      properties:
+        cardTokenExtension:
+          $ref: '#/components/schemas/CardTokenExtension'
     PaymentAuthenticationMethods:
       description: Container for the available authentication methods.
       type: object
@@ -3409,50 +3367,127 @@ components:
           properties:
             status:
               $ref: '#/components/schemas/AuthenticationMethodStatus'
-    Salutation:
-      description: Salutation code of a cardholder.
+    CardBlockOrigin:
+      description: Initiator and channel of the card blocking.
       type: string
       enum:
-      - NOT_SET
-      - MR
-      - MS
-      - FIRM
+      - ONLINE_BANKING_BY_CARDHOLDER
+      - MOBILE_BANKING_BY_CARDHOLDER
+      - THREE_DS_CARDMANAGEMENT_APP_BY_CARDHOLDER
+      - BACKEND_OF_BANK_BY_BANK
+      - BACKEND_OF_BANK_BY_CARDHOLDER
+      - BANK_DEBIT_ONLINE_WEB_BY_BANK
+      - BANK_DEBIT_ONLINE_WEB_BY_CALL_CARDHOLDER
+      - SIX_CALLCENTER_BY_CALL_CARDHOLDER
+      - SIX_CALLCENTER_DEBIT_ONLINE_WEB_VIA_BLOCKING_MASK_BY_CALL_CARDHOLDER
+      - SIX_BY_THIRD_PARTY_ORDER
+      - SIX_DEBIT_ONLINE_WEB_VIA_BLOCKING_MASK_BY_THIRD_PARTY_ORDER
+      - SIX_DEBIT_ONLINE_WEB_VIA_CARD_MASK_BY_THIRD_PARTY_ORDER
+      - SIX_FRAUD_BY_RISKSHIELD_MANUAL
+      - SIX_FRAUD_BY_RISKSHIELD_AUTOMATIC
+      - SIX_FRAUD_BY_DEBIX
+      - SIX_BY_BLOCKING_APPLICATION
+    GetPinRequest:
+      type: string
+      description: "JSON Web Token signed by the issuer, containing all parameters for securely retrieving the PIN. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
+      examples:
+      - see "#/components/schemas/GetPinRequestJwsPayload"
+    BankCardLine:
+      description: Bank card specific field. The content of this field has to be agreed with the card producer and will not be checked by SIX.
+      type: string
+    DatamailerDeliveryDestination:
+      description: Specifies the delivery destination for OTRC, PIN, and card datamailer.
+      type: string
+      enum:
+      - DELIVER_TO_BANK
+      - DELIVER_TO_CARDHOLDER
+    MoneySendReceiveAllowance:
+      description: Defines conditions if money send to and receive from another cardholder is allowed.
+      type: string
+      enum:
+      - NOT_ALLOWED
+      - RECEIVE_ALLOWED
+      - SEND_ALLOWED
+      - RECEIVE_AND_SEND_ALLOWED
+    AuthenticationMethodStatus:
+      description: Status of an authentication method.
+      type: string
+      enum:
+      - ENABLED
+      - DISABLED
+      - BLOCKED
+    FamilyName:
+      description: Family name
+      type: string
+      maxLength: 25
+      examples:
+      - Schweizer
+    CardBlockOriginViaBank:
+      description: Initiator and channel of the card blocking when the card is blocked via the bank.
+      type: string
+      enum:
+      - ONLINE_BANKING_BY_CARDHOLDER
+      - MOBILE_BANKING_BY_CARDHOLDER
+      - THREE_DS_CARDMANAGEMENT_APP_BY_CARDHOLDER
+      - BACKEND_OF_BANK_BY_BANK
+      - BACKEND_OF_BANK_BY_CARDHOLDER
+    Iban:
+      description: IBAN of the bank account for which the card was issued.
+      type: string
+      minLength: 21
+      maxLength: 21
+      examples:
+      - CH3456789012345678901
     ChipApplication:
       description: Indicates what chip will be applied to the card. If no chipApplication is provided, EMVI20 will be applied in the order.
       type: string
       enum:
       - EMVI20
       - EMVI24
-    GetPinRequest:
-      type: string
-      description: "JSON Web Token signed by the issuer, containing all parameters for securely retrieving the PIN. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
-      examples:
-      - see "#/components/schemas/GetPinRequestJwsPayload"
-    CardPlasticCode:
-      description: Plastic code of the card.
-      type: string
-      minLength: 2
-      maxLength: 2
-      examples:
-      - F0
-    SubCardType:
-      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
-      type: string
-      minLength: 2
-      maxLength: 2
-      examples:
-      - A1
-    BankCardLine:
-      description: Bank card specific field. The content of this field has to be agreed with the card producer and will not be checked by SIX.
-      type: string
-    CardExpressCode:
-      description: Defines the express code of the card delivery. Must be set for a physical card order and CardDelivery is DELIVER_TO_CARDHOLDER.
+    PinRecoveryStatus:
+      description: The status of the PIN recovery.
       type: string
       enum:
-      - A_POST
-      - B_POST
-      - REGISTERED
-      - COURIER
+      - NO_PIN_ORDERED
+      - NEW_PIN_ORDERED_PIN_CHANGE_REQUIRED
+      - NEW_PIN_ORDERED_RECOVERY_PROCESSED
+      - NEW_PIN_ORDERED_RECOVERY_CONFIRMED
+      - NEW_PIN_ORDERED_RECOVERY_NOK
+    CardDetailsRequest_2:
+      description: Contains the identifier of the card for which to return the details.
+      type: object
+      required:
+      - cardId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId_2'
+    CardOrderReversalRequest_2:
+      type: object
+      required:
+      - cardId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId_2'
+    CardId_2:
+      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
+      type: object
+      required:
+      - bankClearingNumber
+      - cardNumber
+      - cardType
+      - cardSeqNumber
+      - cardExpiry
+      properties:
+        bankClearingNumber:
+          $ref: '#/components/schemas/BankClearingNumber'
+        cardNumber:
+          $ref: '#/components/schemas/CardNumber'
+        cardType:
+          $ref: '#/components/schemas/CardType'
+        cardSeqNumber:
+          $ref: '#/components/schemas/CardSeqNumber'
+        cardExpiry:
+          $ref: '#/components/schemas/YearMonth'
     ParentCardReference_2:
       description: Reference to a card from which settings can be inherited.
       type: object
@@ -3485,66 +3520,11 @@ components:
         takeoverBillingUpdater:
           type: boolean
           description: Indicates if the new card shall be linked to the account of the parent card within the Mastercard automated billing updater (ABU) resp. the VISA Account Updater (VAU).
-    PinDatamailerOrderRequest_2:
-      description: Details of the PIN datamailer order request. The referenced card must be a physical card.
-      type: object
-      required:
-      - cardId
-      - deliveryDestination
-      - expressCode
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId_2'
-        deliveryDestination:
-          description: Delivery destination of PIN.
-          $ref: '#/components/schemas/DatamailerDeliveryDestination'
-        expressCode:
-          description: The quickness of the PIN delivery.
-          $ref: '#/components/schemas/DatamailerExpressCode'
-        deliveryInformation:
-          description: The delivery information must be set if the PIN is delivered to the cardholder.
-          $ref: '#/components/schemas/DeliveryInformation'
-        mailerText:
-          description: Selects the individual text container for printing onto the datamailer. Can be set if the PIN is delivered to the cardholder.
-          $ref: '#/components/schemas/MailerTextCode'
-    CardMutationRequest_2:
-      description: Fields to modify. Fields that are set will be modified. Others will be ignored.
-      type: object
-      required:
-      - cardId
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId_2'
-        bccData:
-          $ref: '#/components/schemas/CardMutationBccData'
-        fraudConfiguration:
-          $ref: '#/components/schemas/CardMutationFraudConfiguration'
-        cardApplication:
-          $ref: '#/components/schemas/CardMutationCardApplication'
-        contactlessActivationStatus:
-          $ref: '#/components/schemas/CardMutationContactlessActivationStatus'
-        featureToggles:
-          $ref: '#/components/schemas/CardMutationFeatureToggles'
-    CardId_2:
-      description: Complex object representing a card consisting of bank clearing number, card number, card type, card sequence number and card expiry.
-      type: object
-      required:
-      - bankClearingNumber
-      - cardNumber
-      - cardType
-      - cardSeqNumber
-      - cardExpiry
-      properties:
-        bankClearingNumber:
-          $ref: '#/components/schemas/BankClearingNumber'
-        cardNumber:
-          $ref: '#/components/schemas/CardNumber'
-        cardType:
-          $ref: '#/components/schemas/CardType'
-        cardSeqNumber:
-          $ref: '#/components/schemas/CardSeqNumber'
-        cardExpiry:
-          $ref: '#/components/schemas/YearMonth'
+    StartSetPinRequest_2:
+      type: string
+      description: "JSON Web Token signed by the issuer to get an ephemeral public key from debiX for the given cardId. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
+      examples:
+      - see "#/components/schemas/StartSetPinRequestJwsPayload"
     UpdateCardStatusRequest_2:
       description: Contains the request to update the status of the card. The card block reason is required when blocking the card. Only when blocking a card, the information in card block reason, card block origin and blocked card replacement are taken into account; in other cases, they are ignored.
       type: object
@@ -3566,26 +3546,6 @@ components:
           $ref: '#/components/schemas/CardBlockOriginViaBank'
         blockedCardReplacement:
           $ref: '#/components/schemas/BlockedCardReplacement'
-    CardInstanceTokenRequest_2:
-      description: Contains the identifier of the card for which to return the card instance token.
-      type: object
-      required:
-      - cardId
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId_2'
-    VisaADAliasId_2:
-      description: The UUID generated by Alias Directory which identifies the alias
-      type: string
-      minLength: 36
-      maxLength: 36
-      examples:
-      - e336c8c8-2945-4be3-af3e-951ec2d01219
-    StartSetPinRequest_2:
-      type: string
-      description: "JSON Web Token signed by the issuer to get an ephemeral public key from debiX for the given cardId. \n* The algorithm of the JWS signature can be one of RS256/384/512, PS256/384/512, ES256/384/512 or EdDsa/Ed25519. ES256 is recommended.\n* The JOSE header must contain a 'x5t#S256' parameter with the X.509 certificate SHA-256 thumbprint of the key used to sign the token. (https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.8)\n"
-      examples:
-      - see "#/components/schemas/StartSetPinRequestJwsPayload"
     CardDetailsResponse_2:
       description: Contains detailed information about the card.
       type: object
@@ -3615,37 +3575,43 @@ components:
           $ref: '#/components/schemas/CardToken'
         cardInstanceToken:
           $ref: '#/components/schemas/CardInstanceToken'
-    CardOrderReversalRequest_2:
+    PinDatamailerOrderRequest_2:
+      description: Details of the PIN datamailer order request. The referenced card must be a physical card.
+      type: object
+      required:
+      - cardId
+      - deliveryDestination
+      - expressCode
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId_2'
+        deliveryDestination:
+          description: Delivery destination of PIN.
+          $ref: '#/components/schemas/DatamailerDeliveryDestination'
+        expressCode:
+          description: The quickness of the PIN delivery.
+          $ref: '#/components/schemas/DatamailerExpressCode'
+        deliveryInformation:
+          description: The delivery information must be set if the PIN is delivered to the cardholder.
+          $ref: '#/components/schemas/DeliveryInformation'
+        mailerText:
+          description: Selects the individual text container for printing onto the datamailer. Can be set if the PIN is delivered to the cardholder.
+          $ref: '#/components/schemas/MailerTextCode'
+    CardInstanceTokenRequest_2:
+      description: Contains the identifier of the card for which to return the card instance token.
       type: object
       required:
       - cardId
       properties:
         cardId:
           $ref: '#/components/schemas/CardId_2'
-    CardSeqNumber:
-      description: Sequence number of the card.
-      type: integer
-      format: int32
-      minimum: 0
-      maximum: 9
+    VisaADAliasId_2:
+      description: The UUID generated by Alias Directory which identifies the alias
+      type: string
+      minLength: 36
+      maxLength: 36
       examples:
-      - 2
-    ResetPinTryCounterRequest_2:
-      description: Contains the identifier of the card for which to request the reset of the PIN try counter.
-      type: object
-      required:
-      - cardId
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId_2'
-    CardDetailsRequest_2:
-      description: Contains the identifier of the card for which to return the details.
-      type: object
-      required:
-      - cardId
-      properties:
-        cardId:
-          $ref: '#/components/schemas/CardId_2'
+      - e336c8c8-2945-4be3-af3e-951ec2d01219
     EmvProfile_2:
       description: Information about the EMV-Profile.
       type: object
@@ -3659,7 +3625,47 @@ components:
           type: integer
           examples:
           - 4
+    CardSeqNumber:
+      description: Sequence number of the card.
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 9
+      examples:
+      - 2
+    CardMutationRequest_2:
+      description: Fields to modify. Fields that are set will be modified. Others will be ignored.
+      type: object
+      required:
+      - cardId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId_2'
+        bccData:
+          $ref: '#/components/schemas/CardMutationBccData'
+        fraudConfiguration:
+          $ref: '#/components/schemas/CardMutationFraudConfiguration'
+        cardApplication:
+          $ref: '#/components/schemas/CardMutationCardApplication'
+        contactlessActivationStatus:
+          $ref: '#/components/schemas/CardMutationContactlessActivationStatus'
+        featureToggles:
+          $ref: '#/components/schemas/CardMutationFeatureToggles'
+    ResetPinTryCounterRequest_2:
+      description: Contains the identifier of the card for which to request the reset of the PIN try counter.
+      type: object
+      required:
+      - cardId
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId_2'
   parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
     IssuerTraceIdHeader:
       in: header
       name: issuer-trace-id
@@ -3668,12 +3674,6 @@ components:
         type: string
         minLength: 1
         maxLength: 26
-    RequestIdHeader:
-      in: header
-      name: x-request-id
-      description: A unique identifier for a request and response pair.
-      schema:
-        type: string
 x-refined-from:
 - six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
 - six-group-debix-bank-api-v2-bank-to-six-openapi.yml

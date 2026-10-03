@@ -63,6 +63,49 @@ paths:
                 $ref: '#/components/schemas/ApiError'
 components:
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          example: 42
+        description:
+          description: The message describing the error.
+          type: string
+          example: The answer to the great question of Life, the Universe and Everything.
+    ApiError:
+      description: Information about an error on API requests.
+      type: object
+      required:
+      - applicationError
+      - errorCode
+      properties:
+        applicationError:
+          description: The name of the application error.
+          type: string
+          example: OPERATION_FAILED
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          example: 5001
+        description:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+          example: The requested operation failed.
+        errors:
+          description: List of error details.
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+        errorToken:
+          description: A generated error token referencing the error log on the server.
+          type: string
+          example: 618503aa-7beb-4d3d-986e-36f1fdbd0e13
     AuthenticationRequest:
       type: object
       required:
@@ -86,20 +129,6 @@ components:
           type: string
           example: https://requestor.url.com?id=24dfc3e8-0dfa-45d7-95c1-4d213a8da9d9
           description: threeDSRequestorAppURL as defined in the 3DS 2.2 specification. Used to link back to the merchant app from an OOB app.
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          example: 42
-        description:
-          description: The message describing the error.
-          type: string
-          example: The answer to the great question of Life, the Universe and Everything.
     TransactionDetail:
       type: object
       required:
@@ -133,35 +162,6 @@ components:
           type: string
           description: The ISO-4217 three-letter alphabetic currency code.
           example: CHF
-    ApiError:
-      description: Information about an error on API requests.
-      type: object
-      required:
-      - applicationError
-      - errorCode
-      properties:
-        applicationError:
-          description: The name of the application error.
-          type: string
-          example: OPERATION_FAILED
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          example: 5001
-        description:
-          description: A human-readable explanation specific to this occurrence of the problem.
-          type: string
-          example: The requested operation failed.
-        errors:
-          description: List of error details.
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-        errorToken:
-          description: A generated error token referencing the error log on the server.
-          type: string
-          example: 618503aa-7beb-4d3d-986e-36f1fdbd0e13
   parameters:
     ThreeDsTransactionId:
       in: path

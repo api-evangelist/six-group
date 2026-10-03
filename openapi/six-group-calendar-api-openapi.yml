@@ -87,140 +87,6 @@ paths:
           content: {}
 components:
   schemas:
-    ClearingDayCalendarJsonResponse:
-      required:
-      - entries
-      - metaData
-      type: object
-      properties:
-        metaData:
-          $ref: '#/components/schemas/ClearingDayCalendarMetaData'
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClearingDayCalendarJsonResponseEntry'
-      description: Toplevel element that contains metadata and clearing day calendar entries.
-    ScheduledClearingDayChange:
-      required:
-      - nextClearingDay
-      type: object
-      properties:
-        scheduledClearingStop1:
-          type: string
-          description: Clearing stop 1 date and time.
-          format: date-time
-          example: '2024-12-23T17:00:00+01:00'
-        scheduledClearingStop2:
-          type: string
-          description: Clearing stop 2 date and time.
-          format: date-time
-          example: '2024-12-23T18:00:00+01:00'
-        scheduledClearingStop3:
-          type: string
-          description: Clearing stop 3 date and time.
-          format: date-time
-          example: '2024-12-23T18:15:00+01:00'
-        scheduledCutOff1:
-          type: string
-          description: Cut off 1 date and time.
-          format: date-time
-          example: '2024-12-23T16:30:00+01:00'
-        scheduledCutOff2:
-          type: string
-          description: Cut off 2 date and time.
-          format: date-time
-          example: '2024-12-23T17:30:00+01:00'
-        nextClearingDay:
-          type: string
-          description: The clearing day that starts after day end processing (SIC and euroSIC RTGS service) or after day change (SIC IP service).
-          format: date
-          example: '2024-12-24'
-      description: 'Used if a clearing day change is scheduled for the calendar date. Depending on the service certain child-elements are available:
-
-
-        a) clearing stops (SIC RTGS and euroSIC RTGS service)
-
-        b) cut-offs for euroSIC RTGS service
-
-        c) the next clearing day scheduled
-
-
-        The date-time fields are structured according to RFC3339, section 5.6 in ISO 8601 with timezone and milliseconds.
-
-        '
-    ClearingDayCalendarJsonResponseEntry:
-      required:
-      - calendarDay
-      - dayOfWeek
-      - services
-      type: object
-      properties:
-        calendarDay:
-          type: string
-          description: Calendar day (according to ISO 8601) of the record. All dependent information can be found as child elements.
-          format: date
-          example: '2024-12-23'
-        dayOfWeek:
-          maxLength: 15
-          minLength: 1
-          type: string
-          description: Day of week of the current record in english. This redundant information is only available to support readability.
-          example: Wednesday
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
-      description: Contains clearing day information for a specific calendar date.
-    ClearingDayCalendarMetaData:
-      required:
-      - createdStamp
-      type: object
-      properties:
-        createdStamp:
-          type: string
-          description: Date and time (according to ISO 8601) at which this response was created.
-          format: date-time
-          example: '2024-12-21T10:52:05.1904957+01:00'
-      description: Information about the validity and creation stamp.
-    Duration:
-      required:
-      - endDateTime
-      - startDateTime
-      type: object
-      properties:
-        startDateTime:
-          type: string
-          description: Start date and time of the duration.
-          format: date-time
-          example: '2024-12-23T12:00:00+01:00'
-        endDateTime:
-          type: string
-          description: End date and time of the duration.
-          format: date-time
-      description: A duration composed of start and end. The date-time fields are structured according to RFC3339, section 5.6 in ISO 8601 with timezone and milliseconds.
-    GenericObject:
-      required:
-      - '@type'
-      - data
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: 'The field "@type" contains a URI/name identifying the type. Example: "@type": "types.example.com/standard/id".
-
-            '
-        data:
-          type: object
-          properties: {}
-          description: 'An object of type @type containing custom fields.
-
-            '
-      description: 'Structured type that contains an object and its type.
-
-        '
-      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
-
-        '
     Problem:
       required:
       - detail
@@ -274,6 +140,53 @@ components:
           example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
         metadata:
           $ref: '#/components/schemas/GenericObject'
+    ClearingDayCalendarMetaData:
+      required:
+      - createdStamp
+      type: object
+      properties:
+        createdStamp:
+          type: string
+          description: Date and time (according to ISO 8601) at which this response was created.
+          format: date-time
+          example: '2024-12-21T10:52:05.1904957+01:00'
+      description: Information about the validity and creation stamp.
+    ClearingDayCalendarJsonResponse:
+      required:
+      - entries
+      - metaData
+      type: object
+      properties:
+        metaData:
+          $ref: '#/components/schemas/ClearingDayCalendarMetaData'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClearingDayCalendarJsonResponseEntry'
+      description: Toplevel element that contains metadata and clearing day calendar entries.
+    GenericObject:
+      required:
+      - '@type'
+      - data
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: 'The field "@type" contains a URI/name identifying the type. Example: "@type": "types.example.com/standard/id".
+
+            '
+        data:
+          type: object
+          properties: {}
+          description: 'An object of type @type containing custom fields.
+
+            '
+      description: 'Structured type that contains an object and its type.
+
+        '
+      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
+
+        '
     Service:
       required:
       - clearingDay
@@ -306,7 +219,103 @@ components:
         scheduledClearingDayChange:
           $ref: '#/components/schemas/ScheduledClearingDayChange'
       description: Clearing day information for a specific service (e.g. SIC RTGS service or SIC IP service). This always includes the currently valid clearing day and may include planned downtimes and planned clearing day changes - if any.
+    ClearingDayCalendarJsonResponseEntry:
+      required:
+      - calendarDay
+      - dayOfWeek
+      - services
+      type: object
+      properties:
+        calendarDay:
+          type: string
+          description: Calendar day (according to ISO 8601) of the record. All dependent information can be found as child elements.
+          format: date
+          example: '2024-12-23'
+        dayOfWeek:
+          maxLength: 15
+          minLength: 1
+          type: string
+          description: Day of week of the current record in english. This redundant information is only available to support readability.
+          example: Wednesday
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+      description: Contains clearing day information for a specific calendar date.
+    ScheduledClearingDayChange:
+      required:
+      - nextClearingDay
+      type: object
+      properties:
+        scheduledClearingStop1:
+          type: string
+          description: Clearing stop 1 date and time.
+          format: date-time
+          example: '2024-12-23T17:00:00+01:00'
+        scheduledClearingStop2:
+          type: string
+          description: Clearing stop 2 date and time.
+          format: date-time
+          example: '2024-12-23T18:00:00+01:00'
+        scheduledClearingStop3:
+          type: string
+          description: Clearing stop 3 date and time.
+          format: date-time
+          example: '2024-12-23T18:15:00+01:00'
+        scheduledCutOff1:
+          type: string
+          description: Cut off 1 date and time.
+          format: date-time
+          example: '2024-12-23T16:30:00+01:00'
+        scheduledCutOff2:
+          type: string
+          description: Cut off 2 date and time.
+          format: date-time
+          example: '2024-12-23T17:30:00+01:00'
+        nextClearingDay:
+          type: string
+          description: The clearing day that starts after day end processing (SIC and euroSIC RTGS service) or after day change (SIC IP service).
+          format: date
+          example: '2024-12-24'
+      description: 'Used if a clearing day change is scheduled for the calendar date. Depending on the service certain child-elements are available:
+
+
+        a) clearing stops (SIC RTGS and euroSIC RTGS service)
+
+        b) cut-offs for euroSIC RTGS service
+
+        c) the next clearing day scheduled
+
+
+        The date-time fields are structured according to RFC3339, section 5.6 in ISO 8601 with timezone and milliseconds.
+
+        '
+    Duration:
+      required:
+      - endDateTime
+      - startDateTime
+      type: object
+      properties:
+        startDateTime:
+          type: string
+          description: Start date and time of the duration.
+          format: date-time
+          example: '2024-12-23T12:00:00+01:00'
+        endDateTime:
+          type: string
+          description: End date and time of the duration.
+          format: date-time
+      description: A duration composed of start and end. The date-time fields are structured according to RFC3339, section 5.6 in ISO 8601 with timezone and milliseconds.
   parameters:
+    query_serviceIdentification:
+      name: serviceIdentification
+      in: query
+      description: Service identification that should be returned by the API call. If not specified all available services are returned.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
     query_calendarDay:
       name: calendarDay
       in: query
@@ -317,13 +326,4 @@ components:
       schema:
         type: string
         format: date
-    query_serviceIdentification:
-      name: serviceIdentification
-      in: query
-      description: Service identification that should be returned by the API call. If not specified all available services are returned.
-      required: false
-      style: form
-      explode: true
-      schema:
-        type: string
 x-original-swagger-version: '2.0'

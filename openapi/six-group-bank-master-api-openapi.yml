@@ -127,55 +127,32 @@ paths:
           description: Unexpected error.
 components:
   schemas:
-    GenericObject:
+    BankMasterJsonResponse:
       required:
-      - '@type'
-      - data
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: 'The field "@type" contains a URI/name identifying the type.
-
-            '
-          example: types.example.com/standard/id
-        data:
-          type: object
-          description: 'An object of type @type containing custom fields.
-
-            '
-          example: '-'
-      description: 'Structured type that contains an object and its type.
-
-        '
-      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
-
-        '
-    BankMasterBase:
-      required:
-      - entryType
-      - iid
+      - entries
+      - readTime
+      - totalSize
       - validOn
       type: object
       properties:
-        iid:
+        totalSize:
           type: integer
-          description: Each bank / financial institution is identified by an IID (institution identification). IIDs are three to five digits long. QR-IIDs consist exclusively of numbers from 30000 to 31999.
-          example: 9703
+          description: The total count of records in the entries list.
+          example: 42
         validOn:
           type: string
-          description: Date to which the information in a record applies. This date (written as per ISO8601 standard) is identical for all records.
+          description: Master data is edited and published on a daily basis. Therefore the data is valid on that exact date only.
           format: date
           example: '2023-01-23'
-        entryType:
+        readTime:
           type: string
-          description: '"New IID/QR-IID" must be used instead of "IID / QR-IID" if entryType is BankMasterConcatenated.'
-          example: BankMaster
-          enum:
-          - BankMasterConcatenated
-          - BankMaster
-      discriminator:
-        propertyName: entryType
+          description: Date and time (according to ISO 8601) at which this response was created.
+          format: date-time
+          example: '2023-01-21T10:52:05.1904957+01:00'
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BankMasterBase'
     Problem:
       required:
       - detail
@@ -229,29 +206,52 @@ components:
           example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
         metadata:
           $ref: '#/components/schemas/GenericObject'
-    BankMasterJsonResponse:
+    BankMasterBase:
       required:
-      - entries
-      - readTime
-      - totalSize
+      - entryType
+      - iid
       - validOn
       type: object
       properties:
-        totalSize:
+        iid:
           type: integer
-          description: The total count of records in the entries list.
-          example: 42
+          description: Each bank / financial institution is identified by an IID (institution identification). IIDs are three to five digits long. QR-IIDs consist exclusively of numbers from 30000 to 31999.
+          example: 9703
         validOn:
           type: string
-          description: Master data is edited and published on a daily basis. Therefore the data is valid on that exact date only.
+          description: Date to which the information in a record applies. This date (written as per ISO8601 standard) is identical for all records.
           format: date
           example: '2023-01-23'
-        readTime:
+        entryType:
           type: string
-          description: Date and time (according to ISO 8601) at which this response was created.
-          format: date-time
-          example: '2023-01-21T10:52:05.1904957+01:00'
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/BankMasterBase'
+          description: '"New IID/QR-IID" must be used instead of "IID / QR-IID" if entryType is BankMasterConcatenated.'
+          example: BankMaster
+          enum:
+          - BankMasterConcatenated
+          - BankMaster
+      discriminator:
+        propertyName: entryType
+    GenericObject:
+      required:
+      - '@type'
+      - data
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: 'The field "@type" contains a URI/name identifying the type.
+
+            '
+          example: types.example.com/standard/id
+        data:
+          type: object
+          description: 'An object of type @type containing custom fields.
+
+            '
+          example: '-'
+      description: 'Structured type that contains an object and its type.
+
+        '
+      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
+
+        '
