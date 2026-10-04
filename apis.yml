@@ -335,6 +335,8 @@ apis:
     https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html
   baseURL: https://api.six-group.com/api/debix/bank/v2
   tags:
+  - 3D
+  tags_raw:
   - 3 DS
   properties:
   - type: OpenAPI
