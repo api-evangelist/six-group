@@ -153,6 +153,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BankMasterBase'
+    GenericObject:
+      required:
+      - '@type'
+      - data
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: 'The field "@type" contains a URI/name identifying the type.
+
+            '
+          example: types.example.com/standard/id
+        data:
+          type: object
+          description: 'An object of type @type containing custom fields.
+
+            '
+          example: '-'
+      description: 'Structured type that contains an object and its type.
+
+        '
+      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
+
+        '
     Problem:
       required:
       - detail
@@ -231,27 +255,3 @@ components:
           - BankMaster
       discriminator:
         propertyName: entryType
-    GenericObject:
-      required:
-      - '@type'
-      - data
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: 'The field "@type" contains a URI/name identifying the type.
-
-            '
-          example: types.example.com/standard/id
-        data:
-          type: object
-          description: 'An object of type @type containing custom fields.
-
-            '
-          example: '-'
-      description: 'Structured type that contains an object and its type.
-
-        '
-      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
-
-        '

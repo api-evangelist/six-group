@@ -39,19 +39,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
 components:
+  parameters:
+    query_iban:
+      name: iban
+      in: query
+      description: International bank account number (IBAN) parameter of the API call.
+      required: true
+      style: form
+      explode: true
+      schema:
+        maxLength: 100
+        minLength: 10
+        type: string
+        example: CHpp bbbb bkkk kkkk kkkk k
   schemas:
-    IbanResponse:
-      required:
-      - validationResult
-      type: object
-      properties:
-        validationResult:
-          $ref: '#/components/schemas/IbanValidationResult'
-        iid:
-          type: integer
-          description: Each bank / financial institution is identified by an IID (institution identification). IIDs are three to five digits long. QR-IIDs consist exclusively of numbers from 30000 to 31999.
-          example: 9703
-      description: IBAN validation result and IID if available.
+    IbanValidationResult:
+      type: string
+      description: 'Validation result. Possible values:
+
+        - OK                    # This IBAN is formally correct
+
+        - INVALID_COUNTRY_CODE  # This IBAN has an invalid country code
+
+        - INVALID_LENGTH        # This IBAN has an invalid length
+
+        - INVALID_FORMAT,       # This IBAN is formally incorrect according to ISO-13616-1
+
+        - INVALID_CHECKSUM      # This IBAN has an invalid checksum
+
+        - INVALID_IID           # This IBAN has an invalid CH or LI institution identification (IID)
+
+        '
     Problem:
       required:
       - detail
@@ -105,6 +123,18 @@ components:
           example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
         metadata:
           $ref: '#/components/schemas/GenericObject'
+    IbanResponse:
+      required:
+      - validationResult
+      type: object
+      properties:
+        validationResult:
+          $ref: '#/components/schemas/IbanValidationResult'
+        iid:
+          type: integer
+          description: Each bank / financial institution is identified by an IID (institution identification). IIDs are three to five digits long. QR-IIDs consist exclusively of numbers from 30000 to 31999.
+          example: 9703
+      description: IBAN validation result and IID if available.
     GenericObject:
       required:
       - '@type'
@@ -129,33 +159,3 @@ components:
       example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
 
         '
-    IbanValidationResult:
-      type: string
-      description: 'Validation result. Possible values:
-
-        - OK                    # This IBAN is formally correct
-
-        - INVALID_COUNTRY_CODE  # This IBAN has an invalid country code
-
-        - INVALID_LENGTH        # This IBAN has an invalid length
-
-        - INVALID_FORMAT,       # This IBAN is formally incorrect according to ISO-13616-1
-
-        - INVALID_CHECKSUM      # This IBAN has an invalid checksum
-
-        - INVALID_IID           # This IBAN has an invalid CH or LI institution identification (IID)
-
-        '
-  parameters:
-    query_iban:
-      name: iban
-      in: query
-      description: International bank account number (IBAN) parameter of the API call.
-      required: true
-      style: form
-      explode: true
-      schema:
-        maxLength: 100
-        minLength: 10
-        type: string
-        example: CHpp bbbb bkkk kkkk kkkk k

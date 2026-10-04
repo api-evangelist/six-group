@@ -168,66 +168,6 @@ paths:
           content: {}
 components:
   schemas:
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
-    ReceivedHeader:
-      type: object
-      properties:
-        headerName:
-          description: Name of the received header.
-          type: string
-          examples:
-          - x-correlation-id
-        headerValue:
-          description: Value of the received header.
-          type: string
-          examples:
-          - 9bcd4351-4b7b-4017-9b63-9613414c6ff1
-    HealthCheckResponse:
-      type: object
-      required:
-      - message
-      - requestDateTime
-      - receivedHeaders
-      - apiVersion
-      properties:
-        message:
-          description: Response message from the health check.
-          type: string
-          minLength: 1
-          maxLength: 100
-          examples:
-          - The healthcheck GET request was successfully received and processed.
-        requestDateTime:
-          description: Date and time of the request.
-          type: string
-          format: date-time
-          examples:
-          - '2021-10-03T16:03:09.101+02:00'
-        receivedHeaders:
-          description: The headers received by the api backend.
-          type: array
-          items:
-            $ref: '#/components/schemas/ReceivedHeader'
-        apiVersion:
-          description: Version of this API.
-          type: string
-          examples:
-          - 1.0.0
     ApiError:
       description: Information about an error on API requests.
       type: object
@@ -261,6 +201,35 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
+    ReceivedHeader:
+      type: object
+      properties:
+        headerName:
+          description: Name of the received header.
+          type: string
+          examples:
+          - x-correlation-id
+        headerValue:
+          description: Value of the received header.
+          type: string
+          examples:
+          - 9bcd4351-4b7b-4017-9b63-9613414c6ff1
     HealthCheckRequest:
       type: object
       required:
@@ -273,32 +242,7 @@ components:
           maxLength: 100
           examples:
           - Any string
-    ErrorDetail_2:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          example: 42
-        description:
-          description: The message describing the error.
-          type: string
-          example: The answer to the great question of Life, the Universe and Everything.
-    ReceivedHeader_2:
-      type: object
-      properties:
-        headerName:
-          description: Name of the received header.
-          type: string
-          example: x-correlation-id
-        headerValue:
-          description: Value of the received header.
-          type: string
-          example: 9bcd4351-4b7b-4017-9b63-9613414c6ff1
-    HealthCheckResponse_2:
+    HealthCheckResponse:
       type: object
       required:
       - message
@@ -311,21 +255,24 @@ components:
           type: string
           minLength: 1
           maxLength: 100
-          example: The healthcheck GET request was successfully received and processed.
+          examples:
+          - The healthcheck GET request was successfully received and processed.
         requestDateTime:
           description: Date and time of the request.
           type: string
           format: date-time
-          example: '2021-10-03T16:03:09.101+02:00'
+          examples:
+          - '2021-10-03T16:03:09.101+02:00'
         receivedHeaders:
           description: The headers received by the api backend.
           type: array
           items:
-            $ref: '#/components/schemas/ReceivedHeader_2'
+            $ref: '#/components/schemas/ReceivedHeader'
         apiVersion:
           description: Version of this API.
           type: string
-          example: 2.0.0
+          examples:
+          - 1.0.0
     ApiError_2:
       description: Information about an error on API requests.
       type: object
@@ -355,6 +302,31 @@ components:
           description: A generated error token referencing the error log on the server.
           type: string
           example: 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    ErrorDetail_2:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          example: 42
+        description:
+          description: The message describing the error.
+          type: string
+          example: The answer to the great question of Life, the Universe and Everything.
+    ReceivedHeader_2:
+      type: object
+      properties:
+        headerName:
+          description: Name of the received header.
+          type: string
+          example: x-correlation-id
+        headerValue:
+          description: Value of the received header.
+          type: string
+          example: 9bcd4351-4b7b-4017-9b63-9613414c6ff1
     HealthCheckRequest_2:
       type: object
       required:
@@ -366,7 +338,7 @@ components:
           minLength: 1
           maxLength: 100
           example: Any string
-    HealthCheckResponse_3:
+    HealthCheckResponse_2:
       type: object
       required:
       - message
@@ -375,28 +347,25 @@ components:
       - apiVersion
       properties:
         message:
-          description: Response message from health check.
+          description: Response message from the health check.
           type: string
           minLength: 1
           maxLength: 100
-          examples:
-          - The healthcheck GET request was successfully received and processed.
+          example: The healthcheck GET request was successfully received and processed.
         requestDateTime:
           description: Date and time of the request.
           type: string
           format: date-time
-          examples:
-          - '2021-10-03T16:03:09.101+02:00'
+          example: '2021-10-03T16:03:09.101+02:00'
         receivedHeaders:
           description: The headers received by the api backend.
           type: array
           items:
-            $ref: '#/components/schemas/ReceivedHeader'
+            $ref: '#/components/schemas/ReceivedHeader_2'
         apiVersion:
           description: Version of this API.
           type: string
-          examples:
-          - 1.0.0
+          example: 2.0.0
     BankApiError:
       description: Information about an error on API requests.
       type: object
@@ -443,7 +412,7 @@ components:
           maxLength: 100
           examples:
           - Any string
-    HealthCheckResponse_4:
+    HealthCheckResponse_3:
       type: object
       required:
       - message
@@ -486,6 +455,60 @@ components:
           maxLength: 100
           examples:
           - Any string
+    HealthCheckResponse_4:
+      type: object
+      required:
+      - message
+      - requestDateTime
+      - receivedHeaders
+      - apiVersion
+      properties:
+        message:
+          description: Response message from health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          examples:
+          - The healthcheck GET request was successfully received and processed.
+        requestDateTime:
+          description: Date and time of the request.
+          type: string
+          format: date-time
+          examples:
+          - '2021-10-03T16:03:09.101+02:00'
+        receivedHeaders:
+          description: The headers received by the api backend.
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedHeader'
+        apiVersion:
+          description: Version of this API.
+          type: string
+          examples:
+          - 1.0.0
+    GenericObject:
+      required:
+      - '@type'
+      - data
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: 'The field "@type" contains a URI/name identifying the type. Example: "@type": "types.example.com/standard/id".
+
+            '
+        data:
+          type: object
+          properties: {}
+          description: 'An object of type @type containing custom fields.
+
+            '
+      description: 'Structured type that contains an object and its type.
+
+        '
+      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
+
+        '
     Problem:
       required:
       - detail
@@ -539,29 +562,6 @@ components:
           example: /api/epcd/bankmaster/v3/public/errors/EPCD0090000001/provided-D
         metadata:
           $ref: '#/components/schemas/GenericObject'
-    GenericObject:
-      required:
-      - '@type'
-      - data
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: 'The field "@type" contains a URI/name identifying the type. Example: "@type": "types.example.com/standard/id".
-
-            '
-        data:
-          type: object
-          properties: {}
-          description: 'An object of type @type containing custom fields.
-
-            '
-      description: 'Structured type that contains an object and its type.
-
-        '
-      example: 'When associated with a ''Problem'', it typically contains values which caused the failure and similar. May not contain sensitive CID.
-
-        '
     GenericObject_2:
       required:
       - '@type'

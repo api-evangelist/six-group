@@ -63,20 +63,6 @@ paths:
                 $ref: '#/components/schemas/ApiError'
 components:
   schemas:
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          example: 42
-        description:
-          description: The message describing the error.
-          type: string
-          example: The answer to the great question of Life, the Universe and Everything.
     ApiError:
       description: Information about an error on API requests.
       type: object
@@ -106,29 +92,20 @@ components:
           description: A generated error token referencing the error log on the server.
           type: string
           example: 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    AuthenticationRequest:
+    ErrorDetail:
       type: object
       required:
-      - threeDsTransactionId
-      - authId
-      - transactionDetail
+      - errorCode
       properties:
-        threeDsTransactionId:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          example: 42
+        description:
+          description: The message describing the error.
           type: string
-          example: a5b86c4e-0caa-11e8-ba89-0ed5f89f718b
-          description: The 3DS transaction id.
-        authId:
-          type: string
-          minLength: 1
-          maxLength: 36
-          example: ea3ze38kfj3g6ktv6wn14aaylvmdv3qn
-          description: Identifier for the device used for 3DS
-        transactionDetail:
-          $ref: '#/components/schemas/TransactionDetail'
-        threeDSRequestorAppURL:
-          type: string
-          example: https://requestor.url.com?id=24dfc3e8-0dfa-45d7-95c1-4d213a8da9d9
-          description: threeDSRequestorAppURL as defined in the 3DS 2.2 specification. Used to link back to the merchant app from an OOB app.
+          example: The answer to the great question of Life, the Universe and Everything.
     TransactionDetail:
       type: object
       required:
@@ -162,6 +139,29 @@ components:
           type: string
           description: The ISO-4217 three-letter alphabetic currency code.
           example: CHF
+    AuthenticationRequest:
+      type: object
+      required:
+      - threeDsTransactionId
+      - authId
+      - transactionDetail
+      properties:
+        threeDsTransactionId:
+          type: string
+          example: a5b86c4e-0caa-11e8-ba89-0ed5f89f718b
+          description: The 3DS transaction id.
+        authId:
+          type: string
+          minLength: 1
+          maxLength: 36
+          example: ea3ze38kfj3g6ktv6wn14aaylvmdv3qn
+          description: Identifier for the device used for 3DS
+        transactionDetail:
+          $ref: '#/components/schemas/TransactionDetail'
+        threeDSRequestorAppURL:
+          type: string
+          example: https://requestor.url.com?id=24dfc3e8-0dfa-45d7-95c1-4d213a8da9d9
+          description: threeDSRequestorAppURL as defined in the 3DS 2.2 specification. Used to link back to the merchant app from an OOB app.
   parameters:
     ThreeDsTransactionId:
       in: path
