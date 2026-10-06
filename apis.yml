@@ -61,7 +61,7 @@ tags_raw:
 - Payments
 - Switzerland
 created: '2026-07-21'
-modified: '2026-07-22'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: six-group:six-web-api
@@ -355,6 +355,10 @@ apis:
   - type: OpenAPI
     url: openapi/six-group-bank-master-api-openapi.yml
 common:
+- url: https://www.six-group.com/en/blog.html
+  type: Blog
+- url: https://www.six-group.com/en/blog.rss.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/six-group-capability-edges.yml
   name: SIX Business Capability Map
