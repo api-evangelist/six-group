@@ -3,7 +3,7 @@ name: Order and manage a debiX debit card
 description: Issuer-side happy path on the debiX platform - order a card, read its
   details, and manage its status - over mTLS-certificated access.
 api: openapi/six-group-card-management-api-openapi.yml
-operations: [orderCard, getCardDetails, updateCardStatus, getCardToken, startSetPin, setPin]
+operations: [orderCard, postCardsDetails, putCardsStatus, getCardToken, startSetPin, postCardsSetPin]
 generated: '2026-07-22'
 method: generated
 ---
