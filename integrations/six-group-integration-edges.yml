@@ -1,0 +1,18 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/six-group/integrations
+- https://zapier.com/apps/six/integrations
+- https://n8n.io/integrations/six-group/
+- https://composio.dev/toolkits/six-group
+- https://monid.ai/tools/six-group
+checked:
+- https://composio.dev/toolkits/six-group
+- https://monid.ai/tools/six-group
+- https://n8n.io/integrations/six-group/
+- https://zapier.com/apps/six-group/integrations
+- https://zapier.com/apps/six/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
