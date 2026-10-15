@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/six-group/integrations
 - https://zapier.com/apps/six/integrations
@@ -7,12 +7,118 @@ source:
 - https://composio.dev/toolkits/six-group
 - https://monid.ai/tools/six-group
 checked:
+- https://api.twelvedata.com/exchanges
 - https://composio.dev/toolkits/six-group
 - https://monid.ai/tools/six-group
 - https://n8n.io/integrations/six-group/
+- https://registers.esma.europa.eu/solr/esma_registers_bench_entities/select
+- https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv
 - https://zapier.com/apps/six-group/integrations
 - https://zapier.com/apps/six/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: ISO 10383 (MIC)
+  partner: null
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv
+  source: mic
+  category: registered trading venues and market segments
+  contract_reference:
+    register: ISO 10383 Market Identifier Codes (ISO 20022 registration authority)
+    spec_file: null
+    standard: ISO 10383
+    role: venue operator
+    matched_domain: six-group.com
+    matched_by: domain+verified:six-group.com
+    categories:
+    - NSPD
+    - RMKT
+    operating_mics:
+    - XSWX
+    mics:
+    - mic: XSWX
+      operating_mic: XSWX
+      segment: OPRT
+      market: SIX SWISS EXCHANGE
+      category: RMKT
+      legal_name: SIX SWISS EXCHANGE AG
+      country: CH
+    - mic: XDLP
+      operating_mic: XSWX
+      segment: SGMT
+      market: SIX SWISS EXCHANGE - DEAL POOL - BOOK BUILDING AND ANNOUNCEMENT PLATFORM
+      category: NSPD
+      legal_name: SIX SWISS EXCHANGE AG
+      country: CH
+    - mic: XSWM
+      operating_mic: XSWX
+      segment: SGMT
+      market: SIX SWISS EXCHANGE - SIX SWISS EXCHANGE AT MIDPOINT
+      category: RMKT
+      legal_name: SIX SWISS EXCHANGE AG
+      country: CH
+    - mic: XSEB
+      operating_mic: XSWX
+      segment: SGMT
+      market: SIX SWISS EXCHANGE - EBBO BOOK
+      category: RMKT
+      legal_name: SIX SWISS EXCHANGE AG
+      country: CH
+    - mic: XQOD
+      operating_mic: XSWX
+      segment: SGMT
+      market: SIX SWISS EXCHANGE - ETF QOD
+      category: RMKT
+      legal_name: SIX SWISS EXCHANGE AG
+      country: CH
+    detected_by: sweep-capital-markets.py
+    detected: '2026-10-15'
+  detected_by: sweep-capital-markets.py
+  first_seen: '2026-10-15'
+- partner_name: ESMA (EU)
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://registers.esma.europa.eu/solr/esma_registers_bench_entities/select
+  source: esma
+  contract_reference:
+    register: 'ESMA Benchmarks Regulation register: administrators (esma_registers_bench_entities)'
+    spec_file: null
+    registered_name: SIX Financial Information Nordic AB
+    register_id: 549300DDJHSBIZCDSG61
+    role: benchmark administrator (Authorisation under Art. 34)
+    competent_authority: European Securities and Markets Authority - ESMA
+    home_member_state: SWEDEN
+    authorised: null
+    matched_domain: six-group.com
+    matched_by: domain+verified:six-group.com
+    detected_by: sweep-capital-markets.py
+    detected: '2026-10-15'
+    other_registrations:
+    - registered_name: SIX Index AG
+      register_id: 5067002CH0O873Q5Y630
+      role: benchmark administrator (Endorsement under Art. 33)
+      competent_authority: Swiss Financial Market Supervisory Authority - CHFI
+      home_member_state: SWITZERLAND
+  detected_by: sweep-capital-markets.py
+  first_seen: '2026-10-15'
+- partner_name: Twelve Data
+  partner: twelvedata
+  partner_match: aggregator
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.twelvedata.com/exchanges
+  source: twelvedata
+  matched_by: mic:XSWX->domain+verified:six-group.com
+  mic: XSWX
+  detected_by: sweep-capital-markets.py
+  first_seen: '2026-10-15'
 templates: []
