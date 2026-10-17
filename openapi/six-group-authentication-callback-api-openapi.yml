@@ -50,6 +50,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiError'
 components:
+  parameters:
+    CorrelationIdHeader:
+      in: header
+      name: x-correlation-id
+      description: A unique identifier for an authentication request and authentication callback
+      schema:
+        type: string
   schemas:
     ApiError:
       description: Information about an error on API requests.
@@ -84,22 +91,6 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
     AuthenticationRequestCallbackRequest:
       type: object
       required:
@@ -129,10 +120,19 @@ components:
           enum:
           - BIOMETRICS
           - OTHER
-  parameters:
-    CorrelationIdHeader:
-      in: header
-      name: x-correlation-id
-      description: A unique identifier for an authentication request and authentication callback
-      schema:
-        type: string
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.

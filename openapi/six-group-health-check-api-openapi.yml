@@ -168,6 +168,49 @@ paths:
           content: {}
 components:
   schemas:
+    HealthCheckResponse:
+      type: object
+      required:
+      - message
+      - requestDateTime
+      - receivedHeaders
+      - apiVersion
+      properties:
+        message:
+          description: Response message from the health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          examples:
+          - The healthcheck GET request was successfully received and processed.
+        requestDateTime:
+          description: Date and time of the request.
+          type: string
+          format: date-time
+          examples:
+          - '2021-10-03T16:03:09.101+02:00'
+        receivedHeaders:
+          description: The headers received by the api backend.
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedHeader'
+        apiVersion:
+          description: Version of this API.
+          type: string
+          examples:
+          - 1.0.0
+    HealthCheckRequest:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          description: Expected response message from the health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          examples:
+          - Any string
     ApiError:
       description: Information about an error on API requests.
       type: object
@@ -201,6 +244,19 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    ReceivedHeader:
+      type: object
+      properties:
+        headerName:
+          description: Name of the received header.
+          type: string
+          examples:
+          - x-correlation-id
+        headerValue:
+          description: Value of the received header.
+          type: string
+          examples:
+          - 9bcd4351-4b7b-4017-9b63-9613414c6ff1
     ErrorDetail:
       type: object
       required:
@@ -217,32 +273,7 @@ components:
           type: string
           examples:
           - The answer to the great question of Life, the Universe and Everything.
-    ReceivedHeader:
-      type: object
-      properties:
-        headerName:
-          description: Name of the received header.
-          type: string
-          examples:
-          - x-correlation-id
-        headerValue:
-          description: Value of the received header.
-          type: string
-          examples:
-          - 9bcd4351-4b7b-4017-9b63-9613414c6ff1
-    HealthCheckRequest:
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          description: Expected response message from the health check.
-          type: string
-          minLength: 1
-          maxLength: 100
-          examples:
-          - Any string
-    HealthCheckResponse:
+    HealthCheckResponse_2:
       type: object
       required:
       - message
@@ -255,24 +286,32 @@ components:
           type: string
           minLength: 1
           maxLength: 100
-          examples:
-          - The healthcheck GET request was successfully received and processed.
+          example: The healthcheck GET request was successfully received and processed.
         requestDateTime:
           description: Date and time of the request.
           type: string
           format: date-time
-          examples:
-          - '2021-10-03T16:03:09.101+02:00'
+          example: '2021-10-03T16:03:09.101+02:00'
         receivedHeaders:
           description: The headers received by the api backend.
           type: array
           items:
-            $ref: '#/components/schemas/ReceivedHeader'
+            $ref: '#/components/schemas/ReceivedHeader_2'
         apiVersion:
           description: Version of this API.
           type: string
-          examples:
-          - 1.0.0
+          example: 2.0.0
+    HealthCheckRequest_2:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          description: Expected response message from the health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: Any string
     ApiError_2:
       description: Information about an error on API requests.
       type: object
@@ -302,6 +341,17 @@ components:
           description: A generated error token referencing the error log on the server.
           type: string
           example: 618503aa-7beb-4d3d-986e-36f1fdbd0e13
+    ReceivedHeader_2:
+      type: object
+      properties:
+        headerName:
+          description: Name of the received header.
+          type: string
+          example: x-correlation-id
+        headerValue:
+          description: Value of the received header.
+          type: string
+          example: 9bcd4351-4b7b-4017-9b63-9613414c6ff1
     ErrorDetail_2:
       type: object
       required:
@@ -316,29 +366,7 @@ components:
           description: The message describing the error.
           type: string
           example: The answer to the great question of Life, the Universe and Everything.
-    ReceivedHeader_2:
-      type: object
-      properties:
-        headerName:
-          description: Name of the received header.
-          type: string
-          example: x-correlation-id
-        headerValue:
-          description: Value of the received header.
-          type: string
-          example: 9bcd4351-4b7b-4017-9b63-9613414c6ff1
-    HealthCheckRequest_2:
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          description: Expected response message from the health check.
-          type: string
-          minLength: 1
-          maxLength: 100
-          example: Any string
-    HealthCheckResponse_2:
+    HealthCheckResponse_3:
       type: object
       required:
       - message
@@ -347,25 +375,40 @@ components:
       - apiVersion
       properties:
         message:
-          description: Response message from the health check.
+          description: Response message from health check.
           type: string
           minLength: 1
           maxLength: 100
-          example: The healthcheck GET request was successfully received and processed.
+          examples:
+          - The healthcheck GET request was successfully received and processed.
         requestDateTime:
           description: Date and time of the request.
           type: string
           format: date-time
-          example: '2021-10-03T16:03:09.101+02:00'
+          examples:
+          - '2021-10-03T16:03:09.101+02:00'
         receivedHeaders:
           description: The headers received by the api backend.
           type: array
           items:
-            $ref: '#/components/schemas/ReceivedHeader_2'
+            $ref: '#/components/schemas/ReceivedHeader'
         apiVersion:
           description: Version of this API.
           type: string
-          example: 2.0.0
+          examples:
+          - 1.0.0
+    HealthCheckRequest_3:
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          description: Expected response message from health check.
+          type: string
+          minLength: 1
+          maxLength: 100
+          examples:
+          - Any string
     BankApiError:
       description: Information about an error on API requests.
       type: object
@@ -400,19 +443,7 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    HealthCheckRequest_3:
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          description: Expected response message from health check.
-          type: string
-          minLength: 1
-          maxLength: 100
-          examples:
-          - Any string
-    HealthCheckResponse_3:
+    HealthCheckResponse_4:
       type: object
       required:
       - message
@@ -455,37 +486,6 @@ components:
           maxLength: 100
           examples:
           - Any string
-    HealthCheckResponse_4:
-      type: object
-      required:
-      - message
-      - requestDateTime
-      - receivedHeaders
-      - apiVersion
-      properties:
-        message:
-          description: Response message from health check.
-          type: string
-          minLength: 1
-          maxLength: 100
-          examples:
-          - The healthcheck GET request was successfully received and processed.
-        requestDateTime:
-          description: Date and time of the request.
-          type: string
-          format: date-time
-          examples:
-          - '2021-10-03T16:03:09.101+02:00'
-        receivedHeaders:
-          description: The headers received by the api backend.
-          type: array
-          items:
-            $ref: '#/components/schemas/ReceivedHeader'
-        apiVersion:
-          description: Version of this API.
-          type: string
-          examples:
-          - 1.0.0
     GenericObject:
       required:
       - '@type'

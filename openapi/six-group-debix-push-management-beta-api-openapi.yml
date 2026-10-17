@@ -180,25 +180,24 @@ paths:
       description: TEST - P2P
 components:
   schemas:
-    CardType:
-      description: 'A single digit that distinguishes the card types of the schemes.
-
-        - 1: Debit mastercard
-
-        - 3: Visa debit
-
-        - 6: Bank card'
-      type: integer
-      format: int32
-      minimum: 1
-      maximum: 6
-    SubCardType:
-      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
-      type: string
-      minLength: 2
-      maxLength: 2
-      examples:
-      - A1
+    CardSynchronizationRequest:
+      description: Request containing optional filter parameters for card synchronization.
+      type: object
+      properties:
+        cardPlasticCode:
+          $ref: '#/components/schemas/CardPlasticCode'
+        expiry:
+          $ref: '#/components/schemas/YearMonth'
+        subCardType:
+          $ref: '#/components/schemas/SubCardType'
+        cardMaterial:
+          $ref: '#/components/schemas/CardMaterial'
+        cardOrderDateTimeRange:
+          $ref: '#/components/schemas/DateTimeRange'
+        status:
+          $ref: '#/components/schemas/CardStatus'
+        cardType:
+          $ref: '#/components/schemas/CardType'
     PushModule:
       description: 'Module the push event is part of.
 
@@ -208,6 +207,46 @@ components:
 
         - "CARD_LIFECYCLE"'
       type: string
+    PushEventsSearchRequestFilter:
+      description: Contains the filter for the push event search. The date range lower and upper bounds are inclusive.
+      type: object
+      properties:
+        dateRange:
+          $ref: '#/components/schemas/DateRange'
+        pushEventTypes:
+          description: List of push event types.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PushEventType'
+        pushModules:
+          description: List of push modules.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PushModule'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Paging:
+      description: Contains paging properties.
+      type: object
+      properties:
+        pageNumber:
+          description: Page number for paging starting with zero.
+          type: integer
+          format: int32
+          default: 0
+          examples:
+          - 0
+        pageSize:
+          description: Limitation of the page size.
+          type: integer
+          format: int32
+          minimum: 20
+          maximum: 100
+          default: 100
+          examples:
+          - 50
     PushEventType:
       description: 'Type of the push event.
 
@@ -245,22 +284,6 @@ components:
       enum:
       - PHYSICAL
       - VIRTUAL
-    ErrorDetail:
-      type: object
-      required:
-      - errorCode
-      properties:
-        errorCode:
-          description: Code describing the error.
-          type: integer
-          format: int32
-          examples:
-          - 42
-        description:
-          description: The message describing the error.
-          type: string
-          examples:
-          - The answer to the great question of Life, the Universe and Everything.
     PushEventsSearchResponse:
       description: Contains a list of event references. The list is ordered by event timestamp from newest to oldest.
       type: object
@@ -277,107 +300,76 @@ components:
           format: int64
           examples:
           - 1021
-    CardSynchronizationRequest:
-      description: Request containing optional filter parameters for card synchronization.
-      type: object
-      properties:
-        cardPlasticCode:
-          $ref: '#/components/schemas/CardPlasticCode'
-        expiry:
-          $ref: '#/components/schemas/YearMonth'
-        subCardType:
-          $ref: '#/components/schemas/SubCardType'
-        cardMaterial:
-          $ref: '#/components/schemas/CardMaterial'
-        cardOrderDateTimeRange:
-          $ref: '#/components/schemas/DateTimeRange'
-        status:
-          $ref: '#/components/schemas/CardStatus'
-        cardType:
-          $ref: '#/components/schemas/CardType'
-    PushEventsSearchRequestFilter:
-      description: Contains the filter for the push event search. The date range lower and upper bounds are inclusive.
-      type: object
-      properties:
-        dateRange:
-          $ref: '#/components/schemas/DateRange'
-        pushEventTypes:
-          description: List of push event types.
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/PushEventType'
-        pushModules:
-          description: List of push modules.
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/PushModule'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    DateRange:
-      description: Date range lower and upper bounds (both inclusive).
-      type: object
-      properties:
-        from:
-          description: Start date (inclusive).
-          type: string
-          format: date
-          examples:
-          - '2024-01-01'
-        to:
-          description: End date (inclusive).
-          type: string
-          format: date
-          examples:
-          - '2024-12-31'
-    CardPlasticCode:
-      description: Plastic code of the card.
+    SubCardType:
+      description: Sub card type that is linked to a dedicated BIN range and specifies a product like 'Platinum', 'EUR' or 'Student'. It must be configured in bank master data, otherwise field can not be used.
       type: string
       minLength: 2
       maxLength: 2
       examples:
-      - F0
+      - A1
+    DateTimeRange:
+      description: Date-time range lower and upper bounds (both inclusive).
+      type: object
+      properties:
+        from:
+          description: Date-time lower bound (inclusive).
+          type: string
+          format: date-time
+          examples:
+          - '2022-01-01T00:00:00.000+02:00'
+        to:
+          description: Date-time upper bound (inclusive).
+          type: string
+          format: date-time
+          examples:
+          - '2022-12-31T23:59:59.999+02:00'
     PushEventId:
       description: Unique identifier for the push event.
       type: string
       format: uuid
-    Paging:
-      description: Contains paging properties.
-      type: object
-      properties:
-        pageNumber:
-          description: Page number for paging starting with zero.
-          type: integer
-          format: int32
-          default: 0
-          examples:
-          - 0
-        pageSize:
-          description: Limitation of the page size.
-          type: integer
-          format: int32
-          minimum: 20
-          maximum: 100
-          default: 100
-          examples:
-          - 50
-    PushEventReference:
-      description: Reference identifying a push event already sent to the issuer.
+    YearMonth:
       type: object
       required:
-      - eventId
+      - month
+      - year
       properties:
-        eventId:
-          $ref: '#/components/schemas/PushEventId'
-        issuerTraceId:
-          description: Issuer trace id is only available in a push event if the issuer's triggering request had provided an issuer trace id.
-          $ref: '#/components/schemas/IssuerTraceId'
+        month:
+          description: The two digit number of the month starting at 01 for January.
+          type: string
+          examples:
+          - '01'
+        year:
+          description: The last two digits of the year.
+          type: string
+          examples:
+          - '21'
+    ResendPushEventsRequest:
+      description: List of references to push events that should be resent.
+      type: object
+      required:
+      - eventIds
+      properties:
+        eventIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/PushEventId'
     IssuerTraceId:
       description: A issuer‑provided unique trace identifier to correlate the complete flow.
       type: string
       minLength: 1
       maxLength: 26
+    CardType:
+      description: 'A single digit that distinguishes the card types of the schemes.
+
+        - 1: Debit mastercard
+
+        - 3: Visa debit
+
+        - 6: Bank card'
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 6
     CardStatus:
       description: The status of the card.
       type: string
@@ -388,6 +380,22 @@ components:
       - SUSPENSION_PENDING
       - RESUMPTION_PENDING
       - DELETE_PENDING
+    ErrorDetail:
+      type: object
+      required:
+      - errorCode
+      properties:
+        errorCode:
+          description: Code describing the error.
+          type: integer
+          format: int32
+          examples:
+          - 42
+        description:
+          description: The message describing the error.
+          type: string
+          examples:
+          - The answer to the great question of Life, the Universe and Everything.
     BankApiError:
       description: Information about an error on API requests.
       type: object
@@ -422,49 +430,47 @@ components:
           type: string
           examples:
           - 618503aa-7beb-4d3d-986e-36f1fdbd0e13
-    DateTimeRange:
-      description: Date-time range lower and upper bounds (both inclusive).
+    DateRange:
+      description: Date range lower and upper bounds (both inclusive).
       type: object
       properties:
         from:
-          description: Date-time lower bound (inclusive).
+          description: Start date (inclusive).
           type: string
-          format: date-time
+          format: date
           examples:
-          - '2022-01-01T00:00:00.000+02:00'
+          - '2024-01-01'
         to:
-          description: Date-time upper bound (inclusive).
+          description: End date (inclusive).
           type: string
-          format: date-time
+          format: date
           examples:
-          - '2022-12-31T23:59:59.999+02:00'
-    YearMonth:
+          - '2024-12-31'
+    CardPlasticCode:
+      description: Plastic code of the card.
+      type: string
+      minLength: 2
+      maxLength: 2
+      examples:
+      - F0
+    PushEventReference:
+      description: Reference identifying a push event already sent to the issuer.
       type: object
       required:
-      - month
-      - year
+      - eventId
       properties:
-        month:
-          description: The two digit number of the month starting at 01 for January.
-          type: string
-          examples:
-          - '01'
-        year:
-          description: The last two digits of the year.
-          type: string
-          examples:
-          - '21'
-    ResendPushEventsRequest:
-      description: List of references to push events that should be resent.
-      type: object
-      required:
-      - eventIds
-      properties:
-        eventIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/PushEventId'
+        eventId:
+          $ref: '#/components/schemas/PushEventId'
+        issuerTraceId:
+          description: Issuer trace id is only available in a push event if the issuer's triggering request had provided an issuer trace id.
+          $ref: '#/components/schemas/IssuerTraceId'
   parameters:
+    RequestIdHeader:
+      in: header
+      name: x-request-id
+      description: A unique identifier for a request and response pair.
+      schema:
+        type: string
     IssuerTraceIdHeader:
       in: header
       name: issuer-trace-id
@@ -473,12 +479,6 @@ components:
         type: string
         minLength: 1
         maxLength: 26
-    RequestIdHeader:
-      in: header
-      name: x-request-id
-      description: A unique identifier for a request and response pair.
-      schema:
-        type: string
 x-refined-from:
 - six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml
 - six-group-debix-bank-api-v2-bank-to-six-openapi.yml
