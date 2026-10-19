@@ -7,11 +7,18 @@ source:
 - https://composio.dev/toolkits/six-group
 - https://monid.ai/tools/six-group
 checked:
+- https://api.nuget.org/v3
 - https://api.twelvedata.com/exchanges
 - https://composio.dev/toolkits/six-group
+- https://crates.io/api/v1
 - https://monid.ai/tools/six-group
 - https://n8n.io/integrations/six-group/
+- https://proxy.golang.org
+- https://pypi.org/pypi
 - https://registers.esma.europa.eu/solr/esma_registers_bench_entities/select
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv
 - https://zapier.com/apps/six-group/integrations
 - https://zapier.com/apps/six/integrations
@@ -121,4 +128,61 @@ edges:
   mic: XSWX
   detected_by: sweep-capital-markets.py
   first_seen: '2026-10-15'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@six-group/ui-library
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@six-group/ui-library'
+      version: 5.5.2
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@six-group/ui-library
+      repo_leg: github-org:six-group
+      publisher_leg: email:six-group.com
+      matched_by: domain
+    - name: '@six-group/ui-library-angular'
+      version: 5.5.2
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@six-group/ui-library-angular
+      repo_leg: github-org:six-group
+      publisher_leg: email:six-group.com
+      matched_by: domain
+    - name: '@six-group/ui-library-react'
+      version: 5.5.2
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@six-group/ui-library-react
+      repo_leg: github-org:six-group
+      publisher_leg: email:six-group.com
+      matched_by: domain
+    - name: '@six-group/ui-library-vue'
+      version: 5.5.2
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@six-group/ui-library-vue
+      repo_leg: github-org:six-group
+      publisher_leg: email:six-group.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 templates: []

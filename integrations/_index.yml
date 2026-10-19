@@ -104,3 +104,61 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: six-group-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@six-group/ui-library
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@six-group/ui-library'
+      version: 5.5.2
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@six-group/ui-library
+      repo_leg: github-org:six-group
+      publisher_leg: email:six-group.com
+      matched_by: domain
+    - name: '@six-group/ui-library-angular'
+      version: 5.5.2
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@six-group/ui-library-angular
+      repo_leg: github-org:six-group
+      publisher_leg: email:six-group.com
+      matched_by: domain
+    - name: '@six-group/ui-library-react'
+      version: 5.5.2
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@six-group/ui-library-react
+      repo_leg: github-org:six-group
+      publisher_leg: email:six-group.com
+      matched_by: domain
+    - name: '@six-group/ui-library-vue'
+      version: 5.5.2
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@six-group/ui-library-vue
+      repo_leg: github-org:six-group
+      publisher_leg: email:six-group.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
