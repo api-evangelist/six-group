@@ -1,4 +1,4 @@
-# SIX (six-group)
+# SIX
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,152 +64,169 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-SIX operates the financial market infrastructure of Switzerland and Spain, including SIX Swiss Exchange, BME, and Swiss interbank clearing and securities services, alongside SIX Financial Information, one of the largest global market data vendors. It sells real-time, intraday, end-of-day, and historical pricing, reference data, corporate actions, and regulatory/ESG datasets from more than 900 price sources, delivered via the SIX Web API (REST/JSON, GraphQL, WebSocket), the SIX Bulk API, streaming Market Data Feed, SIX Flex and Valordata Feed files, and Snowflake cloud shares. A public developer portal at developer.six-group.com fronts the bLink open banking platform, the debiX debit card API, and a shared Kong-based API catalog with Swiss interbank clearing and settlement APIs.
+SIX operates the financial market infrastructure of Switzerland and Spain, including SIX Swiss Exchange, BME, and Swiss interbank clearing and securities services, alongside SIX Financial Information, one of the largest global market data vendors. It sells real-time, intraday, end-of-day, and historical pricing, reference data, corporate actions, and regulatory/ESG datasets from more than 900 price sources, delivered via the SIX Web API (REST/JSON, GraphQL, WebSocket), the SIX Bulk API, streaming Market Data Feed, SIX Flex and Valordata Feed files, and Snowflake cloud shares. A public developer portal at developer.six-group.com fronts the bLink open banking platform, the debiX debit card API, and a shared Kong-based API catalog with Swiss interbank clearing and settlement APIs. Financial data access is enterprise and sales-gated with MTLS certificate authentication, while several Swiss payment infrastructure APIs are publicly documented with downloadable OpenAPI.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/six-group/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/six-group/refs/heads/main/apis.yml)
+**Areas:** Finance · Market Data · Stocks · Reference Data · Corporate Actions · Real-Time · Exchange · Open Banking · Payments · Switzerland
 
-## Tags
+## SIX on APIs.io
 
-- Financial
-- Market Data
-- Stocks
-- Reference Data
-- Corporate Actions
-- Real-Time
-- Exchange
-- Open Banking
-- Payments
-- Switzerland
+Everything profiled for SIX is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/six-group/](https://apis.io/providers/six-group/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (11)
 
-- **Created:** 2026-07-21
-- **Modified:** 2026-07-21
+- [SIX Web API](https://apis.io/apis/six-group/six-web-api/) — Single API onto the SIX financial data universe - real-time, intraday, end-of-day, and historical pricing across asset classes, reference data, corporate…
+- [SIX Bulk API](https://apis.io/apis/six-group/six-bulk-api/) — REST/JSON bulk retrieval of the entire SIX financial data catalog - corporate actions, equities and fixed income reference data, and end-of-day pricing - as…
+- [SIX bLink API](https://apis.io/apis/six-group/blink-api/) — Switzerland's open banking platform connecting banks and third-party service providers over RESTful JSON/XML APIs with OAuth consent flows - Account…
+- [SIX Debi X API](https://apis.io/apis/six-group/debix-api/) — REST API for card issuers on the debiX debit and mobile payment platform - transaction processing, card token lifecycle, push notifications, and bulk…
+- [SIX debiX Auth Provider API](https://apis.io/apis/six-group/debix-auth-provider-api/) — Bidirectional authentication API pair between SIX and auth providers supporting the 3DS out-of-band (OOB) authentication flow for debiX debit cards, with…
+- [Swiss Bank Master API](https://apis.io/apis/six-group/swiss-bank-master-api/) — Master data required for electronic payments in Switzerland - bank master records in JSON and CSV plus IBAN tooling - published openly on the SIX API…
+- [SIC Service Status API](https://apis.io/apis/six-group/sic-service-status-api/) — Current operational status of the electronic payment services run by SIX Interbank Clearing Ltd, publicly documented with downloadable OpenAPI; GET…
+- [SIC Clearing Day Calendar API](https://apis.io/apis/six-group/sic-clearing-day-calendar-api/) — Scheduling information for the electronic payment services provided by SIX Interbank Clearing Ltd - clearing day calendar lookups - publicly documented on…
+- [Settlement Info Reporting API](https://apis.io/apis/six-group/settlement-info-reporting-api/) — Security settlement information reporting from the SIX custody cockpit for the Swiss market, publicly documented on the SIX API portal with a downloadable…
+- [SIX 3 DS API](https://apis.io/apis/six-group/six-group-3-ds-api/) — 3DS lifecycle, 3DS details, OTRC order.
+- [SIX Bank Master API](https://apis.io/apis/six-group/six-group-bank-master-api/) — **Bankmaster API** All public REST endpoints of the bank master data are located here, such as the bank master data as JSON and downloadable files.
 
-## APIs
+### Published properties
 
-### SIX Web API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Single API onto the SIX financial data universe - real-time, intraday, end-of-day, and historical pricing across asset classes, reference data, corporate actions, tax, and ESG datasets from 900+ price sources - using REST/JSON, GraphQL, and WebSocket streaming with MTLS certificate authentication. Access is sales-gated with demo access by request.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html](https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html)
+Event-driven and webhook contracts.
 
-#### Properties
+- [Six Group Debix Push Webhooks](https://apis.io/asyncapis/six-group/six-group-debix-push-webhooks/)
 
-- [Documentation](https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/web.html)
-- [Portal](https://web.apiportal.six-group.com/portal/bfi/catalog)
+#### MCP servers (1)
 
-### SIX Bulk API
+Model Context Protocol servers that expose the API to agents.
 
-REST/JSON bulk retrieval of the entire SIX financial data catalog - corporate actions, equities and fixed income reference data, and end-of-day pricing - as full extracts or delta updates, with MTLS certificate authentication. Fixed-fee packages, sales-gated with trial access by request.
+- [six-group](https://apis.io/servers/six-group/six-group/)
 
-- **Human URL:** [https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html](https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html)
+#### Collections (20)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://www.six-group.com/en/products-services/financial-information/delivery-methods/api/bulk.html)
+- [debiX Auth Provider API: Provider-to-SIX 3DS API](https://apis.io/collections/six-group/open-six-group-3ds-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS 3DS Authentication API](https://apis.io/collections/six-group/open-six-group-3ds-authentication-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Alias Directory (Beta) API](https://apis.io/collections/six-group/open-six-group-alias-directory-beta-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Authentication callback API](https://apis.io/collections/six-group/open-six-group-authentication-callback-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS bankmaster API](https://apis.io/collections/six-group/open-six-group-bankmaster-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS BulkSubscriptionManagement API](https://apis.io/collections/six-group/open-six-group-bulksubscriptionmanagement-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS BulkSubscriptionResults API](https://apis.io/collections/six-group/open-six-group-bulksubscriptionresults-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS calendar API](https://apis.io/collections/six-group/open-six-group-calendar-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Card Management API](https://apis.io/collections/six-group/open-six-group-card-management-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Card Usage API](https://apis.io/collections/six-group/open-six-group-card-usage-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Click to Pay Issuer Offered API](https://apis.io/collections/six-group/open-six-group-click-to-pay-issuer-offered-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS debiX PUSH Management (Beta) API](https://apis.io/collections/six-group/open-six-group-debix-push-management-beta-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Deprecated API](https://apis.io/collections/six-group/open-six-group-deprecated-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS DetailedSettlementInformation API](https://apis.io/collections/six-group/open-six-group-detailedsettlementinformation-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Health check API](https://apis.io/collections/six-group/open-six-group-health-check-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS healthcheck API](https://apis.io/collections/six-group/open-six-group-healthcheck-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS iban API](https://apis.io/collections/six-group/open-six-group-iban-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS status API](https://apis.io/collections/six-group/open-six-group-status-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Token Lifecycle Management API](https://apis.io/collections/six-group/open-six-group-token-lifecycle-management-api/)
+- [debiX Auth Provider API: Provider-to-SIX 3DS Token Provisioning API](https://apis.io/collections/six-group/open-six-group-token-provisioning-api/)
 
-### SIX bLink API
+#### Overlays (20)
 
-Switzerland's open banking platform connecting banks and third-party service providers over RESTful JSON/XML APIs with OAuth consent flows - AIS, PSS, OpenWealth, and consent base modules. Publicly documented; participation requires bLink admission.
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- **Human URL:** [https://docs.blink.six-group.com/api-reference/introduction](https://docs.blink.six-group.com/api-reference/introduction)
+- [Six Group 3Ds Api Overlay](https://apis.io/overlays/six-group/six-group-3ds-api-overlay/)
+- [Six Group 3Ds Authentication Api Overlay](https://apis.io/overlays/six-group/six-group-3ds-authentication-api-overlay/)
+- [Six Group Alias Directory Beta Api Overlay](https://apis.io/overlays/six-group/six-group-alias-directory-beta-api-overlay/)
+- [Six Group Authentication Callback Api Overlay](https://apis.io/overlays/six-group/six-group-authentication-callback-api-overlay/)
+- [Six Group Bankmaster Api Overlay](https://apis.io/overlays/six-group/six-group-bankmaster-api-overlay/)
+- [Six Group Bulksubscriptionmanagement Api Overlay](https://apis.io/overlays/six-group/six-group-bulksubscriptionmanagement-api-overlay/)
+- [Six Group Bulksubscriptionresults Api Overlay](https://apis.io/overlays/six-group/six-group-bulksubscriptionresults-api-overlay/)
+- [Six Group Calendar Api Overlay](https://apis.io/overlays/six-group/six-group-calendar-api-overlay/)
+- [Six Group Card Management Api Overlay](https://apis.io/overlays/six-group/six-group-card-management-api-overlay/)
+- [Six Group Card Usage Api Overlay](https://apis.io/overlays/six-group/six-group-card-usage-api-overlay/)
+- [Six Group Click To Pay Issuer Offered Api Overlay](https://apis.io/overlays/six-group/six-group-click-to-pay-issuer-offered-api-overlay/)
+- [Six Group Debix Push Management Beta Api Overlay](https://apis.io/overlays/six-group/six-group-debix-push-management-beta-api-overlay/)
+- [Six Group Deprecated Api Overlay](https://apis.io/overlays/six-group/six-group-deprecated-api-overlay/)
+- [Six Group Detailedsettlementinformation Api Overlay](https://apis.io/overlays/six-group/six-group-detailedsettlementinformation-api-overlay/)
+- [Six Group Health Check Api Overlay](https://apis.io/overlays/six-group/six-group-health-check-api-overlay/)
+- [Six Group Healthcheck Api Overlay](https://apis.io/overlays/six-group/six-group-healthcheck-api-overlay/)
+- [Six Group Iban Api Overlay](https://apis.io/overlays/six-group/six-group-iban-api-overlay/)
+- [Six Group Status Api Overlay](https://apis.io/overlays/six-group/six-group-status-api-overlay/)
+- [Six Group Token Lifecycle Management Api Overlay](https://apis.io/overlays/six-group/six-group-token-lifecycle-management-api-overlay/)
+- [Six Group Token Provisioning Api Overlay](https://apis.io/overlays/six-group/six-group-token-provisioning-api-overlay/)
 
-#### Properties
+#### Security (3)
 
-- [Documentation](https://docs.blink.six-group.com/)
-- [API Reference](https://docs.blink.six-group.com/api-reference/introduction)
-- [Downloads](https://docs.blink.six-group.com/docs/downloads)
-- [Website](https://blink.six-group.com/)
+Authentication, trust centre, and vulnerability disclosure.
 
-### SIX debiX API
+- [Six Group Authentication](https://apis.io/security/six-group/six-group-authentication/)
+- [Six Group Domain Security](https://apis.io/security/six-group/six-group-domain-security/)
+- [Six Group Vulnerability Disclosure](https://apis.io/security/six-group/six-group-vulnerability-disclosure/)
 
-REST API for card issuers on the debiX debit and mobile payment platform - transactions, card token lifecycle, push notifications, bulk operations - with publicly downloadable OpenAPI 3.1 definitions.
+## Where to find this API
 
-- **Human URL:** [https://docs.debix.six-group.com/](https://docs.debix.six-group.com/)
-- **Base URL:** `https://api.six-group.com/api/debix/bank/v2`
-
-#### Properties
-
-- [Documentation](https://docs.debix.six-group.com/)
-- [API Reference](https://docs.debix.six-group.com/api/debix/v2)
-- [OpenAPI](openapi/six-group-debix-bank-api-v2-bank-to-six-openapi.yml)
-- [OpenAPI - cardtoken](openapi/six-group-debix-bank-api-cardtoken-v2-bank-to-six-openapi.yml)
-
-### SIX debiX Auth Provider API
-
-Bidirectional authentication API pair between SIX and auth providers supporting the 3DS out-of-band authentication flow for debiX debit cards.
-
-- **Human URL:** [https://docs.debix.six-group.com/debix-auth-v2/](https://docs.debix.six-group.com/debix-auth-v2/)
-- **Base URL:** `https://api.six-group.com/api/debix-auth/provider-auth/v2`
-
-#### Properties
-
-- [Documentation](https://docs.debix.six-group.com/debix-auth-v2/)
-- [OpenAPI - SIX-to-provider](openapi/six-group-debix-auth-provider-api-v2-six-to-provider-openapi.yml)
-- [OpenAPI - provider-to-SIX](openapi/six-group-debix-auth-provider-api-v2-provider-to-six-openapi.yml)
-
-### Swiss Bank Master API
-
-Master data required for electronic payments in Switzerland - bank master records in JSON and CSV plus IBAN tooling. Documented production endpoints respond without registration (healthcheck HTTP 200 on 2026-07-21).
-
-- **Human URL:** [https://apiportal.six-group.com/apis/swiss-bank-master-api-ch-v3/docs](https://apiportal.six-group.com/apis/swiss-bank-master-api-ch-v3/docs)
-- **Base URL:** `https://api.six-group.com/api/epcd/bankmaster/v3`
-
-#### Properties
-
-- [Documentation](https://apiportal.six-group.com/apis/swiss-bank-master-api-ch-v3/docs)
-- [OpenAPI](openapi/six-group-swiss-bank-master-openapi.json)
-
-### SIC Service Status API
-
-Current operational status of the electronic payment services run by SIX Interbank Clearing Ltd. GET /servicestatus returned HTTP 200 without authentication on 2026-07-21.
-
-- **Human URL:** [https://apiportal.six-group.com/apis/sic-service-status-api-v1-ch-v1/docs](https://apiportal.six-group.com/apis/sic-service-status-api-v1-ch-v1/docs)
-- **Base URL:** `https://api.six-group.com/api/sic/pci_p/status/v1`
-
-#### Properties
-
-- [Documentation](https://apiportal.six-group.com/apis/sic-service-status-api-v1-ch-v1/docs)
-- [OpenAPI](openapi/six-group-sic-service-status-openapi.json)
-
-### SIC Clearing Day Calendar API
-
-Scheduling information for the electronic payment services provided by SIX Interbank Clearing Ltd.
-
-- **Human URL:** [https://apiportal.six-group.com/apis/sic-clearing-day-calendar-api-v1-ch-v1/docs](https://apiportal.six-group.com/apis/sic-clearing-day-calendar-api-v1-ch-v1/docs)
-- **Base URL:** `https://api.six-group.com/api/epcd/clearingday/v1`
-
-#### Properties
-
-- [Documentation](https://apiportal.six-group.com/apis/sic-clearing-day-calendar-api-v1-ch-v1/docs)
-- [OpenAPI](openapi/six-group-sic-clearing-day-calendar-openapi.json)
-
-### Settlement Info Reporting API
-
-Security settlement information reporting from the SIX custody cockpit for the Swiss market (OpenAPI licensed CC BY-ND 4.0).
-
-- **Human URL:** [https://apiportal.six-group.com/apis/settlement-info-reporting-ch-v1/docs](https://apiportal.six-group.com/apis/settlement-info-reporting-ch-v1/docs)
-- **Base URL:** `https://api.six-group.com/custody/cockpit/setlInfo/v1`
-
-#### Properties
-
-- [Documentation](https://apiportal.six-group.com/apis/settlement-info-reporting-ch-v1/docs)
-- [OpenAPI](openapi/six-group-settlement-info-reporting-openapi.json)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.six-group.com/)
-- [Portal](https://developer.six-group.com/en/home.html)
 - [Documentation](https://apiportal.six-group.com/)
-- [GitHub Organization](https://github.com/six-group)
-- [LinkedIn](https://www.linkedin.com/company/sixgroup)
-- [Blog](https://www.six-group.com/en/newsroom.html)
-- [Terms of Service](https://www.six-group.com/en/services/legal/terms-of-use.html)
-- [Privacy Policy](https://www.six-group.com/en/services/legal/privacy-statement.html)
+- [Getting started](https://docs.debix.six-group.com/getting-started)
+- [API reference](https://apiportal.six-group.com/apis)
+- [Sign up](https://apiportal.six-group.com/register)
 - [Support](https://www.six-group.com/en/contacts.html)
+- [Blog](https://www.six-group.com/en/blog.html)
+- [Security](https://hackerone.com/six-group)
+- [Terms of service](https://www.six-group.com/en/services/legal/terms-of-use.html)
+- [Privacy policy](https://www.six-group.com/en/services/legal/privacy-statement.html)
+- [GitHub](https://github.com/six-group)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 51.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 55.1 |
+| Contract governance | 18.2 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 70.8 |
+| Access clarity | 34.2 |
+
+**Agent readiness 41.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | verified |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 34.6** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/six-group/](https://apis.io/providers/six-group/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for SIX: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/six-group/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
